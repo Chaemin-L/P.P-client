@@ -1,6 +1,7 @@
 import { RecoilRoot } from "recoil";
-import GlobalStyle from "./style/global";
+
 import { Routers } from "./routes";
+import { GlobalStyle } from "./style/global";
 
 export const App = () => {
   return (

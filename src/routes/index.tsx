@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { GlobalLayout } from "../components/layout/global-layout";
-import { LoginPage } from "../pages/login/login";
+
+import { GlobalLayout } from "@/components/layout/global-layout";
+import { LoginPage } from "@/pages/login/login";
 
 const router = createBrowserRouter([
   {

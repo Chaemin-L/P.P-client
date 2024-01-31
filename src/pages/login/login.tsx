@@ -1,4 +1,4 @@
-import { GoogleAuth } from "../../components/login/google-auth";
+import { GoogleAuth } from "@/components/login/google-auth";
 
 export const LoginPage = () => {
   return (

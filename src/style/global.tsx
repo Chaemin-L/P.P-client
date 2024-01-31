@@ -1,7 +1,8 @@
+/* eslint-disable import/no-named-as-default */
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   #root, 
@@ -36,5 +37,3 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 `;
-
-export default GlobalStyle;
