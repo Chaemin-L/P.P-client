@@ -1,10 +1,10 @@
-import { GoogleAuth } from "@/components/login/google-auth";
+import { GoogleButton } from "@/components/login/google-button";
 
 export const LoginPage = () => {
   return (
     <>
       {/* KaKao Login */}
-      <GoogleAuth />
+      <GoogleButton />
     </>
   );
 };

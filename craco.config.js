@@ -5,4 +5,9 @@ module.exports = {
       "@": path.resolve(__dirname, "src"),
     },
   },
+  devServer: {
+    headers: {
+      "Cross-Origin-Embedder-Policy": "unsafe-none",
+    },
+  },
 };
