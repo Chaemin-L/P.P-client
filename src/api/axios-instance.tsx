@@ -3,6 +3,7 @@ import axios, {
   InternalAxiosRequestConfig,
   AxiosResponse,
 } from "axios";
+import getRefreshToken from "../utils/token";
 
 const Instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}/api`,
@@ -64,7 +65,10 @@ Instance.interceptors.response.use(
         console.log(
           `[API - RESPONSE 401] ${method?.toUpperCase()} ${url} | ${status} : ${error.message} | refresh Token`,
         );
-        // refresh token 발급
+
+        const accessToken = await getRefreshToken();
+        config.headers.Authorization = `Bearer ${accessToken}`;
+
         return axios(config);
       } else {
         console.log(
