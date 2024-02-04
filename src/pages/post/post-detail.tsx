@@ -6,15 +6,13 @@ import { BottomButton } from "@/components/common/bottom-button";
 import { DefaultLayout } from "@/components/layout/default-layout";
 
 export const PostDetailPage = () => {
-  const { postId } = useParams();
+  const { id } = useParams();
 
   return (
     <DefaultLayout>
       <Container>
-        <>현재 보고계신 게시글의 id는 {postId}입니다.</>
+        <>현재 보고계신 게시글의 id는 {id}입니다.</>
         <ActivityBox>
-          <ActivityBox.CompleteButton />
-          <ActivityBox.EditButton />
           <ActivityBox.Title />
           <ActivityBox.ProfileImage />
           <ActivityBox.ProfileImage />
@@ -22,7 +20,6 @@ export const PostDetailPage = () => {
           <ActivityBox.Date />
           <ActivityBox.Location />
           <ActivityBox.Description />
-          <ActivityBox.MemberNum />
         </ActivityBox>
         <BottomButton>신청하기</BottomButton>
       </Container>

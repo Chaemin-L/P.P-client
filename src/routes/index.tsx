@@ -2,8 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { GlobalLayout } from "@/components/layout/global-layout";
 import { GoogleAuth } from "@/components/login/google-auth";
-import { PostDetailPage } from "@/pages/board/post-detail";
 import { LoginPage } from "@/pages/login/login";
+import { MyPostPage } from "@/pages/mypost";
+import { PostDetailPage } from "@/pages/post/post-detail";
 
 const router = createBrowserRouter([
   {
@@ -15,12 +16,16 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/board/:postId",
+        path: "auth/google",
+        element: <GoogleAuth />,
+      },
+      {
+        path: "/post/:id",
         element: <PostDetailPage />,
       },
       {
-        path: "auth/google",
-        element: <GoogleAuth />,
+        path: "/mypost/:id",
+        element: <MyPostPage />,
       },
     ],
   },
