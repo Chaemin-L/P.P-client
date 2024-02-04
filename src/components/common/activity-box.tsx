@@ -1,48 +1,14 @@
-import { createContext, PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { ActivityBoxContextType, TimeType } from "./type";
-
-import { useActivityBox } from "@/hooks/useActivityBox";
-
-export const ActivityBoxContext = createContext<
-  ActivityBoxContextType | undefined
->(undefined);
+import { activityState } from "@/recoil/atoms/activity-state";
 
 export const ActivityBox = ({ children }: PropsWithChildren) => {
-  // 추후에 전역 상태로 관리할 예정
-  const [title, setTitle] = useState<string>("");
-  const [profileImage, setProfileImage] = useState<string>("");
-  const [time, setTime] = useState<TimeType | null>(null);
-  const [date, setDate] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
-  const [memberNum] = useState<string>("1 / 3"); // TODO: api 내부에서 제한 인원 수와 실제 지원자 수를 활용하여 하나의 string으로 가공
-  const [readOnly, setReadOnly] = useState<boolean>(true);
-
-  return (
-    <ActivityBoxContext.Provider
-      value={{
-        title,
-        setTitle,
-        profileImage,
-        setProfileImage,
-        time,
-        setTime,
-        date,
-        setDate,
-        location,
-        setLocation,
-        memberNum,
-        readOnly,
-        setReadOnly,
-      }}
-    >
-      {children}
-    </ActivityBoxContext.Provider>
-  );
+  return <>{children}</>;
 };
 
 const Title = () => {
-  const { readOnly } = useActivityBox();
+  const { readOnly } = useRecoilValue(activityState);
 
   return (
     <div>
@@ -52,7 +18,7 @@ const Title = () => {
 };
 
 const ProfileImage = () => {
-  const { readOnly } = useActivityBox();
+  const { readOnly } = useRecoilValue(activityState);
 
   return (
     <>
@@ -62,7 +28,7 @@ const ProfileImage = () => {
 };
 
 const Time = () => {
-  const { readOnly } = useActivityBox();
+  const { readOnly } = useRecoilValue(activityState);
 
   return (
     <>
@@ -77,7 +43,8 @@ const Time = () => {
 };
 
 const Date = () => {
-  const { readOnly } = useActivityBox();
+  const { readOnly } = useRecoilValue(activityState);
+
   return (
     <>
       <input type="date" disabled={readOnly}></input>
@@ -86,7 +53,7 @@ const Date = () => {
 };
 
 const Location = () => {
-  const { readOnly } = useActivityBox();
+  const { readOnly } = useRecoilValue(activityState);
 
   return (
     <>
@@ -96,7 +63,7 @@ const Location = () => {
 };
 
 const Description = () => {
-  const { readOnly } = useActivityBox();
+  const { readOnly } = useRecoilValue(activityState);
 
   return (
     <>
@@ -106,30 +73,47 @@ const Description = () => {
 };
 
 const MemberNum = () => {
-  const { memberNum } = useActivityBox();
+  const { memberNum } = useRecoilValue(activityState);
 
   return (
     <>
-      <span>{memberNum}</span>
+      <span>{memberNum.length ? memberNum : "1 / 3"}</span>
     </>
   );
 };
 
 /** buttons */
 const CompleteButton = () => {
-  const { setReadOnly } = useActivityBox();
+  const [_, setActivity] = useRecoilState(activityState);
+
   return (
     <>
-      <button onClick={() => setReadOnly(true)}>모집완료</button>
+      <button
+        onClick={() =>
+          setActivity((activity) => ({ ...activity, readOnly: true }))
+        }
+      >
+        모집완료
+      </button>
     </>
   );
 };
 
 const EditButton = () => {
-  const { setReadOnly } = useActivityBox();
+  const [_, setActivity] = useRecoilState(activityState);
+
   return (
     <>
-      <button onClick={() => setReadOnly((prev) => !prev)}>수정하기</button>
+      <button
+        onClick={() =>
+          setActivity((activity) => ({
+            ...activity,
+            readOnly: !activity.readOnly,
+          }))
+        }
+      >
+        수정하기
+      </button>
     </>
   );
 };

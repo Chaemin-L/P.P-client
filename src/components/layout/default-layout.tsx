@@ -41,8 +41,8 @@ const StyledDefaultAppbar = styled.div`
 
 const StyledDefaultLayout = styled.div`
   position: relative;
+  flex: 1;
   width: 100%;
   height: 100%;
-  flex: 1;
   padding: 20px 16px;
 `;
