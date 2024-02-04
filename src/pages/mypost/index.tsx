@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { ActivityBox } from "@/components/common/activity-box";
+import { BottomButton } from "@/components/common/bottom-button";
 import { DefaultLayout } from "@/components/layout/default-layout";
 
 export const MyPostPage = () => {
@@ -23,6 +24,7 @@ export const MyPostPage = () => {
           <ActivityBox.Description />
           <ActivityBox.MemberNum />
         </ActivityBox>
+        <BottomButton>참여관리</BottomButton>
       </Container>
     </DefaultLayout>
   );
