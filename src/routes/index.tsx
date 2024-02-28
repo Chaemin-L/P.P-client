@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { GlobalLayout } from "@/components/layout/global-layout";
 import { GoogleAuth } from "@/components/login/google-auth";
+import { KakaoAuth } from "@/components/login/kakao-auth";
 import { LoginPage } from "@/pages/login/login";
 import { MyPostPage } from "@/pages/mypost";
 import { PostDetailPage } from "@/pages/post/post-detail";
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/mypost/:id",
         element: <MyPostPage />,
+      },
+      {
+        path: "auth/kakao",
+        element: <KakaoAuth />,
       },
     ],
   },
