@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 export type TimeType = "오전" | "오후" | "무관";
 
@@ -17,3 +17,14 @@ export type ActivityBoxContextType = {
   readOnly: boolean;
   setReadOnly: Dispatch<SetStateAction<boolean>>;
 };
+
+export type SelectToggleType = {
+  state: boolean;
+  onClick?: () => void;
+  children: React.ReactNode;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+
+export type TopBarProps = {
+  onClick?: () => void;
+  children: React.ReactNode;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
