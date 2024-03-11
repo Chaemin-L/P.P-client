@@ -12,7 +12,7 @@ const InputNum = ({ value, onChange, children }: InputType) => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-    onChange(e.target.value);
+    onChange(e);
   };
 
   return (
@@ -34,7 +34,7 @@ const InputMap = ({ value, onChange }: InputType) => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-    onChange(e.target.value);
+    onChange(e);
   };
 
   return (
