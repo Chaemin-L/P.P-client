@@ -20,7 +20,7 @@ export const postingState = atom({
     endTime: "",
     endDate: "",
     location: "",
-    memberNum: "",
+    memberNum: 0,
     price: 0,
   },
 });

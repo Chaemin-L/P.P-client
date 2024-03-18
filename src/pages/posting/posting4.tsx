@@ -8,9 +8,9 @@ import { TopBar } from "@/components/common/top-bar";
 import { PostingInput } from "@/components/posting/posting-input";
 import { postingState } from "@/recoil/atoms/posting-state";
 
-export const Posting2 = () => {
+export const Posting4 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
-  const [location, setLocation] = useState(posting.location);
+  const [member, setMember] = useState(posting.memberNum);
   const navigate = useNavigate();
 
   return (
@@ -18,25 +18,27 @@ export const Posting2 = () => {
       <TopBar
         onClick={() => {
           setPosting((prevPosting) => {
-            const updatedPosting = { ...prevPosting, location: location };
+            const updatedPosting = { ...prevPosting, memberNum: member };
             return updatedPosting;
           });
         }}
       >
         1/10완료
       </TopBar>
-      <Text>위치를 입력해 주세요</Text>
-      <PostingInput.InputMap
-        value={location}
+      <Text>필요한 인원을\n입력해주세요</Text>
+      <PostingInput.InputNum
+        value={member}
         onChange={(e) => {
-          setLocation(e.target.value);
+          setMember(Number(e.target.value));
         }}
-      />
+      >
+        명
+      </PostingInput.InputNum>
       <RowBox>
         <BottomButton
           onClick={() => {
             setPosting((prevPosting) => {
-              const updatedPosting = { ...prevPosting, location: location };
+              const updatedPosting = { ...prevPosting, memberNum: member };
               return updatedPosting;
             });
             navigate(-1);
@@ -47,10 +49,9 @@ export const Posting2 = () => {
         <BottomButton
           onClick={() => {
             setPosting((prevPosting) => {
-              const updatedPosting = { ...prevPosting, location: location };
+              const updatedPosting = { ...prevPosting, memberNum: member };
               return updatedPosting;
             });
-            navigate("/posting/3");
           }}
         >
           다음
@@ -76,4 +77,5 @@ const RowBox = styled.div`
   gap: 5.13%;
   display: flex;
   flex-direction: row;
+  white-space: pre-wrap;
 `;

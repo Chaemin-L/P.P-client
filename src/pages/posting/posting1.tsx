@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -11,6 +12,7 @@ export const Posting1 = () => {
   const resetRecoil = useResetRecoilState(postingState);
   const [posting, setPosting] = useRecoilState(postingState);
   const [typeState, setTypeState] = useState(posting.activityType);
+  const navigate = useNavigate();
 
   return (
     <PageContainer>
@@ -23,8 +25,15 @@ export const Posting1 = () => {
             state={item.state}
             onClick={() => {
               setTypeState((prevTypeState) => {
-                const updatedTypeState = [...prevTypeState];
-                updatedTypeState[index] = { ...item, state: !item.state };
+                const updatedTypeState = prevTypeState.map(
+                  (prevStateItem, idx) => {
+                    if (idx === index) {
+                      return { ...prevStateItem, state: !prevStateItem.state };
+                    } else {
+                      return { ...prevStateItem, state: false };
+                    }
+                  },
+                );
                 return updatedTypeState;
               });
             }}
@@ -35,10 +44,12 @@ export const Posting1 = () => {
       </Grid>
       <BottomButton
         onClick={() => {
-          setPosting((prevPosting) => {
-            const updatedPosting = { ...prevPosting, activityType: typeState };
-            return updatedPosting;
-          });
+          // setPosting((prevPosting) => {
+          //   const updatedPosting = { ...prevPosting, activityType: typeState };
+          //   return updatedPosting;
+          // });
+          // navigate("/posting/2");
+          console.log("event!");
         }}
       >
         다음
@@ -48,9 +59,11 @@ export const Posting1 = () => {
 };
 
 const PageContainer = styled.div`
+  overflow: auto;
   display: flex;
   width: 100%;
   align-items: center;
+  flex-direction: column;
 `;
 
 const Grid = styled.div`

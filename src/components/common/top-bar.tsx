@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 
 import { TopBarProps } from "./type";
 
+import backImg from "@/assets/images/back-img.png";
+
 export const TopBar = ({ onClick, children }: TopBarProps) => {
   const navigate = useNavigate();
 
@@ -14,7 +16,7 @@ export const TopBar = ({ onClick, children }: TopBarProps) => {
   return (
     <TopBarContainer>
       <BackButton onClick={handleGoBack}>
-        <BackButtonImg src="../../assets/images/back-img.png" />
+        <BackButtonImg src={backImg} />
       </BackButton>
       <TopBarText>{children}</TopBarText>
     </TopBarContainer>

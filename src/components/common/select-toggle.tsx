@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 
 import { SelectToggleType } from "./type";
 
+import checkImg from "@/assets/images/check-img.png";
+
 export const SelectToggle = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
 };
@@ -26,10 +28,12 @@ const CheckTypeToggle = ({ state, onClick, children }: SelectToggleType) => {
     >
       <ColumnBox>
         <CheckBox></CheckBox>
-        {state ? <CheckImg src="src/assets/images/check-img.png" /> : <></>}
+        {state ? <CheckImg src={checkImg} /> : <></>}
         <span>{children}</span>
       </ColumnBox>
-      <TypeImage src="" />
+      <TypeImageContainer>
+        <TypeImage src="" />
+      </TypeImageContainer>
     </CheckTypeStyle>
   );
 };
@@ -51,14 +55,15 @@ const CheckTypeStyle = styled.button`
   font-size: 18px;
   color: #ffffff;
   border: 0;
-  border-radius: 15px;
+  border-radius: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0% 0% 15.8% 0%;
 `;
 
 const ColumnBox = styled.div`
-  margin: 2.63% 0px 16.7% 7%;
+  padding: 5.26% 0% 4% 7%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -67,25 +72,35 @@ const ColumnBox = styled.div`
 `;
 
 const CheckImg = styled.img`
-  width: 20.51%;
-  height: 20.17%;
+  width: 32px;
+  height: 23px;
   position: absolute;
 `;
 
 const CheckBox = styled.div`
   position: relative;
-  margin: 1% 1% 0% 0%;
-  width: 17.9%;
-  height: 24.56%;
+  margin: 8% 0% 0% 4%;
+  width: 28px;
+  height: 28px;
   background-color: #ffffff;
+  border-radius: 10px;
+`;
+
+const TypeImageContainer = styled.div`
+  width: 45.5%;
+  padding-top: 45.5%;
+  margin: 21.9% 12.8% 0% 0%;
+  border: 12px;
+  position: relative;
 `;
 
 const TypeImage = styled.img`
-  width: 45.5%;
-  height: 62.3%;
-  margin: 21.9% 0% 15.8% 12.8%;
-  border: 12px;
-  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 SelectToggle.ManageSelectToggle = ManageSelectToggle;

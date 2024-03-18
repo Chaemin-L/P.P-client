@@ -5,6 +5,10 @@ import { GoogleAuth } from "@/components/login/google-auth";
 import { LoginPage } from "@/pages/login/login";
 import { MyPostPage } from "@/pages/mypost";
 import { PostDetailPage } from "@/pages/post/post-detail";
+import { Posting1 } from "@/pages/posting/posting1";
+import { Posting2 } from "@/pages/posting/posting2";
+import { Posting3 } from "@/pages/posting/posting3";
+import { Posting4 } from "@/pages/posting/posting4";
 
 const router = createBrowserRouter([
   {
@@ -15,10 +19,10 @@ const router = createBrowserRouter([
         path: "",
         element: <LoginPage />,
       },
-      {
-        path: "auth/google",
-        element: <GoogleAuth />,
-      },
+      // {
+      //   path: "auth/google",
+      //   element: <GoogleAuth />,
+      // },
       {
         path: "/post/:id",
         element: <PostDetailPage />,
@@ -26,6 +30,22 @@ const router = createBrowserRouter([
       {
         path: "/mypost/:id",
         element: <MyPostPage />,
+      },
+      {
+        path: "posting/1",
+        element: <Posting1 />,
+      },
+      {
+        path: "posting/2",
+        element: <Posting2 />,
+      },
+      {
+        path: "posting/3",
+        element: <Posting3 />,
+      },
+      {
+        path: "posting/4",
+        element: <Posting4 />,
       },
     ],
   },
