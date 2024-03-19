@@ -3,7 +3,10 @@ import axios, {
   InternalAxiosRequestConfig,
   AxiosResponse,
 } from "axios";
-import getRefreshToken from "../utils/token";
+
+import { InstanceResponseData } from "./type";
+
+import getRefreshToken from "@/utils/token";
 
 const Instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}/api`,
@@ -42,7 +45,9 @@ Instance.interceptors.request.use(
 );
 
 Instance.interceptors.response.use(
-  (response: AxiosResponse): AxiosResponse => {
+  (
+    response: AxiosResponse<InstanceResponseData>,
+  ): AxiosResponse<InstanceResponseData> => {
     const { method, url } = response.config;
     const stauts = response.status;
     const { code, message } = response.data;
@@ -67,7 +72,9 @@ Instance.interceptors.response.use(
         );
 
         const accessToken = await getRefreshToken();
-        config.headers.Authorization = `Bearer ${accessToken}`;
+        if (accessToken !== undefined) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
+        }
 
         return axios(config);
       } else {

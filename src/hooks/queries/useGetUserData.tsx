@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import UserApi from "../../api/user-api";
 import { AxiosError } from "axios";
-import { TUser } from "./types/user-type";
+
+import { UserResponse } from "@/api/type";
+import UserApi from "@/api/user-api";
 
 export const useUserData = (userId: string) => {
-  return useQuery<TUser[], AxiosError>({
+  return useQuery<UserResponse[], AxiosError>({
     queryKey: ["user", userId],
     queryFn: () => UserApi.getUserData(userId),
   });

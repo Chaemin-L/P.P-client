@@ -1,5 +1,6 @@
-import Instance from "../api/axios-instance";
 import { TRefreshToken } from "./types/refresh-token-type";
+
+import Instance from "@/api/axios-instance";
 
 const getRefreshToken = async (): Promise<string | void> => {
   try {
