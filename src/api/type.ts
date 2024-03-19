@@ -12,6 +12,13 @@ export type ChatGetResponse = {
   createdAt: string;
 };
 
+export type ChatSendResponse = {
+  roomIdx: number;
+  senderName: string;
+  senderUuid: string;
+  message: string;
+};
+
 export type BankGetResponse = {
   id: string;
   name: string;
