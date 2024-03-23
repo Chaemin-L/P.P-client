@@ -16,32 +16,37 @@ export const Posting1 = () => {
 
   return (
     <PageContainer>
-      <TopBar onClick={resetRecoil}>1/10완료</TopBar>
-      <Text>항목을 선택해주세요</Text>
-      <Grid>
-        {typeState.map((item, index) => (
-          <SelectToggle.CheckTypeToggle
-            key={index}
-            state={item.state}
-            onClick={() => {
-              setTypeState((prevTypeState) => {
-                const updatedTypeState = prevTypeState.map(
-                  (prevStateItem, idx) => {
-                    if (idx === index) {
-                      return { ...prevStateItem, state: !prevStateItem.state };
-                    } else {
-                      return { ...prevStateItem, state: false };
-                    }
-                  },
-                );
-                return updatedTypeState;
-              });
-            }}
-          >
-            {item.name}
-          </SelectToggle.CheckTypeToggle>
-        ))}
-      </Grid>
+      <ScrollContainer>
+        <TopBar onClick={resetRecoil}>1/10완료</TopBar>
+        <Text>항목을 선택해주세요</Text>
+        <Grid>
+          {typeState.map((item, index) => (
+            <SelectToggle.CheckTypeToggle
+              key={index}
+              state={item.state}
+              onClick={() => {
+                setTypeState((prevTypeState) => {
+                  const updatedTypeState = prevTypeState.map(
+                    (prevStateItem, idx) => {
+                      if (idx === index) {
+                        return {
+                          ...prevStateItem,
+                          state: !prevStateItem.state,
+                        };
+                      } else {
+                        return { ...prevStateItem, state: false };
+                      }
+                    },
+                  );
+                  return updatedTypeState;
+                });
+              }}
+            >
+              {item.name}
+            </SelectToggle.CheckTypeToggle>
+          ))}
+        </Grid>
+      </ScrollContainer>
       <BottomButton
         onClick={() => {
           // setPosting((prevPosting) => {
@@ -59,6 +64,14 @@ export const Posting1 = () => {
 };
 
 const PageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const ScrollContainer = styled.div`
   overflow: auto;
   display: flex;
   width: 100%;
@@ -72,7 +85,7 @@ const Grid = styled.div`
   grid-template-rows: repeat(4, 1fr);
   gap: 3.07%;
   width: 83.07%;
-  margin: 0px 0px 40px 0px;
+  margin: 0px 0px 150px 0px;
 `;
 
 const Text = styled.span`

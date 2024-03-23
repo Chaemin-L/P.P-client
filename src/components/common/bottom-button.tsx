@@ -20,6 +20,7 @@ const ButtonWrapper = styled.div`
   padding: 0 16px 20px;
   bottom: 0;
   left: 0;
+  background-color: #ffffff;
 `;
 
 const StyledButton = styled.button`

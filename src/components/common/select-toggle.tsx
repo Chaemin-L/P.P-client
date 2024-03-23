@@ -27,9 +27,11 @@ const CheckTypeToggle = ({ state, onClick, children }: SelectToggleType) => {
       onClick={onClick}
     >
       <ColumnBox>
-        <CheckBox></CheckBox>
-        {state ? <CheckImg src={checkImg} /> : <></>}
-        <span>{children}</span>
+        <CheckBoxContainer>
+          <CheckBox></CheckBox>
+          {state ? <CheckImg src={checkImg} /> : <></>}
+          <span>{children}</span>
+        </CheckBoxContainer>
       </ColumnBox>
       <TypeImageContainer>
         <TypeImage src="" />
@@ -75,6 +77,13 @@ const CheckImg = styled.img`
   width: 32px;
   height: 23px;
   position: absolute;
+  top: -1%;
+  right: 0;
+  left: -1%;
+`;
+
+const CheckBoxContainer = styled.div`
+  position: relative;
 `;
 
 const CheckBox = styled.div`

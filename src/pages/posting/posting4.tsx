@@ -4,8 +4,8 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomButton } from "@/components/common/bottom-button";
+import { InputBox } from "@/components/common/Input-box";
 import { TopBar } from "@/components/common/top-bar";
-import { PostingInput } from "@/components/posting/posting-input";
 import { postingState } from "@/recoil/atoms/posting-state";
 
 export const Posting4 = () => {
@@ -25,15 +25,19 @@ export const Posting4 = () => {
       >
         1/10완료
       </TopBar>
-      <Text>필요한 인원을\n입력해주세요</Text>
-      <PostingInput.InputNum
+      <Text>
+        필요한 인원을
+        <br />
+        입력해주세요
+      </Text>
+      <InputBox.InputNum
         value={member}
         onChange={(e) => {
           setMember(Number(e.target.value));
         }}
       >
         명
-      </PostingInput.InputNum>
+      </InputBox.InputNum>
       <RowBox>
         <BottomButton
           onClick={() => {
@@ -65,6 +69,7 @@ const PageContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
+  flex-direction: column;
 `;
 
 const Text = styled.span`

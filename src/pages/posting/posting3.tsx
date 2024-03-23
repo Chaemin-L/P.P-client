@@ -4,8 +4,8 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomButton } from "@/components/common/bottom-button";
+import { InputBox } from "@/components/common/Input-box";
 import { TopBar } from "@/components/common/top-bar";
-import { PostingInput } from "@/components/posting/posting-input";
 import { postingState } from "@/recoil/atoms/posting-state";
 
 export const Posting3 = () => {
@@ -26,14 +26,14 @@ export const Posting3 = () => {
         1/10완료
       </TopBar>
       <Text>금액을 입력해 주세요</Text>
-      <PostingInput.InputNum
+      <InputBox.InputNum
         value={price}
         onChange={(e) => {
           setPrice(Number(e.target.value));
         }}
       >
         페이
-      </PostingInput.InputNum>
+      </InputBox.InputNum>
       <BalanceText>지금 내 잔액은 {}원 입니다</BalanceText>
       <RowBox>
         <BottomButton
@@ -67,6 +67,7 @@ const PageContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
+  flex-direction: column;
 `;
 
 const Text = styled.span`
@@ -84,5 +85,5 @@ const RowBox = styled.div`
 const BalanceText = styled.span`
   color: #d9d9d9;
   font-size: 19px;
-  margin: 0px 0px 49px 0px;
+  margin: 3% 0px 0px 0px;
 `;

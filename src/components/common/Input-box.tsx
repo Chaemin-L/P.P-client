@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import { InputType } from "./type";
 
-export const PostingInput = ({ children }: PropsWithChildren) => {
+export const InputBox = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
 };
 
@@ -17,7 +17,7 @@ const InputNum = ({ value, onChange, children }: InputType) => {
 
   return (
     <InputBoxContainer>
-      <InputBox
+      <InputBoxCom
         type="text"
         inputMode="numeric"
         pattern="[0-9]*"
@@ -57,35 +57,38 @@ const InputBoxContainer = styled.div`
   padding: 11px;
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
 `;
 
-const InputBox = styled.input`
+const InputBoxCom = styled.input`
   font-size: 50px;
   font-weight: bold;
   color: #a1a1a1;
-  widht: 68.4%;
+  width: 68.4%;
   text-align: right;
+  background-color: rgb(0, 0, 0, 0);
+  border: 0;
 `;
 
 const WonText = styled.span`
-  height: 60px;
   color: #ffffff;
   font-size: 20px;
   vertical-align: bottom;
+  margin: 0 0 5% 7%;
 `;
 
 const InputMapContainer = styled.div`
   width: 100%;
   height: 39px;
   display: flex;
-  felx-direction: row;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
 
 const Icon = styled.img`
   width: 7.43%;
-  margin: 0 0 0 1.28%;
+  margin: 0 1.28% 0 0;
   height: 100%;
   background-color: #d9d9d9;
 `;
@@ -101,5 +104,5 @@ const InputMapBox = styled.input`
   border-radius: 11px;
 `;
 
-PostingInput.InputNum = InputNum;
-PostingInput.InputMap = InputMap;
+InputBox.InputNum = InputNum;
+InputBox.InputMap = InputMap;

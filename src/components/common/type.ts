@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, ChangeEvent } from "react";
 
 export type TimeType = "오전" | "오후" | "무관";
 
@@ -28,3 +28,9 @@ export type TopBarProps = {
   onClick?: () => void;
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+
+export type InputType = {
+  value: string | number;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  children?: React.ReactNode;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
