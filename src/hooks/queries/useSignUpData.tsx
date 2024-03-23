@@ -1,10 +1,12 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import UserApi from "../../api/user-api";
+import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { TUser } from "./types/user-type";
 
-export const useSignUp = (a: string, b: string) => {
-  return useMutation<TUser[], AxiosError, { a: string; b: string }>({
-    mutationFn: async (data) => UserApi.postUserData(data.a, data.b),
+import { UserResponse } from "@/api/type";
+import UserApi from "@/api/user-api";
+
+export const useSignUp = () => {
+  return useMutation<UserResponse, AxiosError, { a: string; b: string }>({
+    mutationFn: async (data: { a: string; b: string }) =>
+      UserApi.postUserData(data.a, data.b),
   });
 };
