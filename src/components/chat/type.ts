@@ -15,3 +15,10 @@ export type InputType = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
+
+export type ChatRoomItemType = {
+  roomIdx: string;
+  name: string;
+  chatMsg: string;
+  time: string;
+};
