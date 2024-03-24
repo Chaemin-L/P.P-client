@@ -5,10 +5,10 @@ type BottomButtonProps = {
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
-export const BottomButton = ({ children }: BottomButtonProps) => {
+export const BottomButton = (props: BottomButtonProps) => {
   return (
     <ButtonWrapper>
-      <StyledButton>{children}</StyledButton>
+      <StyledButton {...props}>{props.children}</StyledButton>
     </ButtonWrapper>
   );
 };
