@@ -21,7 +21,9 @@ export const PostDetailPage = () => {
           <ActivityBox.Location />
           <ActivityBox.Description />
         </ActivityBox>
-        <BottomButton>신청하기</BottomButton>
+        <BottomButton onClick={() => console.log("신청합니다")}>
+          신청하기
+        </BottomButton>
       </Container>
     </DefaultLayout>
   );

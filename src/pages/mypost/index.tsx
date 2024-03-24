@@ -24,7 +24,9 @@ export const MyPostPage = () => {
           <ActivityBox.Description />
           <ActivityBox.MemberNum />
         </ActivityBox>
-        <BottomButton>참여관리</BottomButton>
+        <BottomButton onClick={() => console.log("참여관리")}>
+          참여관리
+        </BottomButton>
       </Container>
     </DefaultLayout>
   );
