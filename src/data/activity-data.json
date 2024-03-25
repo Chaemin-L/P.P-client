@@ -1,0 +1,17 @@
+{
+  "status": false,
+  "category": ["심부름", "청소"],
+  "title": "청소 도와주세요",
+  "description": "먼지를 털고 바닥을 물청소 할 생각입니다",
+  "author": {
+    "id": 0,
+    "name": "홍길동",
+    "imageUrl": "https://media.hellobot.co/fixedmenu/%E1%84%89%E1%85%B5%E1%84%85%E1%85%A9_%E1%84%8B%E1%85%A1%E1%84%86%E1%85%AE%20%E1%84%8B%E1%85%B5%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%8C%E1%85%B5%E1%86%BA%E1%84%80%E1%85%B5.png"
+  },
+  "duration": 30,
+  "datetime": "2024-03-24T19:44:54.162Z",
+  "location": "정릉 4동 성당",
+  "members": 43,
+  "maxMembers": 50,
+  "visitor": 25
+}
