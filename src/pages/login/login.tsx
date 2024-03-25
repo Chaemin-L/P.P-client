@@ -4,7 +4,7 @@ export const LoginPage = () => {
   return (
     <>
       {/* KaKao Login */}
-      <GoogleButton />
+      {/* <GoogleButton /> */}
     </>
   );
 };
