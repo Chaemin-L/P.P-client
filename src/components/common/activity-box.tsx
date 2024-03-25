@@ -47,7 +47,7 @@ export const ActivityBox = ({
         <JustifyWrapper>
           <ProfileBadge>
             <ProfileImage src={author.imageUrl} />
-            <span>{author.name}</span>
+            <ProfileName>{author.name}</ProfileName>
           </ProfileBadge>
           <Member>
             {members}/{maxMembers}명
@@ -119,8 +119,14 @@ const ProfileBadge = styled.div`
 
 const ProfileImage = styled.img`
   width: 28px;
-  height: 20px;
+  height: 28px;
   border-radius: 11px;
+  object-fit: cover;
+`;
+
+const ProfileName = styled.div`
+  padding: 4px 12px;
+  text-align: center;
 `;
 
 const Member = styled.span`

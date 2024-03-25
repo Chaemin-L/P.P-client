@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
 
 import { ActivityBox } from "@/components/common/activity-box";
-import { BottomButton } from "@/components/common/bottom-button";
+import { BottomFixed } from "@/components/common/bottom-fixed";
+import { Button } from "@/components/common/button";
 import { DefaultLayout } from "@/components/layout/default-layout";
 import activityData from "@/data/activity-data.json";
 
@@ -13,17 +14,18 @@ export const PostDetailPage = () => {
   return (
     <DefaultLayout>
       <ActivityBox {...activityData} />
-      <BottomButton onClick={() => console.log("신청합니다")}>
-        신청하기
-      </BottomButton>
+      <ButtonWrapper>
+        <Button primary onClick={() => console.log("신고합니다")}>
+          신고
+        </Button>
+      </ButtonWrapper>
+      <BottomFixed>
+        <BottomFixed.Button>신청하기</BottomFixed.Button>
+      </BottomFixed>
     </DefaultLayout>
   );
 };
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+const ButtonWrapper = styled.div`
+  float: right;
 `;

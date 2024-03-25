@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 import { ActivityBox } from "@/components/common/activity-box";
-import { BottomButton } from "@/components/common/bottom-button";
+import { BottomFixed } from "@/components/common/bottom-fixed";
 import { DefaultLayout } from "@/components/layout/default-layout";
 import activityData from "@/data/activity-data.json";
 
@@ -12,12 +12,15 @@ export const MyPostPage = () => {
 
   return (
     <DefaultLayout>
-      <Container>
-        <ActivityBox {...activityData} />
-        <BottomButton onClick={() => console.log("참여관리")}>
+      <ActivityBox {...activityData} />
+      <BottomFixed align="column">
+        <BottomFixed.Button onClick={() => console.log("참여관리")}>
+          끌어올리기
+        </BottomFixed.Button>
+        <BottomFixed.Button onClick={() => console.log("참여관리")}>
           참여관리
-        </BottomButton>
-      </Container>
+        </BottomFixed.Button>
+      </BottomFixed>
     </DefaultLayout>
   );
 };
