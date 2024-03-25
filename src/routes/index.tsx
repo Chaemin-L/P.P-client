@@ -5,6 +5,7 @@ import { GoogleAuth } from "@/components/login/google-auth";
 import { LoginPage } from "@/pages/login/login";
 import { MyPostPage } from "@/pages/mypost";
 import { PostDetailPage } from "@/pages/post/post-detail";
+import { Test } from "@/pages/test";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/mypost/:id",
         element: <MyPostPage />,
+      },
+      {
+        path: "/test",
+        element: <Test />,
       },
     ],
   },
