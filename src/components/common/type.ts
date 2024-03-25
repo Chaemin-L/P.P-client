@@ -17,3 +17,9 @@ export type ActivityBoxContextType = {
   readOnly: boolean;
   setReadOnly: Dispatch<SetStateAction<boolean>>;
 };
+
+export type BottomSheetProps = {
+  children: React.ReactNode;
+  onChangeIsOpened: (newValue: boolean) => void;
+  isOpened: boolean;
+} & Omit<React.HTMLAttributes<HTMLElement>, "type">;

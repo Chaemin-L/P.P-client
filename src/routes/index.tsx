@@ -8,6 +8,7 @@ import { LoginPage } from "@/pages/login/login";
 import { LoginEnd } from "@/pages/login/login-end";
 import { MyPostPage } from "@/pages/mypost";
 import { PostDetailPage } from "@/pages/post/post-detail";
+import { Test } from "@/pages/test";
 
 const router = createBrowserRouter([
   {
@@ -30,12 +31,12 @@ const router = createBrowserRouter([
         path: "/mypost/:id",
         element: <MyPostPage />,
       },
-      // {
-      //   path: "auth/kakao",
-      //   element: <KakaoAuth />,
-      // },
       { path: "/login/end", element: <LoginEnd /> },
       { path: "/auth/kakao", element: <KakaoAuth /> },
+      {
+        path: "/test",
+        element: <Test />,
+      },
     ],
   },
 ]);
