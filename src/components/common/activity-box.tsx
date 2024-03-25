@@ -85,7 +85,7 @@ const BadgeContainer = styled.div`
 
 const Badge = styled.div`
   width: fit-content;
-  padding: 6px 8px;
+  padding: 6px 11px;
   border-radius: 11px;
   background-color: black;
   color: white;

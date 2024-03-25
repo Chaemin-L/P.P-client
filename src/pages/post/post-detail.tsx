@@ -15,7 +15,7 @@ export const PostDetailPage = () => {
     <DefaultLayout>
       <ActivityBox {...activityData} />
       <ButtonWrapper>
-        <Button primary onClick={() => console.log("신고합니다")}>
+        <Button primary isSmall onClick={() => console.log("신고합니다")}>
           신고
         </Button>
       </ButtonWrapper>
