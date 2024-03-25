@@ -51,7 +51,7 @@ export const KakaoAuth = () => {
     if (kakaoAuthCode) {
       void handleGetKakaoToken(kakaoAuthCode);
     }
-  }, [kakaoAuthCode]);
+  }, []);
 
   return (
     <div>

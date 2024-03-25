@@ -10,11 +10,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const root = createRoot(document.getElementById("root")!);
 const queryClient = new QueryClient();
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <App />
+  </QueryClientProvider>,
+  // </React.StrictMode>,
 );
 
 reportWebVitals();
