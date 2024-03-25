@@ -35,7 +35,7 @@ export const KakaoAuth = () => {
           },
         );
 
-        console.log("카카오 로그인 성공");
+        console.log("카카오 로그인 성공", responseData.data.access_token);
 
         localStorage.setItem("KakaoToken", responseData.data.access_token);
 
