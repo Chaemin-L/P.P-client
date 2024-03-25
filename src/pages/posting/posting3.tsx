@@ -53,7 +53,7 @@ export const Posting3 = () => {
               const updatedPosting = { ...prevPosting, price: price };
               return updatedPosting;
             });
-            navigate("/postin/4");
+            navigate("/posting/4");
           }}
         >
           다음

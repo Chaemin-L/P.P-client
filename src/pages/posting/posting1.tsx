@@ -49,11 +49,11 @@ export const Posting1 = () => {
       </ScrollContainer>
       <BottomButton
         onClick={() => {
-          // setPosting((prevPosting) => {
-          //   const updatedPosting = { ...prevPosting, activityType: typeState };
-          //   return updatedPosting;
-          // });
-          // navigate("/posting/2");
+          setPosting((prevPosting) => {
+            const updatedPosting = { ...prevPosting, activityType: typeState };
+            return updatedPosting;
+          });
+          navigate("/posting/2");
           console.log("event!");
         }}
       >

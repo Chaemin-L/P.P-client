@@ -102,6 +102,7 @@ const InputMapBox = styled.input`
   color: #ffffff;
   background-color: #d9d9d9;
   border-radius: 11px;
+  border: 0;
 `;
 
 InputBox.InputNum = InputNum;
