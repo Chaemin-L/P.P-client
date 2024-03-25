@@ -11,6 +11,7 @@ import getRefreshToken from "@/utils/token";
 const Instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}`,
   timeout: 5000,
+  withCredentials: true,
 });
 
 Instance.interceptors.request.use(

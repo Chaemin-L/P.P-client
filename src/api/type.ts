@@ -28,3 +28,11 @@ export type UserResponse = {
   id: string;
   name: string;
 };
+
+export type AuthResponse = {
+  grantType: string;
+  accessToken: string;
+  refreshToken: string;
+  refreshTokenExpirationTime: number;
+  role: string;
+};
