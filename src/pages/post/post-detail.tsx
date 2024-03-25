@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { styled } from "styled-components";
 
 import { ActivityBox } from "@/components/common/activity-box";
@@ -11,6 +12,9 @@ export const PostDetailPage = () => {
   const { id } = useParams();
   */
 
+  // TODO: 자신이 신청한 게시글인지 확인하는 로직
+  const [apply, setApply] = useState<boolean>(false);
+
   return (
     <DefaultLayout>
       <ActivityBox {...activityData} />
@@ -20,7 +24,12 @@ export const PostDetailPage = () => {
         </Button>
       </ButtonWrapper>
       <BottomFixed>
-        <BottomFixed.Button>신청하기</BottomFixed.Button>
+        <BottomFixed.Button
+          isRounded={!apply}
+          onClick={() => setApply((apply) => !apply)}
+        >
+          신청하기
+        </BottomFixed.Button>
       </BottomFixed>
     </DefaultLayout>
   );

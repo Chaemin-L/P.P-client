@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 
 type ButtonProps = {
+  isRounded?: boolean;
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
@@ -10,8 +11,12 @@ type BottomFixedProps = {
   children: React.ReactNode;
 };
 
-const Button = (props: ButtonProps) => {
-  return <StyledButton {...props}>{props.children}</StyledButton>;
+const Button = ({ isRounded = true, ...props }: ButtonProps) => {
+  return (
+    <StyledButton isRounded={isRounded} {...props}>
+      {props.children}
+    </StyledButton>
+  );
 };
 
 export const BottomFixed = ({ align = "row", children }: BottomFixedProps) => {
@@ -32,12 +37,14 @@ const BottomFixedContainer = styled.div<{ align: string }>`
   left: 0;
 `;
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{ isRounded: boolean }>`
   width: 100%;
   padding: 12px;
-  border-radius: 50px;
-  border: 0;
+
   background-color: black;
+  ${({ isRounded }) =>
+    isRounded ? "border-radius: 50px;" : "background-color: #aaaaaa"};
+  border: 0;
   color: white;
   font-size: 24px;
 `;
