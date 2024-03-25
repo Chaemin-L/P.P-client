@@ -1,41 +1,41 @@
-import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { ActivityBox } from "@/components/common/activity-box";
-import { BottomButton } from "@/components/common/bottom-button";
+import { BottomFixed } from "@/components/common/bottom-fixed";
+import { Button } from "@/components/common/button";
 import { DefaultLayout } from "@/components/layout/default-layout";
+import activityData from "@/data/activity-data.json";
 
 export const MyPostPage = () => {
+  /* postId 식별
   const { id } = useParams();
+  */
 
   return (
     <DefaultLayout>
-      <Container>
-        현재 보고계신 {"내"} 게시글의 id는 {id}입니다.
-        <ActivityBox>
-          <ActivityBox.CompleteButton />
-          <ActivityBox.EditButton />
-          <ActivityBox.Title />
-          <ActivityBox.ProfileImage />
-          <ActivityBox.ProfileImage />
-          <ActivityBox.Time />
-          <ActivityBox.Date />
-          <ActivityBox.Location />
-          <ActivityBox.Description />
-          <ActivityBox.MemberNum />
-        </ActivityBox>
-        <BottomButton onClick={() => console.log("참여관리")}>
+      <JustifyWrapper>
+        <Button primary>모집완료</Button>
+        <Button primary>수정하기</Button>
+      </JustifyWrapper>
+      <ActivityBox {...activityData} />
+      <BottomFixed align="column">
+        <BottomFixed.Button
+          onClick={() => console.log("참여관리 페이지로 이동")}
+        >
+          끌어올리기
+        </BottomFixed.Button>
+        <BottomFixed.Button
+          onClick={() => console.log("참여관리 페이지로 이동")}
+        >
           참여관리
-        </BottomButton>
-      </Container>
+        </BottomFixed.Button>
+      </BottomFixed>
     </DefaultLayout>
   );
 };
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
+const JustifyWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 20px;
 `;

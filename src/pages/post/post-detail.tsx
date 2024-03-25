@@ -1,38 +1,40 @@
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import { styled } from "styled-components";
 
 import { ActivityBox } from "@/components/common/activity-box";
-import { BottomButton } from "@/components/common/bottom-button";
+import { BottomFixed } from "@/components/common/bottom-fixed";
+import { Button } from "@/components/common/button";
 import { DefaultLayout } from "@/components/layout/default-layout";
+import activityData from "@/data/activity-data.json";
 
 export const PostDetailPage = () => {
+  /* postId 식별
   const { id } = useParams();
+  */
+
+  // TODO: 자신이 신청한 게시글인지 확인하는 로직
+  const [apply, setApply] = useState<boolean>(false);
 
   return (
     <DefaultLayout>
-      <Container>
-        <>현재 보고계신 게시글의 id는 {id}입니다.</>
-        <ActivityBox>
-          <ActivityBox.Title />
-          <ActivityBox.ProfileImage />
-          <ActivityBox.ProfileImage />
-          <ActivityBox.Time />
-          <ActivityBox.Date />
-          <ActivityBox.Location />
-          <ActivityBox.Description />
-        </ActivityBox>
-        <BottomButton onClick={() => console.log("신청합니다")}>
+      <ActivityBox {...activityData} />
+      <ButtonWrapper>
+        <Button primary isSmall onClick={() => console.log("신고합니다")}>
+          신고
+        </Button>
+      </ButtonWrapper>
+      <BottomFixed>
+        <BottomFixed.Button
+          isRounded={!apply}
+          onClick={() => setApply((apply) => !apply)}
+        >
           신청하기
-        </BottomButton>
-      </Container>
+        </BottomFixed.Button>
+      </BottomFixed>
     </DefaultLayout>
   );
 };
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+const ButtonWrapper = styled.div`
+  float: right;
 `;
