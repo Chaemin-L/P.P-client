@@ -34,3 +34,9 @@ export type InputType = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
+
+export type BottomSheetProps = {
+  children: React.ReactNode;
+  onChangeIsOpened: (newValue: boolean) => void;
+  isOpened: boolean;
+} & Omit<React.HTMLAttributes<HTMLElement>, "type">;
