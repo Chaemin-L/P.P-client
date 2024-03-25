@@ -1,13 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { KakaoResponseType } from "./type";
 
 import { useSignIn } from "@/hooks/queries/useSignIn";
 
 export const KakaoAuth = () => {
-  const navigate = useNavigate();
   const location = useLocation(); // useLocation 훅 사용
   const signInMutate = useSignIn();
 

@@ -1,5 +1,3 @@
-import { AxiosResponse } from "axios";
-
 import Instance from "./axios-instance";
 import { AuthResponse } from "./type";
 
@@ -9,6 +7,9 @@ export default class AuthApi {
       `/auth-service/api/v2/auth/signin/${type}`,
       { token: token },
     );
-    return response.data as AuthResponse;
+
+    console.log(response);
+    const res = response.data as AuthResponse;
+    return res.data;
   }
 }

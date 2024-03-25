@@ -30,9 +30,15 @@ export type UserResponse = {
 };
 
 export type AuthResponse = {
-  grantType: string;
-  accessToken: string;
-  refreshToken: string;
-  refreshTokenExpirationTime: number;
-  role: string;
+  status: number;
+  code: string;
+  msg: string;
+  detailMsg: string;
+  data: {
+    grantType: string;
+    accessToken: string;
+    refreshToken: string;
+    refreshTokenExpirationTime: number;
+    role: string;
+  };
 };
