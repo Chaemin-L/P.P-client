@@ -7,71 +7,52 @@ export const InputBox = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
 };
 
-const InputNum = ({ value, onChange, children }: InputType) => {
-  const [inputValue, setInputValue] = useState(value || "");
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    onChange(e);
-  };
-
+const InputNum = (props: InputType) => {
   return (
     <InputBoxContainer>
       <InputBoxCom
         type="text"
         inputMode="numeric"
         pattern="[0-9]*"
-        value={inputValue}
-        onChange={handleInputChange}
+        {...props}
       />
-      <WonText>{children}</WonText>
+      <WonText>{props.children}</WonText>
     </InputBoxContainer>
   );
 };
 
-const InputMap = ({ value, onChange }: InputType) => {
-  const [inputValue, setInputValue] = useState(value || "");
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    onChange(e);
-  };
-
+const InputMap = (props: InputType) => {
   return (
     <InputMapContainer>
       <Icon src="" />
-      <InputMapBox
-        type="text"
-        value={inputValue}
-        onChange={handleInputChange}
-      />
+      <InputMapBox type="text" {...props} />
     </InputMapContainer>
   );
 };
 
 const InputBoxContainer = styled.div`
-  width: 64.1%;
-  height: 79px;
-  background-color: #d9d9d9;
-  border-radius: 11px;
-  padding: 11px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  padding-left: 21.5%;
 `;
 
 const InputBoxCom = styled.input`
   font-size: 50px;
   font-weight: bold;
   color: #a1a1a1;
-  width: 68.4%;
-  text-align: right;
-  background-color: rgb(0, 0, 0, 0);
+  text-align: center;
   border: 0;
+  width: 70%;
+  height: 79px;
+  background-color: #d9d9d9;
+  border-radius: 11px;
+  padding: 11px;
 `;
 
 const WonText = styled.span`
-  color: #ffffff;
+  color: #d9d9d9;
   font-size: 20px;
   vertical-align: bottom;
   margin: 0 0 5% 7%;

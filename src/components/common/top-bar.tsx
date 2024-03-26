@@ -26,7 +26,8 @@ export const TopBar = ({ onClick, children }: TopBarProps) => {
 const TopBarContainer = styled.div`
   width: 100%;
   padding: 27px 21px 18px 21px;
-  /* bottom-border: 8px; */
+  border-bottom: 8px solid;
+  border-color: #d9d9d9;
   font-size: 15px;
   color: #d9d9d9;
   display: flex;

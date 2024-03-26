@@ -19,18 +19,18 @@ Instance.interceptors.request.use(
     const { method, url } = config;
     console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url}`);
 
-    let token: string | null = null;
+    // let token: string | null = null;
 
-    // 토큰 설정 해줘야함
-    if (config.url === process.env.REACT_APP_REFRESH_URL) {
-      token = localStorage.getItem("refreshToken");
-    } else {
-      token = localStorage.getItem("accessToken");
-    }
+    // // 토큰 설정 해줘야함
+    // if (config.url === process.env.REACT_APP_REFRESH_URL) {
+    //   token = localStorage.getItem("refreshToken");
+    // } else {
+    //   token = localStorage.getItem("accessToken");
+    // }
 
-    if (token !== null) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    // if (token !== null) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
     config.headers["Content-Type"] = "application/json";
 
     return config;
@@ -72,12 +72,12 @@ Instance.interceptors.response.use(
           `[API - RESPONSE 401] ${method?.toUpperCase()} ${url} | ${status} : ${error.message} | refresh Token`,
         );
 
-        const accessToken = await getRefreshToken();
-        if (accessToken !== undefined) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
-        }
+        // const accessToken = await getRefreshToken();
+        // if (accessToken !== undefined) {
+        //   config.headers.Authorization = `Bearer ${accessToken}`;
+        // }
 
-        return axios(config);
+        // return axios(config);
       } else {
         console.log(
           `[API - RESPONSE ERROR] ${method?.toUpperCase()} ${url} | ${status} : ${error.message}`,

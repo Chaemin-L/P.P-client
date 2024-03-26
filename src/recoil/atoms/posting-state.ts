@@ -13,6 +13,7 @@ export const postingState = atom({
       { name: "기타", state: false },
     ],
     title: "",
+    contents: "",
     profileImage: "",
     dateType: "",
     startTime: "",

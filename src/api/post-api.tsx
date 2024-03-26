@@ -6,6 +6,11 @@ export default class PostApi {
     const response = await Instance.post(
       "/haetsal-service/api/v2/market/post",
       { request: data },
+      {
+        headers: {
+          userId: 2,
+        },
+      },
     );
 
     return response.status;
