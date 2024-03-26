@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import { BottomButton } from "@/components/common/bottom-button";
+import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { TopBar } from "@/components/common/top-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
@@ -32,14 +32,16 @@ export const Posting1 = () => {
           setLocation(e.target.value);
         }}
       />
-      <BottomButton
-        onClick={() => {
-          handleSave();
-          navigate("/posting/4");
-        }}
-      >
-        다음
-      </BottomButton>
+      <BottomFixed>
+        <BottomFixed.Button
+          onClick={() => {
+            handleSave();
+            navigate("/posting/4");
+          }}
+        >
+          다음
+        </BottomFixed.Button>
+      </BottomFixed>
     </PageContainer>
   );
 };

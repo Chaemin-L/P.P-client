@@ -4,7 +4,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomButton } from "@/components/common/bottom-button";
-import { SelectToggle } from "@/components/common/select-toggle";
+import { ToggleNotUse } from "@/components/common/toggle-notuse";
 import { TopBar } from "@/components/common/top-bar";
 import { postingState } from "@/recoil/atoms/posting-state";
 
@@ -28,7 +28,7 @@ const Posting1 = () => {
         <Text>항목을 선택해주세요</Text>
         <Grid>
           {typeState.map((item, index) => (
-            <SelectToggle.CheckTypeToggle
+            <ToggleNotUse.CheckTypeToggle
               key={index}
               state={item.state}
               onClick={() => {
@@ -50,7 +50,7 @@ const Posting1 = () => {
               }}
             >
               {item.name}
-            </SelectToggle.CheckTypeToggle>
+            </ToggleNotUse.CheckTypeToggle>
           ))}
         </Grid>
       </ScrollContainer>

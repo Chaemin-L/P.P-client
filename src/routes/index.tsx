@@ -8,6 +8,8 @@ import { LoginEnd } from "@/pages/login/login-end";
 import { MyPostPage } from "@/pages/mypost";
 import { PostDetailPage } from "@/pages/post/post-detail";
 import { Posting1 } from "@/pages/posting/posting1";
+import { Posting2 } from "@/pages/posting/posting2";
+import { Posting3 } from "@/pages/posting/posting3";
 import { Posting4 } from "@/pages/posting/posting4";
 import { Posting5 } from "@/pages/posting/posting5";
 import { Posting6 } from "@/pages/posting/posting6";
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
       {
         path: "posting/1",
         element: <Posting1 />,
+      },
+      {
+        path: "posting/2",
+        element: <Posting2 />,
+      },
+      {
+        path: "posting/3",
+        element: <Posting3 />,
       },
       {
         path: "posting/4",

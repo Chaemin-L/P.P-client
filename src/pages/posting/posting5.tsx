@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import { BottomButton } from "@/components/common/bottom-button";
+import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { TopBar } from "@/components/common/top-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
@@ -57,24 +57,24 @@ export const Posting5 = () => {
       <BalanceText style={{ marginTop: "3%" }}>
         게시물 작성 후 내 잔액은 {leftPrice - posting.price * member}매듭입니다.
       </BalanceText>
-      <BottomButton
-        warpperStyle={{ width: "50%", left: 0, paddingRight: "8px" }}
-        onClick={() => {
-          handleSave();
-          navigate(-1);
-        }}
-      >
-        이전
-      </BottomButton>
-      <BottomButton
-        warpperStyle={{ width: "50%", right: 0, paddingLeft: "8px" }}
-        onClick={() => {
-          handleSave();
-          navigate("posting/6");
-        }}
-      >
-        다음
-      </BottomButton>
+      <BottomFixed align="row">
+        <BottomFixed.Button
+          onClick={() => {
+            handleSave();
+            navigate(-1);
+          }}
+        >
+          이전
+        </BottomFixed.Button>
+        <BottomFixed.Button
+          onClick={() => {
+            handleSave();
+            navigate("/posting/6");
+          }}
+        >
+          다음
+        </BottomFixed.Button>
+      </BottomFixed>
     </PageContainer>
   );
 };

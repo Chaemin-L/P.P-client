@@ -1,36 +1,40 @@
+import { motion } from "framer-motion";
 import { PropsWithChildren } from "react";
 import { styled } from "styled-components";
 
-import { SelectToggleType } from "./type";
+import { ToggleType } from "./type";
 
 import checkImg from "@/assets/images/check-img.png";
 
-export const SelectToggle = ({ children }: PropsWithChildren) => {
+export const ToggleNotUse = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
 };
 
-const ManageSelectToggle = ({ state, onClick, children }: SelectToggleType) => {
+const ManageSelectToggle = (props: ToggleType) => {
+  const { state, ...restProps } = props;
+
   return (
     <ManageSelectStyle
       style={{ backgroundColor: state ? "#d9d9d9" : "#a1a1a1" }}
-      onClick={onClick}
+      {...restProps}
     >
-      {children}
+      {props.children}
     </ManageSelectStyle>
   );
 };
 
-const CheckTypeToggle = ({ state, onClick, children }: SelectToggleType) => {
+const CheckTypeToggle = (props: ToggleType) => {
+  const { state, ...restProps } = props;
   return (
     <CheckTypeStyle
       style={{ backgroundColor: state ? "#a1a1a1" : "#d9d9d9" }}
-      onClick={onClick}
+      {...restProps}
     >
       <ColumnBox>
         <CheckBoxContainer>
           <CheckBox></CheckBox>
           {state ? <CheckImg src={checkImg} /> : <></>}
-          <span>{children}</span>
+          <span>{props.children}</span>
         </CheckBoxContainer>
       </ColumnBox>
       <TypeImageContainer>
@@ -112,5 +116,5 @@ const TypeImage = styled.img`
   object-fit: cover;
 `;
 
-SelectToggle.ManageSelectToggle = ManageSelectToggle;
-SelectToggle.CheckTypeToggle = CheckTypeToggle;
+ToggleNotUse.ManageSelectToggle = ManageSelectToggle;
+ToggleNotUse.CheckTypeToggle = CheckTypeToggle;

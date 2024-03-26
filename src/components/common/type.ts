@@ -18,9 +18,8 @@ export type ActivityBoxContextType = {
   setReadOnly: Dispatch<SetStateAction<boolean>>;
 };
 
-export type SelectToggleType = {
-  state: boolean;
-  onClick?: () => void;
+export type ToggleType = {
+  state?: boolean;
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
@@ -38,3 +37,10 @@ export type BottomSheetProps = {
   onChangeIsOpened: (newValue: boolean) => void;
   isOpened: boolean;
 } & Omit<React.HTMLAttributes<HTMLElement>, "type">;
+
+export type SwitchToggleType = {
+  firstText: string;
+  secondText: string;
+  onChangeSelected: (newValue: boolean) => void;
+  isLeftSelected: boolean;
+};

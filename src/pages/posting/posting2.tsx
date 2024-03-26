@@ -6,37 +6,38 @@ import { styled } from "styled-components";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { TopBar } from "@/components/common/top-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
-import { PostingInput } from "@/components/posting/posting-input";
+import { PostingDatePicker } from "@/components/posting/posting-date-picker";
 import { postingState } from "@/recoil/atoms/posting-state";
 
-export const Posting6 = () => {
+export const Posting2 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
-  const [title, setTitle] = useState(posting.title);
+  const [startDate, setStartDate] = useState(
+    posting.startDateSave ? posting.startDate : new Date(),
+  );
+
   const navigate = useNavigate();
 
   const handleSave = () => {
     setPosting((prevPosting) => {
-      const updatedPosting = { ...prevPosting, title: title };
+      const updatedPosting = {
+        ...prevPosting,
+        startDate: startDate,
+        startDateSave: true,
+      };
       return updatedPosting;
     });
   };
 
   return (
     <PageContainer>
-      <TopBar
-        onClick={() => {
-          handleSave();
-        }}
-      >
-        1/10완료
-      </TopBar>
-      <PostingBoldText>활동 제목을 적어보세요</PostingBoldText>
-      <PostingInput.InputTitle
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-      />
+      <TopBar onClick={() => handleSave()}>1/10완료</TopBar>
+      <PostingBoldText style={{ marginBottom: "10px" }}>
+        날짜를 선택해주세요
+      </PostingBoldText>
+      <span style={{ margin: "10px", fontSize: "18px" }}>
+        {startDate.toLocaleString("ko-KR", { month: "long", day: "2-digit" })}
+      </span>
+      <PostingDatePicker startDate={startDate} setStartDate={setStartDate} />
       <BottomFixed align="row">
         <BottomFixed.Button
           onClick={() => {
@@ -49,7 +50,7 @@ export const Posting6 = () => {
         <BottomFixed.Button
           onClick={() => {
             handleSave();
-            navigate("/posting/7");
+            navigate("/posting/3");
           }}
         >
           다음

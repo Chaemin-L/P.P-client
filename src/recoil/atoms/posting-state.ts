@@ -1,5 +1,7 @@
 import { atom } from "recoil";
 
+const today = new Date();
+
 export const postingState = atom({
   key: "postingState",
   default: {
@@ -16,12 +18,13 @@ export const postingState = atom({
     contents: "",
     profileImage: "",
     dateType: "",
-    startTime: "",
-    startDate: "",
-    endTime: "",
+    startDate: today,
     endDate: "",
     location: "",
     memberNum: 0,
     price: 0,
+    slot: "",
+    startDateSave: false,
+    startTimeSave: false,
   },
 });
