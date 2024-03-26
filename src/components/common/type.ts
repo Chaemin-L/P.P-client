@@ -29,8 +29,10 @@ export type TopBarProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
 export type InputType = {
+  value: string | number;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
+};
 
 export type BottomSheetProps = {
   children: React.ReactNode;

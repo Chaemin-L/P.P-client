@@ -7,25 +7,44 @@ export const InputBox = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
 };
 
-const InputNum = (props: InputType) => {
+const InputNum = ({ value, onChange, children }: InputType) => {
+  const [inputValue, setInputValue] = useState(value || "");
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    onChange(e);
+  };
+
   return (
     <InputBoxContainer>
       <InputBoxCom
         type="text"
         inputMode="numeric"
         pattern="[0-9]*"
-        {...props}
+        value={inputValue}
+        onChange={handleInputChange}
       />
-      <WonText>{props.children}</WonText>
+      <WonText>{children}</WonText>
     </InputBoxContainer>
   );
 };
 
-const InputMap = (props: InputType) => {
+const InputMap = ({ value, onChange }: InputType) => {
+  const [inputValue, setInputValue] = useState(value || "");
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    onChange(e);
+  };
+
   return (
     <InputMapContainer>
       <Icon src="" />
-      <InputMapBox type="text" {...props} />
+      <InputMapBox
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
     </InputMapContainer>
   );
 };
