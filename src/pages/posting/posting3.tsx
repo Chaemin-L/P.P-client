@@ -14,7 +14,7 @@ export const Posting3 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
   const today = new Date();
   const [hours, setHours] = useState(
-    posting.startTimeSave ? posting.startDate.getHours() : today.getHours(),
+    posting.startTimeSave ? posting.startDate.getHours() : today.getHours() + 1,
   );
   const [minutes, setMinutes] = useState(
     posting.startTimeSave ? posting.startDate.getMinutes() : today.getMinutes(),
@@ -60,6 +60,24 @@ export const Posting3 = () => {
         isLeftSelected={isLeftSelected}
         onChangeSelected={SetIsLeftSelected}
       />
+      <span>
+        <input
+          type="number"
+          value={hours}
+          onChange={(e) => {
+            setHours(Number(e.target));
+          }}
+        />
+        <span>시</span>
+        <input
+          type="number"
+          value={minutes}
+          onChange={(e) => {
+            setMinutes(Number(e.target));
+          }}
+        />
+        <span>분</span>
+      </span>
       <BottomFixed align="row">
         <BottomFixed.Button
           onClick={() => {

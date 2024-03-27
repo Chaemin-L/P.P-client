@@ -49,26 +49,30 @@ export type ChatSendResponse = {
   message: string;
 };
 
-export type BankGetResponse = {
-  id: string;
-  name: string;
-};
-
 export type UserResponse = {
   id: string;
   name: string;
 };
 
-export type AuthResponse = {
+export type FinalResponse<T extends object = Record<string, unknown>> = {
   status: number;
   code: string;
   msg: string;
   detailMsg: string;
-  data: {
-    grantType: string;
-    accessToken: string;
-    refreshToken: string;
-    refreshTokenExpirationTime: number;
-    role: string;
-  };
+  data: T;
 };
+
+export type AuthResponse = FinalResponse<{
+  grantType: string;
+  accessToken: string;
+  refreshToken: string;
+  refreshTokenExpirationTime: number;
+  role: string;
+}>;
+
+export type BankDataResponse = FinalResponse<{
+  accountNumber: string;
+  totalBudget: number;
+  availableBudget: number;
+  isBlocked: boolean;
+}>;

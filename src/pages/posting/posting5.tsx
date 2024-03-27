@@ -7,16 +7,20 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { TopBar } from "@/components/common/top-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
+import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { postingState } from "@/recoil/atoms/posting-state";
 
 export const Posting5 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
   const [member, setMember] = useState(posting.memberNum);
   const navigate = useNavigate();
-  const [leftPrice, setLeftPrice] = useState(0);
+  const [availableBudget, setAvailableBudget] = useState(0);
+  const { data: bankData, isLoading, isError, error } = useGetBankData();
 
   useEffect(() => {
-    //남은 잔액 가져와야함
+    if (!isLoading && !isError && bankData) {
+      setAvailableBudget(bankData.availableBudget);
+    }
   }, []);
 
   const handleSave = () => {
@@ -48,14 +52,15 @@ export const Posting5 = () => {
       >
         명
       </InputBox.InputNum>
-      <BalanceText>지금 내 잔액은 {leftPrice}매듭 입니다.</BalanceText>
+      <BalanceText>지금 내 잔액은 {availableBudget}매듭 입니다.</BalanceText>
       <SumContainer>
         <SumText>합계</SumText>
         <SumNumberText>{posting.price * member}</SumNumberText>
         <SumText>매듭</SumText>
       </SumContainer>
       <BalanceText style={{ marginTop: "3%" }}>
-        게시물 작성 후 내 잔액은 {leftPrice - posting.price * member}매듭입니다.
+        게시물 작성 후 내 잔액은 {availableBudget - posting.price * member}
+        매듭입니다.
       </BalanceText>
       <BottomFixed align="row">
         <BottomFixed.Button
