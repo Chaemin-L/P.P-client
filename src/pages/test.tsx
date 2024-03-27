@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 import { BottomSheet } from "@/components/common/bottom-sheet";
+import { useGetProfile } from "@/hooks/queries/useGetProfile";
 
 export const Test = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const { data: bankData, isLoading, isError, error } = useGetProfile();
 
   return (
     <div

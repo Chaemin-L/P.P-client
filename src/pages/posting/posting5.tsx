@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
+import BankApi from "@/api/bank-api";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { TopBar } from "@/components/common/top-bar";
@@ -17,11 +18,9 @@ export const Posting5 = () => {
   const [availableBudget, setAvailableBudget] = useState(0);
   const { data: bankData, isLoading, isError, error } = useGetBankData();
 
-  useEffect(() => {
-    if (!isLoading && !isError && bankData) {
-      setAvailableBudget(bankData.availableBudget);
-    }
-  }, []);
+  // useEffect(() => {
+  //   BankApi.getBankData();
+  // }, []);
 
   const handleSave = () => {
     setPosting((prevPosting) => {

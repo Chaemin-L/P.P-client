@@ -76,3 +76,12 @@ export type BankDataResponse = FinalResponse<{
   availableBudget: number;
   isBlocked: boolean;
 }>;
+
+export type ProfileDataResponse = FinalResponse<{
+  nickNmae: string;
+  gender: string;
+  address: string;
+  ageRange: number;
+  accountNumber: string;
+  profileImage: string;
+}>;

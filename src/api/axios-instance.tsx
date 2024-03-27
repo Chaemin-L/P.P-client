@@ -12,24 +12,25 @@ const Instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}`,
   timeout: 5000,
   withCredentials: true,
+  // headers: { withCredentials: true },
 });
 
 Instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const { method, url } = config;
 
-    let token: string | undefined = undefined;
+    let token: string | null = null;
 
     // 토큰 설정 해줘야함
-    // if (config.url === process.env.REACT_APP_REFRESH_URL) {
-    //   token = localStorage.getItem("refreshToken");
-    // } else {
-    //   token = localStorage.getItem("accessToken");
-    // }
+    if (config.url === process.env.REACT_APP_REFRESH_URL) {
+      token = localStorage.getItem("refreshToken");
+    } else {
+      token = localStorage.getItem("accessToken");
+    }
 
-    token = process.env.REACT_APP_TEST_TOKEN;
+    // token = process.env.REACT_APP_TEST_TOKEN;
 
-    if (token) {
+    if (token !== null) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     config.headers["Content-Type"] = "application/json";
@@ -48,18 +49,16 @@ Instance.interceptors.request.use(
 );
 
 Instance.interceptors.response.use(
-  (
-    response: AxiosResponse<InstanceResponseData>,
-  ): AxiosResponse<InstanceResponseData> => {
+  (response: AxiosResponse): AxiosResponse => {
     const { method, url } = response.config;
     const stauts = response.status;
-    const { code, message } = response.data;
+    // const { code, message } = response.data;
 
     if (stauts === 404) {
-      console.log(
-        `[API - RESPONSE 404] ${method?.toUpperCase()} ${url} | ${code} : ${message}`,
-      );
+      console.log(`[API - RESPONSE 404] ${method?.toUpperCase()} ${url} | `);
     }
+
+    console.log(`[API-RESPONSE ${stauts}] `, response);
 
     return response;
   },
@@ -68,6 +67,8 @@ Instance.interceptors.response.use(
       const { config } = error as { config: InternalAxiosRequestConfig };
       const { method, url } = config;
       const status = error.response.status;
+
+      console.log(`[API-RESPONSE ${status}] `, error);
 
       if (status === 401) {
         console.log(

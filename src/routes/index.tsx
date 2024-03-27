@@ -16,6 +16,7 @@ import { Posting6 } from "@/pages/posting/posting6";
 import { Posting7 } from "@/pages/posting/posting7";
 import { Posting8 } from "@/pages/posting/posting8";
 import { Test } from "@/pages/test";
+import { Test2 } from "@/pages/test2";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/test",
         element: <Test />,
+      },
+      {
+        path: "/test2",
+        element: <Test2 />,
       },
     ],
   },

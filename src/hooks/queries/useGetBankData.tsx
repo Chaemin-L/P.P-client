@@ -6,5 +6,6 @@ export const useGetBankData = () => {
   return useQuery({
     queryKey: [],
     queryFn: () => BankApi.getBankData(),
+    staleTime: 60000,
   });
 };
