@@ -9,28 +9,31 @@ import { InstanceResponseData } from "./type";
 import getRefreshToken from "@/utils/token";
 
 const Instance = axios.create({
-  baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}/api`,
+  baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}`,
   timeout: 5000,
+  withCredentials: true,
 });
 
 Instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const { method, url } = config;
-    console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url}`);
 
-    let token: string | null = null;
+    let token: string | undefined = undefined;
 
-    // 토큰 설정 해줘야함
-    if (config.url === process.env.REACT_APP_REFRESH_URL) {
-      token = localStorage.getItem("refreshToken");
-    } else {
-      token = localStorage.getItem("accessToken");
-    }
+    // // 토큰 설정 해줘야함
+    // if (config.url === process.env.REACT_APP_REFRESH_URL) {
+    //   token = localStorage.getItem("refreshToken");
+    // } else {
+    //   token = localStorage.getItem("accessToken");
+    // }
 
-    if (token !== null) {
+    token = process.env.REACT_APP_TEST_TOKEN;
+
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     config.headers["Content-Type"] = "application/json";
+    console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url} ${token}`);
 
     return config;
   },
@@ -50,13 +53,12 @@ Instance.interceptors.response.use(
   ): AxiosResponse<InstanceResponseData> => {
     const { method, url } = response.config;
     const stauts = response.status;
-    const { code, message } = response.data;
 
     if (stauts === 404) {
-      console.log(
-        `[API - RESPONSE 404] ${method?.toUpperCase()} ${url} | ${code} : ${message}`,
-      );
+      console.log(`[API - RESPONSE 404] ${method?.toUpperCase()} ${url} | `);
     }
+
+    console.log(`[API-RESPONSE ${stauts}] `, response);
 
     return response;
   },
@@ -65,6 +67,8 @@ Instance.interceptors.response.use(
       const { config } = error as { config: InternalAxiosRequestConfig };
       const { method, url } = config;
       const status = error.response.status;
+
+      console.log(`[API-RESPONSE ${status}] `, error);
 
       if (status === 401) {
         console.log(
