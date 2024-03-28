@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import { BottomButton } from "@/components/common/bottom-button";
 import { ToggleNotUse } from "@/components/common/toggle-notuse";
 import { TopBar } from "@/components/common/top-bar";
 import { postingState } from "@/recoil/atoms/posting-state";
@@ -54,7 +53,7 @@ const Posting1 = () => {
           ))}
         </Grid>
       </ScrollContainer>
-      <BottomButton
+      {/* <BottomButton
         onClick={() => {
           handleSvae();
           navigate("/posting/2");
@@ -62,7 +61,7 @@ const Posting1 = () => {
         }}
       >
         다음
-      </BottomButton>
+      </BottomButton> */}
     </PageContainer>
   );
 };
