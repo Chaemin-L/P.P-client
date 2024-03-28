@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import BankApi from "@/api/bank-api";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { TopBar } from "@/components/common/top-bar";
@@ -15,12 +14,7 @@ export const Posting5 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
   const [member, setMember] = useState(posting.memberNum);
   const navigate = useNavigate();
-  const [availableBudget, setAvailableBudget] = useState(0);
-  const { data: bankData, isLoading, isError, error } = useGetBankData();
-
-  // useEffect(() => {
-  //   BankApi.getBankData();
-  // }, []);
+  const { data: bankData } = useGetBankData();
 
   const handleSave = () => {
     setPosting((prevPosting) => {
@@ -51,14 +45,17 @@ export const Posting5 = () => {
       >
         명
       </InputBox.InputNum>
-      <BalanceText>지금 내 잔액은 {availableBudget}매듭 입니다.</BalanceText>
+      <BalanceText>
+        지금 내 잔액은 {bankData ? bankData.availableBudget : 0}매듭 입니다.
+      </BalanceText>
       <SumContainer>
         <SumText>합계</SumText>
         <SumNumberText>{posting.price * member}</SumNumberText>
         <SumText>매듭</SumText>
       </SumContainer>
       <BalanceText style={{ marginTop: "3%" }}>
-        게시물 작성 후 내 잔액은 {availableBudget - posting.price * member}
+        게시물 작성 후 내 잔액은{" "}
+        {(bankData ? bankData.availableBudget : 0) - posting.price * member}
         매듭입니다.
       </BalanceText>
       <BottomFixed align="row">

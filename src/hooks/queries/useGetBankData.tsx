@@ -4,8 +4,7 @@ import BankApi from "@/api/bank-api";
 
 export const useGetBankData = () => {
   return useQuery({
-    queryKey: [],
+    queryKey: ["bankData"],
     queryFn: () => BankApi.getBankData(),
-    staleTime: 60000,
   });
 };

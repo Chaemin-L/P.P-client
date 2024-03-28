@@ -36,7 +36,7 @@ export const Posting1 = () => {
         <BottomFixed.Button
           onClick={() => {
             handleSave();
-            navigate("/posting/4");
+            navigate("/posting/2");
           }}
         >
           다음

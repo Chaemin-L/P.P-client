@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from "axios";
 import { useEffect } from "react";
 
 import { useSignInLocal } from "@/hooks/queries/useSignInLocal";

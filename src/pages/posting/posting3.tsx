@@ -63,17 +63,17 @@ export const Posting3 = () => {
       <span>
         <input
           type="number"
-          value={hours}
+          value={hours.toString()}
           onChange={(e) => {
-            setHours(Number(e.target));
+            setHours(Number(e.target.value));
           }}
         />
         <span>시</span>
         <input
           type="number"
-          value={minutes}
+          value={minutes.toString()}
           onChange={(e) => {
-            setMinutes(Number(e.target));
+            setMinutes(Number(e.target.value));
           }}
         />
         <span>분</span>

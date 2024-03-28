@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useRef } from "react";
 import { styled } from "styled-components";
 
 import { InputType } from "@/components/common/type";
@@ -12,18 +12,33 @@ const InputTitle = (props: InputType) => {
     <InputWrapper>
       <InputContainer>
         <InputTitleBox maxLength={20} type="text" {...props} />
-        <InputLeft>{props.value?.toString.length}/20자</InputLeft>
+        <InputLeft>{props.value?.toString().length}/20자</InputLeft>
       </InputContainer>
     </InputWrapper>
   );
 };
 
 const InputContent = (props: InputType) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   return (
     <InputWrapper>
       <InputContainer>
-        <InputContentBox maxLength={100} type="text" {...props} />
-        <InputLeft>{props.value?.toString.length}/100자</InputLeft>
+        <InputContentBoxContainer onClick={handleClick}>
+          <InputContentBox
+            ref={inputRef}
+            maxLength={100}
+            type="text"
+            {...props}
+          />
+        </InputContentBoxContainer>
+        <InputLeft>{props.value?.toString().length}/100자</InputLeft>
       </InputContainer>
     </InputWrapper>
   );
@@ -42,6 +57,7 @@ const InputContainer = styled.div`
   background-color: #d9d9d9;
   border-radius: 11px;
   color: #ffffff;
+  align-items: flex-start;
 `;
 
 const InputTitleBox = styled.input`
@@ -60,12 +76,19 @@ const InputLeft = styled.span`
   text-align: end;
 `;
 
-const InputContentBox = styled.input`
-  font-size: 18px;
+const InputContentBoxContainer = styled.div`
   width: 100%;
   background-color: transparent;
   border: 0;
   height: 206px;
+`;
+
+const InputContentBox = styled.input`
+  width: 100%;
+  font-size: 18px;
+  background-color: transparent;
+  resize: vertical;
+  border: 0;
 `;
 
 PostingInput.InputTitle = InputTitle;

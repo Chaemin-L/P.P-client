@@ -11,8 +11,8 @@ export const useSignInLocal = () => {
     onSuccess: (response) => {
       console.log("로그인 성공", response.accessToken);
       localStorage.setItem("accessToken", response.accessToken);
-      //   localStorage.setItem("refreshToken", response.refreshToken);
-      navigate("/posting/4");
+      localStorage.setItem("refreshToken", response.refreshToken);
+      navigate("/posting/1");
     },
   });
 };

@@ -16,8 +16,9 @@ export const Posting8 = () => {
     <PageContainer>
       <TopBar
         onClick={() => {
-          navigate("");
           resetRecoil();
+          localStorage.removeItem("postId");
+          navigate("");
         }}
       >
         {" "}
@@ -31,8 +32,9 @@ export const Posting8 = () => {
         <BottomFixed.Button
           onClick={() => {
             resetRecoil();
-            navigate("/posting/8");
-            // 게시글 상세페이지로 가게
+            const postId = localStorage.getItem("postId");
+            navigate("");
+            // 게시글 상세페이지로 가기
           }}
         >
           게시물 보러가기

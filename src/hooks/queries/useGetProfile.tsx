@@ -4,8 +4,7 @@ import ProfileApi from "@/api/profile-api";
 
 export const useGetProfile = () => {
   return useQuery({
-    queryKey: [],
+    queryKey: ["profile"],
     queryFn: () => ProfileApi.getProfile(),
-    staleTime: 60000,
   });
 };
