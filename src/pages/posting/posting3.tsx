@@ -4,7 +4,6 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { InputBox } from "@/components/common/Input-box";
 import { ToggleSwitch } from "@/components/common/toggle-switch";
 import { TopBar } from "@/components/common/top-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";

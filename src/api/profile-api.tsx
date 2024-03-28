@@ -16,7 +16,7 @@ export default class ProfileApi {
       }
     } catch (error) {
       console.error("Error fetching bank data:", error);
-      throw error; // Throw the error to handle it in the calling code
+      throw error;
     }
   }
 }

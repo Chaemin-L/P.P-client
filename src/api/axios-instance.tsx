@@ -12,7 +12,6 @@ const Instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}`,
   timeout: 5000,
   withCredentials: true,
-  // headers: { withCredentials: true },
 });
 
 Instance.interceptors.request.use(
@@ -52,7 +51,6 @@ Instance.interceptors.response.use(
   (response: AxiosResponse): AxiosResponse => {
     const { method, url } = response.config;
     const stauts = response.status;
-    // const { code, message } = response.data;
 
     if (stauts === 404) {
       console.log(`[API - RESPONSE 404] ${method?.toUpperCase()} ${url} | `);
