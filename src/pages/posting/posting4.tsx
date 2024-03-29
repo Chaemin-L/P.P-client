@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
 
@@ -23,7 +23,7 @@ export const Posting4 = () => {
 
   return (
     <PageContainer>
-      <TopBar onClick={() => handleSave()}>1/10완료</TopBar>
+      <PostingAppBar onClick={() => handleSave()}>1/10완료</PostingAppBar>
       <PostingBoldText>
         활동의 소요시간을
         <br />

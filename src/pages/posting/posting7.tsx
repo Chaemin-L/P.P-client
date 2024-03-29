@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 
 import { RequestPostingProps } from "@/api/type";
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { PostingInput } from "@/components/posting/posting-input";
 import { usePostPosting } from "@/hooks/queries/usePostPosting";
@@ -41,14 +41,14 @@ export const Posting7 = () => {
 
   return (
     <PageContainer>
-      <TopBar
+      <PostingAppBar
         onClick={() => {
           handleSave();
           navigate(-1);
         }}
       >
         1/10완료
-      </TopBar>
+      </PostingAppBar>
       <PostingBoldText>활동 내용을 적어보세요</PostingBoldText>
       <PostingInput.InputContent
         value={contents}

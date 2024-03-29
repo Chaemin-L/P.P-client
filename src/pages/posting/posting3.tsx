@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { ToggleSwitch } from "@/components/common/toggle-switch";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
 
@@ -47,7 +47,7 @@ export const Posting3 = () => {
 
   return (
     <PageContainer>
-      <TopBar onClick={() => handleSave()}>1/10완료</TopBar>
+      <PostingAppBar onClick={() => handleSave()}>1/10완료</PostingAppBar>
       <PostingBoldText>
         시작 시간을
         <br />

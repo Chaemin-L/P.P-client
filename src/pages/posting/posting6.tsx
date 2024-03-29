@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { PostingInput } from "@/components/posting/posting-input";
 import { postingState } from "@/recoil/atoms/posting-state";
@@ -23,13 +23,13 @@ export const Posting6 = () => {
 
   return (
     <PageContainer>
-      <TopBar
+      <PostingAppBar
         onClick={() => {
           handleSave();
         }}
       >
         1/10완료
-      </TopBar>
+      </PostingAppBar>
       <PostingBoldText>활동 제목을 적어보세요</PostingBoldText>
       <PostingInput.InputTitle
         value={title}

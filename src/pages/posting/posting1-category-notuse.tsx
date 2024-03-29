@@ -4,7 +4,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { ToggleNotUse } from "@/components/common/toggle-notuse";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { postingState } from "@/recoil/atoms/posting-state";
 
 const Posting1 = () => {
@@ -23,7 +23,7 @@ const Posting1 = () => {
   return (
     <PageContainer>
       <ScrollContainer>
-        <TopBar onClick={resetRecoil}>1/10완료</TopBar>
+        <PostingAppBar onClick={resetRecoil}>1/10완료</PostingAppBar>
         <Text>항목을 선택해주세요</Text>
         <Grid>
           {typeState.map((item, index) => (

@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { PostingDatePicker } from "@/components/posting/posting-date-picker";
 import { postingState } from "@/recoil/atoms/posting-state";
@@ -30,7 +30,7 @@ export const Posting2 = () => {
 
   return (
     <PageContainer>
-      <TopBar onClick={() => handleSave()}>1/10완료</TopBar>
+      <PostingAppBar onClick={() => handleSave()}>1/10완료</PostingAppBar>
       <PostingBoldText style={{ marginBottom: "10px" }}>
         날짜를 선택해주세요
       </PostingBoldText>

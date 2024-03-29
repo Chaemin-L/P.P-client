@@ -1,24 +1,34 @@
 import React, { ChangeEvent } from "react";
 
+import { AppBarProps } from "@/components/common/type";
+
 export type MyChatType = {
   children?: React.ReactNode;
 };
 
-export type OtherChatType = {
+export type ChatItemType = {
   children?: React.ReactNode;
   userId?: number;
   imgurl?: string;
+  userName: string;
 };
 
 export type InputType = {
-  value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  children?: React.ReactNode;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  setHeight: (value: number) => void;
+};
 
 export type ChatRoomItemType = {
   roomIdx: string;
   name: string;
   chatMsg: string;
   time: string;
+};
+
+export type ChatAppBarType = {
+  name: string;
+  appBarData?: AppBarProps;
+  setAppBarHeight: (value: number) => void;
+  onClickTransfer: React.MouseEventHandler<HTMLButtonElement>;
 };

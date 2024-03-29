@@ -5,9 +5,10 @@ import { styled } from "styled-components";
 import { BottomSheetProps } from "./type";
 
 export const BottomSheet = ({
-  children,
   onChangeIsOpened,
   isOpened,
+  style,
+  ...props
 }: BottomSheetProps) => {
   const sheetRef = useRef<HTMLDivElement | null>(null);
   const [height, SetHeight] = useState(0);
@@ -21,7 +22,7 @@ export const BottomSheet = ({
     if (sheetRef.current) {
       SetHeight(sheetRef.current.offsetHeight);
     }
-  }, [children]);
+  }, [props]);
 
   useEffect(() => {
     const handleClickOutside = (e: TouchEvent) => {
@@ -41,36 +42,39 @@ export const BottomSheet = ({
   }, [isOpened, sheetRef]);
 
   return (
-    // <Background style={{ visibility: isOpened ? "visible" : "hidden" }}>
-    <Wrapper
-      ref={sheetRef}
-      variants={variants}
-      animate={isOpened ? "opened" : "closed"}
-      initial={false}
-      style={{
-        visibility: isOpened ? "visible" : "hidden",
-        transition: "visibility 1s",
-      }}
-    >
-      <HeaderContainer>
-        <HeaderXButton onClick={() => onChangeIsOpened(!isOpened)}>
-          <HeaderText>x</HeaderText>
-        </HeaderXButton>
-        <EmptyBox></EmptyBox>
-        <Header></Header>
-      </HeaderContainer>
-      <ContentContainer>{children}</ContentContainer>
-    </Wrapper>
+    <Background style={{ visibility: isOpened ? "visible" : "hidden" }}>
+      <Wrapper
+        ref={sheetRef}
+        variants={variants}
+        animate={isOpened ? "opened" : "closed"}
+        initial={false}
+        style={{
+          visibility: isOpened ? "visible" : "hidden",
+          transition: "visibility 1s",
+          ...style,
+        }}
+      >
+        <HeaderContainer>
+          <HeaderXButton onClick={() => onChangeIsOpened(!isOpened)}>
+            <HeaderText>x</HeaderText>
+          </HeaderXButton>
+          <EmptyBox></EmptyBox>
+          <Header></Header>
+        </HeaderContainer>
+        <ContentContainer>{props.children}</ContentContainer>
+      </Wrapper>
+    </Background>
   );
 };
 
-// const Background = styled.div`
-//   position: absolute;
-//   background-color: rgb(0, 0, 0, 0.25);
-//   z-index: 9996;
-//   height: 100%;
-//   width: 100%;
-// `;
+const Background = styled.div`
+  position: absolute;
+  background-color: rgb(0, 0, 0, 0.25);
+  z-index: 9996;
+  height: 100%;
+  width: 100%;
+  top: 0;
+`;
 
 const Wrapper = styled(motion.div)`
   display: flex;
@@ -81,7 +85,7 @@ const Wrapper = styled(motion.div)`
   left: 0;
   right: 0;
   height: auto;
-  max-height: 81%;
+  max-height: 90%;
   width: 100%;
   transition: transform 150ms ease-out;
 `;
@@ -129,7 +133,7 @@ const HeaderText = styled.text`
 const ContentContainer = styled.div`
   background-color: #ffffff;
   align-items: center;
-  height: auto;
+  height: 100%;
   width: 100%;
   z-index: 9998;
   border-top: 3px solid #ffffff;

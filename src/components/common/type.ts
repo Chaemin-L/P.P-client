@@ -46,3 +46,11 @@ export type SwitchToggleType = {
   onChangeSelected: (newValue: boolean) => void;
   isLeftSelected: boolean;
 };
+
+export type AppBarProps = {
+  isFixed?: boolean;
+  isColorMode?: boolean;
+  isBorderExist?: boolean;
+  isBigSizeText?: boolean;
+  children?: React.ReactNode;
+} & Omit<React.HTMLAttributes<HTMLElement>, "type">;

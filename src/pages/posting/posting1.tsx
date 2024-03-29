@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
 
@@ -24,7 +24,7 @@ export const Posting1 = () => {
 
   return (
     <PageContainer>
-      <TopBar onClick={() => resetRecoil()}>1/10완료</TopBar>
+      <PostingAppBar onClick={() => resetRecoil()}>1/10완료</PostingAppBar>
       <PostingBoldText>위치를 입력해 주세요</PostingBoldText>
       <InputBox.InputMap
         value={location}
