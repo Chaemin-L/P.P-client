@@ -24,6 +24,8 @@ export type ChatRoomItemType = {
   name: string;
   chatMsg: string;
   time: string;
+  transferState: boolean;
+  msgNum: number;
 };
 
 export type ChatAppBarType = {

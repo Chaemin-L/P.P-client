@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { GlobalLayout } from "@/components/layout/global-layout";
 import { GoogleAuth } from "@/components/login/google-auth";
 import { KakaoAuth } from "@/components/login/kakao-auth";
+import { Chat } from "@/pages/chat/chat";
 import { ChatRoom } from "@/pages/chat/chat-room";
 import { LoginPage } from "@/pages/login/login";
 import { LoginEnd } from "@/pages/login/login-end";
@@ -83,8 +84,12 @@ const router = createBrowserRouter([
         element: <Test2 />,
       },
       {
-        path: "/chat",
+        path: "/chat/room",
         element: <ChatRoom />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />,
       },
     ],
   },

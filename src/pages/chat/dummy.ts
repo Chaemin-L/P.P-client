@@ -1,3 +1,5 @@
+import { ChatRoomItemType } from "@/components/chat/type";
+
 export const allMsg = [
   {
     id: "1",
@@ -102,3 +104,94 @@ export const tempList = {
   postId: "",
   transferState: false,
 };
+
+export const tempChatList: ChatRoomItemType[] = [
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 0,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 1,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 10,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 100,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 200,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 23,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 0,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 0,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: false,
+    msgNum: 0,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: true,
+    msgNum: 0,
+  },
+  {
+    roomIdx: "1",
+    name: "성당 청소 도와주세요",
+    chatMsg: "제가 도와드릴게요",
+    time: "3분전",
+    transferState: true,
+    msgNum: 0,
+  },
+];
