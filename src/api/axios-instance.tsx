@@ -4,7 +4,7 @@ import axios, {
   AxiosResponse,
 } from "axios";
 
-import { InstanceResponseData } from "./type";
+import { InstanceResponseData } from "./types/common-type";
 
 import getRefreshToken from "@/utils/token";
 

@@ -23,11 +23,6 @@ export type ToggleType = {
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
-export type TopBarProps = {
-  onClick?: () => void;
-  children: React.ReactNode;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
-
 export type InputType = {
   value: string | number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -36,7 +31,7 @@ export type InputType = {
 
 export type BottomSheetProps = {
   children: React.ReactNode;
-  onChangeIsOpened: (newValue: boolean) => void;
+  onChangeIsOpened: () => void;
   isOpened: boolean;
 } & Omit<React.HTMLAttributes<HTMLElement>, "type">;
 
@@ -54,3 +49,7 @@ export type AppBarProps = {
   isBigSizeText?: boolean;
   children?: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLElement>, "type">;
+
+export type HamburgerProps = {
+  isColorMode?: boolean;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;

@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import Instance from "./axios-instance";
-import { ChatGetResponse, ChatSendResponse } from "./type";
+import { ChatGetResponse, ChatSendResponse } from "./types/chat-type";
 
 export default class ChatApi {
   static async getChatMessages(roomIdx: number): Promise<ChatGetResponse[]> {

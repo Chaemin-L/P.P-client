@@ -1,14 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { ChatAppBarType } from "./type";
 
 import { AppBar } from "@/components/common/app-bar";
 import { Button } from "@/components/common/button";
+import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 
-export const ChatAppBar = (props: ChatAppBarType) => {
-  const { name, onClickTransfer, setAppBarHeight, ...restProps } = props;
-  // const [height, setHeight] = useState(0);
+export const ChatAppBar = ({
+  name,
+  onClickReport,
+  onClickTransfer,
+  setAppBarHeight,
+}: ChatAppBarType) => {
+  const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
 
   useEffect(() => {
     const element = document.getElementById("AppBar");
@@ -18,31 +24,43 @@ export const ChatAppBar = (props: ChatAppBarType) => {
     }
   }, [setAppBarHeight]);
 
+  const isColorMode = !lastTransfer.transferState;
+
   return (
-    <AppBar isFixed={true} isColorMode={true} id="AppBar">
+    <AppBar isFixed={true} isColorMode={isColorMode} id="AppBar">
       <AppBar.AppBarNavigate style={{ padding: "4% 21px" }}>
-        <AppBar.BackButton isColorMode={true} />
+        <AppBar.BackButton isColorMode={isColorMode} />
         <AppBar.HeaderText>{name}</AppBar.HeaderText>
+        <AppBar.HamburgerButton
+          isColorMode={isColorMode}
+          onClick={() => {
+            onClickReport();
+          }}
+        />
       </AppBar.AppBarNavigate>
       <ColumnBox>
-        <RowBox>
-          <Button
-            style={{ width: "100%", borderRadius: "30px", padding: "15px" }}
-          >
-            거래파기
-          </Button>
-          <Button
-            style={{ width: "100%", borderRadius: "30px", padding: "15px" }}
-          >
-            게시물 보기
-          </Button>
-        </RowBox>
+        {isColorMode && (
+          <RowBox>
+            <Button
+              style={{ width: "100%", borderRadius: "30px", padding: "15px" }}
+            >
+              거래파기
+            </Button>
+            <Button
+              style={{ width: "100%", borderRadius: "30px", padding: "15px" }}
+            >
+              게시물 보기
+            </Button>
+          </RowBox>
+        )}
         <Button
           style={{
             width: "100%",
             fontSize: "24px",
             padding: "10px",
             borderRadius: "30px",
+            background: isColorMode ? "#ffffff" : "#d9d9d9",
+            marginTop: isColorMode ? "0" : "11px",
           }}
           onClick={onClickTransfer}
         >
@@ -59,6 +77,7 @@ const ColumnBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 11px;
+  background-color: #d9d9d9;
 `;
 
 const RowBox = styled.div`

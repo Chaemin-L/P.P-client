@@ -52,6 +52,13 @@ export const TransferDetail = ({ setScreen }: TransferProps) => {
         <BottomFixed.Button
           onClick={() => {
             setScreen("transfer-finish");
+            setLastTransfer((prevLastTransfer) => {
+              const updatedLastTransfer = {
+                ...prevLastTransfer,
+                transferState: true,
+              };
+              return updatedLastTransfer;
+            });
           }}
         >
           송금하기

@@ -2,15 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import { AppBarProps } from "./type";
+import { AppBarProps, HamburgerProps } from "./type";
 
 import backImgWhite from "@/assets/images/back-img-white.png";
 import backImg from "@/assets/images/back-img.png";
+import hamburgerMenuBlack from "@/assets/images/hamburger-menu-black.png";
+import hamburgerMenuWhite from "@/assets/images/hamburger-menu-white.png";
 
 export const AppBar = ({
   isFixed = false,
-  isBorderExist,
-  isColorMode,
+  isBorderExist = false,
+  isColorMode = false,
   ...props
 }: AppBarProps) => {
   const Wrapper = isFixed ? AppBarFixedWrapper : AppBarWrapper;
@@ -33,7 +35,7 @@ const AppBarNavigate = (props: AppBarProps) => {
   return <NavigateWrapper {...props}>{props.children}</NavigateWrapper>;
 };
 
-const BackButton = ({ isColorMode, ...props }: AppBarProps) => {
+const BackButton = ({ isColorMode = false, ...props }: AppBarProps) => {
   const { onClick, ...restProps } = props;
   const navigate = useNavigate();
 
@@ -48,7 +50,7 @@ const BackButton = ({ isColorMode, ...props }: AppBarProps) => {
   );
 };
 
-const HeaderText = ({ isBigSizeText, ...props }: AppBarProps) => {
+const HeaderText = ({ isBigSizeText = false, ...props }: AppBarProps) => {
   return (
     <AppBarText
       style={{ fontSize: isBigSizeText ? "25px" : "15px" }}
@@ -56,6 +58,16 @@ const HeaderText = ({ isBigSizeText, ...props }: AppBarProps) => {
     >
       {props.children}
     </AppBarText>
+  );
+};
+
+const HamburgerButton = ({ isColorMode = false, ...props }: HamburgerProps) => {
+  return (
+    <StyledButton {...props}>
+      <HamburgerButtonImg
+        src={isColorMode ? hamburgerMenuWhite : hamburgerMenuBlack}
+      />
+    </StyledButton>
   );
 };
 
@@ -100,6 +112,12 @@ const BackButtonImg = styled.img`
   height: 10px;
 `;
 
+const HamburgerButtonImg = styled.img`
+  width: 14px;
+  height: 16px;
+`;
+
 AppBar.AppBarNavigate = AppBarNavigate;
 AppBar.BackButton = BackButton;
 AppBar.HeaderText = HeaderText;
+AppBar.HamburgerButton = HamburgerButton;

@@ -32,7 +32,7 @@ export const BottomSheet = ({
         !sheetRef.current.contains(e.target) &&
         isOpened
       ) {
-        onChangeIsOpened(false);
+        onChangeIsOpened();
       }
     };
     document.addEventListener("touchend", handleClickOutside);
@@ -55,7 +55,7 @@ export const BottomSheet = ({
         }}
       >
         <HeaderContainer>
-          <HeaderXButton onClick={() => onChangeIsOpened(!isOpened)}>
+          <HeaderXButton onClick={() => onChangeIsOpened()}>
             <HeaderText>x</HeaderText>
           </HeaderXButton>
           <EmptyBox></EmptyBox>

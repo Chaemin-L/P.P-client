@@ -1,5 +1,5 @@
 import Instance from "./axios-instance";
-import { ProfileDataResponse } from "./type";
+import { ProfileDataResponse } from "./types/profile-type";
 
 export default class ProfileApi {
   static async getProfile() {

@@ -1,12 +1,3 @@
-// type msgType = {
-//   id: string;
-//   roomIdx: 1;
-//   senderName: string;
-//   senderUuid: string;
-//   message: string;
-//   createdAt: string;
-// };
-
 export const allMsg = [
   {
     id: "1",
@@ -91,3 +82,23 @@ export const allMsg = [
     createdAt: "2024-03-19T05:29:39.867Z",
   },
 ];
+
+export const tempList = {
+  users: [
+    { name: "김철수", userId: "1" },
+    { name: "홍철수", userId: "2" },
+    { name: "김길동", userId: "3" },
+    { name: "홍길동", userId: "4" },
+    { name: "김민정", userId: "5" },
+    { name: "홍민정", userId: "6" },
+    { name: "김민지", userId: "7" },
+    { name: "홍민지", userId: "8" },
+    { name: "김현지", userId: "9" },
+    { name: "홍현지", userId: "10" },
+  ],
+  price: 30,
+  availableBudget: 4000,
+  member: 10,
+  postId: "",
+  transferState: false,
+};

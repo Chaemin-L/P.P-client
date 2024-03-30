@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import PostApi from "@/api/post-api";
-import { RequestPostingProps } from "@/api/type";
+import { RequestPostingProps } from "@/api/types/posting-type";
 
 export const usePostPosting = () => {
   const navigate = useNavigate();

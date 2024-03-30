@@ -28,7 +28,7 @@ export type ChatRoomItemType = {
 
 export type ChatAppBarType = {
   name: string;
-  appBarData?: AppBarProps;
   setAppBarHeight: (value: number) => void;
-  onClickTransfer: React.MouseEventHandler<HTMLButtonElement>;
+  onClickTransfer: () => void;
+  onClickReport: () => void;
 };
