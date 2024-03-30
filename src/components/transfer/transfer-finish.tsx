@@ -20,7 +20,7 @@ export const TransferFinish = () => {
     <Wrapper>
       <CheckMsg>송금완료</CheckMsg>
       <TransferExplainBox>
-        {lastTransfer.member}명에게
+        {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분께
         <br />
         {lastTransfer.price * lastTransfer.member}매듭을
         <br />

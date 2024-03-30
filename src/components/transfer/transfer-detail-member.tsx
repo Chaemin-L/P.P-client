@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -118,16 +117,6 @@ const MemberScroll = styled.div`
   height: 45.3%;
   width: 100%;
   box-shadow: inset 0px 1px 11px 1px #555555;
-  overflow: scroll;
-  display: grid;
-  width: 100%;
-  gap: 10%;
-  padding: 10px 10%;
-  justify-content: space-between;
-  grid-template-columns: repeat(2, 1fr);
-`;
-
-const MemberScrollGrid = styled.div`
   overflow: scroll;
   display: grid;
   width: 100%;

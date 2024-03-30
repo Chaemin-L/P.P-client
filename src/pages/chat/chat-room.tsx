@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -9,9 +9,6 @@ import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
 import { BottomSheet } from "@/components/common/bottom-sheet";
 import { Transfer } from "@/components/transfer/transfer";
-import { TransferDetail } from "@/components/transfer/transfer-detail";
-import { TransferDetailMember } from "@/components/transfer/transfer-detail-member";
-import { TransferFinish } from "@/components/transfer/transfer-finish";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { transferState } from "@/recoil/atoms/transfer-state";
 // import SockJS from "sockjs-client";
