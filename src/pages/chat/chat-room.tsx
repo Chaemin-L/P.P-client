@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { allMsg } from "./dummy";
@@ -8,6 +9,11 @@ import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
 import { BottomSheet } from "@/components/common/bottom-sheet";
 import { Transfer } from "@/components/transfer/transfer";
+import { TransferDetail } from "@/components/transfer/transfer-detail";
+import { TransferDetailMember } from "@/components/transfer/transfer-detail-member";
+import { TransferFinish } from "@/components/transfer/transfer-finish";
+import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { transferState } from "@/recoil/atoms/transfer-state";
 // import SockJS from "sockjs-client";
 // import Stomp from "stompjs";
 
@@ -17,6 +23,46 @@ export const ChatRoom = () => {
   const [appBarHeight, setAppBarHeight] = useState(0);
   const [chatInputHeight, setChatInputHeight] = useState(0);
   console.log(appBarHeight);
+
+  const [transfer, setTransfer] = useRecoilState(transferState);
+  const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
+
+  useEffect(() => {
+    setTransfer({
+      users: [
+        { name: "김철수", userId: "1" },
+        { name: "홍철수", userId: "2" },
+        { name: "김길동", userId: "3" },
+        { name: "홍길동", userId: "4" },
+        { name: "김민정", userId: "5" },
+        { name: "홍민정", userId: "6" },
+        { name: "김민지", userId: "7" },
+        { name: "홍민지", userId: "8" },
+        { name: "김현지", userId: "9" },
+        { name: "홍현지", userId: "10" },
+      ],
+      price: 30,
+      availableBudget: 4000,
+      member: 10,
+    });
+    setLastTransfer({
+      users: [
+        { name: "김철수", userId: "1" },
+        { name: "홍철수", userId: "2" },
+        { name: "김길동", userId: "3" },
+        { name: "홍길동", userId: "4" },
+        { name: "김민정", userId: "5" },
+        { name: "홍민정", userId: "6" },
+        { name: "김민지", userId: "7" },
+        { name: "홍민지", userId: "8" },
+        { name: "김현지", userId: "9" },
+        { name: "홍현지", userId: "10" },
+      ],
+      price: 30,
+      availableBudget: 4000,
+      member: 10,
+    });
+  }, [setTransfer, setLastTransfer]);
 
   return (
     <PageContainer>
@@ -46,12 +92,13 @@ export const ChatRoom = () => {
         onChange={(e) => setMsg(e.target.value)}
         setHeight={setChatInputHeight}
       />
+
       <BottomSheet
         style={{ height: window.innerHeight > 720 ? "81%" : "90%" }}
         isOpened={isBottomSheetOpened}
         onChangeIsOpened={setIsBottomSheetOpened}
       >
-        <Transfer availableBudget={6000} member={6} price={230} />
+        <Transfer />
       </BottomSheet>
     </PageContainer>
   );

@@ -1,5 +1,9 @@
 export type TransferProps = {
-  availableBudget: number;
-  member: number;
-  price: number;
+  setScreen: React.Dispatch<React.SetStateAction<string>>;
 };
+
+export type memberItem = {
+  isTrue: boolean;
+  setIsTrue: () => void;
+  children: React.ReactNode;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
