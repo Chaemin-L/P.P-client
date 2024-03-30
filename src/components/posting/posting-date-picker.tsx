@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { CustomHeaderProps, DatePickerProps } from "./type";
 
+import backImg from "@/assets/images/back-img.png";
+
 export const PostingDatePicker = ({
   startDate,
   setStartDate,
@@ -42,13 +44,8 @@ const CustomHeader = ({
   increaseMonth,
 }: CustomHeaderProps) => {
   const decreaseMonthWithValidation = () => {
-    const previousMonth = addMonths(date, -1);
-    const startOfPreviousMonth = startOfMonth(previousMonth);
     const today = new Date();
-
-    if (isBefore(startOfPreviousMonth, today)) {
-      decreaseMonth();
-    }
+    if (date > today) decreaseMonth();
   };
 
   const previousMonthString = format(addMonths(date, -1), "LLLL", {
@@ -59,13 +56,15 @@ const CustomHeader = ({
   return (
     <HeaderWrapper>
       <HeaderButton onClick={decreaseMonthWithValidation}>
-        {"<"}
-        {previousMonthString}
+        <ArrowImg src={backImg} />
+        <HeaderButtonText>{previousMonthString}</HeaderButtonText>
       </HeaderButton>
-      <div>{date.toLocaleString("default", { month: "long" })}</div>{" "}
+      <HeaderNowMonth>
+        {date.toLocaleString("default", { month: "long" })}
+      </HeaderNowMonth>
       <HeaderButton onClick={increaseMonth}>
-        {nextMonthString}
-        {">"}
+        <HeaderButtonText>{nextMonthString}</HeaderButtonText>
+        <ArrowImg src={backImg} style={{ transform: "scaleX(-1)" }} />
       </HeaderButton>
     </HeaderWrapper>
   );
@@ -84,9 +83,9 @@ const Picker = styled.div`
   left: 0;
   height: 100%;
   .react-datepicker {
-    font-size: 18px;
     width: 100%;
     height: 100%;
+    border: none;
     .react-datepicker__month-container {
       width: 100%;
       height: 100%;
@@ -96,6 +95,7 @@ const Picker = styled.div`
         flex-direction: column;
         justify-content: space-between;
         padding: 2.8%;
+        font-size: 16px;
         .react-datepicker__week {
           display: flex;
           justify-content: space-between;
@@ -104,18 +104,36 @@ const Picker = styled.div`
     }
     .react-datepicker__header {
       width: 100%;
-      height: 25%;
+      height: 27%;
       background-color: #ffffff;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      border: none;
+      font-size: 18px;
     }
     .react-datepicker__day-names {
       margin: 3% 0 0 0;
-      width: 100%;
       justify-content: space-between;
       display: flex;
       padding: 0 3.5%;
+    }
+    .react-datepicker__day-name {
+      width: 32px;
+    }
+    .react-datepicker__day--selected {
+      background-color: #d9d9d9;
+      font-size: 18px;
+      color: #000000;
+    }
+    .react-datepicker__day {
+      width: 32px;
+      height: 24px;
+      line-height: 24px;
+      border-radius: 20px;
+    }
+    .react-datepicker__day--keyboard-selected {
+      background-color: transparent;
     }
   }
 `;
@@ -124,10 +142,31 @@ const HeaderWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 5%;
+  align-items: flex-end;
+  padding: 0 3%;
 `;
 
 const HeaderButton = styled.button`
   border: 0;
-  background-color: #fff;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+`;
+
+const ArrowImg = styled.img`
+  width: 12px;
+  height: 25px;
+`;
+
+const HeaderButtonText = styled.span`
+  font-size: 20px;
+  color: #a1a1a1;
+`;
+
+const HeaderNowMonth = styled.span`
+  font-size: 25px;
+  color: #000000;
+  padding-bottom: 5px;
 `;

@@ -34,9 +34,9 @@ export const Posting2 = () => {
       <PostingBoldText style={{ marginBottom: "10px" }}>
         날짜를 선택해주세요
       </PostingBoldText>
-      <span style={{ margin: "10px", fontSize: "18px" }}>
+      <SelectDay>
         {startDate.toLocaleString("ko-KR", { month: "long", day: "2-digit" })}
-      </span>
+      </SelectDay>
       <PostingDatePicker startDate={startDate} setStartDate={setStartDate} />
       <BottomFixed align="row">
         <BottomFixed.Button
@@ -65,4 +65,11 @@ const PageContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
+`;
+
+const SelectDay = styled.span`
+  margin: 5%;
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
 `;
