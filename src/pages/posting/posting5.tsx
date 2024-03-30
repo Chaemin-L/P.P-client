@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
@@ -39,7 +39,7 @@ export const Posting5 = () => {
       </PostingBoldText>
       <InputBox.InputNum
         value={member}
-        onChange={(e) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setMember(Number(e.target.value));
         }}
       >

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
@@ -28,7 +28,7 @@ export const Posting1 = () => {
       <PostingBoldText>위치를 입력해 주세요</PostingBoldText>
       <InputBox.InputMap
         value={location}
-        onChange={(e) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setLocation(e.target.value);
         }}
       />

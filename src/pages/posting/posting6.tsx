@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
@@ -33,7 +33,7 @@ export const Posting6 = () => {
       <PostingBoldText>활동 제목을 적어보세요</PostingBoldText>
       <PostingInput.InputTitle
         value={title}
-        onChange={(e) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setTitle(e.target.value);
         }}
       />
