@@ -101,7 +101,7 @@ const Content = styled.div`
   display: flex;
   max-width: 90%;
   max-height: 90%;
-  padding: 52px 34px 40px;
+  padding: 40px 34px;
   background-color: #f5f5f5;
   border-radius: 35px;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
