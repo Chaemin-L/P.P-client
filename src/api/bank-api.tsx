@@ -1,8 +1,15 @@
 import Instance from "./axios-instance";
+import { BankDataResponse } from "./type";
 
 class BankApi {
-  static async getBankData(userId: string) {
-    return await Instance.get(`/users/${userId}`).then((res) => res.data);
+  static async getBankData() {
+    const response = await Instance.get(`/haetsal-service/api/v2/bank/account`);
+    if (response && response.data) {
+      const res = response.data as BankDataResponse;
+      return res.data;
+    } else {
+      throw new Error("Invalid response from server");
+    }
   }
 }
 
