@@ -1,11 +1,11 @@
-import React from "react";
-import { css, styled } from "styled-components";
+import React, { ButtonHTMLAttributes } from "react";
+import { styled } from "styled-components";
 
 type ButtonProps = {
   isSmall?: boolean;
   primary?: boolean;
   children: React.ReactNode;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
   isSmall = false,
@@ -13,13 +13,13 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   return (
-    <StyledButton primary={primary} isSmall={isSmall} {...props}>
+    <StyledButton $primary={primary} $isSmall={isSmall} {...props}>
       {props.children}
     </StyledButton>
   );
 };
 
-const StyledButton = styled.button<{ primary: boolean; isSmall: boolean }>`
+const StyledButton = styled.button<{ $primary: boolean; $isSmall: boolean }>`
   width: fit-content;
   padding: 15px 30px;
   border-radius: 21px;
@@ -27,16 +27,16 @@ const StyledButton = styled.button<{ primary: boolean; isSmall: boolean }>`
   background-color: black;
   color: white;
   font-size: 16px;
-  ${({ primary }) =>
-    !primary &&
-    css`
+  ${({ $primary }) =>
+    !$primary &&
+    `
       background-color: white;
       box-shadow: 0 0 1px rgba(0, 0, 0, 0);
       color: black;
     `}
-  ${({ isSmall }) =>
-    isSmall &&
-    css`
+  ${({ $isSmall }) =>
+    $isSmall &&
+    `
       font-size: 18px;
       border-radius: 40px;
     `}
