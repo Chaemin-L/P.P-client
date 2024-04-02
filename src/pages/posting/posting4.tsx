@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
@@ -33,7 +33,7 @@ export const Posting4 = () => {
       <TimeText>{`${Math.floor(price / 60)}시간 ${price % 60}분`}</TimeText>
       <InputBox.InputNum
         value={price}
-        onChange={(e) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setPrice(Number(e.target.value));
         }}
       >

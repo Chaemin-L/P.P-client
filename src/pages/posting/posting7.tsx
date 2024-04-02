@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
@@ -53,7 +53,7 @@ export const Posting7 = () => {
       <PostingBoldText>활동 내용을 적어보세요</PostingBoldText>
       <PostingInput.InputContent
         value={contents}
-        onChange={(e) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setContents(e.target.value);
         }}
       />
