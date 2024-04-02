@@ -8,6 +8,7 @@ import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { PostingInput } from "@/components/posting/posting-input";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting6 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -37,8 +38,9 @@ export const Posting6 = () => {
           setTitle(e.target.value);
         }}
       />
-      <BottomFixed align="row">
+      <BottomFixed alignDirection="row">
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -47,6 +49,7 @@ export const Posting6 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate("/posting/7");

@@ -8,6 +8,7 @@ import { InputBox } from "@/components/common/Input-box";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting1 = () => {
   const resetRecoil = useResetRecoilState(postingState);
@@ -34,6 +35,7 @@ export const Posting1 = () => {
       />
       <BottomFixed>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate("/posting/2");

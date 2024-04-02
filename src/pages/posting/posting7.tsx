@@ -11,6 +11,7 @@ import { PostingInput } from "@/components/posting/posting-input";
 import { usePostPosting } from "@/hooks/queries/usePostPosting";
 import { postingState } from "@/recoil/atoms/posting-state";
 import { FormatDateString } from "@/utils/format-date-string";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting7 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -58,6 +59,7 @@ export const Posting7 = () => {
       />
       <BottomFixed>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.orange400 }}
           onClick={() => {
             handleSave();
             handlePostPosting();

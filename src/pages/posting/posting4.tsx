@@ -8,6 +8,7 @@ import { InputBox } from "@/components/common/Input-box";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting4 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -29,6 +30,7 @@ export const Posting4 = () => {
         <br />
         입력해주세요
       </PostingBoldText>
+      <TimeText>{`${Math.floor(price / 60)}시간 ${price % 60}분`}</TimeText>
       <InputBox.InputNum
         value={price}
         onChange={(e) => {
@@ -37,9 +39,14 @@ export const Posting4 = () => {
       >
         분
       </InputBox.InputNum>
-      <BalanceText>활동시간 1분당 1매듭이 소요됩니다.</BalanceText>
-      <BottomFixed align="row">
+      <BalanceText>
+        활동시간 1분당 1매듭이
+        <br />
+        소요됩니다
+      </BalanceText>
+      <BottomFixed alignDirection="row">
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -48,6 +55,7 @@ export const Posting4 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate("/posting/5");
@@ -69,6 +77,13 @@ const PageContainer = styled.div`
 
 const BalanceText = styled.span`
   color: #a1a1a1;
-  font-size: 25px;
-  margin: 30% 0px 0px 0px;
+  font-size: 18px;
+  margin: 25% 0px 0px 0px;
+  text-align: center;
+`;
+
+const TimeText = styled.span`
+  color: ${colorTheme.orange400};
+  font-size: 24px;
+  margin-bottom: 8%;
 `;

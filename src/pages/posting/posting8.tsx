@@ -7,6 +7,7 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting8 = () => {
   const resetRecoil = useResetRecoilState(postingState);
@@ -33,6 +34,7 @@ export const Posting8 = () => {
       </PostingBoldText>
       <BottomFixed>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.orange400 }}
           onClick={() => {
             resetRecoil();
             const postId = localStorage.getItem("postId");
