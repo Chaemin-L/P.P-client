@@ -144,7 +144,7 @@ const Member = styled.span`
   }
 `;
 
-const PostDetail = styled.p`
+const PostDetail = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;

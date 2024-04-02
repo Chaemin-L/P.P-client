@@ -18,7 +18,7 @@ export const MyPostPage = () => {
         <Button primary>수정하기</Button>
       </JustifyWrapper>
       <ActivityBox {...activityData} />
-      <BottomFixed align="column">
+      <BottomFixed alignDirection="column">
         <BottomFixed.Button
           onClick={() => console.log("참여관리 페이지로 이동")}
         >

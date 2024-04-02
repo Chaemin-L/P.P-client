@@ -7,27 +7,34 @@ type ButtonProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
 type BottomFixedProps = {
-  align?: "row" | "column";
+  alignDirection?: "row" | "column";
   children: React.ReactNode;
 };
 
 const Button = ({ isRounded = true, ...props }: ButtonProps) => {
   return (
-    <StyledButton isRounded={isRounded} {...props}>
+    <StyledButton $isRounded={isRounded} {...props}>
       {props.children}
     </StyledButton>
   );
 };
 
-export const BottomFixed = ({ align = "row", children }: BottomFixedProps) => {
-  return <BottomFixedContainer align={align}>{children}</BottomFixedContainer>;
+export const BottomFixed = ({
+  alignDirection = "row",
+  children,
+}: BottomFixedProps) => {
+  return (
+    <BottomFixedContainer $alignDirection={alignDirection}>
+      {children}
+    </BottomFixedContainer>
+  );
 };
 
 BottomFixed.Button = Button;
 
-const BottomFixedContainer = styled.div<{ align: string }>`
+const BottomFixedContainer = styled.div<{ $alignDirection: string }>`
   display: flex;
-  flex-direction: ${({ align }) => align};
+  flex-direction: ${({ $alignDirection }) => $alignDirection};
   gap: 11px;
   width: 100%;
   margin: auto;
@@ -37,13 +44,13 @@ const BottomFixedContainer = styled.div<{ align: string }>`
   left: 0;
 `;
 
-const StyledButton = styled.button<{ isRounded: boolean }>`
+const StyledButton = styled.button<{ $isRounded: boolean }>`
   width: 100%;
   padding: 12px;
 
   background-color: black;
-  ${({ isRounded }) =>
-    isRounded ? "border-radius: 50px;" : "background-color: #aaaaaa"};
+  ${({ $isRounded }) =>
+    $isRounded ? "border-radius: 50px;" : "background-color: #aaaaaa"};
   border: 0;
   color: white;
   font-size: 24px;
