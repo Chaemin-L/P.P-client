@@ -31,7 +31,7 @@ export const Posting5 = () => {
           handleSave();
         }}
       >
-        1/10완료
+        5/7완료
       </PostingAppBar>
       <PostingBoldText>
         필요한 인원을

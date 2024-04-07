@@ -4,6 +4,8 @@ import { styled } from "styled-components";
 
 import { BottomSheetProps } from "./type";
 
+import xButtonImg from "@/assets/images/x-button-img.png";
+
 export const BottomSheet = ({
   onChangeIsOpened,
   isOpened,
@@ -56,7 +58,7 @@ export const BottomSheet = ({
       >
         <HeaderContainer>
           <HeaderXButton onClick={() => onChangeIsOpened()}>
-            <HeaderText>x</HeaderText>
+            <HeaderXImg src={xButtonImg} />
           </HeaderXButton>
           <EmptyBox></EmptyBox>
           <Header></Header>
@@ -121,13 +123,15 @@ const HeaderXButton = styled.button`
   z-index: 9999;
 `;
 
-const HeaderText = styled.text`
+const HeaderXImg = styled.img`
   position: absolute;
-  width: 100%;
-  line-height: 100%;
+  width: 80%;
+  height: 80%;
   text-align: center;
-  right: 3%;
-  top: 40%;
+  top: 10%;
+  right: 10%;
+  /* right: 3%;
+  top: 40%; */
 `;
 
 const ContentContainer = styled.div`

@@ -8,6 +8,7 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { Button } from "@/components/common/button";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { transferState } from "@/recoil/atoms/transfer-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const TransferDetailMember = ({ setScreen }: TransferProps) => {
   const [transfer, setTransfer] = useRecoilState(transferState);
@@ -57,13 +58,15 @@ export const TransferDetailMember = ({ setScreen }: TransferProps) => {
   return (
     <Wrapper>
       <CheckMsg>송금할 인원을 선택해주세요.</CheckMsg>
-      <div style={{ fontSize: "30px" }}>{lastTransfer.member}명</div>
+      <div style={{ fontSize: "30px", color: colorTheme.orange400 }}>
+        {lastTransfer.member}명
+      </div>
       <Button
         style={{
           fontSize: "25px",
           padding: "10px 20px",
           borderRadius: "30px",
-          border: "1px solid #d9d9d9",
+          border: "1px solid black",
           margin: "10px",
         }}
         onClick={handleAllSelect}
@@ -89,8 +92,11 @@ export const TransferDetailMember = ({ setScreen }: TransferProps) => {
           );
         })}
       </MemberScroll>
-      <BottomFixed align="column">
-        <BottomFixed.Button onClick={() => setScreen("transfer-detail-price")}>
+      <BottomFixed alignDirection="column">
+        <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
+          onClick={() => setScreen("transfer-detail-price")}
+        >
           다음
         </BottomFixed.Button>
       </BottomFixed>
@@ -104,7 +110,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #d9d9d9;
+  color: black;
   font-size: 20px;
 `;
 

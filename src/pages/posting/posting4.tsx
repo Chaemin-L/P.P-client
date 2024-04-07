@@ -24,7 +24,7 @@ export const Posting4 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => handleSave()}>1/10완료</PostingAppBar>
+      <PostingAppBar onClick={() => handleSave()}>4/7</PostingAppBar>
       <PostingBoldText>
         활동의 소요시간을
         <br />

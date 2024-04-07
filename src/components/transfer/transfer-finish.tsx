@@ -4,8 +4,9 @@ import { styled } from "styled-components";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { transferState } from "@/recoil/atoms/transfer-state";
+import { colorTheme } from "@/style/color-theme";
 
-export const TransferFinish = () => {
+export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
   const resetLastTransferRecoil = useResetRecoilState(lastTransferState);
   const resetTransferRecoil = useResetRecoilState(transferState);
 
@@ -18,7 +19,7 @@ export const TransferFinish = () => {
 
   return (
     <Wrapper>
-      <CheckMsg>송금완료</CheckMsg>
+      <CheckMsg style={{ color: colorTheme.blue900 }}>송금완료</CheckMsg>
       <TransferExplainBox>
         {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분께
         <br />
@@ -32,9 +33,17 @@ export const TransferFinish = () => {
           lastTransfer.member * lastTransfer.price}
         매듭 입니다
       </div>
-      <BottomFixed align="column">
-        <BottomFixed.Button onClick={handleClick}>돌아가기</BottomFixed.Button>
-        <BottomFixed.Button onClick={handleClick}>
+      <BottomFixed alignDirection="column">
+        <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
+          onClick={onClick}
+        >
+          돌아가기
+        </BottomFixed.Button>
+        <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
+          onClick={handleClick}
+        >
           송금내역보기
         </BottomFixed.Button>
       </BottomFixed>
@@ -48,7 +57,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #d9d9d9;
+  color: ${colorTheme.orange400};
   font-size: 20px;
 `;
 
@@ -58,12 +67,10 @@ const CheckMsg = styled.div`
 `;
 
 const TransferExplainBox = styled.div`
-  width: 69.2%;
+  width: 100%;
   padding: 8% 2.7%;
-  margin: 5% 0;
-  border-radius: 8.7%;
-  background-color: #d9d9d9;
-  color: #fff;
+  margin: 5% 0 20%;
+  color: ${colorTheme.orange400};
   font-size: 30px;
   text-align: center;
   font-weight: bold;

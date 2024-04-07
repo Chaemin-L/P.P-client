@@ -48,7 +48,7 @@ export const Posting7 = () => {
           navigate(-1);
         }}
       >
-        1/10완료
+        7/7
       </PostingAppBar>
       <PostingBoldText>활동 내용을 적어보세요</PostingBoldText>
       <PostingInput.InputContent

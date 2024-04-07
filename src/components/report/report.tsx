@@ -20,6 +20,7 @@ export const Report = ({ postId, onSuccessReport }: ReportProps) => {
     //     onSuccessReport();
     //   },
     // });
+    onSuccessReport();
   };
 
   return (
@@ -45,12 +46,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #d9d9d9;
+  color: black;
   font-size: 20px;
   padding: 0 9.7%;
 `;
 
 const CheckMsg = styled.div`
   font-size: 25px;
-  margin: 5% 0 10% 0;
+  margin: 10% 0;
 `;

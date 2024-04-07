@@ -5,6 +5,7 @@ import { TransferProps } from "./type";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const TransferDetail = ({ setScreen }: TransferProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
@@ -12,10 +13,13 @@ export const TransferDetail = ({ setScreen }: TransferProps) => {
   return (
     <Wrapper>
       <CheckMsg>
-        {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분에게 일괄
-        송금할까요?
+        {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분께
+        <br />
+        일괄 송금할까요?
       </CheckMsg>
-      <div>지금 내 잔액은 {lastTransfer.availableBudget}입니다</div>
+      <div style={{ color: colorTheme.orange400 }}>
+        지금 내 잔액은 {lastTransfer.availableBudget}입니다
+      </div>
       <TransferExplainBox>
         <TransferExplainRowBox>
           <div style={{ width: "34%" }}>인당</div>
@@ -35,14 +39,15 @@ export const TransferDetail = ({ setScreen }: TransferProps) => {
         </NumberBigText>
         <div style={{ width: "22%", textAlign: "right" }}>매듭</div>
       </TransferExplainRowBox>
-      <div>
+      <div style={{ color: colorTheme.orange400 }}>
         송금 후 내 잔액은{" "}
         {lastTransfer.availableBudget -
           lastTransfer.member * lastTransfer.price}
         매듭 입니다
       </div>
-      <BottomFixed align="column">
+      <BottomFixed alignDirection="column">
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             setScreen("transfer-detail-member");
           }}
@@ -50,6 +55,7 @@ export const TransferDetail = ({ setScreen }: TransferProps) => {
           수정하기
         </BottomFixed.Button>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             setScreen("transfer-finish");
             setLastTransfer((prevLastTransfer) => {
@@ -74,7 +80,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #d9d9d9;
+  color: black;
   font-size: 20px;
 `;
 
@@ -105,6 +111,7 @@ const NumberText = styled.div`
   font-weight: bold;
   width: 44%;
   text-align: right;
+  color: ${colorTheme.orange400};
 `;
 
 const NumberBigText = styled.div`
@@ -112,4 +119,5 @@ const NumberBigText = styled.div`
   font-weight: bold;
   width: 56%;
   text-align: right;
+  color: ${colorTheme.orange400};
 `;

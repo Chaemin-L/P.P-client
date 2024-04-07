@@ -6,6 +6,6 @@ export const colorTheme = {
   blue100: "#C3CEE6",
   orange400: "#f17547",
   orange300: "#f59c7c",
-  orange200: "f9c4b0",
+  orange200: "#f9c4b0",
   orange100: "#fdebe5",
 };

@@ -29,7 +29,7 @@ export const Posting6 = () => {
           handleSave();
         }}
       >
-        1/10완료
+        6/7
       </PostingAppBar>
       <PostingBoldText>활동 제목을 적어보세요</PostingBoldText>
       <PostingInput.InputTitle

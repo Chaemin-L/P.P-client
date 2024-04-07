@@ -7,6 +7,7 @@ import { ChatAppBarType } from "./type";
 import { AppBar } from "@/components/common/app-bar";
 import { Button } from "@/components/common/button";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const ChatAppBar = ({
   name,
@@ -38,46 +39,21 @@ export const ChatAppBar = ({
           }}
         />
       </AppBar.AppBarNavigate>
-      <ColumnBox>
-        {isColorMode && (
-          <RowBox>
-            <Button
-              style={{ width: "100%", borderRadius: "30px", padding: "15px" }}
-            >
-              거래파기
-            </Button>
-            <Button
-              style={{ width: "100%", borderRadius: "30px", padding: "15px" }}
-            >
-              게시물 보기
-            </Button>
-          </RowBox>
-        )}
-        <Button
-          style={{
-            width: "100%",
-            fontSize: "24px",
-            padding: "10px",
-            borderRadius: "30px",
-            background: isColorMode ? "#ffffff" : "#d9d9d9",
-            marginTop: isColorMode ? "0" : "11px",
-          }}
-          onClick={onClickTransfer}
-        >
-          송금하기
-        </Button>
-      </ColumnBox>
+      {isColorMode ? (
+        <BeforeTransfer onClickTransfer={onClickTransfer} />
+      ) : (
+        <AfterTransfer />
+      )}
     </AppBar>
   );
 };
 
 const ColumnBox = styled.div`
   width: 100%;
-  padding: 0 33px 13px;
   display: flex;
   flex-direction: column;
   gap: 11px;
-  background-color: #d9d9d9;
+  background-color: white;
 `;
 
 const RowBox = styled.div`
@@ -85,4 +61,98 @@ const RowBox = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8.3%;
+  padding: 0 33px;
 `;
+
+const AfterTransferDiv = styled.div`
+  width: 100%;
+  font-size: 30px;
+  padding: 10px;
+  background: ${colorTheme.blue100};
+  color: white;
+  text-align: center;
+  line-height: 50px;
+`;
+
+type BeforeTransferProps = {
+  onClickTransfer: () => void;
+};
+
+const AfterTransfer = () => {
+  return (
+    <ColumnBox>
+      <RowBox>
+        <Button
+          style={{
+            width: "100%",
+            borderRadius: "30px",
+            padding: "15px",
+            color: "white",
+            backgroundColor: colorTheme.blue900,
+          }}
+        >
+          거래내역
+        </Button>
+        <Button
+          style={{
+            width: "100%",
+            borderRadius: "30px",
+            padding: "15px",
+            color: "white",
+            backgroundColor: colorTheme.blue900,
+          }}
+        >
+          게시물 보기
+        </Button>
+      </RowBox>
+      <AfterTransferDiv>송금완료</AfterTransferDiv>
+    </ColumnBox>
+  );
+};
+
+const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
+  return (
+    <ColumnBox
+      style={{ backgroundColor: colorTheme.blue900, paddingBottom: "13px" }}
+    >
+      <RowBox>
+        <Button
+          style={{
+            width: "100%",
+            borderRadius: "30px",
+            padding: "15px",
+            color: colorTheme.blue900,
+          }}
+        >
+          거래파기
+        </Button>
+        <Button
+          style={{
+            width: "100%",
+            borderRadius: "30px",
+            padding: "15px",
+            color: colorTheme.blue900,
+          }}
+        >
+          게시물 보기
+        </Button>
+      </RowBox>
+      <div style={{ padding: "0 33px" }}>
+        <Button
+          style={{
+            width: "100%",
+            fontSize: "24px",
+            padding: "10px",
+            borderRadius: "30px",
+            background: "#ffffff",
+            marginTop: "0",
+            color: colorTheme.blue900,
+          }}
+          onClick={onClickTransfer}
+        >
+          송금하기
+        </Button>
+      </div>
+    </ColumnBox>
+  );
+};

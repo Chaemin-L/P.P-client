@@ -2,11 +2,15 @@ import { styled } from "styled-components";
 
 import { ChatItemType } from "./type";
 
+import { colorTheme } from "@/style/color-theme";
+
 export const ChatItem = ({
   children,
   userId,
   imgurl,
   userName,
+  setProfileModal,
+  setProfileUserId,
 }: ChatItemType) => {
   // const myName = localStorage.getItem("userName")
   //   ? localStorage.getItem("userName")
@@ -23,11 +27,29 @@ export const ChatItem = ({
       {userName === myName ? (
         <></>
       ) : (
-        <ProfileContainer>{imgurl ? <ProfileImg /> : <></>}</ProfileContainer>
+        <ProfileContainer
+          onClick={() => {
+            setProfileUserId(userId);
+            setProfileModal(true);
+          }}
+        >
+          {imgurl ? <ProfileImg /> : <></>}
+        </ProfileContainer>
       )}
-      <ChatBox>
-        <ChatText>{children}</ChatText>
-      </ChatBox>
+      <ChatColumnBox
+        style={{
+          alignItems: userName === myName ? "flex-end" : "flex-start",
+        }}
+      >
+        <ChatBox
+          style={{
+            backgroundColor:
+              userName === myName ? colorTheme.blue100 : colorTheme.blue300,
+          }}
+        >
+          <ChatText>{children}</ChatText>
+        </ChatBox>
+      </ChatColumnBox>
     </Container>
   );
 };
@@ -41,11 +63,11 @@ const Container = styled.div`
 `;
 
 const ProfileContainer = styled.div`
-  width: 48px;
+  width: 40px;
   height: 40px;
   margin-left: 7.15%;
-  margin-right: 3.75%;
-  border-radius: 10px;
+  margin-right: 4%;
+  border-radius: 15px;
   background-color: #d9d9d9;
 `;
 
@@ -55,17 +77,22 @@ const ProfileImg = styled.img`
 `;
 
 const ChatBox = styled.div`
-  max-width: 62.1%;
+  max-width: 100%;
   height: auto;
   width: auto;
   padding: 3.6% 4.7%;
-  background-color: #d9d9d9;
   margin-right: 6%;
   border-radius: 5px;
 `;
 
 const ChatText = styled.div`
-  color: #ffffff;
-  font-size: 18px;
+  color: black;
+  font-size: 15px;
   word-break: break-all;
+`;
+
+const ChatColumnBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 62.1%;
 `;

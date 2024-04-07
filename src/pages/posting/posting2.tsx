@@ -31,7 +31,7 @@ export const Posting2 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => handleSave()}>1/10완료</PostingAppBar>
+      <PostingAppBar onClick={() => handleSave()}>2/7</PostingAppBar>
       <PostingBoldText style={{ marginBottom: "10px" }}>
         날짜를 선택해주세요
       </PostingBoldText>

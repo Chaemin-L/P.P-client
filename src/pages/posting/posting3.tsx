@@ -48,7 +48,7 @@ export const Posting3 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => handleSave()}>1/10완료</PostingAppBar>
+      <PostingAppBar onClick={() => handleSave()}>3/7</PostingAppBar>
       <PostingBoldText>
         시작 시간을
         <br />

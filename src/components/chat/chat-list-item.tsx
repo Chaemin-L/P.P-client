@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 
 import { ChatRoomItemType } from "./type";
 
+import { colorTheme } from "@/style/color-theme";
+
 export const ChatListItem = (props: ChatRoomItemType) => {
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ export const ChatListItem = (props: ChatRoomItemType) => {
         )}
         <LeftColumnDiv>
           <TitleText>{props.name}</TitleText>
-          <ItemText>{props.chatMsg}</ItemText>
+          <ItemText style={{ color: "#828282" }}>{props.chatMsg}</ItemText>
         </LeftColumnDiv>
       </RowDiv>
       <RightColumnDiv>
@@ -28,7 +30,7 @@ export const ChatListItem = (props: ChatRoomItemType) => {
         >
           {props.msgNum}
         </NewMsgNum>
-        <ItemText>{props.time}</ItemText>
+        <ItemText style={{ color: "#d9d9d9" }}>{props.time}</ItemText>
       </RightColumnDiv>
     </ItemContainer>
   );
@@ -53,7 +55,7 @@ const RowDiv = styled.div`
 const StateDiv = styled.div`
   height: 54px;
   width: 60px;
-  background-color: #d9d9d9;
+  background-color: ${colorTheme.orange400};
   color: #ffffff;
   text-align: center;
   font-size: 13px;
@@ -65,11 +67,11 @@ const StateFinishDiv = styled.div`
   height: 54px;
   width: 60px;
   background-color: #ffffff;
-  color: #d9d9d9;
+  color: ${colorTheme.orange400};
   text-align: center;
   font-size: 13px;
   border-radius: 9px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid ${colorTheme.orange400};
   line-height: 54px;
 `;
 
@@ -78,7 +80,7 @@ const LeftColumnDiv = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   padding: 0 0 0 4.61%;
-  gap: 5px;
+  gap: 6px;
 `;
 
 const TitleText = styled.span`
@@ -91,7 +93,7 @@ const NewMsgNum = styled.span`
   padding: 3px;
   width: 100%;
   border-radius: 9px;
-  background-color: #d9d9d9;
+  background-color: ${colorTheme.orange400};
   color: #ffffff;
 `;
 
@@ -105,6 +107,6 @@ const RightColumnDiv = styled.div`
   justify-content: flex-end;
   align-items: flex-end;
   padding: 0 0 0 4.61%;
-  gap: 5px;
+  gap: 6px;
   width: 20%;
 `;

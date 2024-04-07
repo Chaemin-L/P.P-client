@@ -8,6 +8,7 @@ import backImgWhite from "@/assets/images/back-img-white.png";
 import backImg from "@/assets/images/back-img.png";
 import hamburgerMenuBlack from "@/assets/images/hamburger-menu-black.png";
 import hamburgerMenuWhite from "@/assets/images/hamburger-menu-white.png";
+import { colorTheme } from "@/style/color-theme";
 
 export const AppBar = ({
   isFixed = false,
@@ -21,9 +22,9 @@ export const AppBar = ({
     <Wrapper
       {...props}
       style={{
-        borderBottom: isBorderExist ? "8px solid #d9d9d9" : "none",
-        backgroundColor: isColorMode ? "#d9d9d9" : "#ffffff",
-        color: isColorMode ? "#ffffff" : "#d9d9d9",
+        borderBottom: isBorderExist ? "8px solid 1" : "none",
+        backgroundColor: isColorMode ? colorTheme.blue900 : "#ffffff",
+        color: isColorMode ? "#ffffff" : colorTheme.blue900,
       }}
     >
       {props.children}

@@ -7,6 +7,7 @@ import { TransferProps } from "./type";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const TransferDetailPrice = ({ setScreen }: TransferProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
@@ -38,8 +39,9 @@ export const TransferDetailPrice = ({ setScreen }: TransferProps) => {
       <div style={{ marginTop: "20px" }}>
         지금 내 잔액은 {lastTransfer.availableBudget}매듭입니다
       </div>
-      <BottomFixed align="column">
+      <BottomFixed alignDirection="column">
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           isRounded={true}
           onClick={() => {
             handleSave();
@@ -59,7 +61,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #d9d9d9;
+  color: black;
   font-size: 20px;
 `;
 
@@ -68,4 +70,5 @@ const CheckMsg = styled.div`
   margin: 5% 0;
   text-align: center;
   line-height: 30px;
+  color: ${colorTheme.orange400};
 `;

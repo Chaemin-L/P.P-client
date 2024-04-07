@@ -39,7 +39,7 @@ const Wrapper = styled.div`
 `;
 
 const PageText = styled.div`
-  color: #d9d9d9;
+  color: black;
   font-size: 32px;
   width: 100%;
   padding: 10px 7.95%;

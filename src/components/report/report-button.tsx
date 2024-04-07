@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 
 import { ReportButtonProps } from "./type";
 
+import { colorTheme } from "@/style/color-theme";
+
 export const ReportButton = ({ children, ...props }: ReportButtonProps) => {
   return <StyledButton {...props}>{children}</StyledButton>;
 };
@@ -11,7 +13,7 @@ const StyledButton = styled.button`
   width: 100%;
   border-radius: 10px;
   border: none;
-  background-color: #d9d9d9;
+  background-color: ${colorTheme.orange400};
   color: #ffffff;
   text-align: center;
   padding: 18px 0;

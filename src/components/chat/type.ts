@@ -1,16 +1,16 @@
 import React, { ChangeEvent } from "react";
 
-import { AppBarProps } from "@/components/common/type";
-
 export type MyChatType = {
   children?: React.ReactNode;
 };
 
 export type ChatItemType = {
   children?: React.ReactNode;
-  userId?: number;
+  userId: number;
   imgurl?: string;
   userName: string;
+  setProfileModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setProfileUserId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export type InputType = {
@@ -33,4 +33,9 @@ export type ChatAppBarType = {
   setAppBarHeight: (value: number) => void;
   onClickTransfer: () => void;
   onClickReport: () => void;
+};
+
+export type ChatProfileModalType = {
+  userId: number;
+  onClose: () => void;
 };
