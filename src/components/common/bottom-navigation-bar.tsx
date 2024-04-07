@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 import chatIconDark from "@/assets/icons/chat-icon-dark.png";
@@ -11,17 +11,18 @@ import postIconOrange from "@/assets/icons/post-icon-orange.png";
 
 export const BottomNavigationBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [currentUrl, setCurrentUrl] = useState<string>("");
 
   function getCurrentPage(url: string): string {
     const path = url.split("/")[1];
-    console.log("path", path);
     return path;
   }
 
   useEffect(() => {
-    setCurrentUrl(getCurrentPage(window.location.pathname));
-  }, []);
+    setCurrentUrl(getCurrentPage(location.pathname));
+  }, [location.pathname]);
 
   return (
     <Wrapper id="BottomNavigationBar">
@@ -57,7 +58,7 @@ export const BottomNavigationBar = () => {
       </NavigateButton>
       <NavigateButton
         onClick={() => {
-          navigate("/test");
+          navigate("/chat");
         }}
       >
         <img src={currentUrl == "chat" ? chatIconOrange : chatIconDark} />
