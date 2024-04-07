@@ -2,12 +2,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
+import chatIconDark from "@/assets/icons/chat-icon-dark.png";
+import chatIconOrange from "@/assets/icons/chat-icon-orange.png";
+import mypageIconDark from "@/assets/icons/mypage-icon-dark.png";
+import mypageIconOrange from "@/assets/icons/mypage-icon-orange.png";
+import postIconDark from "@/assets/icons/post-icon-dark.png";
+import postIconOrange from "@/assets/icons/post-icon-orange.png";
+
 export const BottomNavigationBar = () => {
   const navigate = useNavigate();
   const [currentUrl, setCurrentUrl] = useState<string>("");
 
   function getCurrentPage(url: string): string {
     const path = url.split("/")[1];
+    console.log("path", path);
     return path;
   }
 
@@ -19,47 +27,48 @@ export const BottomNavigationBar = () => {
     <Wrapper id="BottomNavigationBar">
       <NavigateButton
         onClick={() => {
+          navigate("/mypage");
+        }}
+      >
+        <img src={currentUrl == "mypage" ? mypageIconOrange : mypageIconDark} />
+        <ButtonText
+          style={{
+            color: currentUrl == "mypage" ? "#f17547" : "#828282",
+            fontWeight: currentUrl == "mypage" ? "bold" : "normal",
+          }}
+        >
+          내정보
+        </ButtonText>
+      </NavigateButton>
+      <NavigateButton
+        onClick={() => {
           navigate("/post");
         }}
-        style={{
-          backgroundColor: currentUrl === "post" ? "#000000" : "#ffffff",
-        }}
       >
-        <ButtonImg />
-        <ButtonText>게시글</ButtonText>
+        <img src={currentUrl == "post" ? postIconOrange : postIconDark} />
+        <ButtonText
+          style={{
+            color: currentUrl == "post" ? "#f17547" : "#828282",
+            fontWeight: currentUrl == "post" ? "bold" : "normal",
+          }}
+        >
+          전체 게시물
+        </ButtonText>
       </NavigateButton>
       <NavigateButton
         onClick={() => {
-          navigate("/posting/1");
-        }}
-        style={{
-          backgroundColor: currentUrl === "posting" ? "#000000" : "#ffffff",
+          navigate("/test");
         }}
       >
-        <ButtonImg />
-        <ButtonText>글쓰기</ButtonText>
-      </NavigateButton>
-      <NavigateButton
-        onClick={() => {
-          navigate("/chat");
-        }}
-        style={{
-          backgroundColor: currentUrl === "chat" ? "#000000" : "#ffffff",
-        }}
-      >
-        <ButtonImg />
-        <ButtonText>채팅</ButtonText>
-      </NavigateButton>
-      <NavigateButton
-        onClick={() => {
-          navigate("/profile");
-        }}
-        style={{
-          backgroundColor: currentUrl === "profile" ? "#000000" : "#ffffff",
-        }}
-      >
-        <ButtonImg />
-        <ButtonText>내정보</ButtonText>
+        <img src={currentUrl == "test" ? chatIconOrange : chatIconDark} />
+        <ButtonText
+          style={{
+            color: currentUrl == "test" ? "#f17547" : "#828282",
+            fontWeight: currentUrl == "test" ? "bold" : "normal",
+          }}
+        >
+          채팅
+        </ButtonText>
       </NavigateButton>
     </Wrapper>
   );
@@ -67,32 +76,29 @@ export const BottomNavigationBar = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 60px;
+  height: 63px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   bottom: 0;
+  background-color: #e4e8f1;
 `;
 
 const NavigateButton = styled.button`
-  width: 25%;
+  width: 33.33%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   height: 100%;
-  border-color: #d9d9d9;
+  border: none;
+  gap: 2px;
 `;
 
 const ButtonText = styled.span`
   width: 100%;
-  font-size: 18px;
-  color: #d9d9d9;
-`;
-
-const ButtonImg = styled.img`
-  width: 80%;
-  height: 100%;
+  font-size: 20px;
+  color: #828282;
 `;
