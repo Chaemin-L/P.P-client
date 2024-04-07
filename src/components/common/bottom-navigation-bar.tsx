@@ -60,11 +60,11 @@ export const BottomNavigationBar = () => {
           navigate("/test");
         }}
       >
-        <img src={currentUrl == "test" ? chatIconOrange : chatIconDark} />
+        <img src={currentUrl == "chat" ? chatIconOrange : chatIconDark} />
         <ButtonText
           style={{
-            color: currentUrl == "test" ? "#f17547" : "#828282",
-            fontWeight: currentUrl == "test" ? "bold" : "normal",
+            color: currentUrl == "chat" ? "#f17547" : "#828282",
+            fontWeight: currentUrl == "chat" ? "bold" : "normal",
           }}
         >
           채팅
