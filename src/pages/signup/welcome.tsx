@@ -15,7 +15,10 @@ export const WelcomePage = () => {
       <img width={218} src={WelcomeSVG} />
       <Description text="정릉이음\n지금 시작해볼까요?" />
       <BottomFixed>
-        <BottomFixed.Button onClick={() => navigate("/signup/1")}>
+        <BottomFixed.Button
+          color="orange"
+          onClick={() => navigate("/signup/1")}
+        >
           시작하기
         </BottomFixed.Button>
       </BottomFixed>

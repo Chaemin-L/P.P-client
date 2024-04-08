@@ -16,7 +16,7 @@ export const DonePage = () => {
         <img src={RightEmSVG} />
       </EmphasisWrapper>
       <BottomFixed>
-        <BottomFixed.Button onClick={() => navigate("/")}>
+        <BottomFixed.Button color="orange" onClick={() => navigate("/")}>
           홈화면으로 가기
         </BottomFixed.Button>
       </BottomFixed>

@@ -37,6 +37,7 @@ export const BirthdayPage = () => {
       </InputContainer>
       <BottomFixed>
         <BottomFixed.Button
+          color="orange"
           onClick={() => (birthday ? nextStep() : navigate("/signup/6"))}
         >
           완성하기

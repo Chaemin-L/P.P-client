@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import CameraSVG from "@/assets/images/camera.svg";
+import CameraSVG from "@/assets/icons/camera.svg";
 import { Description as OriginDescription } from "@/components/signup/description";
 import { Header } from "@/components/signup/header";
 
