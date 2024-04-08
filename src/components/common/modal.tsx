@@ -109,6 +109,7 @@ const Content = styled.div`
   flex-direction: column;
   text-align: center;
   gap: 30px;
+  z-index: 100;
   & > * {
     flex: 1;
   }
