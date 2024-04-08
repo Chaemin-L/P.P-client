@@ -15,6 +15,14 @@ import { Posting5 } from "@/pages/posting/posting5";
 import { Posting6 } from "@/pages/posting/posting6";
 import { Posting7 } from "@/pages/posting/posting7";
 import { Posting8 } from "@/pages/posting/posting8";
+import { SignupPage } from "@/pages/signup";
+import { BirthdayPage } from "@/pages/signup/birthday";
+import { DonePage } from "@/pages/signup/done";
+import { GenderPage } from "@/pages/signup/gender";
+import { NicknamePage } from "@/pages/signup/nickname";
+import { PhotoDescriptionPage } from "@/pages/signup/photo-description";
+import { TakePhotoPage } from "@/pages/signup/take-photo";
+import { WelcomePage } from "@/pages/signup/welcome";
 import { Test } from "@/pages/test";
 import { Test2 } from "@/pages/test2";
 
@@ -31,6 +39,40 @@ const router = createBrowserRouter([
       //   path: "auth/google",
       //   element: <GoogleAuth />,
       // },
+      {
+        path: "signup/",
+        element: <SignupPage />,
+        children: [
+          {
+            path: "",
+            element: <WelcomePage />,
+          },
+          {
+            path: "1",
+            element: <NicknamePage />,
+          },
+          {
+            path: "2",
+            element: <GenderPage />,
+          },
+          {
+            path: "3",
+            element: <PhotoDescriptionPage />,
+          },
+          {
+            path: "4",
+            element: <TakePhotoPage />,
+          },
+          {
+            path: "5",
+            element: <BirthdayPage />,
+          },
+          {
+            path: "6",
+            element: <DonePage />,
+          },
+        ],
+      },
       {
         path: "/post/:id",
         element: <PostDetailPage />,
