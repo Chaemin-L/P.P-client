@@ -23,7 +23,8 @@ export const ChatRoom = () => {
   const navigate = useNavigate();
 
   const [appBarHeight, setAppBarHeight] = useState(0);
-  const [chatInputHeight, setChatInputHeight] = useState(0);
+  const [appBerVisibility, setAppBarVisibility] = useState(true);
+  // const [chatInputHeight, setChatInputHeight] = useState(0);
 
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
   const [isTransfer, setIsTransfer] = useState(false);
@@ -52,22 +53,23 @@ export const ChatRoom = () => {
 
   return (
     <PageContainer>
-      <ChatAppBar
-        name="test"
-        onClickTransfer={() => {
-          setIsBottomSheetOpened(true);
-          setIsTransfer(true);
-        }}
-        setAppBarHeight={setAppBarHeight}
-        onClickReport={() => {
-          setIsBottomSheetOpened(true);
-          setIsReport(true);
-        }}
-      />
+      {appBerVisibility && (
+        <ChatAppBar
+          name="test"
+          onClickTransfer={() => {
+            setIsBottomSheetOpened(true);
+            setIsTransfer(true);
+          }}
+          setAppBarHeight={setAppBarHeight}
+          onClickReport={() => {
+            setIsBottomSheetOpened(true);
+            setIsReport(true);
+          }}
+        />
+      )}
       <ChatList
         style={{
-          paddingTop: `${appBarHeight + 10}px`,
-          paddingBottom: `${chatInputHeight + 10}px`,
+          paddingTop: appBerVisibility ? `${appBarHeight + 10}px` : "10px",
         }}
       >
         {allMsg.map((item, index) => {
@@ -87,7 +89,7 @@ export const ChatRoom = () => {
       <ChatInput
         value={msg}
         onChange={(e) => setMsg(e.target.value)}
-        setHeight={setChatInputHeight}
+        onFocus={setAppBarVisibility}
       />
       <BottomSheet
         style={{ height: window.innerHeight > 720 ? "81%" : "90%" }}
@@ -154,4 +156,5 @@ const ChatList = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 70px;
 `;
