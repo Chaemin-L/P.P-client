@@ -4,7 +4,7 @@ import axios, {
   AxiosResponse,
 } from "axios";
 
-import { InstanceResponseData } from "./type";
+import { InstanceResponseData } from "./types/common-type";
 
 import getRefreshToken from "@/utils/token";
 
@@ -18,16 +18,16 @@ Instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const { method, url } = config;
 
-    let token: string | undefined = undefined;
+    let token: string | null = null;
 
-    // // 토큰 설정 해줘야함
-    // if (config.url === process.env.REACT_APP_REFRESH_URL) {
-    //   token = localStorage.getItem("refreshToken");
-    // } else {
-    //   token = localStorage.getItem("accessToken");
-    // }
+    // 토큰 설정 해줘야함
+    if (config.url === process.env.REACT_APP_REFRESH_URL) {
+      token = localStorage.getItem("refreshToken");
+    } else {
+      token = localStorage.getItem("accessToken");
+    }
 
-    token = process.env.REACT_APP_TEST_TOKEN;
+    // token = process.env.REACT_APP_TEST_TOKEN;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -48,7 +48,9 @@ Instance.interceptors.request.use(
 );
 
 Instance.interceptors.response.use(
-  (response: AxiosResponse): AxiosResponse => {
+  (
+    response: AxiosResponse<InstanceResponseData>,
+  ): AxiosResponse<InstanceResponseData> => {
     const { method, url } = response.config;
     const stauts = response.status;
 

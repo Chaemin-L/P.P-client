@@ -5,9 +5,10 @@ import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting1 = () => {
   const resetRecoil = useResetRecoilState(postingState);
@@ -24,7 +25,7 @@ export const Posting1 = () => {
 
   return (
     <PageContainer>
-      <TopBar onClick={() => resetRecoil()}>1/10완료</TopBar>
+      <PostingAppBar onClick={() => resetRecoil()}>1/7</PostingAppBar>
       <PostingBoldText>위치를 입력해 주세요</PostingBoldText>
       <InputBox.InputMap
         value={location}
@@ -34,6 +35,7 @@ export const Posting1 = () => {
       />
       <BottomFixed>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate("/posting/2");

@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import { RequestPostingProps } from "@/api/type";
+import { RequestPostingProps } from "@/api/types/posting-type";
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { PostingInput } from "@/components/posting/posting-input";
 import { usePostPosting } from "@/hooks/queries/usePostPosting";
 import { postingState } from "@/recoil/atoms/posting-state";
 import { FormatDateString } from "@/utils/format-date-string";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting7 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -41,14 +42,14 @@ export const Posting7 = () => {
 
   return (
     <PageContainer>
-      <TopBar
+      <PostingAppBar
         onClick={() => {
           handleSave();
           navigate(-1);
         }}
       >
-        1/10완료
-      </TopBar>
+        7/7
+      </PostingAppBar>
       <PostingBoldText>활동 내용을 적어보세요</PostingBoldText>
       <PostingInput.InputContent
         value={contents}
@@ -58,6 +59,7 @@ export const Posting7 = () => {
       />
       <BottomFixed>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.orange400 }}
           onClick={() => {
             handleSave();
             handlePostPosting();

@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 
 import { SwitchToggleType } from "./type";
 
+import { colorTheme } from "@/style/color-theme";
+
 export const ToggleSwitch = ({
   firstText,
   secondText,
@@ -10,8 +12,8 @@ export const ToggleSwitch = ({
   isLeftSelected,
 }: SwitchToggleType) => {
   const variants = {
-    selected: { width: "65%", backgroundColor: "#A1A1A1" },
-    notSelected: { width: "35%", backgroundColor: "#D9D9D9" },
+    selected: { width: "65%", backgroundColor: colorTheme.orange400 },
+    notSelected: { width: "35%", backgroundColor: colorTheme.orange200 },
   };
 
   return (

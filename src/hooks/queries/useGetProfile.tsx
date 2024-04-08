@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import ProfileApi from "@/api/profile-api";
 
-export const useGetProfile = () => {
+export const useGetProfile = (userId?: number) => {
   return useQuery({
-    queryKey: ["profile"],
-    queryFn: () => ProfileApi.getProfile(),
+    queryKey: ["profile", userId],
+    queryFn: () =>
+      userId ? ProfileApi.getProfile(userId) : ProfileApi.getProfile(),
   });
 };

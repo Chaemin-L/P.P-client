@@ -1,5 +1,5 @@
 import Instance from "./axios-instance";
-import { BankDataResponse } from "./type";
+import { BankDataResponse } from "./types/bank-type";
 
 class BankApi {
   static async getBankData() {
