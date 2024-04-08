@@ -27,7 +27,9 @@ export const Test = () => {
       <BottomSheet
         style={{ zIndex: 2 }}
         isOpened={isOpened}
-        onChangeIsOpened={setIsOpened}
+        onChangeIsOpened={() => {
+          setIsOpened(false);
+        }}
       >
         <div style={{ height: "90px" }}>test</div>
       </BottomSheet>

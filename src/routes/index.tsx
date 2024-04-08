@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { GlobalLayout } from "@/components/layout/global-layout";
 import { GoogleAuth } from "@/components/login/google-auth";
 import { KakaoAuth } from "@/components/login/kakao-auth";
+import { Chat } from "@/pages/chat/chat";
+import { ChatRoom } from "@/pages/chat/chat-room";
 import { LoginPage } from "@/pages/login/login";
 import { LoginEnd } from "@/pages/login/login-end";
 import { MyPostPage } from "@/pages/mypost";
@@ -80,6 +82,14 @@ const router = createBrowserRouter([
       {
         path: "/test2",
         element: <Test2 />,
+      },
+      {
+        path: "/chat/1",
+        element: <ChatRoom />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />,
       },
     ],
   },

@@ -1,9 +1,11 @@
 import Instance from "./axios-instance";
-import { RequestPostingProps, ResponsePostingProps } from "./type";
+import {
+  RequestPostingProps,
+  ResponsePostingProps,
+} from "./types/posting-type";
 
 export default class PostApi {
   static async postPosting(data: RequestPostingProps) {
-    console.log("api::::::::", data);
     const response = await Instance.post(
       "/haetsal-service/api/v2/market/post",
       data,
@@ -14,5 +16,12 @@ export default class PostApi {
     } else {
       throw new Error("Invalid response from server");
     }
+  }
+
+  static async reportPosting(postId: string) {
+    const response = await Instance.post(
+      `/haetsal-service/api/v2/market/post/${postId}/report`,
+    );
+    return response.status;
   }
 }

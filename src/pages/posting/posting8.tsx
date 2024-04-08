@@ -2,10 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
+import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting8 = () => {
   const resetRecoil = useResetRecoilState(postingState);
@@ -14,15 +16,17 @@ export const Posting8 = () => {
   // 뒤로가기 누르면 리스트로 가게
   return (
     <PageContainer>
-      <TopBar
-        onClick={() => {
-          resetRecoil();
-          localStorage.removeItem("postId");
-          navigate("");
-        }}
-      >
-        {" "}
-      </TopBar>
+      <AppBar>
+        <AppBar.AppBarNavigate>
+          <AppBar.BackButton
+            onClick={() => {
+              resetRecoil();
+              localStorage.removeItem("postId");
+              navigate("");
+            }}
+          />
+        </AppBar.AppBarNavigate>
+      </AppBar>
       <PostingBoldText style={{ marginTop: "50px" }}>
         게시물이
         <br />
@@ -30,6 +34,7 @@ export const Posting8 = () => {
       </PostingBoldText>
       <BottomFixed>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.orange400 }}
           onClick={() => {
             resetRecoil();
             const postId = localStorage.getItem("postId");

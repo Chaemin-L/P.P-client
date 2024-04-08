@@ -5,16 +5,17 @@ import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
-import { TopBar } from "@/components/common/top-bar";
+import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting5 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
   const [member, setMember] = useState(posting.memberNum);
   const navigate = useNavigate();
-  const { data: bankData } = useGetBankData();
+  const { data } = useGetBankData();
 
   const handleSave = () => {
     setPosting((prevPosting) => {
@@ -25,13 +26,13 @@ export const Posting5 = () => {
 
   return (
     <PageContainer>
-      <TopBar
+      <PostingAppBar
         onClick={() => {
           handleSave();
         }}
       >
-        1/10완료
-      </TopBar>
+        5/7완료
+      </PostingAppBar>
       <PostingBoldText>
         필요한 인원을
         <br />
@@ -46,7 +47,7 @@ export const Posting5 = () => {
         명
       </InputBox.InputNum>
       <BalanceText>
-        지금 내 잔액은 {bankData ? bankData.availableBudget : 0}매듭 입니다.
+        지금 내 잔액은 {data ? data.availableBudget : 0}매듭 입니다.
       </BalanceText>
       <SumContainer>
         <SumText>합계</SumText>
@@ -55,11 +56,12 @@ export const Posting5 = () => {
       </SumContainer>
       <BalanceText style={{ marginTop: "3%" }}>
         게시물 작성 후 내 잔액은{" "}
-        {(bankData ? bankData.availableBudget : 0) - posting.price * member}
+        {(data ? data.availableBudget : 0) - posting.price * member}
         매듭입니다.
       </BalanceText>
-      <BottomFixed align="row">
+      <BottomFixed alignDirection="row">
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -68,6 +70,7 @@ export const Posting5 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
+          style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
             handleSave();
             navigate("/posting/6");

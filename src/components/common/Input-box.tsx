@@ -2,6 +2,8 @@ import { useState, ChangeEvent, PropsWithChildren } from "react";
 import { styled } from "styled-components";
 
 import { InputType } from "./type";
+import { colorTheme } from "@/style/color-theme";
+import readingGlass from "@/assets/images/reading-glass.png";
 
 export const InputBox = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
@@ -39,7 +41,7 @@ const InputMap = ({ value, onChange }: InputType) => {
 
   return (
     <InputMapContainer>
-      <Icon src="" />
+      <Icon src={readingGlass} />
       <InputMapBox
         type="text"
         value={inputValue}
@@ -60,18 +62,18 @@ const InputBoxContainer = styled.div`
 const InputBoxCom = styled.input`
   font-size: 50px;
   font-weight: bold;
-  color: #a1a1a1;
+  color: white;
   text-align: center;
   border: 0;
   width: 70%;
   height: 79px;
-  background-color: #d9d9d9;
+  background-color: ${colorTheme.orange400};
   border-radius: 11px;
   padding: 11px;
 `;
 
 const WonText = styled.span`
-  color: #d9d9d9;
+  color: black;
   font-size: 20px;
   vertical-align: bottom;
   margin: 0 0 5% 7%;
@@ -87,10 +89,9 @@ const InputMapContainer = styled.div`
 `;
 
 const Icon = styled.img`
-  width: 7.43%;
+  width: 10%;
   margin: 0 1.28% 0 0;
   height: 100%;
-  background-color: #d9d9d9;
 `;
 
 const InputMapBox = styled.input`
@@ -99,8 +100,8 @@ const InputMapBox = styled.input`
   padding: 7.4%;
   font-size: 13px;
   vertical-align: center;
-  color: #ffffff;
-  background-color: #d9d9d9;
+  color: black;
+  background-color: ${colorTheme.blue100};
   border-radius: 11px;
   border: 0;
 `;

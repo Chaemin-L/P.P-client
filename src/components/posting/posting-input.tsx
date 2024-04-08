@@ -2,6 +2,7 @@ import { PropsWithChildren, useRef } from "react";
 import { styled } from "styled-components";
 
 import { InputType } from "@/components/common/type";
+import { colorTheme } from "@/style/color-theme";
 
 export const PostingInput = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
@@ -54,9 +55,9 @@ const InputContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 19px 21px;
-  background-color: #d9d9d9;
+  background-color: ${colorTheme.blue300};
   border-radius: 11px;
-  color: #ffffff;
+  color: black;
   align-items: flex-start;
 `;
 

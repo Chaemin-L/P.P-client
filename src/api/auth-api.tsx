@@ -1,5 +1,5 @@
 import Instance from "./axios-instance";
-import { AuthResponse } from "./type";
+import { AuthResponse } from "./types/auth-type";
 
 export default class AuthApi {
   static async postSignIn(type: string, token: string) {
