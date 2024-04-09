@@ -37,7 +37,9 @@ export const ActivityBox = ({
   return (
     <>
       <Progress>
-        <Status>{status === "RECRUITING" ? "모집중" : "모집완료"}</Status>
+        <Status status={status}>
+          {status === "RECRUITING" ? "모집중" : "모집완료"}
+        </Status>
         <HeadCount>
           {currentApplicant}/{maxNumOfPeople}명
         </HeadCount>
@@ -76,13 +78,17 @@ const Progress = styled.div`
   justify-content: space-between;
 `;
 
-const Status = styled.div`
+const Status = styled.div<{ status: string }>`
   width: fit-content;
   padding: 6px 11px;
   border-radius: 11px;
   background-color: ${colorTheme.orange400};
   color: white;
   font-size: 15px;
+
+  ${({ status }) =>
+    status === "RECRUITING_COMPLETED" &&
+    `background: transparent; color: ${colorTheme.blue500};`}
 `;
 
 const PostInfo = styled.div`
