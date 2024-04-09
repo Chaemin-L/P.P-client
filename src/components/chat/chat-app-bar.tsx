@@ -83,23 +83,19 @@ const AfterTransfer = () => {
     <ColumnBox>
       <RowBox>
         <Button
+          color="blue"
           style={{
             width: "100%",
-            borderRadius: "30px",
             padding: "15px",
-            color: "white",
-            backgroundColor: colorTheme.blue900,
           }}
         >
           거래내역
         </Button>
         <Button
+          color="blue"
           style={{
             width: "100%",
-            borderRadius: "30px",
             padding: "15px",
-            color: "white",
-            backgroundColor: colorTheme.blue900,
           }}
         >
           게시물 보기
@@ -117,21 +113,19 @@ const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
     >
       <RowBox>
         <Button
+          color="white"
           style={{
             width: "100%",
-            borderRadius: "30px",
             padding: "15px",
-            color: colorTheme.blue900,
           }}
         >
           거래파기
         </Button>
         <Button
+          color="white"
           style={{
             width: "100%",
-            borderRadius: "30px",
             padding: "15px",
-            color: colorTheme.blue900,
           }}
         >
           게시물 보기
@@ -139,14 +133,13 @@ const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
       </RowBox>
       <div style={{ padding: "0 33px" }}>
         <Button
+          color="white"
           style={{
             width: "100%",
             fontSize: "24px",
             padding: "10px",
             borderRadius: "30px",
-            background: "#ffffff",
             marginTop: "0",
-            color: colorTheme.blue900,
           }}
           onClick={onClickTransfer}
         >

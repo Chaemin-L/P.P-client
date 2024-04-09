@@ -27,11 +27,8 @@ export const TakePhotoPage = () => {
     <>
       <ContentLayout>
         <ButtonContainer>
-          <Button primary onClick={() => setDataUri("")}>
-            다시찍기
-          </Button>
+          <Button onClick={() => setDataUri("")}>다시찍기</Button>
           <Button
-            primary
             onClick={() =>
               dataUri.length ? nextStep() : setWarningModal(true)
             }

@@ -1,43 +1,43 @@
 import React, { ButtonHTMLAttributes } from "react";
 import { styled } from "styled-components";
 
+import { colorTheme } from "@/style/color-theme";
+
 type ButtonProps = {
-  isSmall?: boolean;
-  primary?: boolean;
+  rounded?: boolean;
+  color?: "blue" | "orange" | "white";
   children: React.ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
-  isSmall = false,
-  primary = false,
+  rounded = false,
+  color = "blue",
   ...props
 }: ButtonProps) => {
   return (
-    <StyledButton $primary={primary} $isSmall={isSmall} {...props}>
+    <StyledButton $rounded={rounded} color={color} {...props}>
       {props.children}
     </StyledButton>
   );
 };
 
-const StyledButton = styled.button<{ $primary: boolean; $isSmall: boolean }>`
-  width: fit-content;
-  padding: 15px 30px;
-  border-radius: 21px;
+const StyledButton = styled.button<{
+  $rounded: boolean;
+  color: "blue" | "orange" | "white";
+}>`
+  padding: 12px 30px;
+  border-radius: 20px;
   border: 0;
-  background-color: black;
   color: white;
-  font-size: 16px;
-  ${({ $primary }) =>
-    !$primary &&
+  font-size: 18px;
+  ${({ $rounded }) => $rounded && "border-radius: 40px;"}
+
+  ${({ color }) =>
+    color === "blue"
+      ? `
+      background-color: ${colorTheme.blue900};
     `
-      background-color: white;
-      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-      color: black;
-    `}
-  ${({ $isSmall }) =>
-    $isSmall &&
-    `
-      font-size: 18px;
-      border-radius: 40px;
-    `}
+      : color === "orange"
+        ? `background-color: ${colorTheme.orange400};`
+        : `background-color: #f5f5f5; color: ${colorTheme.blue900}`};
 `;

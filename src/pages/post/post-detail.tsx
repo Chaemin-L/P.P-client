@@ -22,7 +22,7 @@ export const PostDetailPage = () => {
     <DefaultLayout>
       <ActivityBox {...activityData} />
       <ButtonWrapper>
-        <Button primary isSmall onClick={() => setReportModal(true)}>
+        <Button rounded color="orange" onClick={() => setReportModal(true)}>
           신고
         </Button>
         {reportModal && (
