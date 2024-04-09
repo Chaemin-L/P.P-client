@@ -72,7 +72,7 @@ export const PostDetailPage = () => {
             신청하기
           </BottomFixed.Button>
         ) : (
-          <BottomFixed.Button isRounded={false} onClick={() => setModal(true)}>
+          <BottomFixed.Button rounded={false} onClick={() => setModal(true)}>
             신청 취소하기
           </BottomFixed.Button>
         )}
