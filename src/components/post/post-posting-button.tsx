@@ -11,7 +11,7 @@ export const PostPostingButton = () => {
     <Wrapper>
       <PostingButton
         onClick={() => {
-          navigate("/posting");
+          navigate("/posting/1");
         }}
       >
         <PlusImg src={plusImg} />
