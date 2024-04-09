@@ -25,7 +25,7 @@ const StyledButton = styled.button<{
   $rounded: boolean;
   color: "blue" | "orange" | "white";
 }>`
-  padding: 12px 30px;
+  padding: 15px 30px;
   border-radius: 20px;
   border: 0;
   color: white;
