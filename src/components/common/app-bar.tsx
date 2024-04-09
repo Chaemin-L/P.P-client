@@ -20,12 +20,12 @@ export const AppBar = ({
 
   return (
     <Wrapper
-      {...props}
       style={{
         borderBottom: isBorderExist ? "8px solid 1" : "none",
         backgroundColor: isColorMode ? colorTheme.blue900 : "#ffffff",
         color: isColorMode ? "#ffffff" : colorTheme.blue900,
       }}
+      {...props}
     >
       {props.children}
     </Wrapper>

@@ -28,7 +28,7 @@ export const BottomNavigationBar = () => {
     <Wrapper id="BottomNavigationBar">
       <NavigateButton
         onClick={() => {
-          navigate("/mypage");
+          navigate("/mypage", { replace: true });
         }}
       >
         <img src={currentUrl == "mypage" ? mypageIconOrange : mypageIconDark} />
@@ -43,7 +43,7 @@ export const BottomNavigationBar = () => {
       </NavigateButton>
       <NavigateButton
         onClick={() => {
-          navigate("/post");
+          navigate("/post", { replace: true });
         }}
       >
         <img src={currentUrl == "post" ? postIconOrange : postIconDark} />
@@ -58,7 +58,7 @@ export const BottomNavigationBar = () => {
       </NavigateButton>
       <NavigateButton
         onClick={() => {
-          navigate("/chat");
+          navigate("/chat", { replace: true });
         }}
       >
         <img src={currentUrl == "chat" ? chatIconOrange : chatIconDark} />
