@@ -2,6 +2,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 
 import { ActivityBox } from "@/components/common/activity-box";
+import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { BottomSheet } from "@/components/common/bottom-sheet";
 import { Button } from "@/components/common/button";
@@ -23,7 +24,15 @@ export const PostDetailPage = () => {
   const [modal, setModal] = useState<boolean>(false);
 
   return (
-    <DefaultLayout>
+    <DefaultLayout
+      appbar={
+        <AppBar>
+          <AppBar.AppBarNavigate>
+            <AppBar.BackButton />
+          </AppBar.AppBarNavigate>
+        </AppBar>
+      }
+    >
       <ActivityBox {...activityData} />
       <ButtonWrapper>
         <Button

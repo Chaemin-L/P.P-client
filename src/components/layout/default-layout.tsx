@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   max-width: 480px;
   margin: auto;
   font-size: 16px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
 `;
 
 const StyledDefaultAppbar = styled.div`
