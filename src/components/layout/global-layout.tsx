@@ -41,7 +41,6 @@ export const GlobalLayout = () => {
               ? `calc(100% - 63px)`
               : "100%",
           position: "relative",
-          overflowY: "auto",
         }}
       >
         <Outlet />
