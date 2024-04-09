@@ -93,7 +93,7 @@ const ButtonWrapper = styled.button<{ color?: string }>`
     color === "blue" ? `${colorTheme.blue900}` : `${colorTheme.orange400}`};
   color: white;
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 400;
 `;
 
 const ModalBackground = styled.div`
