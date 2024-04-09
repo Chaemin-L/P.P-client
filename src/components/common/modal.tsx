@@ -84,8 +84,7 @@ const TitleWrapper = styled.div`
 `;
 
 const ButtonWrapper = styled.button<{ color?: string }>`
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   background-color: #f17547;
   border: 0;
   border-radius: 30px;

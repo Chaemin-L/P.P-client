@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    font-size: 62.5%;
+    font-size: 18px;
   }
  
   * {

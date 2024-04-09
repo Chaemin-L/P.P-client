@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 interface DefaultLayoutProps {
   appbar?: React.ReactNode;
+  scrollbar?: boolean;
   children?: React.ReactNode;
 }
 
@@ -11,12 +12,15 @@ const DefaultAppbar = () => (
 
 export const DefaultLayout = ({
   appbar = <DefaultAppbar />,
+  scrollbar = false,
   children,
 }: DefaultLayoutProps) => {
   return (
     <Wrapper>
       {appbar ?? <DefaultAppbar />}
-      <StyledDefaultLayout>{children}</StyledDefaultLayout>
+      <StyledDefaultLayout $scrollbar={scrollbar}>
+        {children}
+      </StyledDefaultLayout>
     </Wrapper>
   );
 };
@@ -28,7 +32,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   max-width: 480px;
   margin: auto;
-  font-size: 16px;
+  font-size: 0.88rem;
   background-color: #ffffff;
 `;
 
@@ -39,10 +43,10 @@ const StyledDefaultAppbar = styled.div`
   background-color: gray;
 `;
 
-const StyledDefaultLayout = styled.div`
+const StyledDefaultLayout = styled.div<{ $scrollbar: boolean }>`
   position: relative;
   flex: 1;
   width: 100%;
   height: 100%;
-  padding: 20px 16px;
+  ${({ $scrollbar }) => ($scrollbar ? "overflow: auto" : "padding: 10px 16px")}
 `;
