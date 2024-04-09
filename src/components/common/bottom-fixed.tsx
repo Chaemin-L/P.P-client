@@ -1,8 +1,11 @@
 import React from "react";
 import { styled } from "styled-components";
 
+import { colorTheme } from "@/style/color-theme";
+
 type ButtonProps = {
-  isRounded?: boolean;
+  rounded?: boolean;
+  color?: "blue" | "orange";
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
@@ -11,9 +14,9 @@ type BottomFixedProps = {
   children: React.ReactNode;
 };
 
-const Button = ({ isRounded = true, ...props }: ButtonProps) => {
+const Button = ({ rounded = true, color = "blue", ...props }: ButtonProps) => {
   return (
-    <StyledButton $isRounded={isRounded} {...props}>
+    <StyledButton $rounded={rounded} color={color} {...props}>
       {props.children}
     </StyledButton>
   );
@@ -44,13 +47,16 @@ const BottomFixedContainer = styled.div<{ $alignDirection: string }>`
   left: 0;
 `;
 
-const StyledButton = styled.button<{ $isRounded: boolean }>`
+const StyledButton = styled.button<{
+  $rounded: boolean;
+  color: "blue" | "orange";
+}>`
   width: 100%;
   padding: 12px;
+  background-color: ${({ color }) =>
+    color === "blue" ? `${colorTheme.blue900}` : `${colorTheme.orange400}`};
 
-  background-color: black;
-  ${({ $isRounded }) =>
-    $isRounded ? "border-radius: 50px;" : "background-color: #aaaaaa"};
+  ${({ $rounded }) => $rounded && "border-radius: 50px;"}
   border: 0;
   color: white;
   font-size: 24px;

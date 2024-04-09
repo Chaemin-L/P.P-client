@@ -1,74 +1,64 @@
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
+import ApplicantSVG from "@/assets/icons/applicant.svg";
+import DateSVG from "@/assets/icons/date.svg";
+import KnotSVG from "@/assets/icons/knot.svg";
+import LocationSVG from "@/assets/icons/location.svg";
+import TimeSVG from "@/assets/icons/time.svg";
 import { activityState } from "@/recoil/atoms/activity-state";
+import { colorTheme } from "@/style/color-theme";
 
 type ActivityBoxProps = {
-  status: boolean;
-  category: string[];
   title: string;
-  description: string;
-  author: {
-    id: number;
-    name: string;
-    imageUrl: string;
-  };
-  duration: number;
-  datetime: string;
+  content: string;
   location: string;
-  members: number;
-  maxMembers: number;
-  visitor: number;
+  volunteerTime: number;
+  pay: number;
+  startDate: string;
+  status: string;
+  currentApplicant: number;
+  maxNumOfPeople: number;
+  visitor?: number; // 조회수
 };
 
 export const ActivityBox = ({
-  status,
-  category,
   title,
-  description,
-  author,
-  duration,
-  datetime,
+  content,
+  volunteerTime,
   location,
-  members,
-  maxMembers,
+  pay,
+  startDate,
+  currentApplicant,
+  status,
+  maxNumOfPeople,
   visitor,
 }: ActivityBoxProps) => {
   return (
     <>
-      <BadgeContainer>
-        <Badge>{status ? "모집중" : "모집완료"}</Badge>
-        {category.map((c) => (
-          <Badge key={c}>{c}</Badge>
-        ))}
-      </BadgeContainer>
+      <Progress>
+        <Status>{status === "RECRUITING" ? "모집중" : "모집완료"}</Status>
+        <HeadCount>
+          {currentApplicant}/{maxNumOfPeople}명
+        </HeadCount>
+        <KnotPay>{pay} 매듭</KnotPay>
+      </Progress>
 
-      <PostInfoContainer>
-        <JustifyWrapper>
-          <ProfileBadge>
-            <ProfileImage src={author.imageUrl} />
-            <ProfileName>{author.name}</ProfileName>
-          </ProfileBadge>
-          <Member>
-            {members}/{maxMembers}명
-          </Member>
-        </JustifyWrapper>
-        <PostDetail>
-          <Title>{title}</Title>
-          <p>{description}</p>
-        </PostDetail>
-      </PostInfoContainer>
+      <PostInfo>
+        <Title>{title}</Title>
+        <Content>{content}</Content>
+      </PostInfo>
 
       <MoreInfoContainer>
         <PromiseInfoList>
-          <PromiseInfoItem>
-            <span>{new Date(datetime).toLocaleDateString()}</span>
+          <PromiseInfoItem icon={DateSVG}>
+            <span>{new Date(startDate).toLocaleDateString()}</span>
           </PromiseInfoItem>
-          <PromiseInfoItem>
+          <PromiseInfoItem icon={LocationSVG}>
             <span>{location}</span>
           </PromiseInfoItem>
-          <PromiseInfoItem>
-            <span>예상 소요 시간 {duration}</span>
+          <PromiseInfoItem icon={TimeSVG}>
+            <span>예상 소요 시간 {volunteerTime}분</span>
           </PromiseInfoItem>
         </PromiseInfoList>
 
@@ -78,77 +68,33 @@ export const ActivityBox = ({
   );
 };
 
-const BadgeContainer = styled.div`
+const Progress = styled.div`
   display: flex;
-  gap: 5px;
+  padding: 15px;
+  border-radius: 20px;
+  background-color: #e4e8f1;
+  justify-content: space-between;
 `;
 
-const Badge = styled.div`
+const Status = styled.div`
   width: fit-content;
   padding: 6px 11px;
   border-radius: 11px;
-  background-color: black;
+  background-color: ${colorTheme.orange400};
   color: white;
   font-size: 15px;
 `;
 
-const PostInfoContainer = styled.div`
+const PostInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
   margin-top: 10px;
   padding: 20px;
-  background-color: black;
+  background-color: #e4e8f1;
   border-radius: 20px;
-`;
-
-const JustifyWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ProfileBadge = styled.div`
-  display: flex;
-  width: fit-content;
-  padding: 6px 8px;
-  align-items: center;
-  background-color: white;
-  border-radius: 11px;
-`;
-
-const ProfileImage = styled.img`
-  width: 28px;
-  height: 28px;
-  border-radius: 11px;
-  object-fit: cover;
-`;
-
-const ProfileName = styled.div`
-  padding: 4px 12px;
-  text-align: center;
-`;
-
-const Member = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: white;
-  &::before {
-    display: block;
-    width: 20px;
-    height: 20px;
-    border-radius: 1px;
-    background-image: url("https://img.freepik.com/free-photo/background_53876-32170.jpg?w=1380&t=st=1711331322~exp=1711331922~hmac=b3b85ba4a67da1f828dbddd65f5f91ad7db964bdcbfafe36701722f28611b632");
-    content: " ";
-  }
-`;
-
-const PostDetail = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  color: white;
+  color: black;
 `;
 
 const Title = styled.h1`
@@ -156,10 +102,42 @@ const Title = styled.h1`
   font-weight: 700;
 `;
 
+const Content = styled.p`
+  line-height: 120%;
+`;
+
+const HeadCount = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  &::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 1px;
+    background-image: url(${ApplicantSVG});
+    content: " ";
+  }
+`;
+
+const KnotPay = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  &::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 1px;
+    background-image: url(${KnotSVG});
+    content: " ";
+  }
+`;
+
 const MoreInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 20px;
   width: 100%;
   padding: 24px 22px 45px;
 `;
@@ -170,7 +148,7 @@ const PromiseInfoList = styled.div`
   gap: 13px;
 `;
 
-const PromiseInfoItem = styled.div`
+const PromiseInfoItem = styled.div<{ icon: string }>`
   display: flex;
   align-items: center;
   gap: 11px;
@@ -178,7 +156,9 @@ const PromiseInfoItem = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 1px;
-    background-image: url("https://blog.kakaocdn.net/dn/bqPYzR/btraWSj02cT/HnIasx6vc09IszobY6Fwe0/img.jpg");
+    background-image: url(${({ icon }) => icon});
+    background-position: center;
+    background-repeat: no-repeat;
     content: " ";
   }
 `;

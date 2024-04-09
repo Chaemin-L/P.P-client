@@ -14,8 +14,8 @@ export const MyPostPage = () => {
   return (
     <DefaultLayout>
       <JustifyWrapper>
-        <Button primary>모집완료</Button>
-        <Button primary>수정하기</Button>
+        <Button>모집완료</Button>
+        <Button>수정하기</Button>
       </JustifyWrapper>
       <ActivityBox {...activityData} />
       <BottomFixed alignDirection="column">

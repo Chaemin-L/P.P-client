@@ -22,14 +22,14 @@ export const DefaultLayout = ({
 };
 
 const Wrapper = styled.div`
-  width: 100dvw;
-  height: 100dvh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   max-width: 480px;
   margin: auto;
   font-size: 16px;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
 `;
 
 const StyledDefaultAppbar = styled.div`

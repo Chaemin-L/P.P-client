@@ -42,7 +42,7 @@ export const TransferDetailPrice = ({ setScreen }: TransferProps) => {
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
           style={{ backgroundColor: colorTheme.blue900 }}
-          isRounded={true}
+          rounded={true}
           onClick={() => {
             handleSave();
             setScreen("transfer-detail");
