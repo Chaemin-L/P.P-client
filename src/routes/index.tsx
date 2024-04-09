@@ -7,8 +7,10 @@ import { Chat } from "@/pages/chat/chat";
 import { ChatRoom } from "@/pages/chat/chat-room";
 import { LoginPage } from "@/pages/login/login";
 import { LoginEnd } from "@/pages/login/login-end";
+import { Mypage } from "@/pages/mypage/mypage";
 import { MyPostPage } from "@/pages/mypost";
 import { PostDetailPage } from "@/pages/post/post-detail";
+import { PostList } from "@/pages/post/post-list";
 import { Posting1 } from "@/pages/posting/posting1";
 import { Posting2 } from "@/pages/posting/posting2";
 import { Posting3 } from "@/pages/posting/posting3";
@@ -132,6 +134,14 @@ const router = createBrowserRouter([
       {
         path: "/chat",
         element: <Chat />,
+      },
+      {
+        path: "/post",
+        element: <PostList />,
+      },
+      {
+        path: "/mypage",
+        element: <Mypage />,
       },
     ],
   },
