@@ -137,7 +137,7 @@ const KnotPay = styled.span`
 const MoreInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 20px;
   width: 100%;
   padding: 24px 22px 45px;
 `;
