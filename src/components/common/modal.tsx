@@ -2,7 +2,8 @@ import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 
-import { ReactComponent as CloseSVG } from "@/assets/icons/close.svg";
+import { ReactComponent as CloseSVG } from "@/assets/icons/modal-close.svg";
+import { colorTheme } from "@/style/color-theme";
 
 type CloseButtonType = {
   onClick: MouseEventHandler<HTMLDivElement>;
@@ -12,7 +13,9 @@ type TitleType = {
   text: string;
 };
 
-type ButtonType = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+type ButtonType = {
+  color?: string;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type">;
 
 type ModalType = {
   onClose: MouseEventHandler<HTMLDivElement>;
@@ -35,8 +38,12 @@ const Title = ({ text }: TitleType) => {
   );
 };
 
-const Button = ({ children, ...props }: ButtonType) => {
-  return <ButtonWrapper {...props}>{children}</ButtonWrapper>;
+const Button = ({ color = "blue", children, ...props }: ButtonType) => {
+  return (
+    <ButtonWrapper color={color} {...props}>
+      {children}
+    </ButtonWrapper>
+  );
 };
 
 export const Modal = ({ onClose, children }: ModalType) => {
@@ -63,8 +70,8 @@ const CloseButtonWrapper = styled.div`
   height: 64px;
   position: absolute;
   background-color: transparent;
-  top: -15px;
-  right: -10px;
+  top: -12px;
+  right: -14px;
 `;
 
 const TitleWrapper = styled.div`
@@ -74,12 +81,14 @@ const TitleWrapper = styled.div`
   word-wrap: break-word;
 `;
 
-const ButtonWrapper = styled.button`
+const ButtonWrapper = styled.button<{ color?: string }>`
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #f17547;
   border: 0;
   border-radius: 30px;
+  background-color: ${({ color }) =>
+    color === "blue" ? `${colorTheme.blue900}` : `${colorTheme.orange400}`};
   color: white;
   font-size: 30px;
   font-weight: 600;
@@ -101,7 +110,7 @@ const Content = styled.div`
   display: flex;
   max-width: 90%;
   max-height: 90%;
-  padding: 40px 34px;
+  padding: 40px;
   background-color: #f5f5f5;
   border-radius: 35px;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);

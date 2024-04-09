@@ -57,11 +57,10 @@ const StyledButton = styled.button<{
 }>`
   width: 100%;
   padding: 12px;
-
-  background-color: black;
-  ${({ $isRounded }) => $isRounded && "border-radius: 50px;"};
   background-color: ${({ color }) =>
     color === "blue" ? `${colorTheme.blue900}` : `${colorTheme.orange400}`};
+
+  ${({ $isRounded }) => $isRounded && "border-radius: 50px;"}
   border: 0;
   color: white;
   font-size: 24px;

@@ -16,6 +16,7 @@ export const PostDetailPage = () => {
   // TODO: 자신이 신청한 게시글인지 확인하는 로직
   const [apply, setApply] = useState<boolean>(false);
   const [reportModal, setReportModal] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false);
 
   return (
     <DefaultLayout>
@@ -32,17 +33,50 @@ export const PostDetailPage = () => {
         )}
       </ButtonWrapper>
       <BottomFixed>
-        <BottomFixed.Button
-          isRounded={!apply}
-          onClick={() => setApply((apply) => !apply)}
-        >
-          신청하기
-        </BottomFixed.Button>
+        {!apply ? (
+          <BottomFixed.Button color="orange" onClick={() => setModal(true)}>
+            신청하기
+          </BottomFixed.Button>
+        ) : (
+          <BottomFixed.Button isRounded={false} onClick={() => setModal(true)}>
+            신청 취소하기
+          </BottomFixed.Button>
+        )}
       </BottomFixed>
+      {modal &&
+        (!apply ? (
+          <Modal
+            onClose={() => {
+              setModal(false);
+              setApply(true);
+            }}
+          >
+            <EmptyBox>
+              <Modal.Title text="신청되었습니다" />
+            </EmptyBox>
+          </Modal>
+        ) : (
+          <Modal onClose={() => setModal(false)}>
+            <Modal.Title text="신청을\n취소하시겠습니까?" />
+            <Modal.Button
+              color="orange"
+              onClick={() => {
+                setApply(false);
+                setModal(false);
+              }}
+            >
+              취소하기
+            </Modal.Button>
+          </Modal>
+        ))}
     </DefaultLayout>
   );
 };
 
 const ButtonWrapper = styled.div`
   float: right;
+`;
+
+const EmptyBox = styled.div`
+  padding: 10px;
 `;

@@ -20,6 +20,7 @@ export const MyPostPage = () => {
       <ActivityBox {...activityData} />
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
+          color="orange"
           onClick={() => console.log("참여관리 페이지로 이동")}
         >
           끌어올리기
