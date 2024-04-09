@@ -20,9 +20,6 @@ export const Chat = () => {
   return (
     <Wrapper>
       <AppBar id="AppBar" isFixed={true}>
-        <AppBar.AppBarNavigate style={{ padding: "20px 20px 8px 21px" }}>
-          <AppBar.BackButton />
-        </AppBar.AppBarNavigate>
         <PageText>채팅</PageText>
       </AppBar>
       <div style={{ height: `${appBarHeight}px` }}></div>
@@ -42,6 +39,6 @@ const PageText = styled.div`
   color: black;
   font-size: 32px;
   width: 100%;
-  padding: 10px 7.95%;
+  padding: 25px 7.95% 10px;
   border-bottom: 1px solid #d9d9d9;
 `;

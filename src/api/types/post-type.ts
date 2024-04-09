@@ -9,7 +9,9 @@ export type RequestPostingProps = {
   maxNumOfPeople: number;
 };
 
-export type ResponsePostingProps = FinalResponse<{
+export type ResponsePostingProps = FinalResponse<PostType>;
+
+export type PostType = {
   postId: number;
   title: string;
   content: string;
@@ -22,4 +24,6 @@ export type ResponsePostingProps = FinalResponse<{
   currentApplicant: number;
   maxNumOfPeople: number;
   dealId: number;
-}>;
+};
+
+export type ResponsePostListProps = FinalResponse<PostType[]>;
