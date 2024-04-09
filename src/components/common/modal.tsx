@@ -78,6 +78,8 @@ const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-size: 25px;
+  font-weight: 500;
   word-wrap: break-word;
 `;
 
@@ -114,7 +116,9 @@ const Content = styled.div`
   background-color: #f5f5f5;
   border-radius: 35px;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
-  font-size: 25px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 120%;
   flex-direction: column;
   text-align: center;
   gap: 30px;
