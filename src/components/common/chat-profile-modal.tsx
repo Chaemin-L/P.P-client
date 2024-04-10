@@ -1,13 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { ChatProfileModalType } from "./type";
+import { ProfileModalType } from "./type";
 
 import { Modal } from "@/components/common/modal";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { colorTheme } from "@/style/color-theme";
 
-export const ChatProfileModal = ({ userId, onClose }: ChatProfileModalType) => {
+export const ChatProfileModal = ({ userId, onClose }: ProfileModalType) => {
   const { data } = useGetProfile(userId);
 
   const [checkReport, setCheckReport] = useState(false);

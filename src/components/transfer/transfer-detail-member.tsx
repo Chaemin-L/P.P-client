@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { TransferDetailMemberItem } from "./transfer-detail-member-item";
-import { TransferProps } from "./type";
+import { TransferDetailProps } from "./type";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { Button } from "@/components/common/button";
@@ -10,7 +10,7 @@ import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
-export const TransferDetailMember = ({ setScreen }: TransferProps) => {
+export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
   const [transfer, setTransfer] = useRecoilState(transferState);
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
 

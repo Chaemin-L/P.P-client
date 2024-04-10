@@ -14,7 +14,7 @@ export const ChatList = ({ chatList }: { chatList: ChatRoomItemType[] }) => {
 };
 
 const ScrollContainer = styled.div`
-  overflow: auto;
+  overflow: scroll;
   display: flex;
   width: 100%;
   align-items: center;

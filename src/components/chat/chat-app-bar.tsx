@@ -4,6 +4,8 @@ import { styled } from "styled-components";
 
 import { ChatAppBarType } from "./type";
 
+import reportIconBlack from "@/assets/icons/report-icon-black.png";
+import reportIconWhite from "@/assets/icons/report-icon-white.png";
 import { AppBar } from "@/components/common/app-bar";
 import { Button } from "@/components/common/button";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
@@ -32,12 +34,21 @@ export const ChatAppBar = ({
       <AppBar.AppBarNavigate style={{ padding: "4% 21px" }}>
         <AppBar.BackButton isColorMode={isColorMode} />
         <AppBar.HeaderText>{name}</AppBar.HeaderText>
-        <AppBar.HamburgerButton
-          isColorMode={isColorMode}
-          onClick={() => {
-            onClickReport();
-          }}
-        />
+        {isColorMode ? (
+          <AppBar.RightButton
+            imgSrc={reportIconWhite}
+            onClick={() => {
+              onClickReport();
+            }}
+          />
+        ) : (
+          <AppBar.RightButton
+            imgSrc={reportIconBlack}
+            onClick={() => {
+              onClickReport();
+            }}
+          />
+        )}
       </AppBar.AppBarNavigate>
       {isColorMode ? (
         <BeforeTransfer onClickTransfer={onClickTransfer} />

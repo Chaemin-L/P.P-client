@@ -7,52 +7,34 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { colorTheme } from "@/style/color-theme";
 
-export const TransferDetail = ({ setScreen }: TransferDetailProps) => {
+export const TransferOnePersonDetail = ({ setScreen }: TransferDetailProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
 
   return (
     <Wrapper>
       <CheckMsg>
-        {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분께
+        {lastTransfer.users[0].name}님께
         <br />
-        일괄 송금할까요?
+        매듭을 송금할까요?
       </CheckMsg>
-      <div style={{ color: colorTheme.orange400 }}>
-        지금 내 잔액은 {lastTransfer.availableBudget}입니다
-      </div>
-      <TransferExplainBox>
-        <TransferExplainRowBox>
-          <div style={{ width: "34%" }}>인당</div>
-          <NumberText>{lastTransfer.price}</NumberText>
-          <div style={{ width: "22%", textAlign: "right" }}>매듭</div>
-        </TransferExplainRowBox>
-        <TransferExplainRowBox>
-          <div style={{ width: "34%" }}>활동인원</div>
-          <NumberText>{lastTransfer.member}</NumberText>
-          <div style={{ width: "22%", textAlign: "right" }}>인원</div>
-        </TransferExplainRowBox>
-      </TransferExplainBox>
-      <TransferExplainRowBox style={{ width: "57.7%", marginBottom: "5%" }}>
-        <div style={{ width: "22%" }}>합계</div>
+      <TransferExplainRowBox style={{ width: "57.7%" }}>
+        <div style={{ width: "22%" }} />
         <NumberBigText>
           {lastTransfer.member * lastTransfer.price}
         </NumberBigText>
         <div style={{ width: "22%", textAlign: "right" }}>매듭</div>
       </TransferExplainRowBox>
       <div style={{ color: colorTheme.orange400 }}>
-        송금 후 내 잔액은{" "}
-        {lastTransfer.availableBudget -
-          lastTransfer.member * lastTransfer.price}
-        매듭 입니다
+        지금 내 잔액은 {lastTransfer.availableBudget}매듭 입니다
       </div>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
           style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
-            setScreen("transfer-detail-member");
+            setScreen("transfer-detail-price");
           }}
         >
-          수정하기
+          매듭 변경하기
         </BottomFixed.Button>
         <BottomFixed.Button
           style={{ backgroundColor: colorTheme.blue900 }}
@@ -87,15 +69,7 @@ const Wrapper = styled.div`
 const CheckMsg = styled.div`
   font-size: 25px;
   margin: 5% 0;
-`;
-
-const TransferExplainBox = styled.div`
-  width: 63.1%;
-  padding: 8% 2.7%;
-  gap: 4px;
-  border-top: 1px solid #d9d9d9;
-  border-bottom: 1px solid #d9d9d9;
-  margin: 5% 0;
+  text-align: center;
 `;
 
 const TransferExplainRowBox = styled.div`
@@ -103,15 +77,7 @@ const TransferExplainRowBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  margin-bottom: 3%;
-`;
-
-const NumberText = styled.div`
-  font-size: 30px;
-  font-weight: bold;
-  width: 44%;
-  text-align: right;
-  color: ${colorTheme.orange400};
+  margin: 10% 0;
 `;
 
 const NumberBigText = styled.div`

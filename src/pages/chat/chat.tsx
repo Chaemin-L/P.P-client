@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
+  overflow: auto;
 `;
 
 const PageText = styled.div`

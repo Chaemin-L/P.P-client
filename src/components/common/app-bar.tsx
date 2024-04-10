@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import { AppBarProps, HamburgerProps } from "./type";
+import { AppBarProps, HamburgerProps, RightButtonProps } from "./type";
 
 import backImgWhite from "@/assets/images/back-img-white.png";
 import backImg from "@/assets/images/back-img.png";
@@ -72,6 +72,14 @@ const HamburgerButton = ({ isColorMode = false, ...props }: HamburgerProps) => {
   );
 };
 
+const RightButton = ({ imgSrc, ...props }: RightButtonProps) => {
+  return (
+    <StyledButton {...props}>
+      <HamburgerButtonImg src={imgSrc} />
+    </StyledButton>
+  );
+};
+
 const AppBarFixedWrapper = styled.div`
   width: 100%;
   position: fixed;
@@ -122,3 +130,4 @@ AppBar.AppBarNavigate = AppBarNavigate;
 AppBar.BackButton = BackButton;
 AppBar.HeaderText = HeaderText;
 AppBar.HamburgerButton = HamburgerButton;
+AppBar.RightButton = RightButton;

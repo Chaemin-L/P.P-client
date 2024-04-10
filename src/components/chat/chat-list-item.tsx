@@ -9,7 +9,7 @@ export const ChatListItem = (props: ChatRoomItemType) => {
   const navigate = useNavigate();
 
   const HandlerEnterRoom = () => {
-    navigate(`/chat/${props.roomIdx}`);
+    navigate(`/chat/${props.roomIdx}`, { state: { memberCount: 1 } });
   };
   return (
     <ItemContainer onClick={HandlerEnterRoom}>

@@ -2,14 +2,17 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import { TransferProps } from "./type";
+import { TransferDetailProps } from "./type";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { colorTheme } from "@/style/color-theme";
 
-export const TransferDetailPrice = ({ setScreen }: TransferProps) => {
+export const TransferDetailPrice = ({
+  setScreen,
+  memberCount,
+}: TransferDetailProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
   const [price, setPrice] = useState(lastTransfer.price);
 
@@ -26,7 +29,9 @@ export const TransferDetailPrice = ({ setScreen }: TransferProps) => {
   return (
     <Wrapper>
       <CheckMsg>
-        {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분께
+        {lastTransfer.member == 1
+          ? `${lastTransfer.users[0].name}님 외 ${lastTransfer.member - 1}분께`
+          : `${lastTransfer.users[0].name}님께`}
         <br />
         얼마의 햇살을 송금할까요?
       </CheckMsg>
@@ -37,7 +42,7 @@ export const TransferDetailPrice = ({ setScreen }: TransferProps) => {
         매듭
       </InputBox.InputNum>
       <div style={{ marginTop: "20px" }}>
-        지금 내 잔액은 {lastTransfer.availableBudget}매듭입니다
+        지금 내 잔액은 {lastTransfer.availableBudget}매듭 입니다
       </div>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
@@ -45,7 +50,9 @@ export const TransferDetailPrice = ({ setScreen }: TransferProps) => {
           rounded={true}
           onClick={() => {
             handleSave();
-            setScreen("transfer-detail");
+            memberCount === 1
+              ? setScreen("transfer-detail-one")
+              : setScreen("transfer-detail");
           }}
         >
           다음
