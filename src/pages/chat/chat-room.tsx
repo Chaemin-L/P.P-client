@@ -9,9 +9,9 @@ import { ChatDetailState } from "./type";
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
-import { ChatProfileModal } from "@/components/common/chat-profile-modal";
 import { BottomSheet } from "@/components/common/bottom-sheet";
 import { Modal } from "@/components/common/modal";
+import { ProfileModal } from "@/components/common/profile-modal";
 import { Report } from "@/components/report/report";
 import { Transfer } from "@/components/transfer/transfer";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
@@ -135,7 +135,7 @@ export const ChatRoom = () => {
         </Modal>
       )}
       {profileModal && (
-        <ChatProfileModal
+        <ProfileModal
           userId={profileUserId}
           onClose={() => {
             setProfileModal(false);

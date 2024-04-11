@@ -4,7 +4,7 @@ import { ProfileDataResponse } from "./types/profile-type";
 export default class ProfileApi {
   static async getProfile(userId?: number) {
     const response = userId
-      ? await Instance.get(`/haetsal-service/api/v2/profile/${userId}`)
+      ? await Instance.get(`/haetsal-service/api/v2/profile?id=${userId}`)
       : await Instance.get(`/haetsal-service/api/v2/profile`);
     if (response && response.data) {
       const res = response.data as ProfileDataResponse;
