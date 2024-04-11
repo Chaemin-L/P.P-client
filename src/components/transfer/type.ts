@@ -1,5 +1,6 @@
-export type TransferProps = {
+export type TransferDetailProps = {
   setScreen: React.Dispatch<React.SetStateAction<string>>;
+  memberCount?: number;
 };
 
 export type memberItem = {
@@ -7,3 +8,8 @@ export type memberItem = {
   setIsTrue: () => void;
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+
+export type TransferProps = {
+  onClick: () => void;
+  memberCount: number;
+};

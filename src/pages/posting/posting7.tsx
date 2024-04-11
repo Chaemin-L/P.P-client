@@ -11,7 +11,6 @@ import { PostingInput } from "@/components/posting/posting-input";
 import { usePostPosting } from "@/hooks/queries/usePostPosting";
 import { postingState } from "@/recoil/atoms/posting-state";
 import { FormatDateString } from "@/utils/format-date-string";
-import { colorTheme } from "@/style/color-theme";
 
 export const Posting7 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -36,7 +35,6 @@ export const Posting7 = () => {
       maxNumOfPeople: posting.memberNum,
     };
 
-    console.log("Request:::::", tempProps);
     postPosting.mutate(tempProps);
   };
 
@@ -47,19 +45,18 @@ export const Posting7 = () => {
           handleSave();
           navigate(-1);
         }}
-      >
-        7/7
-      </PostingAppBar>
+        nowPage={7}
+      />
       <PostingBoldText>활동 내용을 적어보세요</PostingBoldText>
       <PostingInput.InputContent
         value={contents}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
           setContents(e.target.value);
         }}
       />
       <BottomFixed>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.orange400 }}
+          color="orange"
           onClick={() => {
             handleSave();
             handlePostPosting();

@@ -53,3 +53,12 @@ export type AppBarProps = {
 export type HamburgerProps = {
   isColorMode?: boolean;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+
+export type RightButtonProps = {
+  imgSrc: string;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+
+export type ProfileModalType = {
+  userId: number;
+  onClose: () => void;
+};

@@ -19,12 +19,14 @@ export const Mypage = () => {
             마이페이지
           </AppBar.HeaderText>
         </AppBar.AppBarNavigate>
-        <MypageToggleSwitch
-          firstText="내게시물"
-          secondText="신청내역"
-          isLeftSelected={isLeftSelected}
-          onChangeSelected={setIsLeftSelected}
-        />
+        <div style={{ width: "100%", backgroundColor: colorTheme.blue100 }}>
+          <MypageToggleSwitch
+            firstText="내게시물"
+            secondText="신청내역"
+            isLeftSelected={isLeftSelected}
+            onChangeSelected={setIsLeftSelected}
+          />
+        </div>
       </AppBar>
       <MypageList type={isLeftSelected ? "postlist" : "apply"} />
     </Wrapper>

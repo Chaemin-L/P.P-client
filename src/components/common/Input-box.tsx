@@ -2,8 +2,9 @@ import { useState, ChangeEvent, PropsWithChildren } from "react";
 import { styled } from "styled-components";
 
 import { InputType } from "./type";
-import { colorTheme } from "@/style/color-theme";
+
 import readingGlass from "@/assets/images/reading-glass.png";
+import { colorTheme } from "@/style/color-theme";
 
 export const InputBox = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
@@ -60,7 +61,7 @@ const InputBoxContainer = styled.div`
 `;
 
 const InputBoxCom = styled.input`
-  font-size: 50px;
+  font-size: 2.78rem;
   font-weight: bold;
   color: white;
   text-align: center;
@@ -68,20 +69,20 @@ const InputBoxCom = styled.input`
   width: 70%;
   height: 79px;
   background-color: ${colorTheme.orange400};
-  border-radius: 11px;
-  padding: 11px;
+  border-radius: 0.61rem;
+  padding: 0.61rem;
 `;
 
 const WonText = styled.span`
   color: black;
-  font-size: 20px;
+  font-size: 1.11rem;
   vertical-align: bottom;
   margin: 0 0 5% 7%;
 `;
 
 const InputMapContainer = styled.div`
   width: 100%;
-  height: 39px;
+  height: 2.17rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -98,11 +99,11 @@ const InputMapBox = styled.input`
   width: 69.12%;
   height: 100%;
   padding: 7.4%;
-  font-size: 13px;
+  font-size: 0.72rem;
   vertical-align: center;
   color: black;
   background-color: ${colorTheme.blue100};
-  border-radius: 11px;
+  border-radius: 0.61rem;
   border: 0;
 `;
 

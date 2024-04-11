@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
-import { colorTheme } from "@/style/color-theme";
 
 export const Posting8 = () => {
+  const location = useLocation();
+  const state = location.state as { postId: number };
   const resetRecoil = useResetRecoilState(postingState);
   const navigate = useNavigate();
 
@@ -34,11 +34,10 @@ export const Posting8 = () => {
       </PostingBoldText>
       <BottomFixed>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.orange400 }}
+          color="orange"
           onClick={() => {
             resetRecoil();
-            const postId = localStorage.getItem("postId");
-            navigate("");
+            navigate(`/post/${state.postId}`);
             // 게시글 상세페이지로 가기
           }}
         >

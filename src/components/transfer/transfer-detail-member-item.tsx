@@ -32,9 +32,9 @@ const Wrapper = styled.div`
 
 const StyledButton = styled.button`
   width: 90%;
-  padding: 7px 20px;
-  font-size: 25px;
-  border-radius: 15px;
+  padding: 0.39rem 1.11rem;
+  font-size: 1.39rem;
+  border-radius: 0.83rem;
   border: none;
   text-align: center;
 `;

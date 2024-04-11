@@ -62,16 +62,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+  height: 100%;
 `;
 
 const BigHeader = styled.div`
   width: 100%;
-  font-size: 32px;
-  padding: 25px 9% 12px;
+  font-size: 1.8rem;
+  padding: 2.9rem 9% 0.7rem;
 `;
 
 const SmallHeader = styled.div`
   width: 100%;
-  font-size: 15px;
-  padding: 0 8.5% 10px;
+  font-size: 0.83rem;
+  padding: 0 8.5% 0.6rem;
 `;

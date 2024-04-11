@@ -47,11 +47,11 @@ const SelectToggleWrapper = styled.div`
 
 const SelectToggleButton = styled(motion.button)`
   text-align: center;
-  font-size: 18px;
+  font-size: 1rem;
   color: #ffffff;
   width: 100%;
-  line-height: 29px;
-  padding: 8px 0;
+  line-height: 1.61rem;
+  padding: 0.44rem 0;
   border: 0;
-  border-radius: 20px;
+  border-radius: 1.11rem;
 `;

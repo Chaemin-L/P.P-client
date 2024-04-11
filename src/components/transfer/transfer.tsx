@@ -4,17 +4,24 @@ import { TransferDetail } from "./transfer-detail";
 import { TransferDetailMember } from "./transfer-detail-member";
 import { TransferDetailPrice } from "./transfer-detail-price";
 import { TransferFinish } from "./transfer-finish";
+import { TransferOnePersonDetail } from "./transfer-one-person-detail";
+import { TransferProps } from "./type";
 
-export const Transfer = ({ onClick }: { onClick: () => void }) => {
-  const [screen, setScreen] = useState("transfer-detail");
+export const Transfer = ({ onClick, memberCount }: TransferProps) => {
+  const [screen, setScreen] = useState(
+    memberCount === 1 ? "transfer-detail-one" : "transfer-detail",
+  );
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {screen === "transfer-detail" && <TransferDetail setScreen={setScreen} />}
+      {screen === "transfer-detail-one" && (
+        <TransferOnePersonDetail setScreen={setScreen} />
+      )}
       {screen === "transfer-detail-member" && (
         <TransferDetailMember setScreen={setScreen} />
       )}
       {screen === "transfer-detail-price" && (
-        <TransferDetailPrice setScreen={setScreen} />
+        <TransferDetailPrice setScreen={setScreen} memberCount={memberCount} />
       )}
       {screen === "transfer-finish" && <TransferFinish onClick={onClick} />}
     </div>
