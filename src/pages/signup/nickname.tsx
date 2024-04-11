@@ -9,11 +9,14 @@ import { Header } from "@/components/signup/header";
 import { Input } from "@/components/signup/input";
 import { profileState } from "@/recoil/atoms/profile-state";
 
-export const NicknamePage = () => {
+type NicknamePageProps = {
+  nextStep: () => void;
+};
+
+export const NicknamePage = ({ nextStep }: NicknamePageProps) => {
   const [nickname, setNickname] = useState<string>("");
 
   const setProfile = useSetRecoilState(profileState);
-  const navigate = useNavigate();
 
   return (
     <ContentLayout>
@@ -31,7 +34,7 @@ export const NicknamePage = () => {
               ...profile,
               nickname,
             }));
-            navigate("/signup/2");
+            nextStep();
           }}
         >
           다음

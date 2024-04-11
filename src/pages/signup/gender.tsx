@@ -8,11 +8,14 @@ import MaleSVG from "@/assets/images/male.svg";
 import { Header } from "@/components/signup/header";
 import { profileState } from "@/recoil/atoms/profile-state";
 
+type GenderPageProps = {
+  nextStep: () => void;
+};
+
 type GenderType = "male" | "female";
 
-export const GenderPage = () => {
+export const GenderPage = ({ nextStep }: GenderPageProps) => {
   const [gender, setGender] = useState<GenderType>();
-  const navigate = useNavigate();
 
   const setProfile = useSetRecoilState(profileState);
 
@@ -22,7 +25,7 @@ export const GenderPage = () => {
         ...profile,
         gender,
       }));
-      navigate("/signup/3");
+      nextStep();
     }
   }, [gender]);
 

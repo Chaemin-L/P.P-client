@@ -47,36 +47,10 @@ const router = createBrowserRouter([
       {
         path: "signup/",
         element: <SignupPage />,
-        children: [
-          {
-            path: "",
-            element: <WelcomePage />,
-          },
-          {
-            path: "1",
-            element: <NicknamePage />,
-          },
-          {
-            path: "2",
-            element: <GenderPage />,
-          },
-          {
-            path: "3",
-            element: <PhotoDescriptionPage />,
-          },
-          {
-            path: "4",
-            element: <TakePhotoPage />,
-          },
-          {
-            path: "5",
-            element: <BirthdayPage />,
-          },
-          {
-            path: "6",
-            element: <DonePage />,
-          },
-        ],
+      },
+      {
+        path: "signup/done/",
+        element: <DonePage />,
       },
       {
         path: "/post/:id",

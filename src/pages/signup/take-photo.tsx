@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -8,19 +7,22 @@ import { Modal } from "@/components/common/modal";
 import Camera from "@/components/signup/camera";
 import { profileState } from "@/recoil/atoms/profile-state";
 
-export const TakePhotoPage = () => {
+type TakePhotoPageProps = {
+  nextStep: () => void;
+};
+
+export const TakePhotoPage = ({ nextStep }: TakePhotoPageProps) => {
   const [dataUri, setDataUri] = useState("");
   const [warningModal, setWarningModal] = useState(false);
 
   const setProfile = useSetRecoilState(profileState);
-  const navigate = useNavigate();
 
-  const nextStep = () => {
+  const nextPage = () => {
     setProfile((profile) => ({
       ...profile,
       file: dataUri,
     }));
-    navigate("/signup/5");
+    nextStep();
   };
 
   return (
@@ -30,7 +32,7 @@ export const TakePhotoPage = () => {
           <Button onClick={() => setDataUri("")}>다시찍기</Button>
           <Button
             onClick={() =>
-              dataUri.length ? nextStep() : setWarningModal(true)
+              dataUri.length ? nextPage() : setWarningModal(true)
             }
           >
             완료

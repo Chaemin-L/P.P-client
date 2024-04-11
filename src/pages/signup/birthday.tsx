@@ -22,7 +22,7 @@ export const BirthdayPage = () => {
     }));
     console.log(profile);
 
-    navigate("/signup/6");
+    navigate("/signup/done");
   };
 
   return (
@@ -38,7 +38,7 @@ export const BirthdayPage = () => {
       <BottomFixed>
         <BottomFixed.Button
           color="orange"
-          onClick={() => (birthday ? nextStep() : navigate("/signup/6"))}
+          onClick={() => birthday && nextStep()}
         >
           완성하기
         </BottomFixed.Button>
