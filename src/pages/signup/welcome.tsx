@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { styled } from "styled-components";
 
 import WelcomeSVG from "@/assets/images/welcome.svg";

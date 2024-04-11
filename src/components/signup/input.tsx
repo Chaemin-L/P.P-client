@@ -8,8 +8,7 @@ export const Input = forwardRef(function input(props: InputProps, _) {
 });
 
 const InputWrapper = styled.input`
-  max-width: 70%;
-  margin: 0 100px;
+  width: 100%;
   padding: 12px 50px;
   background-color: #e4e8f1;
   border: 0;

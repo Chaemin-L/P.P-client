@@ -3,17 +3,16 @@ import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { Button } from "@/components/common/button";
-import { Modal } from "@/components/common/modal";
 import Camera from "@/components/signup/camera";
 import { profileState } from "@/recoil/atoms/profile-state";
 
 type TakePhotoPageProps = {
   nextStep: () => void;
+  onModal: () => void;
 };
 
-export const TakePhotoPage = ({ nextStep }: TakePhotoPageProps) => {
+export const TakePhotoPage = ({ nextStep, onModal }: TakePhotoPageProps) => {
   const [dataUri, setDataUri] = useState("");
-  const [warningModal, setWarningModal] = useState(false);
 
   const setProfile = useSetRecoilState(profileState);
 
@@ -30,11 +29,7 @@ export const TakePhotoPage = ({ nextStep }: TakePhotoPageProps) => {
       <ContentLayout>
         <ButtonContainer>
           <Button onClick={() => setDataUri("")}>다시찍기</Button>
-          <Button
-            onClick={() =>
-              dataUri.length ? nextPage() : setWarningModal(true)
-            }
-          >
+          <Button onClick={() => (dataUri.length ? nextPage() : onModal())}>
             완료
           </Button>
         </ButtonContainer>
@@ -52,11 +47,6 @@ export const TakePhotoPage = ({ nextStep }: TakePhotoPageProps) => {
           )}
         </div>
       </ContentLayout>
-      {warningModal && (
-        <Modal onClose={() => setWarningModal(false)}>
-          <Modal.Title text="본인 사진 촬영은\n필수입니다." />
-        </Modal>
-      )}
     </>
   );
 };
