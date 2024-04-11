@@ -112,23 +112,23 @@ const ModalHeader = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
-  margin-bottom: 20px;
+  font-size: 1.39rem;
+  margin-bottom: 1.11rem;
 `;
 
 const ModalHeaderLine = styled.div`
-  height: 20px;
-  width: 2px;
+  height: 1.11rem;
+  width: 0.11rem;
   border-radius: 1px;
   background-color: ${colorTheme.blue300};
-  margin: 0 6px;
+  margin: 0 0.33rem;
 `;
 
 const ImgContainer = styled.div`
   width: 70%;
   padding-top: 70%;
   position: relative;
-  border-radius: 21px;
+  border-radius: 1.17rem;
   background-color: ${colorTheme.blue300};
 `;
 
@@ -138,12 +138,12 @@ const Img = styled.img`
   top: 5%;
   left: 5%;
   position: absolute;
-  border-radius: 21px;
+  border-radius: 1.17rem;
 `;
 
 const AddressSpan = styled.span`
   width: 100%;
   text-align: center;
-  font-size: 18px;
-  padding: 20px 0;
+  font-size: 1rem;
+  padding: 1.11rem 0;
 `;

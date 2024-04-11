@@ -96,15 +96,15 @@ const AppBarWrapper = styled.div`
 
 const NavigateWrapper = styled.div`
   width: 100%;
-  padding: 27px 21px 18px 21px;
+  padding: 1.5rem 1.17rem 1rem 1.17rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
 const StyledButton = styled.button`
-  width: 30px;
-  height: 32px;
+  width: 1.67rem;
+  height: 1.78rem;
   align-items: center;
   justify-content: center;
   border: 0;
@@ -117,13 +117,13 @@ const AppBarText = styled.span`
 `;
 
 const BackButtonImg = styled.img`
-  width: 10px;
-  height: 10px;
+  width: 0.56rem;
+  height: 0.56rem;
 `;
 
 const HamburgerButtonImg = styled.img`
-  width: 14px;
-  height: 16px;
+  width: 0.78rem;
+  height: 0.89rem;
 `;
 
 AppBar.AppBarNavigate = AppBarNavigate;

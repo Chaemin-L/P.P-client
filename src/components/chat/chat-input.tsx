@@ -1,18 +1,8 @@
-import { useEffect, useRef } from "react";
 import { styled } from "styled-components";
 
 import { InputType } from "./type";
 
 export const ChatInput = ({ value, onChange, onFocus }: InputType) => {
-  // const inputRef = useRef<HTMLInputElement>(null);
-
-  // useEffect(() => {
-  //   if (inputRef.current) {
-  //     const height = inputRef.current.offsetHeight;
-  //     setHeight(height);
-  //   }
-  // }, [setHeight]);
-
   return (
     <Container>
       <ChatButton></ChatButton>
@@ -44,6 +34,7 @@ const InputContainer = styled.input`
   width: calc(100% - 120px);
   padding: 10px;
   font-size: 22px;
+  border: none;
 `;
 
 const ChatButton = styled.button`

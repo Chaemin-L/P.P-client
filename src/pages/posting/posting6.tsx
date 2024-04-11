@@ -8,7 +8,6 @@ import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { PostingInput } from "@/components/posting/posting-input";
 import { postingState } from "@/recoil/atoms/posting-state";
-import { colorTheme } from "@/style/color-theme";
 
 export const Posting6 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -24,13 +23,7 @@ export const Posting6 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar
-        onClick={() => {
-          handleSave();
-        }}
-      >
-        6/7
-      </PostingAppBar>
+      <PostingAppBar onClick={() => handleSave()} nowPage={6} />
       <PostingBoldText>활동 제목을 적어보세요</PostingBoldText>
       <PostingInput.InputTitle
         value={title}
@@ -40,7 +33,7 @@ export const Posting6 = () => {
       />
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -49,7 +42,7 @@ export const Posting6 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate("/posting/7");

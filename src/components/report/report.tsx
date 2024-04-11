@@ -65,11 +65,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: black;
-  font-size: 20px;
+  font-size: 1.11rem;
   padding: 0 9.7%;
 `;
 
 const CheckMsg = styled.div`
-  font-size: 25px;
+  font-size: 1.39rem;
   margin: 10% 0;
 `;

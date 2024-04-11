@@ -63,11 +63,11 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
       </div>
       <Button
         style={{
-          fontSize: "25px",
-          padding: "10px 20px",
+          fontSize: "1.39rem",
+          padding: "0.56rem 1.11rem",
           borderRadius: "30px",
           border: "1px solid black",
-          margin: "10px",
+          margin: "0.56rem",
         }}
         onClick={handleAllSelect}
       >
@@ -111,23 +111,23 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: black;
-  font-size: 20px;
+  font-size: 1.11rem;
 `;
 
 const CheckMsg = styled.div`
-  font-size: 25px;
+  font-size: 1.39rem;
   margin: 5% 0;
 `;
 
 const MemberScroll = styled.div`
   height: 45.3%;
   width: 100%;
-  box-shadow: inset 0px 1px 11px 1px #555555;
+  box-shadow: inset 0px 1px 0.61rem 1px #555555;
   overflow: scroll;
   display: grid;
   width: 100%;
   gap: 10%;
-  padding: 10px 10%;
+  padding: 0.56rem 10%;
   justify-content: space-between;
   grid-template-columns: repeat(2, 1fr);
 `;

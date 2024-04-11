@@ -160,5 +160,5 @@ const ChatList = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 70px;
+  padding-bottom: 3.89rem;
 `;

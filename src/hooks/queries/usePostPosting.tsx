@@ -9,8 +9,7 @@ export const usePostPosting = () => {
   return useMutation({
     mutationFn: (data: RequestPostingProps) => PostApi.postPosting(data),
     onSuccess: (response) => {
-      localStorage.setItem("postId", response.data.postId.toString());
-      navigate("/posting/8");
+      navigate("/posting/8", { state: { postId: response.data.postId } });
     },
   });
 };

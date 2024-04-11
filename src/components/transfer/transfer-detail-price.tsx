@@ -69,13 +69,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: black;
-  font-size: 20px;
+  font-size: 1.11rem;
 `;
 
 const CheckMsg = styled.div`
-  font-size: 25px;
+  font-size: 1.39rem;
   margin: 5% 0;
   text-align: center;
-  line-height: 30px;
+  line-height: 1.67rem;
   color: ${colorTheme.orange400};
 `;

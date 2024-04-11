@@ -38,7 +38,7 @@ export const ChatListItem = (props: ChatRoomItemType) => {
 
 const ItemContainer = styled.div`
   width: 100%;
-  padding: 20px 7.95% 20px 6.92%;
+  padding: 1.11rem 7.95% 1.11rem 6.92%;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #d9d9d9;
@@ -53,60 +53,62 @@ const RowDiv = styled.div`
 `;
 
 const StateDiv = styled.div`
-  height: 54px;
-  width: 60px;
+  height: 3rem;
+  width: 3.56rem;
   background-color: ${colorTheme.orange400};
   color: #ffffff;
   text-align: center;
-  font-size: 13px;
-  border-radius: 22px;
-  line-height: 54px;
+  font-size: 0.72rem;
+  border-radius: 1.22rem;
+  line-height: 3rem;
 `;
 
 const StateFinishDiv = styled.div`
-  height: 54px;
-  width: 60px;
+  height: 3rem;
+  width: 3.56rem;
   background-color: #ffffff;
   color: ${colorTheme.orange400};
   text-align: center;
-  font-size: 13px;
-  border-radius: 9px;
+  font-size: 0.72rem;
+  border-radius: 0.5rem;
   border: 1px solid ${colorTheme.orange400};
-  line-height: 54px;
+  line-height: 3rem;
 `;
 
 const LeftColumnDiv = styled.div`
   display: flex;
+  height: 2.7rem;
   flex-direction: column;
   justify-content: flex-start;
   padding: 0 0 0 4.61%;
-  gap: 6px;
+  gap: 0.33rem;
 `;
 
 const TitleText = styled.span`
-  font-size: 18px;
+  font-size: 1rem;
+  font-weight: bold;
 `;
 
 const NewMsgNum = styled.span`
-  font-size: 10px;
+  font-size: 0.56rem;
   text-align: center;
-  padding: 3px;
+  padding: 0.17rem;
   width: 100%;
-  border-radius: 9px;
+  border-radius: 0.5rem;
   background-color: ${colorTheme.orange400};
   color: #ffffff;
 `;
 
 const ItemText = styled.span`
-  font-size: 10px;
+  font-size: 0.56rem;
 `;
 
 const RightColumnDiv = styled.div`
   display: flex;
+  height: 2.7rem;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: flex-end;
   padding: 0 0 0 4.61%;
-  gap: 6px;
+  gap: 0.33rem;
   width: 20%;
 `;

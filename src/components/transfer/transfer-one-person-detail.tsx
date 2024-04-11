@@ -63,11 +63,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: black;
-  font-size: 20px;
+  font-size: 1.11rem;
 `;
 
 const CheckMsg = styled.div`
-  font-size: 25px;
+  font-size: 1.67rem;
   margin: 5% 0;
   text-align: center;
 `;
@@ -81,7 +81,7 @@ const TransferExplainRowBox = styled.div`
 `;
 
 const NumberBigText = styled.div`
-  font-size: 40px;
+  font-size: 2.22rem;
   font-weight: bold;
   width: 56%;
   text-align: right;

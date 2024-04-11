@@ -14,7 +14,9 @@ export const PostPostingButton = () => {
           navigate("/posting/1");
         }}
       >
-        <PlusImg src={plusImg} />
+        <PlusImgBox>
+          <PlusImg src={plusImg} />
+        </PlusImgBox>
         <ButtonSpan>게시글 만들기</ButtonSpan>
       </PostingButton>
     </Wrapper>
@@ -23,7 +25,7 @@ export const PostPostingButton = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 9px 5.12% 14px;
+  padding: 0.5rem 5.12% 0.8rem;
 `;
 
 const PostingButton = styled.button`
@@ -33,17 +35,26 @@ const PostingButton = styled.button`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 23px 12.8%;
-  background-color: ${colorTheme.blue900};
-  border-radius: 30px;
+  padding: 1.3rem 2.4rem;
+  background-color: ${colorTheme.blue700};
+  border-radius: 1.8rem;
+`;
+
+const PlusImgBox = styled.div`
+  width: 10.3%;
+  padding-top: 10.3%;
+  position: relative;
 `;
 
 const PlusImg = styled.img`
-  width: 36px;
-  height: 36px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const ButtonSpan = styled.span`
-  font-size: 32px;
+  font-size: 1.8rem;
   color: white;
 `;

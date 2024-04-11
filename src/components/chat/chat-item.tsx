@@ -63,11 +63,11 @@ const Container = styled.div`
 `;
 
 const ProfileContainer = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 2.22rem;
+  height: 2.22rem;
   margin-left: 7.15%;
   margin-right: 4%;
-  border-radius: 15px;
+  border-radius: 0.83rem;
   background-color: #d9d9d9;
 `;
 
@@ -82,12 +82,12 @@ const ChatBox = styled.div`
   width: auto;
   padding: 3.6% 4.7%;
   margin-right: 6%;
-  border-radius: 5px;
+  border-radius: 0.28rem;
 `;
 
 const ChatText = styled.div`
   color: black;
-  font-size: 15px;
+  font-size: 0.83rem;
   word-break: break-all;
 `;
 

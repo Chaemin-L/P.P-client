@@ -8,7 +8,6 @@ import { InputBox } from "@/components/common/Input-box";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
-import { colorTheme } from "@/style/color-theme";
 
 export const Posting1 = () => {
   const resetRecoil = useResetRecoilState(postingState);
@@ -25,7 +24,7 @@ export const Posting1 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => resetRecoil()}>1/7</PostingAppBar>
+      <PostingAppBar onClick={() => resetRecoil()} nowPage={1} />
       <PostingBoldText>위치를 입력해 주세요</PostingBoldText>
       <InputBox.InputMap
         value={location}
@@ -35,7 +34,7 @@ export const Posting1 = () => {
       />
       <BottomFixed>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate("/posting/2");

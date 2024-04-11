@@ -23,13 +23,13 @@ export const ReportButton = ({
 };
 
 const StyledButton = styled.button`
-  margin: 12px 0;
+  margin: 0.67rem 0;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 0.56rem;
   border: none;
   background-color: ${colorTheme.orange200};
   color: #ffffff;
   text-align: center;
-  padding: 18px 0;
-  font-size: 18px;
+  padding: 1rem 0;
+  font-size: 1rem;
 `;

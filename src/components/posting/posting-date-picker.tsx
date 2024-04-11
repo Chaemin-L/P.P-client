@@ -95,7 +95,7 @@ const Picker = styled.div`
         flex-direction: column;
         justify-content: space-between;
         padding: 2.8%;
-        font-size: 16px;
+        font-size: 0.89rem;
         .react-datepicker__week {
           display: flex;
           justify-content: space-between;
@@ -110,7 +110,7 @@ const Picker = styled.div`
       flex-direction: column;
       justify-content: space-between;
       border: none;
-      font-size: 18px;
+      font-size: 1rem;
     }
     .react-datepicker__day-names {
       margin: 3% 0 0 0;
@@ -119,18 +119,18 @@ const Picker = styled.div`
       padding: 0 3.5%;
     }
     .react-datepicker__day-name {
-      width: 32px;
+      width: 1.78rem;
     }
     .react-datepicker__day--selected {
       background-color: #d9d9d9;
-      font-size: 18px;
+      font-size: 1rem;
       color: #000000;
     }
     .react-datepicker__day {
-      width: 32px;
-      height: 24px;
-      line-height: 24px;
-      border-radius: 20px;
+      width: 1.78rem;
+      height: 1.33rem;
+      line-height: 1.33rem;
+      border-radius: 1.11rem;
     }
     .react-datepicker__day--keyboard-selected {
       background-color: transparent;
@@ -152,21 +152,21 @@ const HeaderButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 6px;
+  gap: 0.33rem;
 `;
 
 const ArrowImg = styled.img`
-  width: 12px;
-  height: 25px;
+  width: 0.67rem;
+  height: 1.39rem;
 `;
 
 const HeaderButtonText = styled.span`
-  font-size: 20px;
+  font-size: 1.11rem;
   color: #a1a1a1;
 `;
 
 const HeaderNowMonth = styled.span`
-  font-size: 25px;
+  font-size: 1.39rem;
   color: #000000;
-  padding-bottom: 5px;
+  padding-bottom: 0.28rem;
 `;

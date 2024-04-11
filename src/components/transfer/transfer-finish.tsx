@@ -29,7 +29,7 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
         <br />
         송금하였습니다!
       </TransferExplainBox>
-      ):
+      :
       <div>
         송금 후 내 잔액은{" "}
         {lastTransfer.availableBudget -
@@ -61,11 +61,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: ${colorTheme.orange400};
-  font-size: 20px;
+  font-size: 1.11rem;
 `;
 
 const CheckMsg = styled.div`
-  font-size: 25px;
+  font-size: 1.39rem;
   margin: 5% 0;
 `;
 
@@ -74,7 +74,7 @@ const TransferExplainBox = styled.div`
   padding: 8% 2.7%;
   margin: 5% 0 20%;
   color: ${colorTheme.orange400};
-  font-size: 30px;
+  font-size: 1.67rem;
   text-align: center;
   font-weight: bold;
   line-height: 150%;

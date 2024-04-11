@@ -24,7 +24,7 @@ export const Posting4 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => handleSave()}>4/7</PostingAppBar>
+      <PostingAppBar onClick={() => handleSave()} nowPage={4} />
       <PostingBoldText>
         활동의 소요시간을
         <br />
@@ -44,9 +44,12 @@ export const Posting4 = () => {
         <br />
         소요됩니다
       </BalanceText>
+      <BalanceText style={{ color: colorTheme.orange400 }}>
+        인당 {price} 매듭 소요
+      </BalanceText>
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -55,7 +58,7 @@ export const Posting4 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate("/posting/5");
@@ -76,14 +79,14 @@ const PageContainer = styled.div`
 `;
 
 const BalanceText = styled.span`
-  color: #a1a1a1;
+  color: black;
   font-size: 18px;
-  margin: 25% 0px 0px 0px;
+  margin: 15% 0px 0px 0px;
   text-align: center;
 `;
 
 const TimeText = styled.span`
   color: ${colorTheme.orange400};
-  font-size: 24px;
+  font-size: 1.33rem;
   margin-bottom: 8%;
 `;

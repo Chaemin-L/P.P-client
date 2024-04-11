@@ -1,6 +1,8 @@
 import { PropsWithChildren, useRef } from "react";
 import { styled } from "styled-components";
 
+import { TextAreaType } from "./type";
+
 import { InputType } from "@/components/common/type";
 import { colorTheme } from "@/style/color-theme";
 
@@ -19,8 +21,8 @@ const InputTitle = (props: InputType) => {
   );
 };
 
-const InputContent = (props: InputType) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+const InputContent = (props: TextAreaType) => {
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleClick = () => {
     if (inputRef.current) {
@@ -32,12 +34,7 @@ const InputContent = (props: InputType) => {
     <InputWrapper>
       <InputContainer>
         <InputContentBoxContainer onClick={handleClick}>
-          <InputContentBox
-            ref={inputRef}
-            maxLength={100}
-            type="text"
-            {...props}
-          />
+          <InputContentBox ref={inputRef} maxLength={99} {...props} />
         </InputContentBoxContainer>
         <InputLeft>{props.value?.toString().length}/100자</InputLeft>
       </InputContainer>
@@ -54,15 +51,15 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 19px 21px;
+  padding: 1.06rem 1.17rem;
   background-color: ${colorTheme.blue300};
-  border-radius: 11px;
+  border-radius: 0.61rem;
   color: black;
   align-items: flex-start;
 `;
 
 const InputTitleBox = styled.input`
-  font-size: 25px;
+  font-size: 1.39rem;
   font-weight: bold;
   width: 100%;
   background-color: transparent;
@@ -70,10 +67,10 @@ const InputTitleBox = styled.input`
 `;
 
 const InputLeft = styled.span`
-  font-size: 15px;
+  font-size: 0.83rem;
   width: 100%;
   border: 0;
-  padding-top: 10px;
+  padding-top: 0.56rem;
   text-align: end;
 `;
 
@@ -81,12 +78,13 @@ const InputContentBoxContainer = styled.div`
   width: 100%;
   background-color: transparent;
   border: 0;
-  height: 206px;
+  height: 11.45rem;
 `;
 
-const InputContentBox = styled.input`
+const InputContentBox = styled.textarea`
   width: 100%;
-  font-size: 18px;
+  height: 100%;
+  font-size: 1rem;
   background-color: transparent;
   resize: vertical;
   border: 0;

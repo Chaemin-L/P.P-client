@@ -38,8 +38,9 @@ const Wrapper = styled.div`
 
 const PageText = styled.div`
   color: black;
-  font-size: 32px;
+  font-size: 1.78rem;
   width: 100%;
-  padding: 25px 7.95% 10px;
+  padding: 1.39rem 7.95% 0.56rem;
   border-bottom: 1px solid #d9d9d9;
+  font-weight: 500;
 `;

@@ -63,7 +63,7 @@ const ColumnBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 0.61rem;
   background-color: white;
 `;
 
@@ -72,17 +72,17 @@ const RowBox = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8.3%;
-  padding: 0 33px;
+  padding: 0 1.83rem;
 `;
 
 const AfterTransferDiv = styled.div`
   width: 100%;
-  font-size: 30px;
-  padding: 10px;
+  font-size: 1.67rem;
+  padding: 0.56rem;
   background: ${colorTheme.blue100};
   color: white;
   text-align: center;
-  line-height: 50px;
+  line-height: 2.78rem;
 `;
 
 type BeforeTransferProps = {
@@ -97,7 +97,10 @@ const AfterTransfer = () => {
           color="blue"
           style={{
             width: "100%",
-            padding: "15px",
+            padding: "0.83rem",
+            borderRadius: "1.11rem",
+            color: colorTheme.blue900,
+            fontWeight: "500",
           }}
         >
           거래내역
@@ -106,7 +109,10 @@ const AfterTransfer = () => {
           color="blue"
           style={{
             width: "100%",
-            padding: "15px",
+            padding: "0.83rem",
+            borderRadius: "1.11rem",
+            color: colorTheme.blue900,
+            fontWeight: "500",
           }}
         >
           게시물 보기
@@ -120,14 +126,20 @@ const AfterTransfer = () => {
 const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
   return (
     <ColumnBox
-      style={{ backgroundColor: colorTheme.blue900, paddingBottom: "13px" }}
+      style={{
+        backgroundColor: colorTheme.blue900,
+        paddingBottom: "13px",
+      }}
     >
       <RowBox>
         <Button
           color="white"
           style={{
             width: "100%",
-            padding: "15px",
+            padding: "0.84rem",
+            borderRadius: "1.11rem",
+            color: colorTheme.blue900,
+            fontWeight: "500",
           }}
         >
           거래파기
@@ -136,21 +148,26 @@ const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
           color="white"
           style={{
             width: "100%",
-            padding: "15px",
+            padding: "0.84rem",
+            borderRadius: "1.11rem",
+            color: colorTheme.blue900,
+            fontWeight: "500",
           }}
         >
           게시물 보기
         </Button>
       </RowBox>
-      <div style={{ padding: "0 33px" }}>
+      <div style={{ padding: "0 1.833rem" }}>
         <Button
           color="white"
           style={{
             width: "100%",
-            fontSize: "24px",
-            padding: "10px",
-            borderRadius: "30px",
+            fontSize: "1.33rem",
+            padding: "0.56rem",
+            borderRadius: "1.11rem",
             marginTop: "0",
+            color: colorTheme.blue900,
+            fontWeight: "500",
           }}
           onClick={onClickTransfer}
         >

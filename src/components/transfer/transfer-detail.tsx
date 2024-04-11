@@ -81,18 +81,18 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: black;
-  font-size: 20px;
+  font-size: 1.11rem;
 `;
 
 const CheckMsg = styled.div`
-  font-size: 25px;
+  font-size: 1.39rem;
   margin: 5% 0;
 `;
 
 const TransferExplainBox = styled.div`
   width: 63.1%;
   padding: 8% 2.7%;
-  gap: 4px;
+  gap: 0.22rem;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
   margin: 5% 0;
@@ -107,7 +107,7 @@ const TransferExplainRowBox = styled.div`
 `;
 
 const NumberText = styled.div`
-  font-size: 30px;
+  font-size: 1.67rem;
   font-weight: bold;
   width: 44%;
   text-align: right;
@@ -115,7 +115,7 @@ const NumberText = styled.div`
 `;
 
 const NumberBigText = styled.div`
-  font-size: 40px;
+  font-size: 2.22rem;
   font-weight: bold;
   width: 56%;
   text-align: right;
