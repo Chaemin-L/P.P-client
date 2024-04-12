@@ -28,7 +28,7 @@ const ProgressDots = ({ activeIdx }: ProgressDotsType) => {
   );
 };
 
-export const SignupPage = () => {
+export const ProfilePage = () => {
   const [step, setStep] = useState<number>(1);
   const [requiredModal, setRequiredModal] = useState<boolean>(false);
   const [requiredElem, setRequiredElem] = useState<string>("");

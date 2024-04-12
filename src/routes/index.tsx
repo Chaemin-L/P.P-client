@@ -20,14 +20,8 @@ import { Posting5 } from "@/pages/posting/posting5";
 import { Posting6 } from "@/pages/posting/posting6";
 import { Posting7 } from "@/pages/posting/posting7";
 import { Posting8 } from "@/pages/posting/posting8";
-import { SignupPage } from "@/pages/signup";
-import { BirthdayPage } from "@/pages/signup/birthday";
-import { DonePage } from "@/pages/signup/done";
-import { GenderPage } from "@/pages/signup/gender";
-import { NicknamePage } from "@/pages/signup/nickname";
-import { PhotoDescriptionPage } from "@/pages/signup/photo-description";
-import { TakePhotoPage } from "@/pages/signup/take-photo";
-import { WelcomePage } from "@/pages/signup/welcome";
+import { ProfilePage } from "@/pages/profile";
+import { DonePage } from "@/pages/profile/done";
 import { Test } from "@/pages/test";
 import { Test2 } from "@/pages/test2";
 
@@ -45,11 +39,11 @@ const router = createBrowserRouter([
       //   element: <GoogleAuth />,
       // },
       {
-        path: "signup/",
-        element: <SignupPage />,
+        path: "profile/",
+        element: <ProfilePage />,
       },
       {
-        path: "signup/done/",
+        path: "profile/done/",
         element: <DonePage />,
       },
       {
