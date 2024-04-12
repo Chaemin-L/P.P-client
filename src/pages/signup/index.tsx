@@ -50,7 +50,6 @@ export const SignupPage = () => {
         break;
     }
   }, [step]);
-  console.log(requiredElem);
 
   return (
     <DefaultLayout appbar={<ProgressDots activeIdx={step} />}>

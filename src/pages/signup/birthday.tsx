@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
@@ -13,23 +13,33 @@ type BirthdayPageProps = {
 };
 
 export const BirthdayPage = ({ onModal }: BirthdayPageProps) => {
-  const [birthday, setBirthday] = useState<string>("");
+  const [bYear, setBYear] = useState<string>("");
+  const [bMonth, setBMonth] = useState<string>("");
+  const [bDay, setBDay] = useState<string>("");
   const [error, setError] = useState<boolean>();
   const navigate = useNavigate();
 
   const setProfile = useSetRecoilState(profileState);
-  const profile = useRecoilValue(profileState);
 
   const nextStep = () => {
-    if (isNaN(+birthday)) {
+    if (
+      isNaN(+bYear) ||
+      isNaN(+bMonth) ||
+      isNaN(+bDay) ||
+      +bYear > new Date().getFullYear() ||
+      +bMonth < 0 ||
+      +bMonth > 12 ||
+      +bDay < 0 ||
+      +bDay > new Date(+bYear, +bMonth, 0).getDate()
+    ) {
       setError(true);
       return;
     }
+
     setProfile((profile) => ({
       ...profile,
-      birthday,
+      birthday: [bYear, bMonth, bDay].join("-"),
     }));
-    console.log(profile);
 
     navigate("/signup/done");
   };
@@ -41,19 +51,19 @@ export const BirthdayPage = ({ onModal }: BirthdayPageProps) => {
         <InputWrapper>
           <Input
             maxLength={4}
-            onChange={(event) => setBirthday(event.target.value)}
+            onChange={(event) => setBYear(event.target.value)}
           />
           <span>년도</span>
         </InputWrapper>
         <InputWrapper>
           <Input
-            maxLength={4}
-            onChange={(event) => setBirthday(event.target.value)}
+            maxLength={2}
+            onChange={(event) => setBMonth(event.target.value)}
           />
           <span>월</span>
           <Input
-            maxLength={4}
-            onChange={(event) => setBirthday(event.target.value)}
+            maxLength={2}
+            onChange={(event) => setBDay(event.target.value)}
           />
           <span>일</span>
         </InputWrapper>
@@ -62,7 +72,7 @@ export const BirthdayPage = ({ onModal }: BirthdayPageProps) => {
       <BottomFixed>
         <BottomFixed.Button
           color="orange"
-          onClick={() => (birthday ? nextStep() : onModal())}
+          onClick={() => (bYear && bMonth && bDay ? nextStep() : onModal())}
         >
           완성하기
         </BottomFixed.Button>
