@@ -37,7 +37,7 @@ export const ActivityBox = ({
   return (
     <>
       <Progress>
-        <Status status={status}>
+        <Status $status={status}>
           {status === "RECRUITING" ? "모집중" : "모집완료"}
         </Status>
         <HeadCount>
@@ -53,13 +53,13 @@ export const ActivityBox = ({
 
       <MoreInfoContainer>
         <PromiseInfoList>
-          <PromiseInfoItem icon={DateSVG}>
+          <PromiseInfoItem $icon={DateSVG}>
             <span>{new Date(startDate).toLocaleDateString()}</span>
           </PromiseInfoItem>
-          <PromiseInfoItem icon={LocationSVG}>
+          <PromiseInfoItem $icon={LocationSVG}>
             <span>{location}</span>
           </PromiseInfoItem>
-          <PromiseInfoItem icon={TimeSVG}>
+          <PromiseInfoItem $icon={TimeSVG}>
             <span>예상 소요 시간 {volunteerTime}분</span>
           </PromiseInfoItem>
         </PromiseInfoList>
@@ -78,7 +78,7 @@ const Progress = styled.div`
   justify-content: space-between;
 `;
 
-const Status = styled.div<{ status: string }>`
+const Status = styled.div<{ $status: string }>`
   width: fit-content;
   padding: 6px 11px;
   border-radius: 11px;
@@ -86,8 +86,8 @@ const Status = styled.div<{ status: string }>`
   color: white;
   font-size: 15px;
 
-  ${({ status }) =>
-    status === "RECRUITING_COMPLETED" &&
+  ${({ $status }) =>
+    $status === "RECRUITING_COMPLETED" &&
     `background: transparent; color: ${colorTheme.blue500};`}
 `;
 
@@ -154,7 +154,7 @@ const PromiseInfoList = styled.div`
   gap: 13px;
 `;
 
-const PromiseInfoItem = styled.div<{ icon: string }>`
+const PromiseInfoItem = styled.div<{ $icon: string }>`
   display: flex;
   align-items: center;
   gap: 11px;
@@ -162,45 +162,9 @@ const PromiseInfoItem = styled.div<{ icon: string }>`
     width: 20px;
     height: 20px;
     border-radius: 1px;
-    background-image: url(${({ icon }) => icon});
+    background-image: url(${({ $icon }) => $icon});
     background-position: center;
     background-repeat: no-repeat;
     content: " ";
   }
 `;
-
-/** buttons */
-const CompleteButton = () => {
-  const [_, setActivity] = useRecoilState(activityState);
-
-  return (
-    <>
-      <button
-        onClick={() =>
-          setActivity((activity) => ({ ...activity, readOnly: true }))
-        }
-      >
-        모집완료
-      </button>
-    </>
-  );
-};
-
-const EditButton = () => {
-  const [_, setActivity] = useRecoilState(activityState);
-
-  return (
-    <>
-      <button
-        onClick={() =>
-          setActivity((activity) => ({
-            ...activity,
-            readOnly: !activity.readOnly,
-          }))
-        }
-      >
-        수정하기
-      </button>
-    </>
-  );
-};
