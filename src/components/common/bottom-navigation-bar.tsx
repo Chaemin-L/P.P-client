@@ -26,7 +26,7 @@ export const BottomNavigationBar = () => {
   }, [location.pathname]);
 
   return (
-    <Wrapper id="BottomNavigationBar">
+    <Wrapper>
       <NavigateButton
         onClick={() => {
           navigate("/mypage", { replace: true });
