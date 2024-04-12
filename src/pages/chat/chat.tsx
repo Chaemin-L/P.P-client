@@ -18,11 +18,10 @@ export const Chat = () => {
   }, [setAppBarHeight]);
 
   return (
-    <Wrapper>
+    <Wrapper style={{ paddingTop: `${appBarHeight}px` }}>
       <AppBar id="AppBar" isFixed={true}>
         <PageText>채팅</PageText>
       </AppBar>
-      <div style={{ height: `${appBarHeight}px` }}></div>
       <ChatList chatList={tempChatList} />
     </Wrapper>
   );
@@ -33,12 +32,15 @@ const Wrapper = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
+  overflow: auto;
+  height: 100%;
 `;
 
 const PageText = styled.div`
   color: black;
-  font-size: 32px;
+  font-size: 1.78rem;
   width: 100%;
-  padding: 25px 7.95% 10px;
+  padding: 1.39rem 7.95% 0.56rem;
   border-bottom: 1px solid #d9d9d9;
+  font-weight: 500;
 `;

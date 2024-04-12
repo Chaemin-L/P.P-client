@@ -49,7 +49,7 @@ export const PostListItem = (props: PostListItemProps) => {
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 19px 8.46%;
+  padding: 1.06rem 8.46%;
   border: 1px solid #d9d9d9;
   display: flex;
   flex-direction: column;
@@ -62,29 +62,30 @@ const RowBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 0.3rem;
 `;
 
 const StateIng = styled.div`
-  padding: 4px 8px;
-  font-size: 18px;
+  padding: 0.22rem 0.7rem;
+  font-size: 1rem;
   color: white;
   background-color: ${colorTheme.orange400};
-  border-radius: 8px;
+  border-radius: 0.44rem;
+  line-height: 1.22rem;
 `;
 
 const StateFin = styled.div`
-  font-size: 18px;
+  font-size: 1rem;
   color: ${colorTheme.blue900};
-  padding: 4px 8px;
+  padding: 0.22rem 0.44rem;
 `;
 
 const Title = styled.span`
   width: 100%;
-  font-size: 28px;
+  font-size: 1.56rem;
   font-weight: bold;
-  line-height: 40px;
-  margin: 7px 0 20px 0;
+  line-height: 2.22rem;
+  margin: 0.39rem 0 1.11rem 0;
 `;
 
 const TopIcon = styled.img`

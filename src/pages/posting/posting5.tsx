@@ -26,13 +26,7 @@ export const Posting5 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar
-        onClick={() => {
-          handleSave();
-        }}
-      >
-        5/7완료
-      </PostingAppBar>
+      <PostingAppBar onClick={() => handleSave()} nowPage={5} />
       <PostingBoldText>
         필요한 인원을
         <br />
@@ -61,7 +55,7 @@ export const Posting5 = () => {
       </BalanceText>
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -70,7 +64,7 @@ export const Posting5 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate("/posting/6");
@@ -91,7 +85,7 @@ const PageContainer = styled.div`
 `;
 
 const BalanceText = styled.span`
-  color: #d9d9d9;
+  color: ${colorTheme.orange400};
   font-size: 18px;
   margin: 18% 0px 3% 0px;
 `;
@@ -103,18 +97,19 @@ const SumContainer = styled.div`
   border: solid;
   border-width: 1px 0;
   border-color: #d9d9d9;
-  padding: 31px 0;
-  color: #d9d9d9;
+  padding: 1.72rem 0;
   align-items: flex-end;
   justify-content: space-between;
 `;
 
 const SumText = styled.span`
-  font-size: 20px;
+  font-size: 1.11rem;
   font-weight: bold;
+  color: black;
 `;
 
 const SumNumberText = styled.span`
-  font-size: 40px;
+  font-size: 2.22rem;
   font-weight: bold;
+  color: ${colorTheme.orange400};
 `;

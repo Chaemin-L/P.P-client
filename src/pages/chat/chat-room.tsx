@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { allMsg, tempList } from "./dummy";
+import { ChatDetailState } from "./type";
 
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
-import { ChatProfileModal } from "@/components/chat/chat-profile-modal";
 import { BottomSheet } from "@/components/common/bottom-sheet";
 import { Modal } from "@/components/common/modal";
+import { ProfileModal } from "@/components/common/profile-modal";
 import { Report } from "@/components/report/report";
 import { Transfer } from "@/components/transfer/transfer";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
@@ -21,6 +22,8 @@ import { transferState } from "@/recoil/atoms/transfer-state";
 
 export const ChatRoom = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as ChatDetailState;
 
   const [appBarHeight, setAppBarHeight] = useState(0);
   const [appBerVisibility, setAppBarVisibility] = useState(true);
@@ -106,6 +109,7 @@ export const ChatRoom = () => {
               setIsBottomSheetOpened(false);
               setIsTransfer(false);
             }}
+            memberCount={state.memberCount}
           />
         )}
         {isReport && (
@@ -131,7 +135,7 @@ export const ChatRoom = () => {
         </Modal>
       )}
       {profileModal && (
-        <ChatProfileModal
+        <ProfileModal
           userId={profileUserId}
           onClose={() => {
             setProfileModal(false);
@@ -156,5 +160,5 @@ const ChatList = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 70px;
+  padding-bottom: 3.89rem;
 `;

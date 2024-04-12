@@ -8,6 +8,7 @@ import mypageIconDark from "@/assets/icons/mypage-icon-dark.png";
 import mypageIconOrange from "@/assets/icons/mypage-icon-orange.png";
 import postIconDark from "@/assets/icons/post-icon-dark.png";
 import postIconOrange from "@/assets/icons/post-icon-orange.png";
+import { colorTheme } from "@/style/color-theme";
 
 export const BottomNavigationBar = () => {
   const navigate = useNavigate();
@@ -77,14 +78,14 @@ export const BottomNavigationBar = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 63px;
+  height: 3.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   bottom: 0;
-  background-color: #e4e8f1;
+  background-color: ${colorTheme.blue100};
 `;
 
 const NavigateButton = styled.button`
@@ -95,11 +96,13 @@ const NavigateButton = styled.button`
   align-items: center;
   height: 100%;
   border: none;
-  gap: 2px;
+  gap: 0.22rem;
+  padding-top: 7px;
+  height: 100%;
 `;
 
 const ButtonText = styled.span`
   width: 100%;
-  font-size: 20px;
-  color: #828282;
+  font-size: 1rem;
+  color: ${colorTheme.shade};
 `;

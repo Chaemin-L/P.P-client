@@ -21,12 +21,15 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
     <Wrapper>
       <CheckMsg style={{ color: colorTheme.blue900 }}>송금완료</CheckMsg>
       <TransferExplainBox>
-        {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분께
+        {lastTransfer.member == 1
+          ? `${lastTransfer.users[0].name}님 외 ${lastTransfer.member - 1}분께`
+          : `${lastTransfer.users[0].name}님께`}
         <br />
         {lastTransfer.price * lastTransfer.member}매듭을
         <br />
         송금하였습니다!
       </TransferExplainBox>
+      :
       <div>
         송금 후 내 잔액은{" "}
         {lastTransfer.availableBudget -
@@ -58,11 +61,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: ${colorTheme.orange400};
-  font-size: 20px;
+  font-size: 1.11rem;
 `;
 
 const CheckMsg = styled.div`
-  font-size: 25px;
+  font-size: 1.39rem;
   margin: 5% 0;
 `;
 
@@ -71,7 +74,7 @@ const TransferExplainBox = styled.div`
   padding: 8% 2.7%;
   margin: 5% 0 20%;
   color: ${colorTheme.orange400};
-  font-size: 30px;
+  font-size: 1.67rem;
   text-align: center;
   font-weight: bold;
   line-height: 150%;

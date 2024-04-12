@@ -8,7 +8,6 @@ import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { PostingDatePicker } from "@/components/posting/posting-date-picker";
 import { postingState } from "@/recoil/atoms/posting-state";
-import { colorTheme } from "@/style/color-theme";
 
 export const Posting2 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -31,8 +30,8 @@ export const Posting2 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => handleSave()}>2/7</PostingAppBar>
-      <PostingBoldText style={{ marginBottom: "10px" }}>
+      <PostingAppBar onClick={() => handleSave()} nowPage={2} />
+      <PostingBoldText style={{ marginBottom: "0.56rem" }}>
         날짜를 선택해주세요
       </PostingBoldText>
       <SelectDay>
@@ -41,7 +40,7 @@ export const Posting2 = () => {
       <PostingDatePicker startDate={startDate} setStartDate={setStartDate} />
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -50,7 +49,7 @@ export const Posting2 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate("/posting/3");
@@ -72,7 +71,7 @@ const PageContainer = styled.div`
 
 const SelectDay = styled.span`
   margin: 5%;
-  font-size: 25px;
+  font-size: 1.39rem;
   width: 100%;
   text-align: center;
 `;

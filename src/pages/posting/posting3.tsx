@@ -8,7 +8,6 @@ import { ToggleSwitch } from "@/components/common/toggle-switch";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
-import { colorTheme } from "@/style/color-theme";
 
 export const Posting3 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
@@ -48,7 +47,7 @@ export const Posting3 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => handleSave()}>3/7</PostingAppBar>
+      <PostingAppBar onClick={() => handleSave()} nowPage={3} />
       <PostingBoldText>
         시작 시간을
         <br />
@@ -80,7 +79,7 @@ export const Posting3 = () => {
       </span>
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate(-1);
@@ -89,7 +88,7 @@ export const Posting3 = () => {
           이전
         </BottomFixed.Button>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             handleSave();
             navigate("/posting/4");

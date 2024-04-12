@@ -35,8 +35,3 @@ export type ChatAppBarType = {
   onClickTransfer: () => void;
   onClickReport: () => void;
 };
-
-export type ChatProfileModalType = {
-  userId: number;
-  onClose: () => void;
-};

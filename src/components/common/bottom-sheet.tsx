@@ -99,16 +99,16 @@ const HeaderContainer = styled.div`
 
 const EmptyBox = styled.div`
   width: 100%;
-  height: 25px;
+  height: 1.39rem;
 `;
 
 const Header = styled.div`
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: 1.67rem;
+  border-top-right-radius: 1.67rem;
   background-color: #ffffff;
-  box-shadow: 0 -8px 10px rgb(0, 0, 0, 0.25);
+  box-shadow: 0 -0.44rem 0.56rem rgb(0, 0, 0, 0.25);
   width: 100%;
-  height: 40px;
+  height: 2.22rem;
 `;
 
 const HeaderXButton = styled.button`
@@ -118,7 +118,7 @@ const HeaderXButton = styled.button`
   border-radius: 50%;
   background-color: #ffffff;
   border: 0;
-  box-shadow: -1px 0 13px rgb(0, 0, 0, 0.09);
+  box-shadow: -1px 0 0.72rem rgb(0, 0, 0, 0.09);
   right: 3%;
   z-index: 9999;
 `;
@@ -130,8 +130,6 @@ const HeaderXImg = styled.img`
   text-align: center;
   top: 10%;
   right: 10%;
-  /* right: 3%;
-  top: 40%; */
 `;
 
 const ContentContainer = styled.div`
@@ -140,6 +138,6 @@ const ContentContainer = styled.div`
   height: 100%;
   width: 100%;
   z-index: 9998;
-  border-top: 3px solid #ffffff;
+  border-top: 0.17rem solid #ffffff;
   box-shadow: 0 -1px 1px #ffffff;
 `;
