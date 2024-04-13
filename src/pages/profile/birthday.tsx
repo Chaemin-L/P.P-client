@@ -107,7 +107,7 @@ const InputWrapper = styled.div`
   }
   & > span {
     display: flex;
-    font-size: 30px;
+    font-size: 1.67rem;
     font-color: #a1a1a1;
     white-space: nowrap;
     justify-content: center;

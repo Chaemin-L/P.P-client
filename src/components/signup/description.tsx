@@ -22,7 +22,7 @@ const DescriptionWrapper = styled.div`
   width: 100%;
   margin-top: 35px;
   text-align: center;
-  font-size: 25px;
+  font-size: 1.38rem;
   line-height: 120%;
   color: black;
 `;

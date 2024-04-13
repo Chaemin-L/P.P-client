@@ -80,7 +80,7 @@ const PageContainer = styled.div`
 
 const BalanceText = styled.span`
   color: black;
-  font-size: 18px;
+  font-size: 1rem;
   margin: 15% 0px 0px 0px;
   text-align: center;
 `;

@@ -82,7 +82,7 @@ const Status = styled.div<{ $status: StatusType }>`
   border-radius: 11px;
   background-color: ${colorTheme.orange400};
   color: white;
-  font-size: 15px;
+  font-size: 0.83rem;
 
   ${({ $status }) =>
     $status == "RECRUITMENT_COMPLETED" &&
@@ -102,7 +102,7 @@ const PostInfo = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 1.6rem;
   font-weight: 700;
 `;
 

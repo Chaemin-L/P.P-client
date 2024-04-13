@@ -14,7 +14,7 @@ const InputWrapper = styled.input`
   border: 0;
   border-radius: 20px;
   color: #4b6db4;
-  font-size: 30px;
+  font-size: 1.67rem;
   font-weight: 600;
   text-align: center;
 `;

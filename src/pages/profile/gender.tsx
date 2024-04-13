@@ -68,5 +68,5 @@ const GenderCard = styled.div`
   flex-direction: column;
   gap: 20px;
   text-align: center;
-  font-size: 25px;
+  font-size: 1.39rem;
 `;
