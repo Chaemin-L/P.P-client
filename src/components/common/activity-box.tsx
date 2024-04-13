@@ -1,39 +1,29 @@
-import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
+import { PostType, StatusType } from "@/api/types/post-type";
 import ApplicantSVG from "@/assets/icons/applicant.svg";
 import DateSVG from "@/assets/icons/date.svg";
 import KnotSVG from "@/assets/icons/knot.svg";
 import LocationSVG from "@/assets/icons/location.svg";
 import TimeSVG from "@/assets/icons/time.svg";
-import { activityState } from "@/recoil/atoms/activity-state";
 import { colorTheme } from "@/style/color-theme";
 
-type ActivityBoxProps = {
-  title: string;
-  content: string;
-  location: string;
-  volunteerTime: number;
-  pay: number;
-  startDate: string;
-  status: string;
-  currentApplicant: number;
-  maxNumOfPeople: number;
-  visitor?: number; // 조회수
-};
+export const ActivityBox = (
+  data: Omit<PostType, "startDate"> & { startDate: string[] },
+) => {
+  const {
+    status,
+    currentApplicant,
+    maxNumOfPeople,
+    pay,
+    title,
+    content,
+    location,
+    volunteerTime,
+    startDate,
+    viewsCount,
+  } = data;
 
-export const ActivityBox = ({
-  title,
-  content,
-  volunteerTime,
-  location,
-  pay,
-  startDate,
-  currentApplicant,
-  status,
-  maxNumOfPeople,
-  visitor,
-}: ActivityBoxProps) => {
   return (
     <>
       <Progress>
@@ -54,7 +44,15 @@ export const ActivityBox = ({
       <MoreInfoContainer>
         <PromiseInfoList>
           <PromiseInfoItem $icon={DateSVG}>
-            <span>{new Date(startDate).toLocaleDateString()}</span>
+            <span>
+              {startDate[0]}월 {startDate[1]}일{" "}
+              {+startDate[2] > 12
+                ? +startDate[2] === 0
+                  ? `오전 12시`
+                  : `오후 ${+startDate[2] - 12}`
+                : startDate[2]}
+              :{startDate[3]}
+            </span>
           </PromiseInfoItem>
           <PromiseInfoItem $icon={LocationSVG}>
             <span>{location}</span>
@@ -64,7 +62,7 @@ export const ActivityBox = ({
           </PromiseInfoItem>
         </PromiseInfoList>
 
-        <span>조회수 {visitor}</span>
+        <span>조회수 {viewsCount}회</span>
       </MoreInfoContainer>
     </>
   );
@@ -78,7 +76,7 @@ const Progress = styled.div`
   justify-content: space-between;
 `;
 
-const Status = styled.div<{ $status: string }>`
+const Status = styled.div<{ $status: StatusType }>`
   width: fit-content;
   padding: 6px 11px;
   border-radius: 11px;
@@ -87,7 +85,7 @@ const Status = styled.div<{ $status: string }>`
   font-size: 15px;
 
   ${({ $status }) =>
-    $status === "RECRUITING_COMPLETED" &&
+    $status == "RECRUITMENT_COMPLETED" &&
     `background: transparent; color: ${colorTheme.blue500};`}
 `;
 

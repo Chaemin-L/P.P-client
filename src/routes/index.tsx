@@ -8,7 +8,6 @@ import { ChatRoom } from "@/pages/chat/chat-room";
 import { LoginPage } from "@/pages/login/login";
 import { LoginEnd } from "@/pages/login/login-end";
 import { Mypage } from "@/pages/mypage/mypage";
-import { MyPostPage } from "@/pages/mypost";
 import { ApplicantListPage } from "@/pages/mypost/applicant-list";
 import { PostDetailPage } from "@/pages/post/post-detail";
 import { PostList } from "@/pages/post/post-list";
@@ -47,15 +46,11 @@ const router = createBrowserRouter([
         element: <DonePage />,
       },
       {
-        path: "/post/:id",
+        path: "/post/:postId",
         element: <PostDetailPage />,
       },
       {
-        path: "/mypost/:id",
-        element: <MyPostPage />,
-      },
-      {
-        path: "/mypost/:id/applicant",
+        path: "/post/:postId/applicant",
         element: <ApplicantListPage />,
       },
       { path: "/login/end", element: <LoginEnd /> },
