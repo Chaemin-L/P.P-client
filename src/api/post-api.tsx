@@ -1,9 +1,9 @@
 import Instance from "./axios-instance";
 import {
-  PostType,
   RequestPostingProps,
   ResponsePostListProps,
   ResponsePostingProps,
+  PostDetailType,
 } from "./types/post-type";
 
 export default class PostApi {
@@ -45,6 +45,19 @@ export default class PostApi {
 
     if (response) {
       const temp = response.data as ResponsePostListProps;
+      return temp.data;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  }
+
+  static async getPostDetail(postId: number) {
+    const response = await Instance.get(
+      `/haetsal-service/api/v2/market/post/${postId}`,
+    );
+
+    if (response) {
+      const temp = response.data as PostDetailType;
       return temp.data;
     } else {
       throw new Error("Invalid response from server");

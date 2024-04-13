@@ -9,18 +9,20 @@ export const ChatListItem = (props: ChatRoomItemType) => {
   const navigate = useNavigate();
 
   const HandlerEnterRoom = () => {
-    navigate(`/chat/${props.roomIdx}`, { state: { memberCount: 1 } });
+    navigate(`/chat/${props.roomId}`, {
+      state: { memberCount: props.memberCount },
+    });
   };
   return (
     <ItemContainer onClick={HandlerEnterRoom}>
       <RowDiv>
-        {props.transferState ? (
-          <StateFinishDiv>진행완료</StateFinishDiv>
-        ) : (
+        {props.postStatus === "RECRUITING" ? (
           <StateDiv>진행중</StateDiv>
+        ) : (
+          <StateFinishDiv>진행완료</StateFinishDiv>
         )}
         <LeftColumnDiv>
-          <TitleText>{props.name}</TitleText>
+          <TitleText>{props.postTitle}</TitleText>
           <ItemText style={{ color: "#828282" }}>{props.chatMsg}</ItemText>
         </LeftColumnDiv>
       </RowDiv>

@@ -1,7 +1,11 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import Instance from "./axios-instance";
-import { ChatGetResponse, ChatSendResponse } from "./types/chat-type";
+import {
+  ChatGetResponse,
+  ChatListItem,
+  ChatSendResponse,
+} from "./types/chat-type";
 
 export default class ChatApi {
   static async getChatMessages(roomIdx: number): Promise<ChatGetResponse[]> {
@@ -27,5 +31,25 @@ export default class ChatApi {
       },
     );
     return response.data;
+  }
+
+  static async getChatList() {
+    const response = await axios.get(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats`,
+      {
+        headers: {
+          // userId: "2",
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
+    );
+
+    if (response) {
+      return response.data as ChatListItem[];
+    } else {
+      throw new Error("Invalid response from server");
+    }
   }
 }

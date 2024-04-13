@@ -19,6 +19,8 @@ export const MypageList = ({ type }: { type: string }) => {
           status={item.status}
           currentApplicant={item.currentApplicant}
           maxNumOfPeople={item.maxNumOfPeople}
+          writerId={item.writerInfo.profileId}
+          writerProfileImg={item.writerInfo.profileImage}
         />
       ))}
     </Wrapper>

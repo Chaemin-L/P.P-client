@@ -21,11 +21,13 @@ export type InputType = {
 };
 
 export type ChatRoomItemType = {
-  roomIdx: string;
-  name: string;
-  chatMsg: string;
+  roomId: string;
+  postId: number;
+  memberCount: number;
+  postTitle: string;
+  postStatus: string;
   time: string;
-  transferState: boolean;
+  chatMsg: string;
   msgNum: number;
 };
 

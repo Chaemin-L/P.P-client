@@ -50,6 +50,8 @@ export const PostList = () => {
           status={item.status}
           currentApplicant={item.currentApplicant}
           maxNumOfPeople={item.maxNumOfPeople}
+          writerProfileImg={item.writerInfo.profileImage}
+          writerId={item.writerInfo.profileId}
         />
       ))}
     </Wrapper>

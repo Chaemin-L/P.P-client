@@ -35,14 +35,22 @@ export const PostListItem = (props: PostListItemProps) => {
         <StateSpan>{props.pay}매듭</StateSpan>
       </RowBox>
       <Title>{props.title}</Title>
-      <RowBox>
-        <BottomIcon icon={LocationSVG} />
-        <StateSpan>{props.location}</StateSpan>
-      </RowBox>
-      <RowBox>
-        <BottomIcon icon={DateSVG} />
-        <StateSpan>{BackdateToItemtype(props.startDate)}</StateSpan>
-      </RowBox>
+      <BottomRowBox>
+        <BottomColumnBox>
+          <RowBox>
+            <BottomIcon icon={LocationSVG} />
+            <StateSpan>{props.location}</StateSpan>
+          </RowBox>
+          <RowBox>
+            <BottomIcon icon={DateSVG} />
+            <StateSpan>{BackdateToItemtype(props.startDate)}</StateSpan>
+          </RowBox>
+        </BottomColumnBox>
+        <ProfileImg
+          src={props.writerProfileImg}
+          onClick={() => console.log("user: ", props.writerId)}
+        />
+      </BottomRowBox>
     </Wrapper>
   );
 };
@@ -107,4 +115,24 @@ const BottomIcon = styled.div<{ icon: string }>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+`;
+
+const BottomRowBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const BottomColumnBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProfileImg = styled.img`
+  width: 2.06rem;
+  height: 2.06rem;
+  border: 0.17rem solid ${colorTheme.orange400};
+  border-radius: 0.56rem;
 `;

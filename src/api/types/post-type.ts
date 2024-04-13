@@ -9,9 +9,37 @@ export type RequestPostingProps = {
   maxNumOfPeople: number;
 };
 
-export type ResponsePostingProps = FinalResponse<PostType>;
+export type ResponsePostingProps = FinalResponse<marketPostResponse>;
 
-export type PostType = {
+// export type PostType = {
+//   postId: number;
+//   title: string;
+//   content: string;
+//   createdDate: string;
+//   status: string;
+//   startDate: string;
+//   location: string;
+//   pay: number;
+//   volunteerTime: number;
+//   currentApplicant: number;
+//   maxNumOfPeople: number;
+//   dealId: number;
+// };
+
+export type UserCurrentStatus = {
+  isWriter: boolean;
+  isApplicant: boolean;
+  applyStatus: string;
+};
+
+export type WriterInfo = {
+  profileId: number;
+  nickName: string;
+  profileImage: string;
+  address: string;
+};
+
+export type marketPostResponse = {
   postId: number;
   title: string;
   content: string;
@@ -24,6 +52,13 @@ export type PostType = {
   currentApplicant: number;
   maxNumOfPeople: number;
   dealId: number;
+  viewsCount: number;
+  writerInfo: WriterInfo;
 };
 
-export type ResponsePostListProps = FinalResponse<PostType[]>;
+export type PostDetailType = FinalResponse<{
+  userCurrentStatus: UserCurrentStatus;
+  marketPostResponse: marketPostResponse;
+}>;
+
+export type ResponsePostListProps = FinalResponse<marketPostResponse[]>;
