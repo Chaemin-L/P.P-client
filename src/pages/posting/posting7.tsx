@@ -14,13 +14,13 @@ import { FormatDateString } from "@/utils/format-date-string";
 
 export const Posting7 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
-  const [contents, setContents] = useState(posting.contents);
+  const [content, setContent] = useState(posting.content);
   const navigate = useNavigate();
   const postPosting = usePostPosting();
 
   const handleSave = () => {
     setPosting((prevPosting) => {
-      const updatedPosting = { ...prevPosting, contents: contents };
+      const updatedPosting = { ...prevPosting, content: content };
       return updatedPosting;
     });
   };
@@ -28,7 +28,7 @@ export const Posting7 = () => {
   const handlePostPosting = () => {
     const tempProps: RequestPostingProps = {
       title: posting.title,
-      content: posting.contents,
+      content: content,
       startDate: FormatDateString(posting.startDate),
       location: posting.location,
       volunteerTime: posting.price,
@@ -49,9 +49,9 @@ export const Posting7 = () => {
       />
       <PostingBoldText>활동 내용을 적어보세요</PostingBoldText>
       <PostingInput.InputContent
-        value={contents}
+        value={content}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-          setContents(e.target.value);
+          setContent(e.target.value);
         }}
       />
       <BottomFixed>

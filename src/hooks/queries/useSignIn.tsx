@@ -12,7 +12,13 @@ export const useSignIn = () => {
       console.log("로그인 성공", response.accessToken);
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
-      navigate("/login/end");
+      localStorage.setItem("userId", response.userId.toString());
+      if (response.profileId === null) {
+        navigate("/signup");
+      } else {
+        localStorage.setItem("profileId", response.profileId.toString());
+        navigate("/post");
+      }
     },
   });
 };

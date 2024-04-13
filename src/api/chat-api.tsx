@@ -38,7 +38,7 @@ export default class ChatApi {
       `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats`,
       {
         headers: {
-          // userId: "2",
+          userId: "2",
           Authorization: localStorage.getItem("accessToken"),
           "Content-Type": "application/json",
         },

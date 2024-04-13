@@ -15,6 +15,7 @@ type tempType = {
 };
 
 export const useGetChatList = () => {
+  console.log("Token: ", localStorage.getItem("accessToken"));
   const { data } = useQuery({
     queryKey: ["chatList"],
     queryFn: () => ChatApi.getChatList(),

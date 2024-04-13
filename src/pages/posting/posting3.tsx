@@ -7,6 +7,7 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { ToggleSwitch } from "@/components/common/toggle-switch";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
+import { PostingTimeInput } from "@/components/posting/posting-time-input";
 import { postingState } from "@/recoil/atoms/posting-state";
 
 export const Posting3 = () => {
@@ -77,6 +78,7 @@ export const Posting3 = () => {
         />
         <span>분</span>
       </span>
+      <PostingTimeInput />
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
           color="blue"

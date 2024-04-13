@@ -20,6 +20,11 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
   const postBlock = usePostBlock();
   const deleteBlock = useDeleteBlock();
 
+  let myId: number = -1;
+  let myIdStorage: string | null = null;
+  myIdStorage = localStorage.getItem("userId");
+  if (myIdStorage) myId = Number(myIdStorage);
+
   const handleBlock = () => {
     isBlocked
       ? deleteBlock.mutate(userId, {
@@ -87,13 +92,15 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
               {profileData?.address}
             </AddressSpan>
           </ModalDiv>
-          <Modal.Button
-            style={{ width: "100%" }}
-            onClick={() => setCheckBlock(true)}
-            color={isBlocked ? "blue" : "orange"}
-          >
-            {isBlocked ? "차단해제" : "차단하기"}
-          </Modal.Button>
+          {myId !== userId && (
+            <Modal.Button
+              style={{ width: "100%" }}
+              onClick={() => setCheckBlock(true)}
+              color={isBlocked ? "blue" : "orange"}
+            >
+              {isBlocked ? "차단해제" : "차단하기"}
+            </Modal.Button>
+          )}
         </div>
       )}
     </Modal>
