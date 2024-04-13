@@ -29,21 +29,13 @@ export const PostDetailPage = () => {
 
   const [applyModal, setApplyModal] = useState<boolean>(false);
 
-  const { data, refetch: refetchDetail } = useGetPostDetail(postId!);
-  const { mutateAsync: applyActivity } = usePostApply(postId!);
-  const { mutateAsync: cancelActivity } = useDeleteApply(postId!);
+  const { data } = useGetPostDetail(postId!);
+  const { mutate: applyActivity } = usePostApply(postId!);
+  const { mutate: cancelActivity } = useDeleteApply(postId!);
   const { mutate: pullUp } = usePullUp(postId!);
   const { mutate: changeStatus } = useChangeStatus(postId!);
 
   const navigate = useNavigate();
-
-  const refetch = useCallback(() => {
-    void refetchDetail();
-  }, [refetchDetail]);
-
-  useEffect(() => {
-    refetch();
-  }, []);
 
   return (
     <DefaultLayout
@@ -155,7 +147,7 @@ export const PostDetailPage = () => {
           <Modal
             onClose={() => {
               setApplyModal(false);
-              void applyActivity().then(() => refetch());
+              applyActivity();
             }}
           >
             <EmptyBox>
@@ -168,7 +160,7 @@ export const PostDetailPage = () => {
             <Modal.Button
               color="orange"
               onClick={() => {
-                void cancelActivity().then(() => refetch());
+                cancelActivity();
                 setApplyModal(false);
               }}
             >

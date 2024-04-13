@@ -9,7 +9,6 @@ export function useGetPostDetail(postId: string) {
   return useQuery({
     queryKey: [CACHE_KEY],
     queryFn: () => PostApi.getPostDetail(postId),
-    enabled: false,
     select: (data: PostDetailType) => {
       const [date, time] = data.marketPostResponse.startDate
         .split("+")[0]
