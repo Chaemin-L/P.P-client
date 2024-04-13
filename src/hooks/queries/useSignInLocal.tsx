@@ -12,7 +12,7 @@ export const useSignInLocal = () => {
       console.log("로그인 성공", response.accessToken);
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
-      navigate("/posting/1");
+      navigate("/post");
     },
   });
 };
