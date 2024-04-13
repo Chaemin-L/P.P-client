@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 import LocationSVG from "@/assets/icons/location.svg";
@@ -7,7 +7,9 @@ import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
-import applicantListData from "@/data/applicant-list-data.json";
+import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
+import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
+import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
 import { colorTheme } from "@/style/color-theme";
 
 type ApplicantItemProps = {
@@ -52,6 +54,14 @@ export const ApplicantListPage = () => {
   const [applyIds, setApplyIds] = useState<number[]>([]);
   const [applyModal, setApplyModal] = useState<boolean>();
 
+  const { postId } = useParams();
+
+  const { data } = useGetApplyList(postId!);
+  const { mutate: accept } = usePostApplyAccept(postId!);
+  const { mutate: changeStatus } = useChangeStatus(postId!);
+
+  console.log(data);
+
   return (
     <DefaultLayout
       scrollbar
@@ -64,13 +74,13 @@ export const ApplicantListPage = () => {
         </AppBar>
       }
     >
-      {applicantListData.map((a) => (
+      {data?.map((applicant) => (
         <ApplicantItem
-          key={a.applyId}
-          {...a}
-          selected={applyIds.includes(a.applicantInfo.profileId)}
+          key={applicant.applyId}
+          {...applicant}
+          selected={applyIds.includes(applicant.applyId)}
           onSelect={() => {
-            const id = a.applicantInfo.profileId;
+            const id = applicant.applyId;
             if (applyIds.includes(id)) {
               setApplyIds((prev) => prev.filter((p) => p !== id));
             } else {
@@ -80,7 +90,13 @@ export const ApplicantListPage = () => {
         />
       ))}
       <BottomFixed>
-        <BottomFixed.Button color="orange" onClick={() => setApplyModal(true)}>
+        <BottomFixed.Button
+          color="orange"
+          onClick={() => {
+            accept(applyIds);
+            setApplyModal(true);
+          }}
+        >
           {applyIds.length}명 수락하기
         </BottomFixed.Button>
       </BottomFixed>
@@ -91,8 +107,17 @@ export const ApplicantListPage = () => {
           }}
         >
           <Modal.Title text="신청 수락 완료" />
-          <Modal.Button color="orange">채팅방 만들기</Modal.Button>
-          <Modal.Button>모집완료</Modal.Button>
+          <Modal.Button
+            color="orange"
+            onClick={() => {
+              // TODO: 채팅방 생성 후 라우팅
+            }}
+          >
+            채팅방 만들기
+          </Modal.Button>
+          <Modal.Button onClick={() => changeStatus("RECRUITMENT_COMPLETED")}>
+            모집완료
+          </Modal.Button>
         </Modal>
       )}
     </DefaultLayout>
@@ -100,6 +125,7 @@ export const ApplicantListPage = () => {
 };
 
 const ApplicantItemWrapper = styled.div`
+  height: 20%;
   display: flex;
   padding: 20px 25px;
   gap: 10px;
@@ -107,36 +133,24 @@ const ApplicantItemWrapper = styled.div`
 `;
 
 const ApplicantImage = styled.div`
+  height: 100%;
   display: flex;
   position: relative;
-  flex: 0.4;
-  width: 100%;
-  height: 100%;
-  align-items: center;
+  flex: 1.2;
+  align-items: start;
   & img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 90%;
-    height: 90%;
-    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 1/1;
     border-radius: 10px;
-  }
-  &::before {
-    content: "";
-    display: block;
-    padding-top: 100%;
   }
 `;
 
 const ApplicantInfo = styled.div`
   display: flex;
-  padding-bottom: 17px;
-  flex: 1;
+  flex: 3;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 2px;
 `;
 
 const ApplicantLocation = styled.div`
@@ -177,9 +191,9 @@ const Bullet = styled.span`
 `;
 
 const ApplyButton = styled.button<{ $selected: boolean }>`
-  flex: 0.4;
+  flex: 1.1;
   display: flex;
-  padding: 40px 12px;
+  padding: 30px 10px;
   border: 0;
   border-radius: 15px;
   background-color: #e4e8f1;
@@ -187,7 +201,6 @@ const ApplyButton = styled.button<{ $selected: boolean }>`
   font-size: 0.8rem;
   justify-content: center;
   align-items: center;
-
   ${({ $selected }) =>
     $selected && `background-color: ${colorTheme.orange400};color: white`}
 `;

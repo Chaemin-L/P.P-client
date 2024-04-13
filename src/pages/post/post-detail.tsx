@@ -55,7 +55,7 @@ export const PostDetailPage = () => {
             <Button
               color="orange"
               onClick={() => {
-                changeStatus("RECRUITMENT_COMPLETED");
+                setStatusModal(true);
               }}
             >
               모집완료
@@ -108,6 +108,8 @@ export const PostDetailPage = () => {
           <Modal.Title text="신고가 접수되었습니다." />
         </Modal>
       )}
+
+      {/** BottomFixed Buttons */}
       <BottomFixed alignDirection="column">
         {data?.userCurrentStatus.isWriter ? (
           data?.marketPostResponse.status === "RECRUITING" ? (
@@ -120,7 +122,13 @@ export const PostDetailPage = () => {
               </BottomFixed.Button>
             </>
           ) : (
-            <></>
+            <BottomFixed.Button
+              onClick={() => {
+                // TODO: 채팅방으로 이동
+              }}
+            >
+              채팅방으로 가기
+            </BottomFixed.Button>
           )
         ) : !data?.userCurrentStatus.isApplicant ? (
           <BottomFixed.Button
@@ -142,6 +150,8 @@ export const PostDetailPage = () => {
           </BottomFixed.Button>
         )}
       </BottomFixed>
+
+      {/** Modal */}
       {applyModal &&
         (!data?.userCurrentStatus.isApplicant ? (
           <Modal
@@ -187,7 +197,7 @@ export const PostDetailPage = () => {
           </Modal.Button>
         </Modal>
       )}
-      {data?.userCurrentStatus.isWriter && statusModal && (
+      {statusModal && (
         <Modal onClose={() => setStatusModal(false)}>
           <Modal.Title text="모집을\n끝내시겠습니까?" />
 
@@ -195,7 +205,7 @@ export const PostDetailPage = () => {
             color="orange"
             onClick={() => {
               setStatusModal(false);
-              // TODO: 모집 상태 변경 api
+              changeStatus("RECRUITMENT_COMPLETED");
             }}
           >
             모집종료
