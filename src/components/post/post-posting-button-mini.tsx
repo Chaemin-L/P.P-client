@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import plusImg from "@/assets/images/plus-img.png";
+import PlusWhiteSVG from "@/assets/icons/plus-white.svg";
 import { colorTheme } from "@/style/color-theme";
 
 export const PostPostingButtonMini = () => {
@@ -10,37 +10,30 @@ export const PostPostingButtonMini = () => {
   return (
     <FixedButton
       onClick={() => {
-        navigate("/posting");
+        navigate("/posting/1");
       }}
     >
-      <ImgBackground>
-        <Img src={plusImg} />
-      </ImgBackground>
+      <PlusImg src={PlusWhiteSVG} />
     </FixedButton>
   );
 };
 
 const FixedButton = styled.button`
-  width: 21.8%;
-  padding-top: 21.8%;
+  width: 4.72rem;
+  height: 4.72rem;
   position: fixed;
-  background-color: ${colorTheme.blue900};
-  border-radius: 8%;
+  background-color: ${colorTheme.blue500};
+  border-radius: 35%;
   border: none;
-  top: 1;
-  right: 1;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const ImgBackground = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-`;
-
-const Img = styled.img`
-  width: 42.4%;
-  height: 42.4%;
-  position: absolute;
-  top: 28.8%;
-  left: 28.8%;
+const PlusImg = styled.img`
+  width: 2rem;
+  height: 2rem;
 `;

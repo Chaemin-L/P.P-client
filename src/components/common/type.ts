@@ -50,10 +50,6 @@ export type AppBarProps = {
   children?: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLElement>, "type">;
 
-export type HamburgerProps = {
-  isColorMode?: boolean;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
-
 export type RightButtonProps = {
   imgSrc: string;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;

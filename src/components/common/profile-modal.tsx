@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { ProfileModalType } from "./type";
 
-import mapIcon from "@/assets/icons/map-icon.png";
+import LocationSVG from "@/assets/icons/location.svg";
 import { Modal } from "@/components/common/modal";
 import { useDeleteBlock } from "@/hooks/queries/useDeleteBlock";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
@@ -83,7 +83,7 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
               <Img src={profileData?.profileImage} />
             </ImgContainer>
             <AddressSpan>
-              <img src={mapIcon} />
+              <img src={LocationSVG} />
               {profileData?.address}
             </AddressSpan>
           </ModalDiv>

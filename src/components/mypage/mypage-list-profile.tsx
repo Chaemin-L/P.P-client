@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
 
-import knotIcon from "@/assets/icons/knot-icon.png";
-import maleIcon from "@/assets/icons/male-icon.png";
-import mapIcon from "@/assets/icons/map-icon.png";
-import peopleIcon from "@/assets/icons/people-icon.png";
+import FemaleSVG from "@/assets/icons/female.svg";
+import KnotWhiteBackSVG from "@/assets/icons/knot-white-back.svg";
+import LocationWhiteBackSVG from "@/assets/icons/location-white-back.svg";
+import MaleSVG from "@/assets/icons/male.svg";
+import PersonSVG from "@/assets/icons/person-white-back.svg";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { colorTheme } from "@/style/color-theme";
@@ -18,7 +19,9 @@ export const MypageListProfile = () => {
       <ColumnBox>
         <ProfileRowBox>
           <Name>{myProfile?.nickName}</Name>
-          <OtherStateIcon src={maleIcon} />
+          <OtherStateIcon
+            src={myProfile?.gender == "male" ? MaleSVG : FemaleSVG}
+          />
           <SexAge>
             {myProfile?.gender == "male" ? "남" : "여"} / {myProfile?.ageRange}
             대
@@ -26,17 +29,17 @@ export const MypageListProfile = () => {
         </ProfileRowBox>
         <StateOrangeBox>
           <PriceStateBox>
-            <KnotIconImg src={knotIcon} />
+            <KnotIconImg src={KnotWhiteBackSVG} />
             <KnotPriceState>{bankAccount?.totalBudget}</KnotPriceState>
             <KnotPriceWon>매듭</KnotPriceWon>
           </PriceStateBox>
           <OtherStateColumnBox>
             <PriceStateBox style={{ width: "5rem" }}>
-              <OtherStateIcon src={mapIcon} />
+              <OtherStateIcon src={LocationWhiteBackSVG} />
               <div>{myProfile?.address}</div>
             </PriceStateBox>
             <PriceStateBox style={{ width: "5rem" }}>
-              <OtherStateIcon src={peopleIcon} />
+              <OtherStateIcon src={PersonSVG} />
             </PriceStateBox>
           </OtherStateColumnBox>
         </StateOrangeBox>
@@ -93,10 +96,10 @@ const StateOrangeBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-top-left-radius: 0.56rem;
-  border-bottom-left-radius: 0.56rem;
+  border-top-left-radius: 1.11rem;
+  border-bottom-left-radius: 1.11rem;
   width: 100%;
-  background-color: ${colorTheme.orange300};
+  background-color: ${colorTheme.orange400};
   color: white;
   padding: 0.66rem 6% 0.66rem 4.5%;
 `;

@@ -8,6 +8,7 @@ import { useGetPostList } from "@/hooks/queries/useGetPostList";
 
 export const PostList = () => {
   const headerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [miniButtonVisible, setMiniButtonVisible] = useState(false);
   const { data } = useGetPostList();
@@ -16,29 +17,27 @@ export const PostList = () => {
     if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
 
     const handleScroll = () => {
-      if (headerRef.current) {
-        const scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
-        const isScrollingDown = scrollTop > headerHeight;
+      if (wrapperRef.current) {
+        const isScrollingDown = wrapperRef.current.scrollTop > headerHeight;
         setMiniButtonVisible(isScrollingDown);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    wrapperRef.current?.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      wrapperRef.current?.removeEventListener("scroll", handleScroll);
     };
   }, [headerHeight]);
 
   return (
-    <Wrapper>
+    <Wrapper ref={wrapperRef}>
       <div style={{ width: "100%" }} ref={headerRef}>
+        {miniButtonVisible && <PostPostingButtonMini />}
         <BigHeader>전체게시물</BigHeader>
         <SmallHeader>
           게시글 만들기 버튼을 눌러 게시글을 만들어 보아요
         </SmallHeader>
         <PostPostingButton />
-        {miniButtonVisible && <PostPostingButtonMini />}
       </div>
       {data?.map((item, index) => (
         <PostListItem

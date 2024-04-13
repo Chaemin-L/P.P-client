@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import { PostListItemProps } from "./type";
 
-import calendarIcon from "@/assets/icons/calendar-icon.png";
-import knotIcon from "@/assets/icons/knot-icon.png";
-import mapIcon from "@/assets/icons/map-icon.png";
-import peopleIcon from "@/assets/icons/people-icon.png";
+import ApplicantSVG from "@/assets/icons/applicant.svg";
+import DateSVG from "@/assets/icons/date.svg";
+import KnotSVG from "@/assets/icons/knot.svg";
+import LocationSVG from "@/assets/icons/location.svg";
 import { colorTheme } from "@/style/color-theme";
 import { BackdateToItemtype } from "@/utils/backdate-to-itemtype";
 
@@ -27,20 +27,20 @@ export const PostListItem = (props: PostListItemProps) => {
         {props.status == "TRANSACTION_COMPLETED" && (
           <StateFin>거래완료</StateFin>
         )}
-        <TopIcon src={peopleIcon} />
+        <TopIcon src={ApplicantSVG} />
         <StateSpan>
           {props.currentApplicant}/{props.maxNumOfPeople}명
         </StateSpan>
-        <TopIcon src={knotIcon} />
+        <TopIcon src={KnotSVG} />
         <StateSpan>{props.pay}매듭</StateSpan>
       </RowBox>
       <Title>{props.title}</Title>
       <RowBox>
-        <BottomIcon src={mapIcon} />
+        <BottomIcon icon={LocationSVG} />
         <StateSpan>{props.location}</StateSpan>
       </RowBox>
       <RowBox>
-        <BottomIcon src={calendarIcon} />
+        <BottomIcon icon={DateSVG} />
         <StateSpan>{BackdateToItemtype(props.startDate)}</StateSpan>
       </RowBox>
     </Wrapper>
@@ -89,13 +89,22 @@ const Title = styled.span`
 `;
 
 const TopIcon = styled.img`
-  padding: 0 7px 0 13px;
+  margin: 0 0.39rem 0 0.72rem;
+  width: 1rem;
+  height: 1rem;
 `;
 
 const StateSpan = styled.span`
-  font-size: 15px;
+  font-size: 0.83rem;
 `;
 
-const BottomIcon = styled.img`
-  padding-right: 14px;
+const BottomIcon = styled.div<{ icon: string }>`
+  margin-right: 0.78rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1px;
+  background-image: url(${({ icon }) => icon});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 `;
