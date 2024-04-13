@@ -237,9 +237,9 @@ const JustifyWrapper = styled.div`
 `;
 
 const DoneWrapper = styled.div`
+  width: 110%;
   position: relative;
-  width: 100dvw;
-  left: -15px;
+  right: 5%;
   padding: 25px;
   margin-bottom: 20px;
   background-color: ${colorTheme.blue100};
