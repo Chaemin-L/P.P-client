@@ -1,5 +1,6 @@
 import Instance from "./axios-instance";
 import {
+  PostType,
   RequestPostingProps,
   ResponsePostListProps,
   ResponsePostingProps,
@@ -27,10 +28,10 @@ export default class PostApi {
   }
 
   static async getPostList() {
-    const reponse = await Instance.get("/haetsal-service/api/v2/market/post");
+    const response = await Instance.get("/haetsal-service/api/v2/market/post");
 
-    if (reponse) {
-      const temp = reponse.data as ResponsePostListProps;
+    if (response) {
+      const temp = response.data as ResponsePostListProps;
       return temp.data;
     } else {
       throw new Error("Invalid response from server");
@@ -38,12 +39,12 @@ export default class PostApi {
   }
 
   static async getUserActivity(type: string) {
-    const reponse = await Instance.get(
+    const response = await Instance.get(
       `/haetsal-service/api/v2/market/post/user-activity/${type}`,
     );
 
-    if (reponse) {
-      const temp = reponse.data as ResponsePostListProps;
+    if (response) {
+      const temp = response.data as ResponsePostListProps;
       return temp.data;
     } else {
       throw new Error("Invalid response from server");

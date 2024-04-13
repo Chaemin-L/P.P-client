@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { AppBar } from "@/components/common/app-bar";
 import { MypageList } from "@/components/mypage/mypage-list";
+import { MypageListProfile } from "@/components/mypage/mypage-list-profile";
 import { MypageToggleSwitch } from "@/components/mypage/mypage-toggle-switch";
 import { colorTheme } from "@/style/color-theme";
 
@@ -11,15 +12,31 @@ export const Mypage = () => {
 
   return (
     <Wrapper>
-      <AppBar style={{ backgroundColor: colorTheme.blue100 }}>
+      <AppBar style={{ backgroundColor: colorTheme.blue900 }}>
         <AppBar.AppBarNavigate
-          style={{ paddingBottom: "19px", paddingTop: "25px" }}
+          style={{
+            paddingBottom: "1.06rem",
+            paddingTop: "2.944rem",
+            paddingLeft: "1.94rem",
+          }}
         >
-          <AppBar.HeaderText style={{ fontSize: "25px" }}>
+          <AppBar.HeaderText
+            style={{
+              fontSize: "1.78rem",
+              color: "#ffffff",
+              textAlign: "start",
+            }}
+          >
             마이페이지
           </AppBar.HeaderText>
         </AppBar.AppBarNavigate>
-        <div style={{ width: "100%", backgroundColor: colorTheme.blue100 }}>
+        <MypageListProfile />
+        <div
+          style={{
+            width: "100%",
+            backgroundColor: colorTheme.blue100,
+          }}
+        >
           <MypageToggleSwitch
             firstText="내게시물"
             secondText="신청내역"
@@ -38,4 +55,5 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 `;

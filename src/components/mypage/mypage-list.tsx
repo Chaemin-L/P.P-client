@@ -26,7 +26,7 @@ export const MypageList = ({ type }: { type: string }) => {
 };
 
 const Wrapper = styled.div`
-  overflow: auto;
+  /* overflow: auto; */
   width: 100%;
   height: 100%;
   background-color: white;
