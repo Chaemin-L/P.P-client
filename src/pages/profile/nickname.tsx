@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -9,11 +8,15 @@ import { Header } from "@/components/signup/header";
 import { Input } from "@/components/signup/input";
 import { profileState } from "@/recoil/atoms/profile-state";
 
-export const NicknamePage = () => {
+type NicknamePageProps = {
+  nextStep: () => void;
+  onModal: () => void;
+};
+
+export const NicknamePage = ({ nextStep, onModal }: NicknamePageProps) => {
   const [nickname, setNickname] = useState<string>("");
 
   const setProfile = useSetRecoilState(profileState);
-  const navigate = useNavigate();
 
   return (
     <ContentLayout>
@@ -22,16 +25,21 @@ export const NicknamePage = () => {
         maxLength={5}
         value={nickname}
         onChange={({ target }) => setNickname(target.value)}
+        style={{ maxWidth: "80%" }}
       />
       <Description text="닉네임을 최대 5글자로\n쓸 수 있어요~" />
       <BottomFixed>
         <BottomFixed.Button
           onClick={() => {
+            if (nickname.length === 0) {
+              onModal();
+              return;
+            }
             setProfile((profile) => ({
               ...profile,
               nickname,
             }));
-            navigate("/signup/2");
+            nextStep();
           }}
         >
           다음

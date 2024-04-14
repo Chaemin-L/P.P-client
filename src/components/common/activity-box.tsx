@@ -1,43 +1,35 @@
-import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
+import { PostType, StatusType } from "@/api/types/post-type";
 import ApplicantSVG from "@/assets/icons/applicant.svg";
 import DateSVG from "@/assets/icons/date.svg";
 import KnotSVG from "@/assets/icons/knot.svg";
 import LocationSVG from "@/assets/icons/location.svg";
 import TimeSVG from "@/assets/icons/time.svg";
-import { activityState } from "@/recoil/atoms/activity-state";
 import { colorTheme } from "@/style/color-theme";
 
-type ActivityBoxProps = {
-  title: string;
-  content: string;
-  location: string;
-  volunteerTime: number;
-  pay: number;
-  startDate: string;
-  status: string;
-  currentApplicant: number;
-  maxNumOfPeople: number;
-  visitor?: number; // 조회수
-};
+export const ActivityBox = (
+  data: Omit<PostType, "startDate"> & { startDate: string[] },
+) => {
+  const {
+    status,
+    currentApplicant,
+    maxNumOfPeople,
+    pay,
+    title,
+    content,
+    location,
+    volunteerTime,
+    startDate,
+    viewsCount,
+  } = data;
 
-export const ActivityBox = ({
-  title,
-  content,
-  volunteerTime,
-  location,
-  pay,
-  startDate,
-  currentApplicant,
-  status,
-  maxNumOfPeople,
-  visitor,
-}: ActivityBoxProps) => {
   return (
     <>
       <Progress>
-        <Status>{status === "RECRUITING" ? "모집중" : "모집완료"}</Status>
+        <Status $status={status}>
+          {status === "RECRUITING" ? "모집중" : "모집완료"}
+        </Status>
         <HeadCount>
           {currentApplicant}/{maxNumOfPeople}명
         </HeadCount>
@@ -51,18 +43,26 @@ export const ActivityBox = ({
 
       <MoreInfoContainer>
         <PromiseInfoList>
-          <PromiseInfoItem icon={DateSVG}>
-            <span>{new Date(startDate).toLocaleDateString()}</span>
+          <PromiseInfoItem $icon={DateSVG}>
+            <span>
+              {startDate[0]}월 {startDate[1]}일{" "}
+              {+startDate[2] > 12
+                ? +startDate[2] === 0
+                  ? `오전 12시`
+                  : `오후 ${+startDate[2] - 12}`
+                : startDate[2]}
+              :{startDate[3]}
+            </span>
           </PromiseInfoItem>
-          <PromiseInfoItem icon={LocationSVG}>
+          <PromiseInfoItem $icon={LocationSVG}>
             <span>{location}</span>
           </PromiseInfoItem>
-          <PromiseInfoItem icon={TimeSVG}>
+          <PromiseInfoItem $icon={TimeSVG}>
             <span>예상 소요 시간 {volunteerTime}분</span>
           </PromiseInfoItem>
         </PromiseInfoList>
 
-        <span>조회수 {visitor}</span>
+        <span>조회수 {viewsCount}회</span>
       </MoreInfoContainer>
     </>
   );
@@ -76,13 +76,17 @@ const Progress = styled.div`
   justify-content: space-between;
 `;
 
-const Status = styled.div`
+const Status = styled.div<{ $status: StatusType }>`
   width: fit-content;
   padding: 6px 11px;
   border-radius: 11px;
   background-color: ${colorTheme.orange400};
   color: white;
-  font-size: 15px;
+  font-size: 0.83rem;
+
+  ${({ $status }) =>
+    $status == "RECRUITMENT_COMPLETED" &&
+    `background: transparent; color: ${colorTheme.blue500};`}
 `;
 
 const PostInfo = styled.div`
@@ -98,7 +102,7 @@ const PostInfo = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 1.6rem;
   font-weight: 700;
 `;
 
@@ -148,7 +152,7 @@ const PromiseInfoList = styled.div`
   gap: 13px;
 `;
 
-const PromiseInfoItem = styled.div<{ icon: string }>`
+const PromiseInfoItem = styled.div<{ $icon: string }>`
   display: flex;
   align-items: center;
   gap: 11px;
@@ -156,45 +160,9 @@ const PromiseInfoItem = styled.div<{ icon: string }>`
     width: 20px;
     height: 20px;
     border-radius: 1px;
-    background-image: url(${({ icon }) => icon});
+    background-image: url(${({ $icon }) => $icon});
     background-position: center;
     background-repeat: no-repeat;
     content: " ";
   }
 `;
-
-/** buttons */
-const CompleteButton = () => {
-  const [_, setActivity] = useRecoilState(activityState);
-
-  return (
-    <>
-      <button
-        onClick={() =>
-          setActivity((activity) => ({ ...activity, readOnly: true }))
-        }
-      >
-        모집완료
-      </button>
-    </>
-  );
-};
-
-const EditButton = () => {
-  const [_, setActivity] = useRecoilState(activityState);
-
-  return (
-    <>
-      <button
-        onClick={() =>
-          setActivity((activity) => ({
-            ...activity,
-            readOnly: !activity.readOnly,
-          }))
-        }
-      >
-        수정하기
-      </button>
-    </>
-  );
-};

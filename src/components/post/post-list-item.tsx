@@ -93,7 +93,7 @@ const TopIcon = styled.img`
 `;
 
 const StateSpan = styled.span`
-  font-size: 15px;
+  font-size: 0.83rem;
 `;
 
 const BottomIcon = styled.img`

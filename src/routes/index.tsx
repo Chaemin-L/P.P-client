@@ -8,7 +8,7 @@ import { ChatRoom } from "@/pages/chat/chat-room";
 import { LoginPage } from "@/pages/login/login";
 import { LoginEnd } from "@/pages/login/login-end";
 import { Mypage } from "@/pages/mypage/mypage";
-import { MyPostPage } from "@/pages/mypost";
+import { ApplicantListPage } from "@/pages/post/applicant-list";
 import { PostDetailPage } from "@/pages/post/post-detail";
 import { PostList } from "@/pages/post/post-list";
 import { Posting1 } from "@/pages/posting/posting1";
@@ -19,14 +19,8 @@ import { Posting5 } from "@/pages/posting/posting5";
 import { Posting6 } from "@/pages/posting/posting6";
 import { Posting7 } from "@/pages/posting/posting7";
 import { Posting8 } from "@/pages/posting/posting8";
-import { SignupPage } from "@/pages/signup";
-import { BirthdayPage } from "@/pages/signup/birthday";
-import { DonePage } from "@/pages/signup/done";
-import { GenderPage } from "@/pages/signup/gender";
-import { NicknamePage } from "@/pages/signup/nickname";
-import { PhotoDescriptionPage } from "@/pages/signup/photo-description";
-import { TakePhotoPage } from "@/pages/signup/take-photo";
-import { WelcomePage } from "@/pages/signup/welcome";
+import { ProfilePage } from "@/pages/profile";
+import { DonePage } from "@/pages/profile/done";
 import { Test } from "@/pages/test";
 import { Test2 } from "@/pages/test2";
 
@@ -44,46 +38,20 @@ const router = createBrowserRouter([
       //   element: <GoogleAuth />,
       // },
       {
-        path: "signup/",
-        element: <SignupPage />,
-        children: [
-          {
-            path: "",
-            element: <WelcomePage />,
-          },
-          {
-            path: "1",
-            element: <NicknamePage />,
-          },
-          {
-            path: "2",
-            element: <GenderPage />,
-          },
-          {
-            path: "3",
-            element: <PhotoDescriptionPage />,
-          },
-          {
-            path: "4",
-            element: <TakePhotoPage />,
-          },
-          {
-            path: "5",
-            element: <BirthdayPage />,
-          },
-          {
-            path: "6",
-            element: <DonePage />,
-          },
-        ],
+        path: "profile/",
+        element: <ProfilePage />,
       },
       {
-        path: "/post/:id",
+        path: "profile/done/",
+        element: <DonePage />,
+      },
+      {
+        path: "/post/:postId",
         element: <PostDetailPage />,
       },
       {
-        path: "/mypost/:id",
-        element: <MyPostPage />,
+        path: "/post/:postId/applicant",
+        element: <ApplicantListPage />,
       },
       { path: "/login/end", element: <LoginEnd /> },
       { path: "/auth/kakao", element: <KakaoAuth /> },

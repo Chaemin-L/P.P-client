@@ -1,5 +1,5 @@
 import Instance from "./axios-instance";
-import { ProfileDataResponse } from "./types/profile-type";
+import { ProfileDataResponse, ProfilePostResponse } from "./types/profile-type";
 
 export default class ProfileApi {
   static async getProfile(userId?: number) {
@@ -12,5 +12,13 @@ export default class ProfileApi {
     } else {
       throw new Error("Invalid response from server");
     }
+  }
+
+  static async postProfile() {
+    return await Instance.post("/haetal-service/api/v2/profile")
+      .then((res) => res.data as ProfilePostResponse)
+      .catch(() => {
+        throw new Error("Invalid response from server");
+      });
   }
 }

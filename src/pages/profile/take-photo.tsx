@@ -1,26 +1,27 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { Button } from "@/components/common/button";
-import { Modal } from "@/components/common/modal";
 import Camera from "@/components/signup/camera";
 import { profileState } from "@/recoil/atoms/profile-state";
 
-export const TakePhotoPage = () => {
+type TakePhotoPageProps = {
+  nextStep: () => void;
+  onModal: () => void;
+};
+
+export const TakePhotoPage = ({ nextStep, onModal }: TakePhotoPageProps) => {
   const [dataUri, setDataUri] = useState("");
-  const [warningModal, setWarningModal] = useState(false);
 
   const setProfile = useSetRecoilState(profileState);
-  const navigate = useNavigate();
 
-  const nextStep = () => {
+  const nextPage = () => {
     setProfile((profile) => ({
       ...profile,
       file: dataUri,
     }));
-    navigate("/signup/5");
+    nextStep();
   };
 
   return (
@@ -28,11 +29,7 @@ export const TakePhotoPage = () => {
       <ContentLayout>
         <ButtonContainer>
           <Button onClick={() => setDataUri("")}>다시찍기</Button>
-          <Button
-            onClick={() =>
-              dataUri.length ? nextStep() : setWarningModal(true)
-            }
-          >
+          <Button onClick={() => (dataUri.length ? nextPage() : onModal())}>
             완료
           </Button>
         </ButtonContainer>
@@ -50,11 +47,6 @@ export const TakePhotoPage = () => {
           )}
         </div>
       </ContentLayout>
-      {warningModal && (
-        <Modal onClose={() => setWarningModal(false)}>
-          <Modal.Title text="본인 사진 촬영은\n필수입니다." />
-        </Modal>
-      )}
     </>
   );
 };

@@ -74,11 +74,11 @@ const ProfileRowBox = styled.div`
 `;
 
 const Name = styled.span`
-  font-size: 25px;
+  font-size: 1.38rem;
 `;
 
 const SexAge = styled.span`
-  font-size: 10px;
+  font-size: 0.56rem;
   color: ${colorTheme.shade};
 `;
 
@@ -108,12 +108,12 @@ const KnotIconImg = styled.img`
 `;
 
 const KnotPriceState = styled.span`
-  font-size: 25px;
+  font-size: 1.38rem;
   font-weight: bold;
 `;
 
 const KnotPriceWon = styled.span`
-  font-size: 13px;
+  font-size: 0.72rem;
 `;
 
 const OtherStateColumnBox = styled.div`

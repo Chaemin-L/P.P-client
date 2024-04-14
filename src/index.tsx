@@ -7,7 +7,7 @@ import { App } from "./app";
 import reportWebVitals from "./reportWebVitals";
 
 const root = createRoot(document.getElementById("root")!);
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 root.render(
   // <React.StrictMode>
   <QueryClientProvider client={queryClient}>

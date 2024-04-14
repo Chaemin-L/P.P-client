@@ -59,5 +59,5 @@ const StyledButton = styled.button<{
   ${({ $rounded }) => $rounded && "border-radius: 50px;"}
   border: 0;
   color: white;
-  font-size: 24px;
+  font-size: 1.3rem;
 `;
