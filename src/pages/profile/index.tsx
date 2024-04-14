@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import { BirthdayPage } from "./birthday";
 import { GenderPage } from "./gender";
 import { NicknamePage } from "./nickname";
+import { PasswordPage } from "./password";
 import { PhotoDescriptionPage } from "./photo-description";
 import { TakePhotoPage } from "./take-photo";
 import { WelcomePage } from "./welcome";
@@ -11,7 +12,7 @@ import { WelcomePage } from "./welcome";
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
 
-const STEPSIZE = 5;
+const STEPSIZE = 6;
 
 type ProgressDotsType = {
   activeIdx: number;
@@ -21,7 +22,7 @@ const ProgressDots = ({ activeIdx }: ProgressDotsType) => {
   if (activeIdx === 0) return <></>;
   return (
     <ProgressDotsContainer>
-      {new Array(STEPSIZE).fill(0).map((a, i) => (
+      {new Array(STEPSIZE).fill(0).map((_, i) => (
         <Dot key={i} $active={activeIdx === i + 1} />
       ))}
     </ProgressDotsContainer>
@@ -68,7 +69,13 @@ export const ProfilePage = () => {
           onModal={() => setRequiredModal(true)}
         />
       )}
-      {step === 5 && <BirthdayPage onModal={() => setRequiredModal(true)} />}
+      {step === 5 && (
+        <BirthdayPage
+          nextStep={nextStep}
+          onModal={() => setRequiredModal(true)}
+        />
+      )}
+      {step === 6 && <PasswordPage />}
       {requiredModal && (
         <Modal onClose={() => setRequiredModal(false)}>
           <Modal.Title text={`${requiredElem}은\\n필수 항목입니다.`} />

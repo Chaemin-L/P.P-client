@@ -2,8 +2,8 @@ import { styled } from "styled-components";
 
 import WelcomeSVG from "@/assets/images/welcome.svg";
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { Description } from "@/components/signup/description";
-import { Header } from "@/components/signup/header";
+import { Description } from "@/components/profile/description";
+import { Header } from "@/components/profile/header";
 
 type WelcomePageProps = {
   nextStep: () => void;

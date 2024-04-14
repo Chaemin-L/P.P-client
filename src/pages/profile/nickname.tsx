@@ -3,9 +3,9 @@ import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { Description } from "@/components/signup/description";
-import { Header } from "@/components/signup/header";
-import { Input } from "@/components/signup/input";
+import { Description } from "@/components/profile/description";
+import { Header } from "@/components/profile/header";
+import { Input } from "@/components/profile/input";
 import { profileState } from "@/recoil/atoms/profile-state";
 
 type NicknamePageProps = {

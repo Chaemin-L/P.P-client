@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 
 import FemaleSVG from "@/assets/images/female.svg";
 import MaleSVG from "@/assets/images/male.svg";
-import { Header } from "@/components/signup/header";
+import { Header } from "@/components/profile/header";
 import { profileState } from "@/recoil/atoms/profile-state";
 
 type GenderPageProps = {

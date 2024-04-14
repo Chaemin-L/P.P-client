@@ -3,7 +3,7 @@ import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { Button } from "@/components/common/button";
-import Camera from "@/components/signup/camera";
+import Camera from "@/components/profile/camera";
 import { profileState } from "@/recoil/atoms/profile-state";
 
 type TakePhotoPageProps = {
