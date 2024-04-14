@@ -21,27 +21,30 @@ export const useGetChatList = () => {
     queryFn: () => ChatApi.getChatList(),
   });
 
+  console.log(data);
+
   const tempList: tempType[] = [];
 
-  data?.map((item, index) => {
-    const { data: postDetail } = useQuery({
-      queryKey: ["postDetail"],
-      queryFn: () => PostApi.getPostDetail(item.postId),
-    });
-    if (postDetail) {
-      const tempPostDetail = postDetail?.marketPostResponse;
-      tempList.push({
-        roomId: item.roomId,
-        postId: item.postId,
-        memberCount: item.memberCount,
-        postTitle: tempPostDetail.title,
-        postStatus: tempPostDetail.status,
-        time: "3분전",
-        chatMsg: "샬라샬라",
-        msgNum: 3,
-      });
-    }
-  });
-
+  // if (data) {
+  //   for (let i = 0; i < data.length; i++) {
+  //     const { data: postDetail } = useQuery({
+  //       queryKey: ["postDetail"],
+  //       queryFn: () => PostApi.getPostDetail(data[i].postId),
+  //     });
+  //     if (postDetail) {
+  //       const tempPostDetail = postDetail?.marketPostResponse;
+  //       tempList.push({
+  //         roomId: data[i].roomId,
+  //         postId: data[i].postId,
+  //         memberCount: data[i].memberCount,
+  //         postTitle: tempPostDetail.title,
+  //         postStatus: tempPostDetail.status,
+  //         time: "3분전",
+  //         chatMsg: "샬라샬라",
+  //         msgNum: 3,
+  //       });
+  //     }
+  //   }
+  // }
   return tempList;
 };

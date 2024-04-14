@@ -21,7 +21,7 @@ export const PostListItem = (props: PostListItemProps) => {
     >
       <RowBox>
         {props.status == "RECRUITING" && <StateIng>모집중</StateIng>}
-        {props.status == "RECRUITEMNT_COMPLETED" && (
+        {props.status == "RECRUITMENT_COMPLETED" && (
           <StateFin>모집완료</StateFin>
         )}
         {props.status == "TRANSACTION_COMPLETED" && (
@@ -85,7 +85,7 @@ const StateIng = styled.div`
 const StateFin = styled.div`
   font-size: 1rem;
   color: ${colorTheme.blue900};
-  padding: 0.22rem 0.44rem;
+  padding: 0.22rem;
 `;
 
 const Title = styled.span`

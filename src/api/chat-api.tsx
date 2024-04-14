@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from "axios";
 
 import Instance from "./axios-instance";
 import {
+  ChatFinalRespnse,
   ChatGetResponse,
-  ChatListItem,
   ChatSendResponse,
 } from "./types/chat-type";
 
@@ -45,9 +45,10 @@ export default class ChatApi {
         withCredentials: true,
       },
     );
-
+    console.log(response);
     if (response) {
-      return response.data as ChatListItem[];
+      const temp = response.data as ChatFinalRespnse;
+      return temp.result;
     } else {
       throw new Error("Invalid response from server");
     }

@@ -1,5 +1,3 @@
-import { FinalResponse } from "./common-type";
-
 export type ChatGetResponse = {
   id: string;
   roomIdx: number;
@@ -22,6 +20,9 @@ export type ChatListItem = {
   memberCount: number;
 };
 
-// export type ChatListResponse = FinalResponse<{
-
-// }>
+export type ChatFinalRespnse = {
+  message: string;
+  code: string;
+  success: boolean;
+  result: ChatListItem[];
+};
