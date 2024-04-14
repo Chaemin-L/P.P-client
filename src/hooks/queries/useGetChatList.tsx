@@ -1,4 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+
+import { useGetPostDetail } from "./useGetPostDetail";
 
 import ChatApi from "@/api/chat-api";
 import PostApi from "@/api/post-api";
@@ -15,36 +18,36 @@ type tempType = {
 };
 
 export const useGetChatList = () => {
-  console.log("Token: ", localStorage.getItem("accessToken"));
-  const { data } = useQuery({
-    queryKey: ["chatList"],
+  return useQuery({
+    queryKey: ["chat-list"],
     queryFn: () => ChatApi.getChatList(),
   });
+  // const { data: chatData } = useQuery({
+  //   queryKey: ["chat-list"],
+  //   queryFn: () => ChatApi.getChatList(),
+  // });
 
-  console.log(data);
+  // if (!chatData) return [];
 
-  const tempList: tempType[] = [];
+  // const tempList: tempType[] = [];
 
-  // if (data) {
-  //   for (let i = 0; i < data.length; i++) {
-  //     const { data: postDetail } = useQuery({
-  //       queryKey: ["postDetail"],
-  //       queryFn: () => PostApi.getPostDetail(data[i].postId),
+  // for (let i = 0; i < chatData.length; i++) {
+  //   const { data: postDetail } = useGetPostDetail(
+  //     chatData[i].postId.toString(),
+  //   );
+  //   if (postDetail) {
+  //     const tempPostDetail = postDetail?.marketPostResponse;
+  //     tempList.push({
+  //       roomId: chatData[i].roomId,
+  //       postId: chatData[i].postId,
+  //       memberCount: chatData[i].memberCount,
+  //       postTitle: tempPostDetail.title,
+  //       postStatus: tempPostDetail.status,
+  //       time: "3분전",
+  //       chatMsg: "샬라샬라",
+  //       msgNum: 3,
   //     });
-  //     if (postDetail) {
-  //       const tempPostDetail = postDetail?.marketPostResponse;
-  //       tempList.push({
-  //         roomId: data[i].roomId,
-  //         postId: data[i].postId,
-  //         memberCount: data[i].memberCount,
-  //         postTitle: tempPostDetail.title,
-  //         postStatus: tempPostDetail.status,
-  //         time: "3분전",
-  //         chatMsg: "샬라샬라",
-  //         msgNum: 3,
-  //       });
-  //     }
   //   }
   // }
-  return tempList;
+  // return tempList;
 };

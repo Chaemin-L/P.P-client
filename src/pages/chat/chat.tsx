@@ -9,7 +9,7 @@ import { useGetChatList } from "@/hooks/queries/useGetChatList";
 
 export const Chat = () => {
   const [appBarHeight, setAppBarHeight] = useState(0);
-  const chatList = useGetChatList();
+  const { data: chatList } = useGetChatList();
 
   useEffect(() => {
     const element = document.getElementById("AppBar");
@@ -24,7 +24,7 @@ export const Chat = () => {
       <AppBar id="AppBar" isFixed={true}>
         <PageText>채팅</PageText>
       </AppBar>
-      <ChatList chatList={chatList} />
+      {chatList && <ChatList chatList={chatList} />}
     </Wrapper>
   );
 };

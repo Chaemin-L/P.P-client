@@ -13,7 +13,7 @@ export const TransferDetail = ({ setScreen }: TransferDetailProps) => {
   return (
     <Wrapper>
       <CheckMsg>
-        {lastTransfer.users[0].name}님 외 {lastTransfer.member - 1}분께
+        {lastTransfer.users[0].nickName}님 외 {lastTransfer.member - 1}분께
         <br />
         일괄 송금할까요?
       </CheckMsg>

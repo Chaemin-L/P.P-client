@@ -3,12 +3,30 @@ import { styled } from "styled-components";
 import { ChatListItem } from "./chat-list-item";
 import { ChatRoomItemType } from "./type";
 
-export const ChatList = ({ chatList }: { chatList: ChatRoomItemType[] }) => {
+import { ChatListItemType } from "@/api/types/chat-type";
+import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
+
+export const ChatList = ({ chatList }: { chatList: ChatListItemType[] }) => {
   return (
     <ScrollContainer>
-      {chatList.map((item, index) => (
-        <ChatListItem key={index} {...item} />
-      ))}
+      {chatList.map((item, index) => {
+        console.log("item index: ", index);
+        console.log("item: ", item);
+        const { data: postDetail } = useGetPostDetail(item.postId.toString());
+        if (postDetail) {
+          const tempItem: ChatRoomItemType = {
+            roomId: item.roomId,
+            postId: item.postId,
+            memberCount: item.memberCount,
+            postTitle: postDetail.marketPostResponse.title,
+            postStatus: postDetail.marketPostResponse.status,
+            time: "3분전",
+            chatMsg: "샬라샬라",
+            msgNum: item.memberCount,
+          };
+          return <ChatListItem key={index} {...tempItem} />;
+        }
+      })}
     </ScrollContainer>
   );
 };

@@ -9,8 +9,12 @@ export const ChatListItem = (props: ChatRoomItemType) => {
   const navigate = useNavigate();
 
   const HandlerEnterRoom = () => {
-    navigate(`/chat/${props.roomId}`, {
-      state: { memberCount: props.memberCount },
+    navigate(`/chat/detail`, {
+      state: {
+        roomId: props.roomId,
+        postId: props.postId,
+        memberCount: props.memberCount,
+      },
     });
   };
   return (

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { allMsg, tempList } from "./dummy";
-import { ChatDetailState } from "./type";
 
+import { ChatListItemType } from "@/api/types/chat-type";
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
@@ -14,7 +14,9 @@ import { Modal } from "@/components/common/modal";
 import { ProfileModal } from "@/components/common/profile-modal";
 import { Report } from "@/components/report/report";
 import { Transfer } from "@/components/transfer/transfer";
+import { useChatDataSetting } from "@/hooks/chat/useChatDataSetting";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
+import { useGetMessages } from "@/hooks/queries/useGetMessages";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { transferState } from "@/recoil/atoms/transfer-state";
 // import SockJS from "sockjs-client";
@@ -23,7 +25,9 @@ import { transferState } from "@/recoil/atoms/transfer-state";
 export const ChatRoom = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as ChatDetailState;
+  const state = location.state as ChatListItemType;
+
+  const [transfer, setTransfer] = useRecoilState(transferState);
 
   const [appBarHeight, setAppBarHeight] = useState(0);
   const [appBerVisibility, setAppBarVisibility] = useState(true);
@@ -32,27 +36,14 @@ export const ChatRoom = () => {
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
   const [isTransfer, setIsTransfer] = useState(false);
   const [isReport, setIsReport] = useState(false);
-  const setTransfer = useSetRecoilState(transferState);
-  const setLastTransfer = useSetRecoilState(lastTransferState);
+  useChatDataSetting(state);
+  const { data: msgs } = useGetMessages(state.roomId);
   const [reportModal, setReportModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
 
-  const { data } = useGetBankData();
-
   const [msg, setMsg] = useState("");
-
-  useEffect(() => {
-    setTransfer({
-      ...tempList,
-      availableBudget: data ? data.availableBudget : 4000,
-    });
-    setLastTransfer({
-      ...tempList,
-      availableBudget: data ? data.availableBudget : 4000,
-    });
-  }, [setTransfer, setLastTransfer]);
 
   return (
     <PageContainer>
@@ -75,14 +66,18 @@ export const ChatRoom = () => {
           paddingTop: appBerVisibility ? `${appBarHeight + 10}px` : "10px",
         }}
       >
-        {allMsg.map((item, index) => {
+        {msgs?.map((item, index) => {
+          const temp = transfer.users.find(
+            (e) => e.userId.toString() === item.userId,
+          );
           return (
             <ChatItem
               key={index}
-              userId={item.senderUuid}
-              userName={item.senderName}
+              userId={Number(item.userId)}
+              userName={temp ? temp.nickName : "(알 수 없음)"}
               setProfileModal={setProfileModal}
               setProfileUserId={setProfileUserId}
+              imgurl={temp ? temp.profileImg : undefined}
             >
               {item.message}
             </ChatItem>
@@ -119,7 +114,6 @@ export const ChatRoom = () => {
               setIsBottomSheetOpened(false);
               setIsReport(false);
               setReportModal(true);
-              //신고완료 모달창 띄우기
             }}
           />
         )}

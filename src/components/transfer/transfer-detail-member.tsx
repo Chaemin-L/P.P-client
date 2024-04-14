@@ -36,13 +36,18 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
     }
   };
 
-  const handleMemberCheck = (item: { name: string; userId: string }) => {
+  const handleMemberCheck = (item: {
+    nickName: string;
+    userId: number;
+    blocked: boolean;
+    profileImg: string;
+  }) => {
     const foundUser = lastTransfer.users.find(
-      (user) => user.name === item.name,
+      (user) => user.nickName === item.nickName,
     );
     const isTrue = !!foundUser;
     const tempUsers = isTrue
-      ? lastTransfer.users.filter((user) => user.name !== item.name)
+      ? lastTransfer.users.filter((user) => user.nickName !== item.nickName)
       : [...lastTransfer.users, item];
 
     setLastTransfer((prevLastTransfer) => {
@@ -78,7 +83,7 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
       <MemberScroll>
         {transfer.users.map((item, index) => {
           const foundUser = lastTransfer.users.find(
-            (user) => user.name === item.name,
+            (user) => user.nickName === item.nickName,
           );
           const isTrue = !!foundUser;
           return (
@@ -87,7 +92,7 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
               isTrue={isTrue}
               setIsTrue={() => handleMemberCheck(item)}
             >
-              {item.name}
+              {item.nickName}
             </TransferDetailMemberItem>
           );
         })}

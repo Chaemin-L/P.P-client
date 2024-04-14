@@ -37,3 +37,10 @@ export type ChatAppBarType = {
   onClickTransfer: () => void;
   onClickReport: () => void;
 };
+
+export type ChatInRoomUser = {
+  nickName: string;
+  userId: number;
+  profileImg: string;
+  blocked: boolean;
+};

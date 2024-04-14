@@ -1,12 +1,3 @@
-export type ChatGetResponse = {
-  id: string;
-  roomIdx: number;
-  senderName: string;
-  senderUuid: string;
-  message: string;
-  createdAt: string;
-};
-
 export type ChatSendResponse = {
   roomIdx: number;
   senderName: string;
@@ -14,15 +5,29 @@ export type ChatSendResponse = {
   message: string;
 };
 
-export type ChatListItem = {
+export type ChatListItemType = {
   roomId: string;
   postId: number;
   memberCount: number;
 };
 
-export type ChatFinalRespnse = {
+export type ChatFinalResponse<T extends object = Record<string, unknown>> = {
   message: string;
   code: string;
   success: boolean;
-  result: ChatListItem[];
+  result: T;
 };
+
+export type ChatListResponse = ChatFinalResponse<ChatListItemType[]>;
+
+export type ChatRoomMessage = {
+  userId: string;
+  message: string;
+  createdAt: string;
+};
+
+export type ChatRoomMessageList = ChatFinalResponse<ChatRoomMessage[]>;
+
+export type ChatMemberResponse = ChatFinalResponse<{
+  userIds: string[];
+}>;

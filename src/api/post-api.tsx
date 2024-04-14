@@ -66,7 +66,7 @@ export default class PostApi {
     }
   }
 
-  static async getPostDetail(postId: number) {
+  static async getPostDetail(postId: string) {
     const response = await Instance.get(
       `/haetsal-service/api/v2/market/post/${postId}`,
     );
