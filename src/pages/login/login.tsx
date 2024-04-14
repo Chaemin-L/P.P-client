@@ -5,7 +5,7 @@ export const LoginPage = () => {
   return (
     <>
       <KakaoButton />
-      {/* <GoogleButton /> */}
+      <GoogleButton />
     </>
   );
 };

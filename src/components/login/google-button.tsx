@@ -1,31 +1,37 @@
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  User as FirebaseUser,
-} from "firebase/auth";
-import { useState } from "react";
-
-import { auth } from "@/lib/firebase";
+import { useGoogleLogin } from "@/hooks/use-google-login";
 
 export const GoogleButton = () => {
-  const [userData, setUserData] = useState<FirebaseUser | null>(null);
+  const { isLoading, signIn, signOut, user, accessToken } = useGoogleLogin();
 
-  function handleGoogleLogin() {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        setUserData(data.user);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
+  if (isLoading) return <div>Loading...</div>;
   return (
-    <div>
-      <button onClick={handleGoogleLogin}>Login</button>
-      {userData ? userData.displayName : null}
-    </div>
+    <>
+      <button onClick={() => void signIn()}>Login</button>
+      <button onClick={() => void signOut()}>Logout</button>
+      <div>
+        {!isLoading && user ? (
+          <div>
+            <>
+              <br />
+              Profile: <br />
+              <img src={user.photoURL ?? ""} width={50} height={50} />
+              <br />
+              {user.displayName}님<br />
+              {user.email},
+              <br />
+              <br />
+              AccessToken:
+              <br />
+              {accessToken}
+              <br />
+              <br />
+              RefreshToken:
+              <br />
+              {user.refreshToken}
+            </>
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 };

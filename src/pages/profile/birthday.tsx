@@ -41,7 +41,7 @@ export const BirthdayPage = ({ onModal }: BirthdayPageProps) => {
       birthday: [bYear, bMonth, bDay].join("-"),
     }));
 
-    navigate("/signup/done");
+    navigate("/profile/done");
   };
 
   return (
