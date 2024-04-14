@@ -7,6 +7,7 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
+import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { postingState } from "@/recoil/atoms/posting-state";
 import { colorTheme } from "@/style/color-theme";
 
@@ -14,6 +15,7 @@ export const Posting4 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
   const [price, setPrice] = useState(posting.price);
   const navigate = useNavigate();
+  const { data } = useGetBankData();
 
   const handleSave = () => {
     setPosting((prevPosting) => {
@@ -47,6 +49,9 @@ export const Posting4 = () => {
       <BalanceText style={{ color: colorTheme.orange400 }}>
         인당 {price} 매듭 소요
       </BalanceText>
+      <BalanceText style={{ color: colorTheme.orange400 }}>
+        지금 내 사용 가능 잔액은 {data?.availableBudget}입니다.
+      </BalanceText>
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
           color="blue"
@@ -61,7 +66,7 @@ export const Posting4 = () => {
           color="blue"
           onClick={() => {
             handleSave();
-            navigate("/posting/5");
+            navigate("/posting/5", { state: data });
           }}
         >
           다음
@@ -81,7 +86,7 @@ const PageContainer = styled.div`
 const BalanceText = styled.span`
   color: black;
   font-size: 18px;
-  margin: 15% 0px 0px 0px;
+  margin: 10% 0px 0px 0px;
   text-align: center;
 `;
 

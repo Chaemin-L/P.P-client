@@ -58,7 +58,7 @@ export const PostListItem = (props: PostListItemProps) => {
 const Wrapper = styled.div`
   width: 100%;
   padding: 1.06rem 8.46%;
-  border: 1px solid #d9d9d9;
+  border-top: 1px solid #d9d9d9;
   display: flex;
   flex-direction: column;
   border-left-width: 0;

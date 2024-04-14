@@ -1,13 +1,13 @@
 import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
+import { BankAccountData } from "@/api/types/bank-type";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { InputBox } from "@/components/common/Input-box";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
-import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { postingState } from "@/recoil/atoms/posting-state";
 import { colorTheme } from "@/style/color-theme";
 
@@ -15,7 +15,8 @@ export const Posting5 = () => {
   const [posting, setPosting] = useRecoilState(postingState);
   const [member, setMember] = useState(posting.memberNum);
   const navigate = useNavigate();
-  const { data } = useGetBankData();
+  const location = useLocation();
+  const data = location.state as BankAccountData;
 
   const handleSave = () => {
     setPosting((prevPosting) => {
