@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -8,11 +7,14 @@ import MaleSVG from "@/assets/images/male.svg";
 import { Header } from "@/components/signup/header";
 import { profileState } from "@/recoil/atoms/profile-state";
 
+type GenderPageProps = {
+  nextStep: () => void;
+};
+
 type GenderType = "male" | "female";
 
-export const GenderPage = () => {
+export const GenderPage = ({ nextStep }: GenderPageProps) => {
   const [gender, setGender] = useState<GenderType>();
-  const navigate = useNavigate();
 
   const setProfile = useSetRecoilState(profileState);
 
@@ -22,7 +24,7 @@ export const GenderPage = () => {
         ...profile,
         gender,
       }));
-      navigate("/signup/3");
+      nextStep();
     }
   }, [gender]);
 
@@ -66,5 +68,5 @@ const GenderCard = styled.div`
   flex-direction: column;
   gap: 20px;
   text-align: center;
-  font-size: 25px;
+  font-size: 1.39rem;
 `;

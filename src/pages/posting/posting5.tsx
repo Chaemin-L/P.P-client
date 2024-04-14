@@ -87,7 +87,7 @@ const PageContainer = styled.div`
 
 const BalanceText = styled.span`
   color: ${colorTheme.orange400};
-  font-size: 18px;
+  font-size: 1rem;
   margin: 18% 0px 3% 0px;
 `;
 

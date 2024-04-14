@@ -1,0 +1,44 @@
+[
+  {
+    "applyId": 0,
+    "applicantInfo": {
+      "profileId": 0,
+      "nickName": "홍길동일세",
+      "profileImage": "https://media.hellobot.co/fixedmenu/%E1%84%89%E1%85%B5%E1%84%85%E1%85%A9_%E1%84%8B%E1%85%A1%E1%84%86%E1%85%AE%20%E1%84%8B%E1%85%B5%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%8C%E1%85%B5%E1%86%BA%E1%84%80%E1%85%B5.png",
+      "address": "정릉 3동 주민센터"
+    },
+    "createdTime": "2024-4-10T00:00:00",
+    "status": "NONE",
+    "introduction": "안녕하세요",
+    "postId": 0,
+    "isAccepted": false
+  },
+  {
+    "applyId": 1,
+    "applicantInfo": {
+      "profileId": 3,
+      "nickName": "동에번쩍",
+      "profileImage": "https://media.hellobot.co/fixedmenu/%E1%84%89%E1%85%B5%E1%84%85%E1%85%A9_%E1%84%8B%E1%85%A1%E1%84%86%E1%85%AE%20%E1%84%8B%E1%85%B5%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%8C%E1%85%B5%E1%86%BA%E1%84%80%E1%85%B5.png",
+      "address": "정릉 2동"
+    },
+    "createdTime": "2024-4-10T00:00:00",
+    "status": "NONE",
+    "introduction": "string",
+    "postId": 0,
+    "isAccepted": false
+  },
+  {
+    "applyId": 4,
+    "applicantInfo": {
+      "profileId": 5,
+      "nickName": "서에번쩍",
+      "profileImage": "https://media.hellobot.co/fixedmenu/%E1%84%89%E1%85%B5%E1%84%85%E1%85%A9_%E1%84%8B%E1%85%A1%E1%84%86%E1%85%AE%20%E1%84%8B%E1%85%B5%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%8C%E1%85%B5%E1%86%BA%E1%84%80%E1%85%B5.png",
+      "address": "정릉동"
+    },
+    "createdTime": "2024-4-10T00:00:00",
+    "status": "NONE",
+    "introduction": "string",
+    "postId": 0,
+    "isAccepted": true
+  }
+]

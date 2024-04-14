@@ -13,7 +13,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    font-size: 20px;
 
     @media screen and (min-width: 380px) and (max-width: 480px) {
       font-size: 18px;

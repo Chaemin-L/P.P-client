@@ -9,22 +9,7 @@ export type RequestPostingProps = {
   maxNumOfPeople: number;
 };
 
-export type ResponsePostingProps = FinalResponse<marketPostResponse>;
-
-// export type PostType = {
-//   postId: number;
-//   title: string;
-//   content: string;
-//   createdDate: string;
-//   status: string;
-//   startDate: string;
-//   location: string;
-//   pay: number;
-//   volunteerTime: number;
-//   currentApplicant: number;
-//   maxNumOfPeople: number;
-//   dealId: number;
-// };
+export type ResponsePostingProps = FinalResponse<PostType>;
 
 export type UserCurrentStatus = {
   isWriter: boolean;
@@ -39,12 +24,17 @@ export type WriterInfo = {
   address: string;
 };
 
-export type marketPostResponse = {
+export type StatusType =
+  | "RECRUITING"
+  | "RECRUITMENT_COMPLETED"
+  | "TRANSACTION_COMPLETED";
+
+export type PostType = {
   postId: number;
   title: string;
   content: string;
   createdDate: string;
-  status: string;
+  status: StatusType;
   startDate: string;
   location: string;
   pay: number;
@@ -56,9 +46,23 @@ export type marketPostResponse = {
   writerInfo: WriterInfo;
 };
 
-export type PostDetailType = FinalResponse<{
-  userCurrentStatus: UserCurrentStatus;
-  marketPostResponse: marketPostResponse;
-}>;
+export type ResponsePostDetail = FinalResponse<PostDetailType>;
 
-export type ResponsePostListProps = FinalResponse<marketPostResponse[]>;
+export type UserCurrentStatusType = {
+  isWriter: boolean;
+  isApplicant: boolean;
+  applyStatus: string;
+};
+
+export type PostDetailType = {
+  writerInfo: {
+    profileId: number;
+    nickName: string;
+    profileImage: string;
+    address: string;
+  };
+  userCurrentStatus: UserCurrentStatusType;
+  marketPostResponse: PostType;
+};
+
+export type ResponsePostListProps = FinalResponse<PostType[]>;

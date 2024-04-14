@@ -13,6 +13,6 @@ export const Header = ({ text = "" }: { text: string }) => {
 const HeaderWrapper = styled.div`
   width: 100%;
   text-align: center;
-  font-size: 30px;
+  font-size: 1.67rem;
   line-height: 120%;
 `;
