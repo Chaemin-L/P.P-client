@@ -13,6 +13,12 @@ export type ChatListItemType = {
   status: StatusType;
 };
 
+export type ChatMakeRoom = {
+  roomId: string;
+  postId: number;
+  memberCount: number;
+};
+
 export type ChatFinalResponse<T extends object = Record<string, unknown>> = {
   message: string;
   code: string;
@@ -22,8 +28,14 @@ export type ChatFinalResponse<T extends object = Record<string, unknown>> = {
 
 export type ChatListResponse = ChatFinalResponse<ChatListItemType[]>;
 
+export type senderInfo = {
+  userId: number;
+  profileImage: string;
+  nickName: string;
+};
+
 export type ChatRoomMessage = {
-  userId: string;
+  senderInfo: senderInfo;
   message: string;
   createdAt: string;
 };
@@ -36,9 +48,18 @@ export type ChatRoomMember = {
   profileImage: string;
 };
 
+export type postInfo = {
+  postId: number;
+  status: string;
+  title: string;
+  pay: number;
+  dealId: number;
+};
+
 export type ChatRoomData = {
   messages: ChatRoomMessage[];
   userInfos: ChatRoomMember[];
+  postInfo: postInfo;
 };
 
 export type ChatRoomResponse = ChatFinalResponse<ChatRoomData>;

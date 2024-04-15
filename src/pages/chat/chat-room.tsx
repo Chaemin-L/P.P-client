@@ -8,7 +8,11 @@ import { styled } from "styled-components";
 import { allMsg, tempList } from "./dummy";
 import { ChatRoomSubMessage } from "./type";
 
-import { ChatListItemType, ChatRoomMessage } from "@/api/types/chat-type";
+import {
+  ChatListItemType,
+  ChatMakeRoom,
+  ChatRoomMessage,
+} from "@/api/types/chat-type";
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
@@ -25,13 +29,12 @@ import { FormatDateString } from "@/utils/format-date-string";
 export const ChatRoom = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as ChatListItemType;
+  const state = location.state as ChatMakeRoom;
 
   const [transfer, setTransfer] = useRecoilState(transferState);
   const [newRoomMsgs, setNewRoomMsgs] = useState<ChatRoomSubMessage[]>([]);
 
   const roomMsgs = useChatDataSetting(state);
-  // console.log(transfer);
 
   const [appBarHeight, setAppBarHeight] = useState(0);
   const [appBerVisibility, setAppBarVisibility] = useState(true);
@@ -85,9 +88,6 @@ export const ChatRoom = () => {
         {},
         JSON.stringify(temp),
       );
-      // setNewRoomMsgs((prevHistory) => {
-      //   return prevHistory ? [...prevHistory, temp] : [];
-      // });
     }
   };
 
@@ -122,17 +122,14 @@ export const ChatRoom = () => {
         }}
       >
         {roomMsgs?.map((item, index) => {
-          const temp = transfer.users.find((e) => {
-            if (e.userId === Number(item.userId)) return e;
-          });
           return (
             <ChatItem
               key={index}
-              userId={item.userId}
-              userName={temp ? temp.nickName : "(알 수 없음)"}
+              userId={item.senderInfo.userId}
+              userName={item.senderInfo.nickName}
               setProfileModal={setProfileModal}
               setProfileUserId={setProfileUserId}
-              imgurl={temp ? temp.profileImage : undefined}
+              imgurl={item.senderInfo.profileImage}
             >
               {item.message.replace(/^"(.*)"$/, "$1")}
             </ChatItem>
@@ -145,7 +142,13 @@ export const ChatRoom = () => {
           return (
             <ChatItem
               key={index}
-              userId={item.userId}
+              userId={
+                temp
+                  ? Number(item.userId)
+                  : item.userId === myId
+                    ? Number(myId)
+                    : -2
+              }
               userName={temp ? temp.nickName : "(알 수 없음)"}
               setProfileModal={setProfileModal}
               setProfileUserId={setProfileUserId}

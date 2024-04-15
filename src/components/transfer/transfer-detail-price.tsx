@@ -68,7 +68,7 @@ export const TransferDetailPrice = ({
       </div>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           rounded={true}
           onClick={() => {
             if (price === "") {

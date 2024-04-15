@@ -43,7 +43,7 @@ export const Splash = () => {
     const timer = setTimeout(() => {
       verifyTokens().catch((err) => console.log(err));
       navigate(path, { replace: true });
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);

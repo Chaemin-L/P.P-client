@@ -6,6 +6,7 @@ import {
   ChatListItemType,
   ChatListResponse,
   ChatMakeRequest,
+  ChatMakeRoom,
   ChatMemberResponse,
   ChatRoomResponse,
   ChatSendRequest,
@@ -119,7 +120,7 @@ export default class ChatApi {
     );
     // console.log(response);
     if (response) {
-      const temp = response.data as ChatFinalResponse<ChatListItemType>;
+      const temp = response.data as ChatFinalResponse<ChatMakeRoom>;
       return temp.result;
     } else {
       throw new Error("Invalid response from server");

@@ -1,17 +1,41 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { AppBar } from "@/components/common/app-bar";
 import { MypageList } from "@/components/mypage/mypage-list";
 import { MypageListProfile } from "@/components/mypage/mypage-list-profile";
 import { MypageToggleSwitch } from "@/components/mypage/mypage-toggle-switch";
+import { MypageUpButton } from "@/components/mypage/mypage-up-button";
 import { colorTheme } from "@/style/color-theme";
 
 export const Mypage = () => {
   const [isLeftSelected, setIsLeftSelected] = useState(true);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [miniButtonVisible, setMiniButtonVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (wrapperRef.current) {
+        const isScrollingDown = wrapperRef.current.scrollTop > 600;
+        setMiniButtonVisible(isScrollingDown);
+      }
+    };
+
+    wrapperRef.current?.addEventListener("scroll", handleScroll);
+    return () => {
+      wrapperRef.current?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleMiniButton = () => {
+    if (wrapperRef.current) {
+      wrapperRef.current.scrollTop = 0;
+    }
+  };
+
   return (
-    <Wrapper>
+    <Wrapper ref={wrapperRef}>
       <AppBar style={{ backgroundColor: colorTheme.blue900 }}>
         <AppBar.AppBarNavigate
           style={{
@@ -46,6 +70,7 @@ export const Mypage = () => {
         </div>
       </AppBar>
       <MypageList type={isLeftSelected ? "postlist" : "apply"} />
+      {miniButtonVisible && <MypageUpButton onHandler={handleMiniButton} />}
     </Wrapper>
   );
 };

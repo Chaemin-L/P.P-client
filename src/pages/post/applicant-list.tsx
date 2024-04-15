@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
-import { ChatMakeRequest } from "@/api/types/chat-type";
+import { ChatMakeRequest, ChatMakeRoom } from "@/api/types/chat-type";
 import LocationSVG from "@/assets/icons/location.svg";
 import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
@@ -65,7 +65,9 @@ export const ApplicantListPage = () => {
 
   const { mutate: makeChat } = usePostMakeChat();
   // const chatRoomId = useCheckChatMake(postId!);
-  const [chatMakeRoomId, setChatMakeRoomId] = useState("");
+  const [chatMakeRoomId, setChatMakeRoomId] = useState<ChatMakeRoom | null>(
+    null,
+  );
   const navigate = useNavigate();
 
   const [isApplyError, setIsApplyError] = useState(false);
@@ -125,7 +127,8 @@ export const ApplicantListPage = () => {
               makeChat(tempData, {
                 onSuccess: (res) => {
                   setApplyModal(true);
-                  setChatMakeRoomId(res.roomId);
+                  setChatMakeRoomId(res);
+                  console.log("makeChat: ", res);
                 },
               });
             } else {
@@ -148,7 +151,9 @@ export const ApplicantListPage = () => {
             onClick={() => {
               navigate(`/chat/detail`, {
                 state: {
-                  roomId: chatMakeRoomId,
+                  roomId: chatMakeRoomId?.roomId,
+                  postId: chatMakeRoomId?.postId,
+                  memberCount: chatMakeRoomId?.memberCount,
                 },
               });
             }}

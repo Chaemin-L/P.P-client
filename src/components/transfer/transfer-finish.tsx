@@ -37,18 +37,15 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
         매듭 입니다
       </div>
       <BottomFixed alignDirection="column">
-        <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
-          onClick={onClick}
-        >
+        <BottomFixed.Button color="blue" onClick={onClick}>
           돌아가기
         </BottomFixed.Button>
-        <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+        {/* <BottomFixed.Button
+          color="blue"
           onClick={handleClick}
         >
-          송금내역보기
-        </BottomFixed.Button>
+          송금내역보기 */}
+        {/* </BottomFixed.Button> */}
       </BottomFixed>
     </Wrapper>
   );

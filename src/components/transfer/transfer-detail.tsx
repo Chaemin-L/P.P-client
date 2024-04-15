@@ -47,7 +47,7 @@ export const TransferDetail = ({ setScreen }: TransferDetailProps) => {
       </div>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
             setScreen("transfer-detail-member");
           }}
@@ -55,16 +55,9 @@ export const TransferDetail = ({ setScreen }: TransferDetailProps) => {
           수정하기
         </BottomFixed.Button>
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => {
-            setScreen("transfer-finish");
-            setLastTransfer((prevLastTransfer) => {
-              const updatedLastTransfer = {
-                ...prevLastTransfer,
-                transferState: true,
-              };
-              return updatedLastTransfer;
-            });
+            setScreen("transfer-detail-password");
           }}
         >
           송금하기

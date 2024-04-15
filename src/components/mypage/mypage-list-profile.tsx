@@ -38,9 +38,9 @@ export const MypageListProfile = () => {
               <OtherStateIcon src={LocationWhiteBackSVG} />
               <div>{myProfile?.address}</div>
             </PriceStateBox>
-            <PriceStateBox style={{ width: "5rem" }}>
+            {/* <PriceStateBox style={{ width: "5rem" }}>
               <OtherStateIcon src={PersonSVG} />
-            </PriceStateBox>
+            </PriceStateBox> */}
           </OtherStateColumnBox>
         </StateOrangeBox>
       </ColumnBox>

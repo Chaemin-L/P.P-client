@@ -100,7 +100,7 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
       </MemberScroll>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => setScreen("transfer-detail-price")}
         >
           다음
