@@ -21,8 +21,8 @@ export const GenderPage = ({ nextStep }: GenderPageProps) => {
   useEffect(() => {
     if (gender !== undefined) {
       setProfile((profile) => ({
-        ...profile,
-        gender,
+        request: { ...profile.request, gender },
+        file: profile.file,
       }));
       nextStep();
     }

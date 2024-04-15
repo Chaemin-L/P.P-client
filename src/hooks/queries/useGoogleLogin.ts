@@ -5,8 +5,7 @@ import {
 } from "@firebase/auth";
 import { useEffect, useState } from "react";
 
-import { useSignIn } from "./queries/useSignIn";
-
+import { useSignIn } from "@/hooks/queries/useSignIn";
 import { auth } from "@/lib/firebase";
 
 export const useGoogleLogin = () => {

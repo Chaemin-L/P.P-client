@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
@@ -36,8 +35,13 @@ export const BirthdayPage = ({ nextStep, onModal }: BirthdayPageProps) => {
     }
 
     setProfile((profile) => ({
-      ...profile,
-      birthday: [bYear, bMonth, bDay].join("-"),
+      request: {
+        ...profile.request,
+        birth: [bYear, bMonth.padStart(2, "0"), bDay.padStart(2, "0")].join(
+          "-",
+        ),
+      },
+      file: profile.file,
     }));
 
     nextStep();

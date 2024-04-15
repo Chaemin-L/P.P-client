@@ -1,4 +1,4 @@
-import { useGoogleLogin } from "@/hooks/use-google-login";
+import { useGoogleLogin } from "@/hooks/queries/useGoogleLogin";
 
 export const GoogleButton = () => {
   const { isLoading, signIn, signOut, user, accessToken } = useGoogleLogin();

@@ -1,8 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 
 import { Header } from "@/components/profile/header";
+import { usePostProfile } from "@/hooks/queries/usePostProfile";
 import { profileState } from "@/recoil/atoms/profile-state";
 import { colorTheme } from "@/style/color-theme";
 
@@ -15,7 +16,9 @@ export const PasswordPage = () => {
     "INITIAL",
   );
 
-  const setProfile = useSetRecoilState(profileState);
+  const profile = useRecoilValue(profileState);
+
+  const { mutate: submitProfile } = usePostProfile();
 
   const onChange = (
     type: "password" | "confirmPassword",
@@ -38,8 +41,19 @@ export const PasswordPage = () => {
   useEffect(() => {
     if (confirmPassword.length === PASSWORD_LENGTH) {
       if (password === confirmPassword) {
-        setProfile((profile) => ({ ...profile, password }));
-        // TODO: 프로필 등록 api
+        const formData = new FormData();
+        const requestJSON = JSON.stringify({ ...profile.request, password });
+        const requestBLOB = new Blob([requestJSON], {
+          type: "application/json",
+        });
+        formData.append("request", requestBLOB);
+        formData.append(
+          "file",
+          new Blob([profile.file], {
+            type: "application/json",
+          }),
+        );
+        submitProfile(formData);
       } else {
         setPassword("");
         setConfirmPassword("");

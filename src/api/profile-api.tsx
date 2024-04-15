@@ -14,8 +14,10 @@ export default class ProfileApi {
     }
   }
 
-  static async postProfile() {
-    return await Instance.post("/haetal-service/api/v2/profile")
+  static async postProfile(profile: FormData) {
+    return await Instance.post("/auth-service/api/v2/profile", profile, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
       .then((res) => res.data as ProfilePostResponse)
       .catch(() => {
         throw new Error("Invalid response from server");

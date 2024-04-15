@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { BirthdayPage } from "./birthday";
@@ -35,6 +36,12 @@ export const ProfilePage = () => {
   const [requiredElem, setRequiredElem] = useState<string>("");
 
   const nextStep = () => setStep((step) => step + 1);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("role") === "ROLE_USER") return navigate("/post");
+  }, []);
 
   useEffect(() => {
     switch (step) {
