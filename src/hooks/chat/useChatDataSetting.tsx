@@ -20,7 +20,6 @@ export const useChatDataSetting = (props: ChatListItemType) => {
   console.log("postData: ", postData);
 
   useEffect(() => {
-    console.log("useEffect!!!!");
     const myId = localStorage.getItem("userId") || "0";
     const users: ChatRoomMember[] =
       roomData?.userInfos?.filter((item) => item.userId !== Number(myId)) || [];
@@ -34,7 +33,7 @@ export const useChatDataSetting = (props: ChatListItemType) => {
       users: users,
       price: price,
       availableBudget: availableBudget,
-      member: props.memberCount,
+      member: users.length,
       postId: props.postId.toString(),
       transferState: false,
     });
@@ -43,7 +42,7 @@ export const useChatDataSetting = (props: ChatListItemType) => {
       users: users,
       price: price,
       availableBudget: availableBudget,
-      member: props.memberCount,
+      member: users.length,
       postId: props.postId.toString(),
       transferState: false,
     });

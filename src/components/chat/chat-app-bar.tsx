@@ -17,6 +17,8 @@ export const ChatAppBar = ({
   onClickReport,
   onClickTransfer,
   setAppBarHeight,
+  postId,
+  setErrorModal,
 }: ChatAppBarType) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
   const navigate = useNavigate();
@@ -47,9 +49,13 @@ export const ChatAppBar = ({
         />
       </AppBar.AppBarNavigate>
       {isColorMode ? (
-        <BeforeTransfer onClickTransfer={onClickTransfer} />
+        <BeforeTransfer
+          onClickTransfer={onClickTransfer}
+          postId={postId}
+          setErrorModal={setErrorModal}
+        />
       ) : (
-        <AfterTransfer />
+        <AfterTransfer postId={postId} setErrorModal={setErrorModal} />
       )}
     </AppBar>
   );
@@ -83,9 +89,19 @@ const AfterTransferDiv = styled.div`
 
 type BeforeTransferProps = {
   onClickTransfer: () => void;
+  postId: string;
+  setErrorModal: () => void;
 };
 
-const AfterTransfer = () => {
+const AfterTransfer = ({
+  postId,
+  setErrorModal,
+}: {
+  postId: string;
+  setErrorModal: () => void;
+}) => {
+  const navigate = useNavigate();
+
   return (
     <ColumnBox>
       <RowBox>
@@ -98,6 +114,7 @@ const AfterTransfer = () => {
             color: colorTheme.blue900,
             fontWeight: "500",
           }}
+          onClick={setErrorModal}
         >
           거래내역
         </Button>
@@ -110,6 +127,9 @@ const AfterTransfer = () => {
             color: colorTheme.blue900,
             fontWeight: "500",
           }}
+          onClick={() => {
+            navigate(`/post/${postId}`);
+          }}
         >
           게시물 보기
         </Button>
@@ -119,7 +139,13 @@ const AfterTransfer = () => {
   );
 };
 
-const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
+const BeforeTransfer = ({
+  onClickTransfer,
+  postId,
+  setErrorModal,
+}: BeforeTransferProps) => {
+  const navigate = useNavigate();
+
   return (
     <ColumnBox
       style={{
@@ -137,6 +163,7 @@ const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
             color: colorTheme.blue900,
             fontWeight: "500",
           }}
+          onClick={setErrorModal}
         >
           거래파기
         </Button>
@@ -148,6 +175,9 @@ const BeforeTransfer = ({ onClickTransfer }: BeforeTransferProps) => {
             borderRadius: "1.11rem",
             color: colorTheme.blue900,
             fontWeight: "500",
+          }}
+          onClick={() => {
+            navigate(`/post/${postId}`);
           }}
         >
           게시물 보기

@@ -37,6 +37,7 @@ export const ChatRoom = () => {
   const [isReport, setIsReport] = useState(false);
   const [reportModal, setReportModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
   const [msg, setMsg] = useState("");
@@ -54,6 +55,10 @@ export const ChatRoom = () => {
           onClickReport={() => {
             setIsBottomSheetOpened(true);
             setIsReport(true);
+          }}
+          postId={state.postId.toString()}
+          setErrorModal={() => {
+            setErrorModal(true);
           }}
         />
       )}
@@ -132,6 +137,15 @@ export const ChatRoom = () => {
             setProfileModal(false);
           }}
         />
+      )}
+      {errorModal && (
+        <Modal
+          onClose={() => {
+            setErrorModal(false);
+          }}
+        >
+          <Modal.Title text="아직 지원하지 않는 서비스입니다." />
+        </Modal>
       )}
     </PageContainer>
   );

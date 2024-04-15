@@ -98,7 +98,8 @@ const EachBox = styled.div`
 
 const TextDiv = styled.div`
   font-size: 1.11rem;
-  padding: 0 0 5% 2%;
+  margin: 0 0 5% 2%;
+  width: 2.3rem;
 `;
 
 const StyledInput = styled(motion.input)`

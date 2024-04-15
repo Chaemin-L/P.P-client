@@ -47,11 +47,9 @@ export const Posting4 = () => {
       <TimeText>{`${Math.floor(Number(price) / 60)}시간 ${Number(price) % 60}분`}</TimeText>
       {isError && !isErrorText && (
         <ErrorMsg>
-          잔액이 모자랍니다!
-          <br />
-          {`소요시간은 1~${availableBudget}분 사이로`}
-          <br />
-          설정해주세요
+          {`잔액이 모자랍니다!
+          소요시간은 1~${availableBudget}분 사이로
+          설정해주세요`}
         </ErrorMsg>
       )}
       {isErrorText && <ErrorMsg>소요시간을 지정해주세요!</ErrorMsg>}
@@ -130,4 +128,5 @@ const ErrorMsg = styled.div`
   text-align: center;
   font-weight: bold;
   line-height: 1.1rem;
+  white-space: pre-line;
 `;

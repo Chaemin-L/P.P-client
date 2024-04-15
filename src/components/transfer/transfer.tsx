@@ -9,7 +9,7 @@ import { TransferProps } from "./type";
 
 export const Transfer = ({ onClick, memberCount }: TransferProps) => {
   const [screen, setScreen] = useState(
-    memberCount === 1 ? "transfer-detail-one" : "transfer-detail",
+    memberCount === 2 ? "transfer-detail-one" : "transfer-detail",
   );
   return (
     <div style={{ height: "100%", width: "100%" }}>

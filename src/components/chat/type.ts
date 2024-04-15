@@ -36,6 +36,8 @@ export type ChatAppBarType = {
   setAppBarHeight: (value: number) => void;
   onClickTransfer: () => void;
   onClickReport: () => void;
+  postId: string;
+  setErrorModal: () => void;
 };
 
 export type ChatInRoomUser = {

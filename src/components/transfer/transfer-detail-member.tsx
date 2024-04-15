@@ -133,7 +133,7 @@ const MemberScroll = styled.div`
   display: grid;
   width: 100%;
   gap: 10%;
-  padding: 0.56rem 10%;
+  padding: 0 10%;
   justify-content: space-between;
   grid-template-columns: repeat(2, 1fr);
 `;
