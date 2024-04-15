@@ -9,15 +9,13 @@ export const useSignIn = () => {
     mutationFn: (data: { type: string; token: string }) =>
       AuthApi.postSignIn(data.type, data.token),
     onSuccess: (response) => {
-      console.log("로그인 성공", response.accessToken);
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
       localStorage.setItem("userId", response.userId.toString());
       // localStorage.setItem("nickName", response.)
-      if (response.role === "ROLE_TEMPORARY_USER") {
+      if (response.role !== "ROLE_USER") {
         navigate("/signup");
       } else {
-        localStorage.setItem("profileId", response.profileId.toString());
         navigate("/post");
       }
     },

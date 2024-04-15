@@ -134,7 +134,7 @@ export const ChatRoom = () => {
               setProfileUserId={setProfileUserId}
               imgurl={temp ? temp.profileImage : undefined}
             >
-              {item.message}
+              {item.message.replace(/^"(.*)"$/, "$1")}
             </ChatItem>
           );
         })}
@@ -151,7 +151,7 @@ export const ChatRoom = () => {
               setProfileUserId={setProfileUserId}
               imgurl={temp ? temp.profileImage : undefined}
             >
-              {item.message}
+              {item.message.replace(/^"(.*)"$/, "$1")}
             </ChatItem>
           );
         })}

@@ -21,6 +21,7 @@ import { Posting7 } from "@/pages/posting/posting7";
 import { Posting8 } from "@/pages/posting/posting8";
 import { ProfilePage } from "@/pages/profile";
 import { DonePage } from "@/pages/profile/done";
+import { Splash } from "@/pages/splash/splash";
 import { Test } from "@/pages/test";
 import { Test2 } from "@/pages/test2";
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
+        element: <Splash />,
+      },
+      {
+        path: "login/",
         element: <LoginPage />,
       },
       // {

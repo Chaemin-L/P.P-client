@@ -18,18 +18,11 @@ Instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const { method, url } = config;
 
-    let token: string | null = null;
-
-    // 토큰 설정 해줘야함
-    if (config.url === process.env.REACT_APP_REFRESH_URL) {
-      token = localStorage.getItem("refreshToken");
-    } else {
-      token = localStorage.getItem("accessToken");
-    }
+    const token = localStorage.getItem("accessToken");
 
     // token = process.env.REACT_APP_TEST_TOKEN;
 
-    if (token) {
+    if (token !== undefined) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     config.headers["Content-Type"] = "application/json";
@@ -75,9 +68,9 @@ Instance.interceptors.response.use(
           `[API - RESPONSE 401] ${method?.toUpperCase()} ${url} | ${status} : ${error.message} | refresh Token`,
         );
 
-        const accessToken = await getRefreshToken();
-        if (accessToken !== undefined) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
+        const reissueData = await getRefreshToken();
+        if (reissueData !== undefined) {
+          config.headers.Authorization = `Bearer ${reissueData.accessToken}`;
         }
 
         return axios(config);

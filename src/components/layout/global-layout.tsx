@@ -32,7 +32,6 @@ export const GlobalLayout = () => {
         style={{
           width: "100%",
           height:
-            currentUrl[1] == "" ||
             currentUrl[1] == "post" ||
             (currentUrl[1] == "chat" && !currentUrl[2]) ||
             currentUrl[1] == "mypage"
@@ -43,8 +42,7 @@ export const GlobalLayout = () => {
       >
         <Outlet />
       </div>
-      {(currentUrl[1] == "" ||
-        currentUrl[1] == "post" ||
+      {(currentUrl[1] == "post" ||
         (currentUrl[1] == "chat" && !currentUrl[2]) ||
         currentUrl[1] == "mypage") && <BottomNavigationBar />}
     </div>

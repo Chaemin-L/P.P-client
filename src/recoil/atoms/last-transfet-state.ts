@@ -16,6 +16,7 @@ export const lastTransferState = atom({
     availableBudget: 0,
     member: 0,
     postId: "",
+    dealId: 0,
     transferState: false,
   },
 });

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { TransferDetail } from "./transfer-detail";
 import { TransferDetailMember } from "./transfer-detail-member";
+import { TransferDetailPassword } from "./transfer-detail-password";
 import { TransferDetailPrice } from "./transfer-detail-price";
 import { TransferFinish } from "./transfer-finish";
 import { TransferOnePersonDetail } from "./transfer-one-person-detail";
@@ -24,6 +25,7 @@ export const Transfer = ({ onClick, memberCount }: TransferProps) => {
         <TransferDetailPrice setScreen={setScreen} memberCount={memberCount} />
       )}
       {screen === "transfer-finish" && <TransferFinish onClick={onClick} />}
+      {screen === "transfer-detail-password" && <TransferDetailPassword />}
     </div>
   );
 };

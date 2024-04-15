@@ -27,6 +27,9 @@ export const useChatDataSetting = (props: ChatListItemType) => {
     // console.log("useEffect!!!! users:::: ", users);
     // console.log("useEffect!!!! users:::: ");
     const price: number = postData ? postData.marketPostResponse.pay : 0;
+    const status: boolean =
+      postData?.marketPostResponse?.status === "TRANSACTION_COMPLETED";
+    const dealId: number = postData ? postData.marketPostResponse.dealId : 0;
     const availableBudget: number = bankData ? bankData.availableBudget : 0;
 
     setTransfer({
@@ -35,7 +38,8 @@ export const useChatDataSetting = (props: ChatListItemType) => {
       availableBudget: availableBudget,
       member: users.length,
       postId: props.postId.toString(),
-      transferState: false,
+      dealId: dealId,
+      transferState: status,
     });
 
     setLastTransfer({
@@ -44,7 +48,8 @@ export const useChatDataSetting = (props: ChatListItemType) => {
       availableBudget: availableBudget,
       member: users.length,
       postId: props.postId.toString(),
-      transferState: false,
+      dealId: dealId,
+      transferState: status,
     });
   }, [roomData]);
 
