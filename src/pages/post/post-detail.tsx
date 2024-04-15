@@ -49,8 +49,8 @@ export const PostDetailPage = () => {
         </AppBar>
       }
     >
-      {data?.userCurrentStatus.isWriter ? (
-        data?.marketPostResponse.status === "RECRUITING" ? (
+      {data?.marketPostResponse.status === "RECRUITING" ? (
+        data?.userCurrentStatus.isWriter ? (
           <JustifyWrapper>
             <Button
               color="orange"
@@ -63,10 +63,10 @@ export const PostDetailPage = () => {
             <Button color="orange">편집하기</Button>
           </JustifyWrapper>
         ) : (
-          <DoneWrapper>모집완료</DoneWrapper>
+          <></>
         )
       ) : (
-        <></>
+        <DoneWrapper>모집완료</DoneWrapper>
       )}
       <ActivityBox
         {...(data?.marketPostResponse as PostType)}
@@ -130,24 +130,28 @@ export const PostDetailPage = () => {
               채팅방으로 가기
             </BottomFixed.Button>
           )
-        ) : !data?.userCurrentStatus.isApplicant ? (
-          <BottomFixed.Button
-            color="orange"
-            onClick={() => {
-              setApplyModal(true);
-            }}
-          >
-            신청하기
-          </BottomFixed.Button>
+        ) : data?.marketPostResponse.status === "RECRUITING" ? (
+          !data?.userCurrentStatus.isApplicant ? (
+            <BottomFixed.Button
+              color="orange"
+              onClick={() => {
+                setApplyModal(true);
+              }}
+            >
+              신청하기
+            </BottomFixed.Button>
+          ) : (
+            <BottomFixed.Button
+              rounded={false}
+              onClick={() => {
+                setApplyModal(true);
+              }}
+            >
+              신청 취소하기
+            </BottomFixed.Button>
+          )
         ) : (
-          <BottomFixed.Button
-            rounded={false}
-            onClick={() => {
-              setApplyModal(true);
-            }}
-          >
-            신청 취소하기
-          </BottomFixed.Button>
+          <></>
         )}
       </BottomFixed>
 
