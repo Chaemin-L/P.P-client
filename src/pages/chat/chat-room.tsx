@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { Stomp, CompatClient } from "@stomp/stompjs";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import SockJS from "sockjs-client";
 import { styled } from "styled-components";
 
 import { allMsg, tempList } from "./dummy";
+import { ChatRoomSubMessage } from "./type";
 
-import { ChatListItemType } from "@/api/types/chat-type";
+import { ChatListItemType, ChatRoomMessage } from "@/api/types/chat-type";
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
@@ -15,9 +18,9 @@ import { ProfileModal } from "@/components/common/profile-modal";
 import { Report } from "@/components/report/report";
 import { Transfer } from "@/components/transfer/transfer";
 import { useChatDataSetting } from "@/hooks/chat/useChatDataSetting";
+import { UseSendMessages } from "@/hooks/queries/useSendMessages";
 import { transferState } from "@/recoil/atoms/transfer-state";
-// import SockJS from "sockjs-client";
-// import Stomp from "stompjs";
+import { FormatDateString } from "@/utils/format-date-string";
 
 export const ChatRoom = () => {
   const navigate = useNavigate();
@@ -25,12 +28,12 @@ export const ChatRoom = () => {
   const state = location.state as ChatListItemType;
 
   const [transfer, setTransfer] = useRecoilState(transferState);
+  const [newRoomMsgs, setNewRoomMsgs] = useState<ChatRoomSubMessage[]>([]);
   const roomMsgs = useChatDataSetting(state);
-  console.log(transfer);
+  // console.log(transfer);
 
   const [appBarHeight, setAppBarHeight] = useState(0);
   const [appBerVisibility, setAppBarVisibility] = useState(true);
-  // const [chatInputHeight, setChatInputHeight] = useState(0);
 
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
   const [isTransfer, setIsTransfer] = useState(false);
@@ -41,6 +44,58 @@ export const ChatRoom = () => {
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
   const [msg, setMsg] = useState("");
+
+  const client = useRef<CompatClient | null>(null);
+  const { mutate: sendMsg } = UseSendMessages();
+
+  const connectHandler = () => {
+    const socket = new WebSocket(
+      `${process.env.REACT_APP_CHAT_WS_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/ws/init`,
+    );
+    client.current = Stomp.over(socket);
+    client.current.connect({}, () => {
+      client.current?.subscribe(`/sub/room/${state.roomId}`, (message) => {
+        const temp = JSON.parse(message.body) as ChatRoomSubMessage;
+        setNewRoomMsgs((prevHistory) => {
+          return prevHistory ? [...prevHistory, temp] : [];
+        });
+        console.log("newMessage:", message);
+      });
+    });
+  };
+
+  useEffect(() => {
+    connectHandler();
+  }, []);
+
+  const sendHandler = () => {
+    if (client.current && client.current.connected) {
+      const temp = {
+        type: "CHAT",
+        roomIdx: state.roomId,
+        message: msg,
+        // senderName: localStorage.getItem("nickName"),
+        senderName: "홍",
+        createdAt: FormatDateString(new Date()),
+      };
+      client.current.send(
+        `/chat/room/${state.roomId}/message`,
+        {},
+        JSON.stringify(temp),
+      );
+      setNewRoomMsgs((prevHistory) => {
+        return prevHistory ? [...prevHistory, temp] : [];
+      });
+    }
+  };
+
+  const handleSendMessage = () => {
+    if (msg !== "") {
+      sendHandler();
+      sendMsg({ roomId: state.roomId, message: msg });
+      setMsg("");
+    }
+  };
 
   return (
     <PageContainer>
@@ -70,7 +125,7 @@ export const ChatRoom = () => {
         {roomMsgs?.map((item, index) => {
           const temp = transfer.users.find((e) => {
             e.userId === Number(item.userId);
-            // console.log("roomMsgMap:", e);
+            return e;
           });
           return (
             <ChatItem
@@ -85,11 +140,30 @@ export const ChatRoom = () => {
             </ChatItem>
           );
         })}
+        {newRoomMsgs.map((item, index) => {
+          const temp = transfer.users.find((e) => {
+            e.nickName === item.senderName;
+            return e;
+          });
+          return (
+            <ChatItem
+              key={index}
+              userId={temp ? temp.userId.toString() : "-2"}
+              userName={temp ? temp.nickName : "(알 수 없음)"}
+              setProfileModal={setProfileModal}
+              setProfileUserId={setProfileUserId}
+              imgurl={temp ? temp.profileImage : undefined}
+            >
+              {item.message}
+            </ChatItem>
+          );
+        })}
       </ChatList>
       <ChatInput
         value={msg}
         onChange={(e) => setMsg(e.target.value)}
         onFocus={setAppBarVisibility}
+        onClick={handleSendMessage}
       />
       <BottomSheet
         style={{ height: window.innerHeight > 720 ? "81%" : "90%" }}

@@ -8,12 +8,5 @@ export const usePostMakeChat = () => {
   const navigate = useNavigate();
   return useMutation({
     mutationFn: (data: ChatMakeRequest) => ChatApi.postChatMake(data),
-    onSuccess: (response) => {
-      navigate(`/chat/detail`, {
-        state: {
-          response,
-        },
-      });
-    },
   });
 };

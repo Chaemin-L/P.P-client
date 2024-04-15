@@ -46,15 +46,7 @@ export const useChatDataSetting = (props: ChatListItemType) => {
       postId: props.postId.toString(),
       transferState: false,
     });
-  }, [
-    roomData,
-    postData,
-    bankData,
-    props.memberCount,
-    props.postId,
-    setTransfer,
-    setLastTransfer,
-  ]);
+  }, [roomData, postData, bankData]);
 
   return roomData?.messages;
 };

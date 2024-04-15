@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 import { InputType } from "./type";
 
-export const ChatInput = ({ value, onChange, onFocus }: InputType) => {
+export const ChatInput = ({ value, onChange, onFocus, onClick }: InputType) => {
   return (
     <Container>
       <ChatButton></ChatButton>
@@ -15,7 +15,7 @@ export const ChatInput = ({ value, onChange, onFocus }: InputType) => {
         onFocus={() => onFocus(false)}
         onBlur={() => onFocus(true)}
       />
-      <ChatButton>보내기</ChatButton>
+      <ChatButton onClick={onClick}>보내기</ChatButton>
     </Container>
   );
 };

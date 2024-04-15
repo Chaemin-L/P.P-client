@@ -8,26 +8,20 @@ import {
   ChatMakeRequest,
   ChatMemberResponse,
   ChatRoomResponse,
-  ChatSendResponse,
+  ChatSendRequest,
 } from "./types/chat-type";
 
 export default class ChatApi {
-  static async sendChatMessages({
-    roomIdx,
-    senderName,
-    senderUuid,
-    message,
-  }: ChatSendResponse): Promise<ChatSendResponse> {
-    const response: AxiosResponse<ChatSendResponse> = await Instance.post(
-      `/chat/room/${roomIdx}/messages`,
-      {
-        roomIdx: roomIdx,
-        senderName: senderName,
-        senderUuid: senderUuid,
-        message: message,
-      },
+  static async sendChatMessages({ message, roomId }: ChatSendRequest) {
+    const response = await axios.post(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats/${roomId}/message`,
+      message,
     );
-    return response.data;
+    if (response) {
+      return response.status;
+    } else {
+      throw new Error("Invalid response from server");
+    }
   }
 
   static async getChatList() {

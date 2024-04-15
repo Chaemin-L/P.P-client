@@ -1,9 +1,7 @@
 import { StatusType } from "./post-type";
 
-export type ChatSendResponse = {
-  roomIdx: number;
-  senderName: string;
-  senderUuid: string;
+export type ChatSendRequest = {
+  roomId: string;
   message: string;
 };
 

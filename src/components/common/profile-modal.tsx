@@ -19,6 +19,7 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
 
   const postBlock = usePostBlock();
   const deleteBlock = useDeleteBlock();
+  console.log("Profile-Modal:: ", userId);
 
   let myId: number = -1;
   let myIdStorage: string | null = null;

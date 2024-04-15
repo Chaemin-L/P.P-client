@@ -13,10 +13,8 @@ export const useSignIn = () => {
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
       localStorage.setItem("userId", response.userId.toString());
-      if (
-        response.profileId === null ||
-        response.role === "ROLE_TEMPORARY_USER"
-      ) {
+      // localStorage.setItem("nickName", response.)
+      if (response.role === "ROLE_TEMPORARY_USER") {
         navigate("/signup");
       } else {
         localStorage.setItem("profileId", response.profileId.toString());

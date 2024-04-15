@@ -17,7 +17,7 @@ export const ChatItem = ({
     : "-1";
 
   // console.log("myId: ", myId);
-  // console.log("userId: ", { userId, imgurl, userName });
+  console.log("userId: ", { userId, imgurl, userName });
 
   return (
     <Container
@@ -28,8 +28,10 @@ export const ChatItem = ({
       {userId !== myId && (
         <ProfileImg
           onClick={() => {
-            setProfileUserId(Number(userId));
-            setProfileModal(true);
+            if (userId !== "-2") {
+              setProfileUserId(Number(userId));
+              setProfileModal(true);
+            }
           }}
           src={imgurl}
         ></ProfileImg>
