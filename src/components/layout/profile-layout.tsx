@@ -24,7 +24,7 @@ export const ProfileLayout = ({ children }: { children: ReactNode }) => {
   const { data } = useGetProfile();
 
   useEffect(() => {
-    if (!role || role === "ROLE_TEMPORARY_USER") navigate("/profile");
+    if (!role || role === "ROLE_TEMPORARY_USER") navigate("/profile/welcome");
     else setProfile(data!);
   }, []);
 

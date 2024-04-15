@@ -26,7 +26,7 @@ export type ProfilePostRequest = {
 };
 
 export type ProfilePostResponse = FinalResponse<{
-  profileId: number;
+  userId: number;
   nickName: string;
   gender: string;
   address: string;
