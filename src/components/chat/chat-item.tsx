@@ -17,7 +17,6 @@ export const ChatItem = ({
     : "-1";
 
   // console.log("myId: ", myId);
-  console.log("userId: ", { userId, imgurl, userName });
 
   return (
     <Container

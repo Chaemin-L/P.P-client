@@ -29,6 +29,7 @@ export const ChatRoom = () => {
 
   const [transfer, setTransfer] = useRecoilState(transferState);
   const [newRoomMsgs, setNewRoomMsgs] = useState<ChatRoomSubMessage[]>([]);
+
   const roomMsgs = useChatDataSetting(state);
   // console.log(transfer);
 
@@ -43,10 +44,11 @@ export const ChatRoom = () => {
   const [errorModal, setErrorModal] = useState(false);
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
-  const [msg, setMsg] = useState("");
 
   const client = useRef<CompatClient | null>(null);
   const { mutate: sendMsg } = UseSendMessages();
+  const tempId = localStorage.getItem("userId");
+  const myId = tempId === null ? "" : tempId;
 
   const connectHandler = () => {
     const socket = new WebSocket(
@@ -59,7 +61,7 @@ export const ChatRoom = () => {
         setNewRoomMsgs((prevHistory) => {
           return prevHistory ? [...prevHistory, temp] : [];
         });
-        console.log("newMessage:", message);
+        console.log("newMessage:", message.body);
       });
     });
   };
@@ -68,14 +70,14 @@ export const ChatRoom = () => {
     connectHandler();
   }, []);
 
-  const sendHandler = () => {
+  const sendHandler = (inputValue: string) => {
     if (client.current && client.current.connected) {
       const temp = {
         type: "CHAT",
         roomIdx: state.roomId,
-        message: msg,
+        message: inputValue,
         // senderName: localStorage.getItem("nickName"),
-        senderName: "홍",
+        userId: myId,
         createdAt: FormatDateString(new Date()),
       };
       client.current.send(
@@ -83,18 +85,15 @@ export const ChatRoom = () => {
         {},
         JSON.stringify(temp),
       );
-      setNewRoomMsgs((prevHistory) => {
-        return prevHistory ? [...prevHistory, temp] : [];
-      });
+      // setNewRoomMsgs((prevHistory) => {
+      //   return prevHistory ? [...prevHistory, temp] : [];
+      // });
     }
   };
 
-  const handleSendMessage = () => {
-    if (msg !== "") {
-      sendHandler();
-      sendMsg({ roomId: state.roomId, message: msg });
-      setMsg("");
-    }
+  const handleSendMessage = (inputValue: string) => {
+    sendHandler(inputValue);
+    sendMsg({ roomId: state.roomId, message: inputValue });
   };
 
   return (
@@ -124,8 +123,7 @@ export const ChatRoom = () => {
       >
         {roomMsgs?.map((item, index) => {
           const temp = transfer.users.find((e) => {
-            e.userId === Number(item.userId);
-            return e;
+            if (e.userId === Number(item.userId)) return e;
           });
           return (
             <ChatItem
@@ -140,15 +138,14 @@ export const ChatRoom = () => {
             </ChatItem>
           );
         })}
-        {newRoomMsgs.map((item, index) => {
+        {newRoomMsgs?.map((item, index) => {
           const temp = transfer.users.find((e) => {
-            e.nickName === item.senderName;
-            return e;
+            if (e.userId === Number(item.userId)) return e;
           });
           return (
             <ChatItem
               key={index}
-              userId={temp ? temp.userId.toString() : "-2"}
+              userId={item.userId}
               userName={temp ? temp.nickName : "(알 수 없음)"}
               setProfileModal={setProfileModal}
               setProfileUserId={setProfileUserId}
@@ -159,12 +156,7 @@ export const ChatRoom = () => {
           );
         })}
       </ChatList>
-      <ChatInput
-        value={msg}
-        onChange={(e) => setMsg(e.target.value)}
-        onFocus={setAppBarVisibility}
-        onClick={handleSendMessage}
-      />
+      <ChatInput onFocus={setAppBarVisibility} onClick={handleSendMessage} />
       <BottomSheet
         style={{ height: window.innerHeight > 720 ? "81%" : "90%" }}
         isOpened={isBottomSheetOpened}
@@ -218,7 +210,7 @@ export const ChatRoom = () => {
             setErrorModal(false);
           }}
         >
-          <Modal.Title text="아직 지원하지 않는 서비스입니다." />
+          <Modal.Title text="아직 지원하지 않는 \n 서비스입니다." />
         </Modal>
       )}
     </PageContainer>

@@ -13,9 +13,20 @@ import {
 
 export default class ChatApi {
   static async sendChatMessages({ message, roomId }: ChatSendRequest) {
+    const myId = localStorage.getItem("userId")
+      ? localStorage.getItem("userId")
+      : "-1";
     const response = await axios.post(
       `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats/${roomId}/message`,
       message,
+      {
+        headers: {
+          userId: myId,
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
     );
     if (response) {
       return response.status;
@@ -25,11 +36,14 @@ export default class ChatApi {
   }
 
   static async getChatList() {
+    const myId = localStorage.getItem("userId")
+      ? localStorage.getItem("userId")
+      : "-1";
     const response = await axios.get(
       `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats`,
       {
         headers: {
-          userId: "2",
+          userId: myId,
           Authorization: localStorage.getItem("accessToken"),
           "Content-Type": "application/json",
         },

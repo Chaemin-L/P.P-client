@@ -7,6 +7,6 @@ export type ChatRoomSubMessage = {
   type: string;
   roomIdx: string;
   message: string;
-  senderName: string;
+  userId: string;
   createdAt: string;
 };

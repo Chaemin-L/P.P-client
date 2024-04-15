@@ -14,11 +14,9 @@ export type ChatItemType = {
 };
 
 export type InputType = {
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   // setHeight: (value: number) => void;
   onFocus: React.Dispatch<React.SetStateAction<boolean>>;
-  onClick: () => void;
+  onClick: (inputValue: string) => void;
 };
 
 export type ChatRoomItemType = {
