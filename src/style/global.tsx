@@ -13,7 +13,16 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    font-size: 62.5%;
+
+    @media screen and (min-width: 380px) and (max-width: 480px) {
+      font-size: 18px;
+    }
+    @media screen and (min-width: 340px) and (max-width: 379px) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: 339px) {
+      font-size: 14px;
+    }
   }
  
   * {
