@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
+import { AddressPage } from "./address";
 import { BirthPage } from "./birth";
 import { GenderPage } from "./gender";
-import { LocationPage } from "./location";
+import { NamePage } from "./name";
 import { NicknamePage } from "./nickname";
 import { PasswordPage } from "./password";
 import { PhotoDescriptionPage } from "./photo-description";
 import { TakePhotoPage } from "./take-photo";
-import { WelcomePage } from "./welcome";
 
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
@@ -62,7 +62,9 @@ export const ProfilePage = () => {
 
   return (
     <DefaultLayout appbar={<ProgressDots activeIdx={step} />}>
-      {step === 1 && <WelcomePage nextStep={nextStep} />}
+      {step === 1 && (
+        <NamePage nextStep={nextStep} onModal={() => setRequiredModal(true)} />
+      )}
       {step === 2 && (
         <NicknamePage
           nextStep={nextStep}
@@ -80,7 +82,7 @@ export const ProfilePage = () => {
       {step === 5 && (
         <BirthPage nextStep={nextStep} onModal={() => setRequiredModal(true)} />
       )}
-      {step === 6 && <LocationPage nextStep={nextStep} />}
+      {step === 6 && <AddressPage nextStep={nextStep} />}
       {step === 7 && <PasswordPage />}
       {requiredModal && (
         <Modal onClose={() => setRequiredModal(false)}>

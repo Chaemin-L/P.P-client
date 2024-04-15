@@ -21,6 +21,7 @@ import { Posting7 } from "@/pages/posting/posting7";
 import { Posting8 } from "@/pages/posting/posting8";
 import { ProfilePage } from "@/pages/profile";
 import { DonePage } from "@/pages/profile/done";
+import { WelcomePage } from "@/pages/profile/welcome";
 import { Test } from "@/pages/test";
 import { Test2 } from "@/pages/test2";
 
@@ -39,6 +40,11 @@ const routeChildren = [
   {
     path: "/profile",
     element: <ProfilePage />,
+    auth: true,
+  },
+  {
+    path: "/profile/welcome",
+    element: <WelcomePage />,
     auth: true,
   },
   {

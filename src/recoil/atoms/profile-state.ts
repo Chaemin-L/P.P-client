@@ -6,10 +6,10 @@ export const profileState = atom({
     request: {
       nickName: "",
       password: "",
-      name: "이채민", // dummy
+      name: "",
       birth: "",
       gender: "",
-      address: "정릉 3동", // dummy
+      address: "",
     },
     file: "",
   },
