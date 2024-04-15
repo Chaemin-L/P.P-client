@@ -6,7 +6,7 @@ import { KakaoAuth } from "@/components/login/kakao-auth";
 import { Chat } from "@/pages/chat/chat";
 import { ChatRoom } from "@/pages/chat/chat-room";
 import { WrongAccessPage } from "@/pages/error/wrong-access";
-import { LoginPage } from "@/pages/login/login";
+import { LoginPage } from "@/pages/login";
 import { Mypage } from "@/pages/mypage/mypage";
 import { ApplicantListPage } from "@/pages/post/applicant-list";
 import { PostDetailPage } from "@/pages/post/post-detail";
@@ -27,6 +27,11 @@ import { Test2 } from "@/pages/test2";
 const routeChildren = [
   {
     path: "",
+    element: <>스플래쉬</>,
+    auth: false,
+  },
+  {
+    path: "/login",
     element: <LoginPage />,
     auth: false,
   },

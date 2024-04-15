@@ -1,3 +1,4 @@
+import { ReactComponent as GoogleLoginButtonSVG } from "@/assets/icons/google-login-button.svg";
 import { useGoogleLogin } from "@/hooks/queries/useGoogleLogin";
 
 export const GoogleButton = () => {
@@ -6,7 +7,10 @@ export const GoogleButton = () => {
   if (isLoading) return <div>Loading...</div>;
   return (
     <>
-      <button onClick={() => void signIn()}>Login</button>
+      <div style={{ width: "50vw" }} onClick={() => void signIn()}>
+        <GoogleLoginButtonSVG />
+      </div>
+      {/* <button onClick={() => void signIn()}>Login</button>
       <button onClick={() => void signOut()}>Logout</button>
       <div>
         {!isLoading && user ? (
@@ -31,7 +35,7 @@ export const GoogleButton = () => {
             </>
           </div>
         ) : null}
-      </div>
+      </div> */}
     </>
   );
 };
