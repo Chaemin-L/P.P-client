@@ -14,6 +14,7 @@ import { DefaultLayout } from "@/components/layout/default-layout";
 import { Report } from "@/components/report/report";
 import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useDeleteApply } from "@/hooks/queries/useDeleteApply";
+import { useDeletePost } from "@/hooks/queries/useDeletePost";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { usePostApply } from "@/hooks/queries/usePostApply";
@@ -24,6 +25,7 @@ export const PostDetailPage = () => {
   const { postId } = useParams();
   const { data: profile } = useGetProfile();
 
+  const [editModal, setEditModal] = useState(false);
   const [statusModal, setStatusModal] = useState(false);
   const [reportModal, setReportModal] = useState(false);
   const [repostModal, setRepostModal] = useState(false);
@@ -32,9 +34,11 @@ export const PostDetailPage = () => {
   const [applyModal, setApplyModal] = useState<boolean>(false);
 
   const { data } = useGetPostDetail(postId!);
+  const { mutate: deletePost } = useDeletePost(postId!);
   const { mutate: applyActivity } = usePostApply(postId!);
   const { mutate: cancelActivity } = useDeleteApply(postId!);
   const { mutate: pullUp } = usePullUp(postId!);
+  // deprecated
   const { mutate: changeStatus } = useChangeStatus(postId!);
 
   const navigate = useNavigate();
@@ -62,7 +66,14 @@ export const PostDetailPage = () => {
             >
               모집완료
             </Button>
-            <Button color="orange">편집하기</Button>
+            <Button
+              color="orange"
+              onClick={() => {
+                setEditModal(true);
+              }}
+            >
+              편집하기
+            </Button>
           </JustifyWrapper>
         ) : (
           <></>
@@ -222,6 +233,15 @@ export const PostDetailPage = () => {
           </Modal.Button>
         </Modal>
       )}
+      {editModal && (
+        <Modal onClose={() => setEditModal(false)}>
+          <Modal.Title text="편집하시겠습니까?" />
+          <EditModalButtonWrapper>
+            <Modal.Button color="orange">수정하기</Modal.Button>
+            <Modal.Button onClick={() => deletePost()}>삭제하기</Modal.Button>
+          </EditModalButtonWrapper>
+        </Modal>
+      )}
     </DefaultLayout>
   );
 };
@@ -264,4 +284,11 @@ const ButtonWrapper = styled.div`
 
 const EmptyBox = styled.div`
   padding: 10px;
+`;
+
+const EditModalButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.78rem;
 `;
