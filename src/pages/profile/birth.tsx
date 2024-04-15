@@ -7,12 +7,12 @@ import { Header } from "@/components/profile/header";
 import { Input } from "@/components/profile/input";
 import { profileState } from "@/recoil/atoms/profile-state";
 
-type BirthdayPageProps = {
+type BirthPageProps = {
   nextStep: () => void;
   onModal: () => void;
 };
 
-export const BirthdayPage = ({ nextStep, onModal }: BirthdayPageProps) => {
+export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
   const [bYear, setBYear] = useState<string>("");
   const [bMonth, setBMonth] = useState<string>("");
   const [bDay, setBDay] = useState<string>("");

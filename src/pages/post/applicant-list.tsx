@@ -48,7 +48,7 @@ const ApplicantItem = (props: ApplicantItemProps) => {
         <ApplicantMoreInfo>
           도움횟수 16 <Bullet />{" "}
           {props.applicantInfo.gender === "male" ? "남" : "여"} <Bullet />{" "}
-          {props.applicantInfo.ageRange}대
+          {props.applicantInfo.ageRange * 10}대
         </ApplicantMoreInfo>
       </ApplicantInfo>
       <ApplyButton $selected={props.selected} onClick={props.onSelect}>

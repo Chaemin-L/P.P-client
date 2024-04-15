@@ -37,7 +37,7 @@ export const GenderPage = ({ nextStep }: GenderPageProps) => {
           <span>여성</span>
         </GenderCard>
         <GenderCard onClick={() => setGender("male")}>
-          <img width="100%" src={MaleSVG} data-caption="남성" />
+          <img width="100%" src={MaleSVG} />
           <span>남성</span>
         </GenderCard>
       </GenderContainer>

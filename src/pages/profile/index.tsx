@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import { BirthdayPage } from "./birthday";
+import { BirthPage } from "./birth";
 import { GenderPage } from "./gender";
+import { LocationPage } from "./location";
 import { NicknamePage } from "./nickname";
 import { PasswordPage } from "./password";
 import { PhotoDescriptionPage } from "./photo-description";
@@ -13,7 +14,7 @@ import { WelcomePage } from "./welcome";
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
 
-const STEPSIZE = 6;
+const STEPSIZE = 7;
 
 type ProgressDotsType = {
   activeIdx: number;
@@ -77,12 +78,10 @@ export const ProfilePage = () => {
         />
       )}
       {step === 5 && (
-        <BirthdayPage
-          nextStep={nextStep}
-          onModal={() => setRequiredModal(true)}
-        />
+        <BirthPage nextStep={nextStep} onModal={() => setRequiredModal(true)} />
       )}
-      {step === 6 && <PasswordPage />}
+      {step === 6 && <LocationPage nextStep={nextStep} />}
+      {step === 7 && <PasswordPage />}
       {requiredModal && (
         <Modal onClose={() => setRequiredModal(false)}>
           <Modal.Title text={`${requiredElem}은\\n필수 항목입니다.`} />
