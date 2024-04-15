@@ -26,6 +26,7 @@ export const PostDetailPage = () => {
   const { data: profile } = useGetProfile();
 
   const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const [statusModal, setStatusModal] = useState(false);
   const [reportModal, setReportModal] = useState(false);
   const [repostModal, setRepostModal] = useState(false);
@@ -238,8 +239,25 @@ export const PostDetailPage = () => {
           <Modal.Title text="편집하시겠습니까?" />
           <EditModalButtonWrapper>
             <Modal.Button color="orange">수정하기</Modal.Button>
-            <Modal.Button onClick={() => deletePost()}>삭제하기</Modal.Button>
+            <Modal.Button
+              onClick={() => {
+                setEditModal(false);
+                setDeleteModal(true);
+              }}
+            >
+              삭제하기
+            </Modal.Button>
           </EditModalButtonWrapper>
+        </Modal>
+      )}
+      {deleteModal && (
+        <Modal
+          onClose={() => {
+            setDeleteModal(false);
+            deletePost();
+          }}
+        >
+          <Modal.Title text="게시물이\n삭제되었습니다" />
         </Modal>
       )}
     </DefaultLayout>
