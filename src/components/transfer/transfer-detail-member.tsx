@@ -39,8 +39,9 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
   const handleMemberCheck = (item: {
     nickName: string;
     userId: number;
-    blocked: boolean;
-    profileImg: string;
+    profileId: number;
+    profileImage: string;
+    accountNumber: string;
   }) => {
     const foundUser = lastTransfer.users.find(
       (user) => user.nickName === item.nickName,

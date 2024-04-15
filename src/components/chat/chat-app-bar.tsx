@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -18,6 +19,7 @@ export const ChatAppBar = ({
   setAppBarHeight,
 }: ChatAppBarType) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const element = document.getElementById("AppBar");
@@ -32,7 +34,10 @@ export const ChatAppBar = ({
   return (
     <AppBar isFixed={true} isColorMode={isColorMode} id="AppBar">
       <AppBar.AppBarNavigate style={{ padding: "4% 21px" }}>
-        <AppBar.BackButton isColorMode={isColorMode} />
+        <AppBar.BackButton
+          isColorMode={isColorMode}
+          onClick={() => navigate("/chat", { replace: true })}
+        />
         <AppBar.HeaderText>{name}</AppBar.HeaderText>
         <AppBar.RightButton
           imgSrc={isColorMode ? ReportWhiteSVG : ReportBlackSVG}

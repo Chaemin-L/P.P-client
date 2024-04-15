@@ -28,20 +28,6 @@ export default class PostApi {
     return response.status;
   }
 
-  // static async getPostDetail(postId: string) {
-  //   const response = await Instance.get<ResponsePostDetail>(
-  //     `/haetsal-service/api/v2/market/post/${postId}`,
-  //   )
-  //     .then((res) => res.data)
-  //     .catch((e) => console.log(e));
-  //   console.log(response);
-  //   if (response) {
-  //     return response.data;
-  //   } else {
-  //     throw new Error("Invalid response from server");
-  //   }
-  // }
-
   static async getPostList() {
     const response = await Instance.get("/haetsal-service/api/v2/market/post");
 

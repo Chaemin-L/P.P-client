@@ -15,9 +15,6 @@ import { ProfileModal } from "@/components/common/profile-modal";
 import { Report } from "@/components/report/report";
 import { Transfer } from "@/components/transfer/transfer";
 import { useChatDataSetting } from "@/hooks/chat/useChatDataSetting";
-import { useGetBankData } from "@/hooks/queries/useGetBankData";
-import { useGetMessages } from "@/hooks/queries/useGetMessages";
-import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { transferState } from "@/recoil/atoms/transfer-state";
 // import SockJS from "sockjs-client";
 // import Stomp from "stompjs";
@@ -28,6 +25,8 @@ export const ChatRoom = () => {
   const state = location.state as ChatListItemType;
 
   const [transfer, setTransfer] = useRecoilState(transferState);
+  const roomMsgs = useChatDataSetting(state);
+  console.log(transfer);
 
   const [appBarHeight, setAppBarHeight] = useState(0);
   const [appBerVisibility, setAppBarVisibility] = useState(true);
@@ -36,13 +35,10 @@ export const ChatRoom = () => {
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
   const [isTransfer, setIsTransfer] = useState(false);
   const [isReport, setIsReport] = useState(false);
-  useChatDataSetting(state);
-  const { data: msgs } = useGetMessages(state.roomId);
   const [reportModal, setReportModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
-
   const [msg, setMsg] = useState("");
 
   return (
@@ -66,18 +62,19 @@ export const ChatRoom = () => {
           paddingTop: appBerVisibility ? `${appBarHeight + 10}px` : "10px",
         }}
       >
-        {msgs?.map((item, index) => {
-          const temp = transfer.users.find(
-            (e) => e.userId.toString() === item.userId,
-          );
+        {roomMsgs?.map((item, index) => {
+          const temp = transfer.users.find((e) => {
+            e.userId === Number(item.userId);
+            // console.log("roomMsgMap:", e);
+          });
           return (
             <ChatItem
               key={index}
-              userId={Number(item.userId)}
+              userId={item.userId}
               userName={temp ? temp.nickName : "(알 수 없음)"}
               setProfileModal={setProfileModal}
               setProfileUserId={setProfileUserId}
-              imgurl={temp ? temp.profileImg : undefined}
+              imgurl={temp ? temp.profileImage : undefined}
             >
               {item.message}
             </ChatItem>

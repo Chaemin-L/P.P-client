@@ -12,24 +12,26 @@ export const ChatItem = ({
   setProfileModal,
   setProfileUserId,
 }: ChatItemType) => {
-  // const myName = localStorage.getItem("userName")
-  //   ? localStorage.getItem("userName")
-  //   : "김철수";
+  const myId = localStorage.getItem("userId")
+    ? localStorage.getItem("userId")
+    : "-1";
 
-  const myName = "김철수";
+  // console.log("myId: ", myId);
+  // console.log("userId: ", { userId, imgurl, userName });
 
   return (
     <Container
       style={{
-        justifyContent: userName === myName ? "flex-end" : "flex-start",
+        justifyContent:
+          Number(userName) === Number(myId) ? "flex-end" : "flex-start",
       }}
     >
-      {userName === myName ? (
+      {userName === myId ? (
         <></>
       ) : (
         <ProfileContainer
           onClick={() => {
-            setProfileUserId(userId);
+            setProfileUserId(Number(userId));
             setProfileModal(true);
           }}
         >
@@ -38,13 +40,13 @@ export const ChatItem = ({
       )}
       <ChatColumnBox
         style={{
-          alignItems: userName === myName ? "flex-end" : "flex-start",
+          alignItems: userName === myId ? "flex-end" : "flex-start",
         }}
       >
         <ChatBox
           style={{
             backgroundColor:
-              userName === myName ? colorTheme.blue100 : colorTheme.blue300,
+              userName === myId ? colorTheme.blue100 : colorTheme.blue300,
           }}
         >
           <ChatText>{children}</ChatText>

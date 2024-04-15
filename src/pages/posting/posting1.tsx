@@ -4,7 +4,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { InputBox } from "@/components/common/Input-box";
+import { InputBox } from "@/components/common/input-box";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";

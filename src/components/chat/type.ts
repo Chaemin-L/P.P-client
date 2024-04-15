@@ -6,7 +6,7 @@ export type MyChatType = {
 
 export type ChatItemType = {
   children?: React.ReactNode;
-  userId: number;
+  userId: string;
   imgurl?: string;
   userName: string;
   setProfileModal: React.Dispatch<React.SetStateAction<boolean>>;

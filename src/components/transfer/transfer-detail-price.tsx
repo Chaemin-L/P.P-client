@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import { TransferDetailProps } from "./type";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { InputBox } from "@/components/common/Input-box";
+import { InputBox } from "@/components/common/input-box";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { colorTheme } from "@/style/color-theme";
 

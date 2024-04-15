@@ -20,10 +20,10 @@ export const ChatListItem = (props: ChatRoomItemType) => {
   return (
     <ItemContainer onClick={HandlerEnterRoom}>
       <RowDiv>
-        {props.postStatus === "RECRUITING" ? (
-          <StateDiv>진행중</StateDiv>
-        ) : (
+        {props.postStatus === "TRANSACTION_COMPLETED" ? (
           <StateFinishDiv>진행완료</StateFinishDiv>
+        ) : (
+          <StateDiv>진행중</StateDiv>
         )}
         <LeftColumnDiv>
           <TitleText>{props.postTitle}</TitleText>

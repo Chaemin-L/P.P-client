@@ -1,7 +1,8 @@
 import { MouseEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
+import { ChatMakeRequest } from "@/api/types/chat-type";
 import LocationSVG from "@/assets/icons/location.svg";
 import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
@@ -10,6 +11,7 @@ import { DefaultLayout } from "@/components/layout/default-layout";
 import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
 import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
+import { usePostMakeChat } from "@/hooks/queries/usePostMakeChat";
 import { colorTheme } from "@/style/color-theme";
 
 type ApplicantItemProps = {
@@ -59,6 +61,9 @@ export const ApplicantListPage = () => {
   const { data } = useGetApplyList(postId!);
   const { mutate: accept } = usePostApplyAccept(postId!);
   const { mutate: changeStatus } = useChangeStatus(postId!);
+  const { mutate: makeChat } = usePostMakeChat();
+
+  const navigate = useNavigate();
 
   console.log(data);
 
@@ -111,6 +116,13 @@ export const ApplicantListPage = () => {
             color="orange"
             onClick={() => {
               // TODO: 채팅방 생성 후 라우팅
+              const tempList: string[] = applyIds.map((id) => id.toString());
+              const tempData: ChatMakeRequest = {
+                postId: Number(postId),
+                memberIds: tempList,
+              };
+
+              makeChat(tempData);
             }}
           >
             채팅방 만들기

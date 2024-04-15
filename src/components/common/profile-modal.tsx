@@ -84,11 +84,12 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
               <ModalHeaderLine />
               <span>{profileData?.ageRange + "대"}</span>
             </ModalHeader>
-            <ImgContainer>
-              <Img src={profileData?.profileImage} />
-            </ImgContainer>
+            <Img src={profileData?.profileImage} />
             <AddressSpan>
-              <img src={LocationSVG} />
+              <img
+                style={{ width: "1rem", height: "1rem" }}
+                src={LocationSVG}
+              />
               {profileData?.address}
             </AddressSpan>
           </ModalDiv>
@@ -111,6 +112,7 @@ const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 11rem;
 `;
 
 const ModalHeader = styled.div`
@@ -131,20 +133,9 @@ const ModalHeaderLine = styled.div`
   margin: 0 0.33rem;
 `;
 
-const ImgContainer = styled.div`
-  width: 70%;
-  padding-top: 70%;
-  position: relative;
-  border-radius: 1.17rem;
-  background-color: ${colorTheme.blue300};
-`;
-
 const Img = styled.img`
-  width: 90%;
-  height: 90%;
-  top: 5%;
-  left: 5%;
-  position: absolute;
+  width: 8rem;
+  height: 8rem;
   border-radius: 1.17rem;
 `;
 
