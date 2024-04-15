@@ -15,12 +15,14 @@ import { Report } from "@/components/report/report";
 import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useDeleteApply } from "@/hooks/queries/useDeleteApply";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
+import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { usePostApply } from "@/hooks/queries/usePostApply";
 import { usePullUp } from "@/hooks/queries/usePullUp";
 import { colorTheme } from "@/style/color-theme";
 
 export const PostDetailPage = () => {
   const { postId } = useParams();
+  const { data: profile } = useGetProfile();
 
   const [statusModal, setStatusModal] = useState(false);
   const [reportModal, setReportModal] = useState(false);
@@ -174,7 +176,11 @@ export const PostDetailPage = () => {
             <Modal.Button
               color="orange"
               onClick={() => {
-                cancelActivity();
+                if (profile)
+                  cancelActivity({
+                    applyId: data.userCurrentStatus.applyId,
+                    userId: profile?.userId,
+                  });
                 setApplyModal(false);
               }}
             >

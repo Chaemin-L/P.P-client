@@ -1,7 +1,7 @@
 import { FinalResponse } from "./common-type";
 
 export type ProfileData = {
-  profileId: number;
+  userId: number;
   nickName: string;
   gender: string;
   address: string;
