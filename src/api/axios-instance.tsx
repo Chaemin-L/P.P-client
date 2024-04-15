@@ -12,11 +12,14 @@ const Instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_URL}:${process.env.REACT_APP_API_PORT}`,
   timeout: 5000,
   withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 Instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-    const { method, url } = config;
+    const { method, url, headers } = config;
 
     let token: string | null = null;
 
@@ -30,12 +33,10 @@ Instance.interceptors.request.use(
     // token = process.env.REACT_APP_TEST_TOKEN;
 
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      headers.Authorization = `Bearer ${token}`;
     }
-    config.headers["Content-Type"] = "application/json";
     console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url} ${token}`);
-
-    return config;
+    return { ...config, headers };
   },
   (error: AxiosError) => {
     const { method, url } = error.config as InternalAxiosRequestConfig;

@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import { BirthdayPage } from "./birthday";
+import { AddressPage } from "./address";
+import { BirthPage } from "./birth";
 import { GenderPage } from "./gender";
+import { NamePage } from "./name";
 import { NicknamePage } from "./nickname";
+import { PasswordPage } from "./password";
 import { PhotoDescriptionPage } from "./photo-description";
 import { TakePhotoPage } from "./take-photo";
-import { WelcomePage } from "./welcome";
 
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
 
-const STEPSIZE = 5;
+const STEPSIZE = 7;
 
 type ProgressDotsType = {
   activeIdx: number;
@@ -21,7 +24,7 @@ const ProgressDots = ({ activeIdx }: ProgressDotsType) => {
   if (activeIdx === 0) return <></>;
   return (
     <ProgressDotsContainer>
-      {new Array(STEPSIZE).fill(0).map((a, i) => (
+      {new Array(STEPSIZE).fill(0).map((_, i) => (
         <Dot key={i} $active={activeIdx === i + 1} />
       ))}
     </ProgressDotsContainer>
@@ -34,6 +37,12 @@ export const ProfilePage = () => {
   const [requiredElem, setRequiredElem] = useState<string>("");
 
   const nextStep = () => setStep((step) => step + 1);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("role") === "ROLE_USER") return navigate("/post");
+  }, []);
 
   useEffect(() => {
     switch (step) {
@@ -53,7 +62,9 @@ export const ProfilePage = () => {
 
   return (
     <DefaultLayout appbar={<ProgressDots activeIdx={step} />}>
-      {step === 1 && <WelcomePage nextStep={nextStep} />}
+      {step === 1 && (
+        <NamePage nextStep={nextStep} onModal={() => setRequiredModal(true)} />
+      )}
       {step === 2 && (
         <NicknamePage
           nextStep={nextStep}
@@ -68,7 +79,11 @@ export const ProfilePage = () => {
           onModal={() => setRequiredModal(true)}
         />
       )}
-      {step === 5 && <BirthdayPage onModal={() => setRequiredModal(true)} />}
+      {step === 5 && (
+        <BirthPage nextStep={nextStep} onModal={() => setRequiredModal(true)} />
+      )}
+      {step === 6 && <AddressPage nextStep={nextStep} />}
+      {step === 7 && <PasswordPage />}
       {requiredModal && (
         <Modal onClose={() => setRequiredModal(false)}>
           <Modal.Title text={`${requiredElem}은\\n필수 항목입니다.`} />

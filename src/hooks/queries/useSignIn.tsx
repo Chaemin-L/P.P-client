@@ -12,7 +12,8 @@ export const useSignIn = () => {
       console.log("로그인 성공", response.accessToken);
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
-      if (response.role === "ROLE_TEMPORARY_USER") navigate("/signup");
+      localStorage.setItem("role", response.role);
+      if (response.role === "ROLE_TEMPORARY_USER") navigate("/profile");
       else navigate("/post");
     },
   });

@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
 import CameraSVG from "@/assets/icons/camera.svg";
-import { Description as OriginDescription } from "@/components/signup/description";
-import { Header } from "@/components/signup/header";
+import { Description as OriginDescription } from "@/components/profile/description";
+import { Header } from "@/components/profile/header";
 
 type PhotoDescriptionPageProps = {
   nextStep: () => void;
