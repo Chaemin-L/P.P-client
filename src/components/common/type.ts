@@ -50,10 +50,6 @@ export type AppBarProps = {
   children?: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLElement>, "type">;
 
-export type HamburgerProps = {
-  isColorMode?: boolean;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
-
 export type RightButtonProps = {
   imgSrc: string;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
@@ -61,4 +57,19 @@ export type RightButtonProps = {
 export type ProfileModalType = {
   userId: number;
   onClose: () => void;
+};
+
+export type InputWrapperProps = {
+  children: React.ReactNode;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "type">;
+
+export type InputInnerProps = {
+  gap?: string;
+  children: React.ReactNode;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  maximum: number;
+  minimum?: number;
+  isError: boolean;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
 };

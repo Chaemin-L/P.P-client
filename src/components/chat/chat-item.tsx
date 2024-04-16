@@ -12,39 +12,38 @@ export const ChatItem = ({
   setProfileModal,
   setProfileUserId,
 }: ChatItemType) => {
-  // const myName = localStorage.getItem("userName")
-  //   ? localStorage.getItem("userName")
-  //   : "김철수";
+  const tempId = localStorage.getItem("userId");
+  const myId = tempId ? Number(tempId) : -1;
 
-  const myName = "김철수";
+  // console.log("myId: ", myId);
 
   return (
     <Container
       style={{
-        justifyContent: userName === myName ? "flex-end" : "flex-start",
+        justifyContent: userId === myId ? "flex-end" : "flex-start",
       }}
     >
-      {userName === myName ? (
-        <></>
-      ) : (
-        <ProfileContainer
+      {userId !== myId && (
+        <ProfileImg
           onClick={() => {
-            setProfileUserId(userId);
-            setProfileModal(true);
+            if (userId !== -2) {
+              setProfileUserId(Number(userId));
+              setProfileModal(true);
+            }
           }}
-        >
-          {imgurl ? <ProfileImg /> : <></>}
-        </ProfileContainer>
+          src={imgurl}
+        ></ProfileImg>
       )}
       <ChatColumnBox
         style={{
-          alignItems: userName === myName ? "flex-end" : "flex-start",
+          alignItems: userId === myId ? "flex-end" : "flex-start",
         }}
       >
+        {userId !== myId && <NameDiv>{userName}</NameDiv>}
         <ChatBox
           style={{
             backgroundColor:
-              userName === myName ? colorTheme.blue100 : colorTheme.blue300,
+              userId === myId ? colorTheme.blue100 : colorTheme.blue300,
           }}
         >
           <ChatText>{children}</ChatText>
@@ -62,18 +61,12 @@ const Container = styled.div`
   flex-direction: row;
 `;
 
-const ProfileContainer = styled.div`
+const ProfileImg = styled.img`
   width: 2.22rem;
   height: 2.22rem;
-  margin-left: 7.15%;
-  margin-right: 4%;
+  margin: 0.6rem 4% 0 7.15%;
   border-radius: 0.83rem;
   background-color: #d9d9d9;
-`;
-
-const ProfileImg = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 const ChatBox = styled.div`
@@ -87,7 +80,7 @@ const ChatBox = styled.div`
 
 const ChatText = styled.div`
   color: black;
-  font-size: 0.83rem;
+  font-size: 1.2rem;
   word-break: break-all;
 `;
 
@@ -95,4 +88,10 @@ const ChatColumnBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 62.1%;
+  gap: 0.4rem;
+`;
+
+const NameDiv = styled.div`
+  font-size: 0.83rem;
+  color: #707379;
 `;
