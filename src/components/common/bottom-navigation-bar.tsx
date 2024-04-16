@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import chatIconDark from "@/assets/icons/chat-icon-dark.png";
-import chatIconOrange from "@/assets/icons/chat-icon-orange.png";
-import mypageIconDark from "@/assets/icons/mypage-icon-dark.png";
-import mypageIconOrange from "@/assets/icons/mypage-icon-orange.png";
-import postIconDark from "@/assets/icons/post-icon-dark.png";
-import postIconOrange from "@/assets/icons/post-icon-orange.png";
+import ChatDarkSVG from "@/assets/icons/chat-dark.svg";
+import ChatOrangeSVG from "@/assets/icons/chat-orange.svg";
+import MypageDarkSVG from "@/assets/icons/mypage-dark.svg";
+import MypageOrangeSVG from "@/assets/icons/mypage-orange.svg";
+import PostDark from "@/assets/icons/post-dark.svg";
+import PostOrange from "@/assets/icons/post-orange.svg";
 import { colorTheme } from "@/style/color-theme";
 
 export const BottomNavigationBar = () => {
@@ -26,13 +26,13 @@ export const BottomNavigationBar = () => {
   }, [location.pathname]);
 
   return (
-    <Wrapper id="BottomNavigationBar">
+    <Wrapper>
       <NavigateButton
         onClick={() => {
           navigate("/mypage", { replace: true });
         }}
       >
-        <img src={currentUrl == "mypage" ? mypageIconOrange : mypageIconDark} />
+        <img src={currentUrl == "mypage" ? MypageOrangeSVG : MypageDarkSVG} />
         <ButtonText
           style={{
             color: currentUrl == "mypage" ? "#f17547" : "#828282",
@@ -47,7 +47,7 @@ export const BottomNavigationBar = () => {
           navigate("/post", { replace: true });
         }}
       >
-        <img src={currentUrl == "post" ? postIconOrange : postIconDark} />
+        <img src={currentUrl == "post" ? PostOrange : PostDark} />
         <ButtonText
           style={{
             color: currentUrl == "post" ? "#f17547" : "#828282",
@@ -62,7 +62,7 @@ export const BottomNavigationBar = () => {
           navigate("/chat", { replace: true });
         }}
       >
-        <img src={currentUrl == "chat" ? chatIconOrange : chatIconDark} />
+        <img src={currentUrl == "chat" ? ChatOrangeSVG : ChatDarkSVG} />
         <ButtonText
           style={{
             color: currentUrl == "chat" ? "#f17547" : "#828282",

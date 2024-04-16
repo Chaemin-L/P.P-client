@@ -1,29 +1,47 @@
 import { styled } from "styled-components";
 
-import knotIcon from "@/assets/icons/knot-icon.png";
-import maleIcon from "@/assets/icons/male-icon.png";
-import mapIcon from "@/assets/icons/map-icon.png";
-import peopleIcon from "@/assets/icons/people-icon.png";
+import FemaleSVG from "@/assets/icons/female.svg";
+import KnotWhiteBackSVG from "@/assets/icons/knot-white-back.svg";
+import LocationWhiteBackSVG from "@/assets/icons/location-white-back.svg";
+import MaleSVG from "@/assets/icons/male.svg";
+import PersonSVG from "@/assets/icons/person-white-back.svg";
+import { useGetBankData } from "@/hooks/queries/useGetBankData";
+import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { colorTheme } from "@/style/color-theme";
 
 export const MypageListProfile = () => {
+  const { data: myProfile } = useGetProfile();
+  const { data: bankAccount } = useGetBankData();
+
   return (
     <Wrapper>
-      <ImgContainer>
-        <Img />
-      </ImgContainer>
+      <ProfileImg src={myProfile?.profileImage} />
       <ColumnBox>
         <ProfileRowBox>
-          <Name></Name>
-          <OtherStateIcon src={maleIcon} />
-          <SexAge></SexAge>
+          <Name>{myProfile?.nickName}</Name>
+          <OtherStateIcon
+            src={myProfile?.gender == "male" ? MaleSVG : FemaleSVG}
+          />
+          <SexAge>
+            {myProfile?.gender == "male" ? "남" : "여"} / {myProfile?.ageRange}
+            대
+          </SexAge>
         </ProfileRowBox>
         <StateOrangeBox>
           <PriceStateBox>
-            <KnotIconImg src={knotIcon} />
-            <KnotPriceState></KnotPriceState>
+            <KnotIconImg src={KnotWhiteBackSVG} />
+            <KnotPriceState>{bankAccount?.totalBudget}</KnotPriceState>
             <KnotPriceWon>매듭</KnotPriceWon>
           </PriceStateBox>
+          <OtherStateColumnBox>
+            <PriceStateBox style={{ width: "5rem" }}>
+              <OtherStateIcon src={LocationWhiteBackSVG} />
+              <div>{myProfile?.address}</div>
+            </PriceStateBox>
+            {/* <PriceStateBox style={{ width: "5rem" }}>
+              <OtherStateIcon src={PersonSVG} />
+            </PriceStateBox> */}
+          </OtherStateColumnBox>
         </StateOrangeBox>
       </ColumnBox>
     </Wrapper>
@@ -33,28 +51,19 @@ export const MypageListProfile = () => {
 const Wrapper = styled.div`
   width: 100%;
   background-color: ${colorTheme.blue100};
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  padding: 26px 9% 26px 0;
+  border-top-left-radius: 0.83rem;
+  border-top-right-radius: 0.83rem;
+  padding: 1.44rem 0 1.4rem 9%;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 3.3%;
 `;
 
-const ImgContainer = styled.div`
-  width: 20%;
-  padding-top: 20%;
-  position: relative;
-  border-radius: 10px;
-`;
-
-const Img = styled.img`
-  width: 100%;
-  height: 100%;
-  top: 0;
-  position: absolute;
-  border-radius: 10px;
+const ProfileImg = styled.img`
+  width: 4.33rem;
+  height: 4.33rem;
+  border-radius: 0.56rem;
 `;
 
 const ColumnBox = styled.div`
@@ -73,11 +82,11 @@ const ProfileRowBox = styled.div`
   gap: 1%;
 `;
 
-const Name = styled.span`
-  font-size: 1.38rem;
+const Name = styled.div`
+  font-size: 1.39rem;
 `;
 
-const SexAge = styled.span`
+const SexAge = styled.div`
   font-size: 0.56rem;
   color: ${colorTheme.shade};
 `;
@@ -87,41 +96,44 @@ const StateOrangeBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 1.11rem;
+  border-bottom-left-radius: 1.11rem;
   width: 100%;
-  background-color: ${colorTheme.orange200};
+  background-color: ${colorTheme.orange400};
   color: white;
-  padding: 8px 4.5% 8px 8%;
+  padding: 0.66rem 6% 0.66rem 4.5%;
 `;
 
 const PriceStateBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  gap: 2%;
+  gap: 3%;
 `;
 
 const KnotIconImg = styled.img`
-  width: 25px;
-  height: 25px;
+  width: 1.39rem;
+  height: 1.39rem;
 `;
 
-const KnotPriceState = styled.span`
-  font-size: 1.38rem;
+const KnotPriceState = styled.div`
+  font-size: 1.39rem;
   font-weight: bold;
 `;
 
-const KnotPriceWon = styled.span`
-  font-size: 0.72rem;
+const KnotPriceWon = styled.div`
+  font-size: 0.722rem;
+  width: 1.8rem;
 `;
 
 const OtherStateColumnBox = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.61rem;
 `;
 
 const OtherStateIcon = styled.img`
-  width: 6px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.68rem;
 `;

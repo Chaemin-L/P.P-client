@@ -33,32 +33,19 @@ export default class PostApi {
     }
   }
 
-  static async reportPosting(postId: string) {
+  static async reportPosting(data: { postId: string; reportMsg: string }) {
     const response = await Instance.post(
-      `/haetsal-service/api/v2/market/post/${postId}/report`,
+      `/haetsal-service/api/v2/market/post/${data.postId}/report`,
+      { introduction: data.reportMsg },
     );
     return response.status;
   }
 
-  static async getPostDetail(postId: string) {
-    const response = await Instance.get<ResponsePostDetail>(
-      `/haetsal-service/api/v2/market/post/${postId}`,
-    )
-      .then((res) => res.data)
-      .catch((e) => console.log(e));
-    console.log(response);
-    if (response) {
-      return response.data;
-    } else {
-      throw new Error("Invalid response from server");
-    }
-  }
-
   static async getPostList() {
-    const reponse = await Instance.get("/haetsal-service/api/v2/market/post");
+    const response = await Instance.get("/haetsal-service/api/v2/market/post");
 
-    if (reponse) {
-      const temp = reponse.data as ResponsePostListProps;
+    if (response) {
+      const temp = response.data as ResponsePostListProps;
       return temp.data;
     } else {
       throw new Error("Invalid response from server");
@@ -66,12 +53,25 @@ export default class PostApi {
   }
 
   static async getUserActivity(type: string) {
-    const reponse = await Instance.get(
+    const response = await Instance.get(
       `/haetsal-service/api/v2/market/post/user-activity/${type}`,
     );
 
-    if (reponse) {
-      const temp = reponse.data as ResponsePostListProps;
+    if (response) {
+      const temp = response.data as ResponsePostListProps;
+      return temp.data;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  }
+
+  static async getPostDetail(postId: string) {
+    const response = await Instance.get(
+      `/haetsal-service/api/v2/market/post/${postId}`,
+    );
+
+    if (response) {
+      const temp = response.data as ResponsePostDetail;
       return temp.data;
     } else {
       throw new Error("Invalid response from server");

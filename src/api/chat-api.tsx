@@ -1,31 +1,132 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import Instance from "./axios-instance";
-import { ChatGetResponse, ChatSendResponse } from "./types/chat-type";
+import {
+  ChatFinalResponse,
+  ChatListItemType,
+  ChatListResponse,
+  ChatMakeRequest,
+  ChatMakeRoom,
+  ChatMemberResponse,
+  ChatRoomResponse,
+  ChatSendRequest,
+} from "./types/chat-type";
 
 export default class ChatApi {
-  static async getChatMessages(roomIdx: number): Promise<ChatGetResponse[]> {
-    const response: AxiosResponse<ChatGetResponse> = await Instance.get(
-      `/chat/room/${roomIdx}/messages`,
-    );
-    return [response.data];
-  }
-
-  static async sendChatMessages({
-    roomIdx,
-    senderName,
-    senderUuid,
-    message,
-  }: ChatSendResponse): Promise<ChatSendResponse> {
-    const response: AxiosResponse<ChatSendResponse> = await Instance.post(
-      `/chat/room/${roomIdx}/messages`,
+  static async sendChatMessages({ message, roomId }: ChatSendRequest) {
+    const myId = localStorage.getItem("userId")
+      ? localStorage.getItem("userId")
+      : "-1";
+    const response = await axios.post(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats/${roomId}/message`,
+      message,
       {
-        roomIdx: roomIdx,
-        senderName: senderName,
-        senderUuid: senderUuid,
-        message: message,
+        headers: {
+          userId: myId,
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       },
     );
-    return response.data;
+    if (response) {
+      return response.status;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  }
+
+  static async getChatList() {
+    const myId = localStorage.getItem("userId")
+      ? localStorage.getItem("userId")
+      : "-1";
+    const response = await axios.get(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats`,
+      {
+        headers: {
+          userId: myId,
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
+    );
+    console.log(response);
+    if (response) {
+      const temp = response.data as ChatListResponse;
+      return temp.result;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  }
+
+  static async getChatRoomData(chatRoomId: string) {
+    const myId = localStorage.getItem("userId")
+      ? localStorage.getItem("userId")
+      : "-1";
+    const response = await axios.get(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats/${chatRoomId}`,
+      {
+        headers: {
+          userId: myId,
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
+    );
+    // console.log(response);
+    if (response) {
+      const temp = response.data as ChatRoomResponse;
+      return temp.result;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  }
+
+  static async getChatMembers(chatRoomId: string) {
+    const response = await axios.get(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats/${chatRoomId}/members`,
+      {
+        headers: {
+          userId: "2",
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
+    );
+    // console.log(response);
+    if (response) {
+      const temp = response.data as ChatMemberResponse;
+      return temp.result.userIds;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  }
+
+  static async postChatMake(data: ChatMakeRequest) {
+    const myId = localStorage.getItem("userId")
+      ? localStorage.getItem("userId")
+      : "-1";
+    const response = await axios.post(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats`,
+      data,
+      {
+        headers: {
+          userId: myId,
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
+    );
+    // console.log(response);
+    if (response) {
+      const temp = response.data as ChatFinalResponse<ChatMakeRoom>;
+      return temp.result;
+    } else {
+      throw new Error("Invalid response from server");
+    }
   }
 }
