@@ -12,7 +12,14 @@ export const useSignInLocal = () => {
       console.log("로그인 성공", response.accessToken);
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
-      navigate("/posting/1");
+      localStorage.setItem("userId", response.userId.toString());
+      localStorage.setItem("role", response.role);
+      // if (response.role !== "ROLE_USER") {
+      //   navigate("/signup");
+      // } else {
+      //   navigate("/post");
+      // }
+      navigate("/post");
     },
   });
 };

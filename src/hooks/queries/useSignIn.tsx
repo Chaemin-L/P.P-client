@@ -9,11 +9,11 @@ export const useSignIn = () => {
     mutationFn: (data: { type: string; token: string }) =>
       AuthApi.postSignIn(data.type, data.token),
     onSuccess: (response) => {
-      console.log("로그인 성공", response.accessToken);
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
+      localStorage.setItem("userId", response.userId.toString());
       localStorage.setItem("role", response.role);
-      if (response.role === "ROLE_TEMPORARY_USER") navigate("/profile");
+      if (response.role !== "ROLE_USER") navigate("/profile");
       else navigate("/post");
     },
   });

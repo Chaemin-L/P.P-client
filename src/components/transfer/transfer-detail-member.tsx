@@ -36,13 +36,19 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
     }
   };
 
-  const handleMemberCheck = (item: { name: string; userId: string }) => {
+  const handleMemberCheck = (item: {
+    nickName: string;
+    userId: number;
+    profileId: number;
+    profileImage: string;
+    accountNumber: string;
+  }) => {
     const foundUser = lastTransfer.users.find(
-      (user) => user.name === item.name,
+      (user) => user.nickName === item.nickName,
     );
     const isTrue = !!foundUser;
     const tempUsers = isTrue
-      ? lastTransfer.users.filter((user) => user.name !== item.name)
+      ? lastTransfer.users.filter((user) => user.nickName !== item.nickName)
       : [...lastTransfer.users, item];
 
     setLastTransfer((prevLastTransfer) => {
@@ -78,7 +84,7 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
       <MemberScroll>
         {transfer.users.map((item, index) => {
           const foundUser = lastTransfer.users.find(
-            (user) => user.name === item.name,
+            (user) => user.nickName === item.nickName,
           );
           const isTrue = !!foundUser;
           return (
@@ -87,14 +93,14 @@ export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
               isTrue={isTrue}
               setIsTrue={() => handleMemberCheck(item)}
             >
-              {item.name}
+              {item.nickName}
             </TransferDetailMemberItem>
           );
         })}
       </MemberScroll>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+          color="blue"
           onClick={() => setScreen("transfer-detail-price")}
         >
           다음
@@ -127,7 +133,7 @@ const MemberScroll = styled.div`
   display: grid;
   width: 100%;
   gap: 10%;
-  padding: 0.56rem 10%;
+  padding: 0 10%;
   justify-content: space-between;
   grid-template-columns: repeat(2, 1fr);
 `;
