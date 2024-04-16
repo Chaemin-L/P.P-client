@@ -1,19 +1,16 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { ApplyType } from "@/api/types/apply-type";
-import { ChatMakeRequest, ChatMakeRoom } from "@/api/types/chat-type";
 import LocationSVG from "@/assets/icons/location.svg";
 import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
-import { useCheckChatMake } from "@/hooks/chat/useChatMake";
 import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
 import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
-import { usePostMakeChat } from "@/hooks/queries/usePostMakeChat";
 import { colorTheme } from "@/style/color-theme";
 
 type ApplicantItemProps = {
@@ -71,25 +68,7 @@ export const ApplicantListPage = () => {
   const { mutate: accept } = usePostApplyAccept(postId!);
   const { mutate: changeStatus } = useChangeStatus(postId!);
 
-  const { mutate: makeChat } = usePostMakeChat();
-  // const chatRoomId = useCheckChatMake(postId!);
-  const [chatMakeRoomId, setChatMakeRoomId] = useState<ChatMakeRoom | null>(
-    null,
-  );
-  const navigate = useNavigate();
-
-  const [isApplyError, setIsApplyError] = useState(false);
-  // const [isApplyChange, setIsApplyChange] = useState(false);
-
-  // console.log(data);
-  // useEffect(() => {
-  //   const tempList: number[] = data ? data.filter((item) => {item.status}) : [];
-  //   setIsApplyChange(false);
-  //   applyIds.map((item) => {
-  //     if (tempList.find((e) => e === item) === undefined)
-  //       setIsApplyChange(true);
-  //   });
-  // }, [applyIds]);
+  console.log(data);
 
   return (
     <DefaultLayout
@@ -122,26 +101,8 @@ export const ApplicantListPage = () => {
         <BottomFixed.Button
           color="orange"
           onClick={() => {
-            if (applyIds.length > 0) {
-              accept(applyIds);
-              setApplyModal(true);
-
-              const tempList: string[] = applyIds.map((id) => id.toString());
-              const tempData: ChatMakeRequest = {
-                postId: Number(postId),
-                memberIds: tempList,
-              };
-
-              makeChat(tempData, {
-                onSuccess: (res) => {
-                  setApplyModal(true);
-                  setChatMakeRoomId(res);
-                  console.log("makeChat: ", res);
-                },
-              });
-            } else {
-              setIsApplyError(true);
-            }
+            accept(applyIds);
+            setApplyModal(true);
           }}
         >
           {applyIds.length}명 수락하기
@@ -157,32 +118,16 @@ export const ApplicantListPage = () => {
           <Modal.Button
             color="orange"
             onClick={() => {
-              navigate(`/chat/detail`, {
-                state: {
-                  roomId: chatMakeRoomId?.roomId,
-                  postId: chatMakeRoomId?.postId,
-                  memberCount: chatMakeRoomId?.memberCount,
-                },
-              });
+              // TODO: 채팅방 생성 후 라우팅
             }}
           >
-            채팅방 가기
+            채팅방 만들기
           </Modal.Button>
           <Modal.Button onClick={() => changeStatus("RECRUITMENT_COMPLETED")}>
             모집완료
           </Modal.Button>
         </Modal>
       )}
-      {isApplyError && applyIds.length === 0 && (
-        <Modal onClose={() => setIsApplyError(false)}>
-          <Modal.Title text="수락할 지원자 선택 후 \n 수락해주세요." />
-        </Modal>
-      )}
-      {/* {isApplyError && !isApplyChange && applyIds.length > 0 && (
-        <Modal onClose={() => setIsApplyError(false)}>
-          <Modal.Title text={"변경사항이 없습니다."} />
-        </Modal>
-      )} */}
     </DefaultLayout>
   );
 };

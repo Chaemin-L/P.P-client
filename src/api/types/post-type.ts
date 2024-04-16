@@ -11,19 +11,6 @@ export type RequestPostingProps = {
 
 export type ResponsePostingProps = FinalResponse<PostType>;
 
-export type UserCurrentStatus = {
-  isWriter: boolean;
-  isApplicant: boolean;
-  applyStatus: string;
-};
-
-export type WriterInfo = {
-  profileId: number;
-  nickName: string;
-  profileImage: string;
-  address: string;
-};
-
 export type StatusType =
   | "RECRUITING"
   | "RECRUITMENT_COMPLETED"
@@ -43,7 +30,6 @@ export type PostType = {
   maxNumOfPeople: number;
   dealId: number;
   viewsCount: number;
-  writerInfo: WriterInfo;
 };
 
 export type ResponsePostDetail = FinalResponse<PostDetailType>;

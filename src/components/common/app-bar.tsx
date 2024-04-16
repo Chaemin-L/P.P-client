@@ -1,10 +1,13 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import { AppBarProps, RightButtonProps } from "./type";
+import { AppBarProps, HamburgerProps, RightButtonProps } from "./type";
 
-import BackBlackSVG from "@/assets/icons/back-black.svg";
-import BackWhiteSVG from "@/assets/icons/back-white.svg";
+import backImgWhite from "@/assets/images/back-img-white.png";
+import backImg from "@/assets/images/back-img.png";
+import hamburgerMenuBlack from "@/assets/images/hamburger-menu-black.png";
+import hamburgerMenuWhite from "@/assets/images/hamburger-menu-white.png";
 import { colorTheme } from "@/style/color-theme";
 
 export const AppBar = ({
@@ -43,7 +46,7 @@ const BackButton = ({ isColorMode = false, ...props }: AppBarProps) => {
   };
   return (
     <StyledButton onClick={handleClick} {...restProps}>
-      <BackButtonImg src={isColorMode ? BackWhiteSVG : BackBlackSVG} />
+      <BackButtonImg src={isColorMode ? backImgWhite : backImg} />
     </StyledButton>
   );
 };
@@ -59,10 +62,20 @@ const HeaderText = ({ isBigSizeText = false, ...props }: AppBarProps) => {
   );
 };
 
+const HamburgerButton = ({ isColorMode = false, ...props }: HamburgerProps) => {
+  return (
+    <StyledButton {...props}>
+      <HamburgerButtonImg
+        src={isColorMode ? hamburgerMenuWhite : hamburgerMenuBlack}
+      />
+    </StyledButton>
+  );
+};
+
 const RightButton = ({ imgSrc, ...props }: RightButtonProps) => {
   return (
     <StyledButton {...props}>
-      <RightButtonImg src={imgSrc} />
+      <HamburgerButtonImg src={imgSrc} />
     </StyledButton>
   );
 };
@@ -108,7 +121,7 @@ const BackButtonImg = styled.img`
   height: 0.56rem;
 `;
 
-const RightButtonImg = styled.img`
+const HamburgerButtonImg = styled.img`
   width: 0.78rem;
   height: 0.89rem;
 `;
@@ -116,4 +129,5 @@ const RightButtonImg = styled.img`
 AppBar.AppBarNavigate = AppBarNavigate;
 AppBar.BackButton = BackButton;
 AppBar.HeaderText = HeaderText;
+AppBar.HamburgerButton = HamburgerButton;
 AppBar.RightButton = RightButton;

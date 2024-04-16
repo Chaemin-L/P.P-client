@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import { PostListItemProps } from "./type";
 
-import ApplicantSVG from "@/assets/icons/applicant.svg";
-import DateSVG from "@/assets/icons/date.svg";
-import KnotSVG from "@/assets/icons/knot.svg";
-import LocationSVG from "@/assets/icons/location.svg";
+import calendarIcon from "@/assets/icons/calendar-icon.png";
+import knotIcon from "@/assets/icons/knot-icon.png";
+import mapIcon from "@/assets/icons/map-icon.png";
+import peopleIcon from "@/assets/icons/people-icon.png";
 import { colorTheme } from "@/style/color-theme";
 import { BackdateToItemtype } from "@/utils/backdate-to-itemtype";
 
@@ -21,36 +21,28 @@ export const PostListItem = (props: PostListItemProps) => {
     >
       <RowBox>
         {props.status == "RECRUITING" && <StateIng>모집중</StateIng>}
-        {props.status == "RECRUITMENT_COMPLETED" && (
+        {props.status == "RECRUITEMNT_COMPLETED" && (
           <StateFin>모집완료</StateFin>
         )}
         {props.status == "TRANSACTION_COMPLETED" && (
           <StateFin>거래완료</StateFin>
         )}
-        <TopIcon src={ApplicantSVG} />
+        <TopIcon src={peopleIcon} />
         <StateSpan>
           {props.currentApplicant}/{props.maxNumOfPeople}명
         </StateSpan>
-        <TopIcon src={KnotSVG} />
+        <TopIcon src={knotIcon} />
         <StateSpan>{props.pay}매듭</StateSpan>
       </RowBox>
       <Title>{props.title}</Title>
-      <BottomRowBox>
-        <BottomColumnBox>
-          <RowBox>
-            <BottomIcon icon={LocationSVG} />
-            <StateSpan>{props.location}</StateSpan>
-          </RowBox>
-          <RowBox>
-            <BottomIcon icon={DateSVG} />
-            <StateSpan>{BackdateToItemtype(props.startDate)}</StateSpan>
-          </RowBox>
-        </BottomColumnBox>
-        <ProfileImg
-          src={props.writerProfileImg}
-          onClick={() => console.log("user: ", props.writerId)}
-        />
-      </BottomRowBox>
+      <RowBox>
+        <BottomIcon src={mapIcon} />
+        <StateSpan>{props.location}</StateSpan>
+      </RowBox>
+      <RowBox>
+        <BottomIcon src={calendarIcon} />
+        <StateSpan>{BackdateToItemtype(props.startDate)}</StateSpan>
+      </RowBox>
     </Wrapper>
   );
 };
@@ -58,7 +50,7 @@ export const PostListItem = (props: PostListItemProps) => {
 const Wrapper = styled.div`
   width: 100%;
   padding: 1.06rem 8.46%;
-  border-top: 1px solid #d9d9d9;
+  border: 1px solid #d9d9d9;
   display: flex;
   flex-direction: column;
   border-left-width: 0;
@@ -85,7 +77,7 @@ const StateIng = styled.div`
 const StateFin = styled.div`
   font-size: 1rem;
   color: ${colorTheme.blue900};
-  padding: 0.22rem;
+  padding: 0.22rem 0.44rem;
 `;
 
 const Title = styled.span`
@@ -97,42 +89,13 @@ const Title = styled.span`
 `;
 
 const TopIcon = styled.img`
-  margin: 0 0.39rem 0 0.72rem;
-  width: 1rem;
-  height: 1rem;
+  padding: 0 7px 0 13px;
 `;
 
 const StateSpan = styled.span`
   font-size: 0.83rem;
 `;
 
-const BottomIcon = styled.div<{ icon: string }>`
-  margin-right: 0.78rem;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 1px;
-  background-image: url(${({ icon }) => icon});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-`;
-
-const BottomRowBox = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const BottomColumnBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ProfileImg = styled.img`
-  width: 2.06rem;
-  height: 2.06rem;
-  border: 0.17rem solid ${colorTheme.orange400};
-  border-radius: 0.56rem;
+const BottomIcon = styled.img`
+  padding-right: 14px;
 `;

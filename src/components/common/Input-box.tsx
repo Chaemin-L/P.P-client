@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import { InputType } from "./type";
 
-import ReadingGlassSVG from "@/assets/icons/reading-glass.svg";
+import readingGlass from "@/assets/images/reading-glass.png";
 import { colorTheme } from "@/style/color-theme";
 
 export const InputBox = ({ children }: PropsWithChildren) => {
@@ -42,7 +42,7 @@ const InputMap = ({ value, onChange }: InputType) => {
 
   return (
     <InputMapContainer>
-      <Icon src={ReadingGlassSVG} />
+      <Icon src={readingGlass} />
       <InputMapBox
         type="text"
         value={inputValue}
@@ -90,16 +90,17 @@ const InputMapContainer = styled.div`
 `;
 
 const Icon = styled.img`
-  width: 1.78rem;
+  width: 10%;
   margin: 0 1.28% 0 0;
-  height: 1.89rem;
+  height: 100%;
 `;
 
 const InputMapBox = styled.input`
   width: 69.12%;
   height: 100%;
   padding: 7.4%;
-  font-size: 1rem;
+  font-size: 0.72rem;
+  vertical-align: center;
   color: black;
   background-color: ${colorTheme.blue100};
   border-radius: 0.61rem;

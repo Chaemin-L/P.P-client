@@ -7,7 +7,7 @@ const CACHE_KEY = "post-detail";
 
 export function useGetPostDetail(postId: string) {
   return useQuery({
-    queryKey: [CACHE_KEY, postId],
+    queryKey: [CACHE_KEY],
     queryFn: () => PostApi.getPostDetail(postId),
     select: (data: PostDetailType) => {
       const [date, time] = data.marketPostResponse.startDate

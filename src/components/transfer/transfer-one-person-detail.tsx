@@ -13,7 +13,7 @@ export const TransferOnePersonDetail = ({ setScreen }: TransferDetailProps) => {
   return (
     <Wrapper>
       <CheckMsg>
-        {lastTransfer.users[0].nickName}님께
+        {lastTransfer.users[0].name}님께
         <br />
         매듭을 송금할까요?
       </CheckMsg>
@@ -39,7 +39,14 @@ export const TransferOnePersonDetail = ({ setScreen }: TransferDetailProps) => {
         <BottomFixed.Button
           style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
-            setScreen("transfer-detail-password");
+            setScreen("transfer-finish");
+            setLastTransfer((prevLastTransfer) => {
+              const updatedLastTransfer = {
+                ...prevLastTransfer,
+                transferState: true,
+              };
+              return updatedLastTransfer;
+            });
           }}
         >
           송금하기

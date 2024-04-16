@@ -21,12 +21,21 @@ Instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const { method, url, headers } = config;
 
-    const token = localStorage.getItem("accessToken");
+    let token: string | null = null;
 
-    if (token !== undefined) {
-      config.headers.Authorization = `Bearer ${token}`;
+    // 토큰 설정 해줘야함
+    if (config.url === process.env.REACT_APP_REFRESH_URL) {
+      token = localStorage.getItem("refreshToken");
+    } else {
+      token = localStorage.getItem("accessToken");
     }
-    console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url}`);
+
+    // token = process.env.REACT_APP_TEST_TOKEN;
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+    console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url} ${token}`);
     return { ...config, headers };
   },
   (error: AxiosError) => {
@@ -67,9 +76,9 @@ Instance.interceptors.response.use(
           `[API - RESPONSE 401] ${method?.toUpperCase()} ${url} | ${status} : ${error.message} | refresh Token`,
         );
 
-        const reissueData = await getRefreshToken();
-        if (reissueData !== undefined) {
-          config.headers.Authorization = `Bearer ${reissueData.accessToken}`;
+        const accessToken = await getRefreshToken();
+        if (accessToken !== undefined) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
         }
 
         return axios(config);

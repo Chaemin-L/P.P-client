@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { PostType } from "@/api/types/post-type";
-import BackBlackSVG from "@/assets/icons/back-black.svg";
+import backImg from "@/assets/images/back-img.png";
 import { ActivityBox } from "@/components/common/activity-box";
 import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
@@ -50,7 +50,7 @@ export const PostDetailPage = () => {
         <AppBar>
           <AppBar.AppBarNavigate>
             <StyledButton onClick={() => navigate("/post")}>
-              <BackButtonSVG src={BackBlackSVG} />
+              <BackButtonSVG src={backImg} />
             </StyledButton>
           </AppBar.AppBarNavigate>
         </AppBar>

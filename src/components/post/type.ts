@@ -7,6 +7,4 @@ export type PostListItemProps = {
   status: string;
   currentApplicant: number;
   maxNumOfPeople: number;
-  writerProfileImg: string;
-  writerId: number;
 };

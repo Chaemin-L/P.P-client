@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 
 import { BottomSheetProps } from "./type";
 
-import CloseBlueDarkSVG from "@/assets/icons/close-blue-dark.svg";
+import xButtonImg from "@/assets/images/x-button-img.png";
 
 export const BottomSheet = ({
   onChangeIsOpened,
@@ -58,7 +58,7 @@ export const BottomSheet = ({
       >
         <HeaderContainer>
           <HeaderXButton onClick={() => onChangeIsOpened()}>
-            <HeaderXImg src={CloseBlueDarkSVG} />
+            <HeaderXImg src={xButtonImg} />
           </HeaderXButton>
           <EmptyBox></EmptyBox>
           <Header></Header>
