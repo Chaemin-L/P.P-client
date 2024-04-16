@@ -39,14 +39,7 @@ export const TransferOnePersonDetail = ({ setScreen }: TransferDetailProps) => {
         <BottomFixed.Button
           style={{ backgroundColor: colorTheme.blue900 }}
           onClick={() => {
-            setScreen("transfer-finish");
-            setLastTransfer((prevLastTransfer) => {
-              const updatedLastTransfer = {
-                ...prevLastTransfer,
-                transferState: true,
-              };
-              return updatedLastTransfer;
-            });
+            setScreen("transfer-detail-password");
           }}
         >
           송금하기

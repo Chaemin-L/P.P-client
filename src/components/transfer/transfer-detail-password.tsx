@@ -18,6 +18,7 @@ export const TransferDetailPassword = ({
 }: TransferDetailProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(transferState);
   const [password, setPassword] = useState<string>("");
+  const [isError, setIsError] = useState(false);
   const [status, setStatus] = useState<"INITIAL" | "CONFIRM" | "MISMATCH">(
     "INITIAL",
   );
@@ -29,7 +30,10 @@ export const TransferDetailPassword = ({
       e.target.value.toString().length > PASSWORD_LENGTH
     )
       return;
-    else setPassword(e.target.value);
+    else {
+      setPassword(e.target.value);
+      setIsError(false);
+    }
   };
 
   useEffect(() => {
@@ -57,6 +61,10 @@ export const TransferDetailPassword = ({
               return updatedLastTransfer;
             });
           },
+          onError: () => {
+            setPassword("");
+            setIsError(true);
+          },
         },
       );
     }
@@ -82,6 +90,7 @@ export const TransferDetailPassword = ({
           ))}
         </PasswordWrapper>
       </InputArea>
+      {isError && <ErrorMessage>비밀번호가 틀렸습니다</ErrorMessage>}
       <BottomFixed>
         <BottomFixed.Button
           color="blue"
@@ -109,7 +118,7 @@ const Wrapper = styled.div`
 
 const CheckMsg = styled.div`
   font-size: 1.39rem;
-  margin: 5% 0;
+  margin: 5% 0 15%;
 `;
 
 const InputArea = styled.div`
@@ -164,4 +173,5 @@ const ErrorMessage = styled.div`
   color: ${colorTheme.orange400};
   text-align: center;
   line-height: 120%;
+  margin-top: 10%;
 `;

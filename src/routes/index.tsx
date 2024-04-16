@@ -102,7 +102,7 @@ const routeChildren = [
     element: <Posting8 />,
     auth: true,
   },
-  { path: "/test2", Element: <Test2 />, auth: true },
+  { path: "/test2", element: <Test2 />, auth: true },
   {
     path: "/chat/detail",
     element: <ChatRoom />,
