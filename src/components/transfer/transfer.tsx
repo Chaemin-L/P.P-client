@@ -26,7 +26,10 @@ export const Transfer = ({ onClick, memberCount }: TransferProps) => {
       )}
       {screen === "transfer-finish" && <TransferFinish onClick={onClick} />}
       {screen === "transfer-detail-password" && (
-        <TransferDetailPassword setScreen={setScreen} />
+        <TransferDetailPassword
+          setScreen={setScreen}
+          memberCount={memberCount}
+        />
       )}
     </div>
   );

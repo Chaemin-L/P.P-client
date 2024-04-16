@@ -10,7 +10,7 @@ export const Test2 = () => {
     const handleGetKakaoToken = () => {
       try {
         signInMutate.mutate({
-          email: "test3@email",
+          email: "test2@email",
           password: "1234",
         });
       } catch (e) {

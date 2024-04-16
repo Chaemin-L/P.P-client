@@ -61,11 +61,14 @@ export default class ChatApi {
   }
 
   static async getChatRoomData(chatRoomId: string) {
+    const myId = localStorage.getItem("userId")
+      ? localStorage.getItem("userId")
+      : "-1";
     const response = await axios.get(
       `${process.env.REACT_APP_CHAT_API_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/api/chats/${chatRoomId}`,
       {
         headers: {
-          userId: "2",
+          userId: myId,
           Authorization: localStorage.getItem("accessToken"),
           "Content-Type": "application/json",
         },

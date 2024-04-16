@@ -23,12 +23,10 @@ Instance.interceptors.request.use(
 
     const token = localStorage.getItem("accessToken");
 
-    // token = process.env.REACT_APP_TEST_TOKEN;
-
     if (token !== undefined) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url} ${token}`);
+    console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url}`);
     return { ...config, headers };
   },
   (error: AxiosError) => {

@@ -23,7 +23,6 @@ import { ProfilePage } from "@/pages/profile";
 import { DonePage } from "@/pages/profile/done";
 import { WelcomePage } from "@/pages/profile/welcome";
 import { Splash } from "@/pages/splash/splash";
-import { Test } from "@/pages/test";
 import { Test2 } from "@/pages/test2";
 
 const routeChildren = [
@@ -103,14 +102,7 @@ const routeChildren = [
     element: <Posting8 />,
     auth: true,
   },
-  {
-    path: "/test",
-    element: <Test />,
-  },
-  {
-    path: "/test2",
-    element: <Test2 />,
-  },
+  { path: "/test2", Element: <Test2 />, auth: true },
   {
     path: "/chat/detail",
     element: <ChatRoom />,

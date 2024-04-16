@@ -9,7 +9,6 @@ import SplashHandSVG from "@/assets/images/splash-hand.svg";
 import getRefreshToken from "@/utils/token";
 
 export const Splash = () => {
-  // 로그인해야함
   let path = "/login";
   const navigate = useNavigate();
 
@@ -19,8 +18,8 @@ export const Splash = () => {
     if (accessToken !== undefined && refreshToken !== undefined) {
       try {
         const data = await getRefreshToken();
-        console.log("splash::", data);
         if (data) {
+          localStorage.setItem("role", data.role);
           if (data.role !== "ROLE_USER") {
             path = "/signup";
             console.log("splash::", path);

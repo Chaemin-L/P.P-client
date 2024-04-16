@@ -13,11 +13,13 @@ export const useSignInLocal = () => {
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
       localStorage.setItem("userId", response.userId.toString());
-      if (response.role !== "ROLE_USER") {
-        navigate("/signup");
-      } else {
-        navigate("/post");
-      }
+      localStorage.setItem("role", response.role);
+      // if (response.role !== "ROLE_USER") {
+      //   navigate("/signup");
+      // } else {
+      //   navigate("/post");
+      // }
+      navigate("/post");
     },
   });
 };

@@ -8,14 +8,12 @@ import { CommonInput } from "@/components/common/common-input";
 import { ToggleSwitch } from "@/components/common/toggle-switch";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
-import { PostingTimeInput } from "@/components/posting/posting-time-input";
 import { postingState } from "@/recoil/atoms/posting-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const Posting3 = () => {
   const navigate = useNavigate();
   const [posting, setPosting] = useRecoilState(postingState);
-  const today = new Date();
   const hour = posting.startTimeSave ? posting.startDate.getHours() : -1;
   const [minuteValue, setMinuteValue] = useState(
     posting.startTimeSave ? posting.startDate.getMinutes().toString() : "",
