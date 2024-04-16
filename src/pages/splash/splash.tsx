@@ -6,6 +6,8 @@ import { styled } from "styled-components";
 
 import SplashBackSVG from "@/assets/images/splash-back.svg";
 import SplashHandSVG from "@/assets/images/splash-hand.svg";
+import SplashLogoSVG from "@/assets/images/splash-logo.svg";
+import { colorTheme } from "@/style/color-theme";
 import getRefreshToken from "@/utils/token";
 
 export const Splash = () => {
@@ -49,7 +51,7 @@ export const Splash = () => {
 
   return (
     <Wrapper>
-      <BackgroundImg img={SplashBackSVG}>
+      {/* <BackgroundImg img={SplashBackSVG}>
         <HandImg
           src={SplashHandSVG}
           animate={{
@@ -57,7 +59,13 @@ export const Splash = () => {
             transition: { duration: 2, repeat: Infinity },
           }}
         />
-      </BackgroundImg>
+      </BackgroundImg> */}
+      <LogoImg
+        src={SplashLogoSVG}
+        initial={{ opacity: 0, scale: 0.6 }}
+        animate={{ opacity: 1, scale: 1.0 }}
+        transition={{ duration: 1 }}
+      />
     </Wrapper>
   );
 };
@@ -68,6 +76,12 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${colorTheme.blue100};
+`;
+
+const LogoImg = styled(motion.img)`
+  width: 15.06rem;
+  height: 3.38rem;
 `;
 
 const BackgroundImg = styled.div<{ img: string }>`
