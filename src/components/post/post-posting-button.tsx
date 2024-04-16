@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import PlusWhiteSVG from "@/assets/icons/plus-white.svg";
+import plusImg from "@/assets/images/plus-img.png";
 import { colorTheme } from "@/style/color-theme";
 
 export const PostPostingButton = () => {
@@ -15,7 +15,7 @@ export const PostPostingButton = () => {
         }}
       >
         <PlusImgBox>
-          <PlusImg src={PlusWhiteSVG} />
+          <PlusImg src={plusImg} />
         </PlusImgBox>
         <ButtonSpan>게시글 만들기</ButtonSpan>
       </PostingButton>
@@ -36,7 +36,7 @@ const PostingButton = styled.button`
   justify-content: space-between;
   align-items: center;
   padding: 1.3rem 2.4rem;
-  background-color: ${colorTheme.blue500};
+  background-color: ${colorTheme.blue700};
   border-radius: 1.8rem;
 `;
 

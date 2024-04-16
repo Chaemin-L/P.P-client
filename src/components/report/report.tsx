@@ -8,7 +8,7 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { usePostReport } from "@/hooks/queries/usePostReport";
 
 export const Report = ({ postId, onSuccessReport }: ReportProps) => {
-  const { mutate: reportPost } = usePostReport();
+  const reportPost = usePostReport();
   const [reportList, setReportList] = useState([
     { content: "광고/홍보 글이에요", state: false },
     { content: "중복/도배 글이에요", state: false },
@@ -17,13 +17,12 @@ export const Report = ({ postId, onSuccessReport }: ReportProps) => {
   ]);
 
   const handleReport = () => {
-    const temp = reportList.find((e) => {
-      if (e.state) return e;
-    });
-    reportPost(
-      { postId: postId, reportMsg: temp ? temp.content : "" },
-      { onSuccess: () => onSuccessReport() },
-    );
+    // reportPost.mutate(postId, {
+    //   onSuccess: () => {
+    //     onSuccessReport();
+    //   },
+    // });
+    onSuccessReport();
   };
 
   return (

@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
-// import { tempChatList } from "./dummy";
+import { tempChatList } from "./dummy";
 
 import { ChatList } from "@/components/chat/chat-list";
 import { AppBar } from "@/components/common/app-bar";
-import { useGetChatList } from "@/hooks/queries/useGetChatList";
 
 export const Chat = () => {
   const [appBarHeight, setAppBarHeight] = useState(0);
-  const { data: chatList } = useGetChatList();
 
   useEffect(() => {
     const element = document.getElementById("AppBar");
@@ -24,7 +22,7 @@ export const Chat = () => {
       <AppBar id="AppBar" isFixed={true}>
         <PageText>채팅</PageText>
       </AppBar>
-      {chatList && <ChatList chatList={chatList} />}
+      <ChatList chatList={tempChatList} />
     </Wrapper>
   );
 };

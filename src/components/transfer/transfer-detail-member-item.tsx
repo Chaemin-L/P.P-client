@@ -26,17 +26,15 @@ export const TransferDetailMemberItem = ({
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 4.4rem;
   display: flex;
   justify-content: center;
-  padding: 0.72rem 0;
 `;
 
 const StyledButton = styled.button`
   width: 90%;
   padding: 0.39rem 1.11rem;
   font-size: 1.39rem;
-  border-radius: 1.3rem;
+  border-radius: 0.83rem;
   border: none;
   text-align: center;
 `;

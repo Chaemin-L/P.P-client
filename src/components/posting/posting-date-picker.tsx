@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { CustomHeaderProps, DatePickerProps } from "./type";
 
-import BackGraySVG from "@/assets/icons/back-gray.svg";
+import backImg from "@/assets/images/back-img.png";
 
 export const PostingDatePicker = ({
   startDate,
@@ -56,7 +56,7 @@ const CustomHeader = ({
   return (
     <HeaderWrapper>
       <HeaderButton onClick={decreaseMonthWithValidation}>
-        <ArrowImg src={BackGraySVG} />
+        <ArrowImg src={backImg} />
         <HeaderButtonText>{previousMonthString}</HeaderButtonText>
       </HeaderButton>
       <HeaderNowMonth>
@@ -64,7 +64,7 @@ const CustomHeader = ({
       </HeaderNowMonth>
       <HeaderButton onClick={increaseMonth}>
         <HeaderButtonText>{nextMonthString}</HeaderButtonText>
-        <ArrowImg src={BackGraySVG} style={{ transform: "scaleX(-1)" }} />
+        <ArrowImg src={backImg} style={{ transform: "scaleX(-1)" }} />
       </HeaderButton>
     </HeaderWrapper>
   );
