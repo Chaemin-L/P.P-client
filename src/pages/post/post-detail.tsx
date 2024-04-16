@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -26,6 +26,7 @@ export const PostDetailPage = () => {
   const { data: profile } = useGetProfile();
 
   const [editModal, setEditModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false); // TODO: remove this
   const [deleteModal, setDeleteModal] = useState(false);
   const [statusModal, setStatusModal] = useState(false);
   const [reportModal, setReportModal] = useState(false);
@@ -62,7 +63,7 @@ export const PostDetailPage = () => {
             <Button
               color="orange"
               onClick={() => {
-                setStatusModal(true);
+                setErrorModal(true);
               }}
             >
               모집완료
@@ -223,22 +224,22 @@ export const PostDetailPage = () => {
         <Modal onClose={() => setStatusModal(false)}>
           <Modal.Title text="모집을\n끝내시겠습니까?" />
 
-          <Modal.Button
-            color="orange"
-            onClick={() => {
-              setStatusModal(false);
-              changeStatus("RECRUITMENT_COMPLETED");
-            }}
-          >
-            모집종료
-          </Modal.Button>
+          <Modal.Button color="orange">모집종료</Modal.Button>
         </Modal>
       )}
       {editModal && (
         <Modal onClose={() => setEditModal(false)}>
           <Modal.Title text="편집하시겠습니까?" />
           <EditModalButtonWrapper>
-            <Modal.Button color="orange">수정하기</Modal.Button>
+            <Modal.Button
+              color="orange"
+              onClick={() => {
+                setEditModal(false);
+                setErrorModal(true);
+              }}
+            >
+              수정하기
+            </Modal.Button>
             <Modal.Button
               onClick={() => {
                 setEditModal(false);
@@ -258,6 +259,15 @@ export const PostDetailPage = () => {
           }}
         >
           <Modal.Title text="게시물이\n삭제되었습니다" />
+        </Modal>
+      )}
+      {errorModal && (
+        <Modal
+          onClose={() => {
+            setErrorModal(false);
+          }}
+        >
+          <Modal.Title text="아직 지원하지 않는 \n 서비스입니다." />
         </Modal>
       )}
     </DefaultLayout>
