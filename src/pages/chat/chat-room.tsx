@@ -38,6 +38,7 @@ export const ChatRoom = () => {
 
   const [appBarHeight, setAppBarHeight] = useState(0);
   const [appBerVisibility, setAppBarVisibility] = useState(true);
+  const chatListRef = useRef<HTMLDivElement | null>(null);
 
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
   const [isTransfer, setIsTransfer] = useState(false);
@@ -72,6 +73,17 @@ export const ChatRoom = () => {
   useEffect(() => {
     connectHandler();
   }, []);
+
+  // 스크롤을 맨 아래로 이동하는 함수
+  const scrollToBottom = () => {
+    if (chatListRef.current !== null)
+      chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
+  };
+
+  useEffect(() => {
+    // 메시지가 업데이트될 때마다 스크롤을 맨 아래로 이동
+    scrollToBottom();
+  }, [newRoomMsgs]);
 
   const sendHandler = (inputValue: string) => {
     if (client.current && client.current.connected) {
@@ -117,6 +129,7 @@ export const ChatRoom = () => {
         />
       )}
       <ChatList
+        ref={chatListRef}
         style={{
           paddingTop: appBerVisibility ? `${appBarHeight + 10}px` : "10px",
         }}

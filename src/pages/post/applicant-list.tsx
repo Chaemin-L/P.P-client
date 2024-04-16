@@ -64,6 +64,7 @@ const ApplicantItem = (props: ApplicantItemProps) => {
 export const ApplicantListPage = () => {
   const [applyIds, setApplyIds] = useState<number[]>([]);
   const [applyModal, setApplyModal] = useState<boolean>();
+  const [applyUserIds, setApplyUserIds] = useState<number[]>([]);
 
   const { postId } = useParams();
 
@@ -110,10 +111,13 @@ export const ApplicantListPage = () => {
           selected={applyIds.includes(applicant.applyId)}
           onSelect={() => {
             const id = applicant.applyId;
+            const userId = applicant.applicantInfo.userId;
             if (applyIds.includes(id)) {
               setApplyIds((prev) => prev.filter((p) => p !== id));
+              setApplyUserIds((prev) => prev.filter((p) => p !== userId));
             } else {
               setApplyIds((prev) => [...prev, id]);
+              setApplyUserIds((prev) => [...prev, userId]);
             }
           }}
         />
@@ -126,7 +130,9 @@ export const ApplicantListPage = () => {
               accept(applyIds);
               setApplyModal(true);
 
-              const tempList: string[] = applyIds.map((id) => id.toString());
+              const tempList: string[] = applyUserIds.map((id) =>
+                id.toString(),
+              );
               const tempData: ChatMakeRequest = {
                 postId: Number(postId),
                 memberIds: tempList,
