@@ -51,6 +51,7 @@ export type ResponsePostDetail = FinalResponse<PostDetailType>;
 export type UserCurrentStatusType = {
   isWriter: boolean;
   isApplicant: boolean;
+  applyId: number;
   applyStatus: string;
 };
 

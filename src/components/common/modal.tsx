@@ -115,7 +115,7 @@ const Content = styled.div`
   background-color: #f5f5f5;
   border-radius: 35px;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
-  font-size: 1rem;
+  font-size: 18px;
   font-weight: 400;
   line-height: 120%;
   flex-direction: column;

@@ -8,35 +8,34 @@ import { Header } from "@/components/profile/header";
 import { Input } from "@/components/profile/input";
 import { profileState } from "@/recoil/atoms/profile-state";
 
-type NicknamePageProps = {
+type NamePageProps = {
   nextStep: () => void;
   onModal: () => void;
 };
 
-export const NicknamePage = ({ nextStep, onModal }: NicknamePageProps) => {
-  const [nickName, setNickName] = useState<string>("");
+export const NamePage = ({ nextStep, onModal }: NamePageProps) => {
+  const [name, setName] = useState<string>("");
 
   const setProfile = useSetRecoilState(profileState);
 
   return (
     <ContentLayout>
-      <Header text="닉네임을 정해볼까요?" />
+      <Header text="우선\n이름을 알려주세요!" />
       <Input
         maxLength={5}
-        value={nickName}
-        onChange={({ target }) => setNickName(target.value)}
+        value={name}
+        onChange={({ target }) => setName(target.value)}
         style={{ maxWidth: "80%" }}
       />
-      <Description text="닉네임을 최대 5글자로\n쓸 수 있어요~" />
       <BottomFixed>
         <BottomFixed.Button
           onClick={() => {
-            if (nickName.length === 0) {
+            if (name.length === 0) {
               onModal();
               return;
             }
             setProfile((profile) => ({
-              request: { ...profile.request, nickName: nickName },
+              request: { ...profile.request, name },
               file: profile.file,
             }));
             nextStep();

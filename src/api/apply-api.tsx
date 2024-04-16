@@ -39,9 +39,9 @@ export class ApplyApi {
     }
   }
 
-  static async deleteApply(postId: string) {
+  static async deleteApply(postId: string, applyId: number, userId: number) {
     const response = await Instance.delete(
-      `/haetsal-service/api/v2/market/post/${postId}/apply`,
+      `/haetsal-service/api/v2/market/post/${postId}/apply/${applyId}/${userId}`,
     );
     if (response) {
       return response.status;

@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 
 import FemaleSVG from "@/assets/images/female.svg";
 import MaleSVG from "@/assets/images/male.svg";
-import { Header } from "@/components/signup/header";
+import { Header } from "@/components/profile/header";
 import { profileState } from "@/recoil/atoms/profile-state";
 
 type GenderPageProps = {
@@ -21,8 +21,8 @@ export const GenderPage = ({ nextStep }: GenderPageProps) => {
   useEffect(() => {
     if (gender !== undefined) {
       setProfile((profile) => ({
-        ...profile,
-        gender,
+        request: { ...profile.request, gender },
+        file: profile.file,
       }));
       nextStep();
     }
@@ -37,7 +37,7 @@ export const GenderPage = ({ nextStep }: GenderPageProps) => {
           <span>여성</span>
         </GenderCard>
         <GenderCard onClick={() => setGender("male")}>
-          <img width="100%" src={MaleSVG} data-caption="남성" />
+          <img width="100%" src={MaleSVG} />
           <span>남성</span>
         </GenderCard>
       </GenderContainer>

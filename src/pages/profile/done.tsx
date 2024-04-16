@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import LeftEmSVG from "@/assets/images/left-em.svg";
 import RightEmSVG from "@/assets/images/right-em.svg";
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { Header } from "@/components/signup/header";
+import { Header } from "@/components/profile/header";
 
 export const DonePage = () => {
   const navigate = useNavigate();

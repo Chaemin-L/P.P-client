@@ -5,6 +5,8 @@ export type ApplyType = {
     nickName: string;
     profileImage: string;
     address: string;
+    gender: string;
+    ageRange: number;
   };
   createdTime: string;
   status:

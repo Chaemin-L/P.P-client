@@ -1,27 +1,25 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { Header } from "@/components/signup/header";
-import { Input } from "@/components/signup/input";
+import { Header } from "@/components/profile/header";
+import { Input } from "@/components/profile/input";
 import { profileState } from "@/recoil/atoms/profile-state";
 
-type BirthdayPageProps = {
+type BirthPageProps = {
+  nextStep: () => void;
   onModal: () => void;
 };
 
-export const BirthdayPage = ({ onModal }: BirthdayPageProps) => {
+export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
   const [bYear, setBYear] = useState<string>("");
   const [bMonth, setBMonth] = useState<string>("");
   const [bDay, setBDay] = useState<string>("");
   const [error, setError] = useState<boolean>();
-  const navigate = useNavigate();
 
   const setProfile = useSetRecoilState(profileState);
-
-  const nextStep = () => {
+  const saveProfile = () => {
     if (
       isNaN(+bYear) ||
       isNaN(+bMonth) ||
@@ -37,11 +35,16 @@ export const BirthdayPage = ({ onModal }: BirthdayPageProps) => {
     }
 
     setProfile((profile) => ({
-      ...profile,
-      birthday: [bYear, bMonth, bDay].join("-"),
+      request: {
+        ...profile.request,
+        birth: [bYear, bMonth.padStart(2, "0"), bDay.padStart(2, "0")].join(
+          "-",
+        ),
+      },
+      file: profile.file,
     }));
 
-    navigate("/signup/done");
+    nextStep();
   };
 
   return (
@@ -72,9 +75,9 @@ export const BirthdayPage = ({ onModal }: BirthdayPageProps) => {
       <BottomFixed>
         <BottomFixed.Button
           color="orange"
-          onClick={() => (bYear && bMonth && bDay ? nextStep() : onModal())}
+          onClick={() => (bYear && bMonth && bDay ? saveProfile() : onModal())}
         >
-          완성하기
+          다음
         </BottomFixed.Button>
       </BottomFixed>
     </ContentLayout>

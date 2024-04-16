@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import { AuthLayout } from "@/components/layout/auth-layout";
 import { GlobalLayout } from "@/components/layout/global-layout";
-import { GoogleAuth } from "@/components/login/google-auth";
 import { KakaoAuth } from "@/components/login/kakao-auth";
 import { Chat } from "@/pages/chat/chat";
 import { ChatRoom } from "@/pages/chat/chat-room";
-import { LoginPage } from "@/pages/login/login";
-import { LoginEnd } from "@/pages/login/login-end";
+import { WrongAccessPage } from "@/pages/error/wrong-access";
+import { LoginPage } from "@/pages/login";
 import { Mypage } from "@/pages/mypage/mypage";
 import { ApplicantListPage } from "@/pages/post/applicant-list";
 import { PostDetailPage } from "@/pages/post/post-detail";
@@ -21,102 +21,127 @@ import { Posting7 } from "@/pages/posting/posting7";
 import { Posting8 } from "@/pages/posting/posting8";
 import { ProfilePage } from "@/pages/profile";
 import { DonePage } from "@/pages/profile/done";
+import { WelcomePage } from "@/pages/profile/welcome";
 import { Splash } from "@/pages/splash/splash";
 import { Test } from "@/pages/test";
 import { Test2 } from "@/pages/test2";
+
+const routeChildren = [
+  {
+    path: "",
+    element: <Splash />,
+    auth: false,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+    auth: false,
+  },
+  { path: "/auth/kakao", element: <KakaoAuth /> },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+    auth: true,
+  },
+  {
+    path: "/profile/welcome",
+    element: <WelcomePage />,
+    auth: true,
+  },
+  {
+    path: "/profile/done/",
+    element: <DonePage />,
+    auth: true,
+  },
+  {
+    path: "/post/:postId",
+    element: <PostDetailPage />,
+    auth: true,
+  },
+  {
+    path: "/post/:postId/applicant",
+    element: <ApplicantListPage />,
+    auth: true,
+  },
+  {
+    path: "posting/1",
+    element: <Posting1 />,
+    auth: true,
+  },
+  {
+    path: "posting/2",
+    element: <Posting2 />,
+    auth: true,
+  },
+  {
+    path: "posting/3",
+    element: <Posting3 />,
+    auth: true,
+  },
+  {
+    path: "posting/4",
+    auth: true,
+    element: <Posting4 />,
+  },
+  {
+    path: "posting/5",
+    element: <Posting5 />,
+    auth: true,
+  },
+  {
+    path: "posting/6",
+    element: <Posting6 />,
+    auth: true,
+  },
+  {
+    path: "posting/7",
+    element: <Posting7 />,
+    auth: true,
+  },
+  {
+    path: "posting/8",
+    element: <Posting8 />,
+    auth: true,
+  },
+  {
+    path: "/test",
+    element: <Test />,
+  },
+  {
+    path: "/test2",
+    element: <Test2 />,
+  },
+  {
+    path: "/chat/detail",
+    element: <ChatRoom />,
+    auth: true,
+  },
+  {
+    path: "/chat",
+    element: <Chat />,
+    auth: true,
+  },
+  {
+    path: "/post",
+    element: <PostList />,
+    auth: true,
+  },
+  {
+    path: "/mypage",
+    element: <Mypage />,
+    auth: true,
+  },
+];
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <GlobalLayout />,
-    children: [
-      {
-        path: "",
-        element: <Splash />,
-      },
-      {
-        path: "login/",
-        element: <LoginPage />,
-      },
-      // {
-      //   path: "auth/google",
-      //   element: <GoogleAuth />,
-      // },
-      {
-        path: "profile/",
-        element: <ProfilePage />,
-      },
-      {
-        path: "profile/done/",
-        element: <DonePage />,
-      },
-      {
-        path: "/post/:postId",
-        element: <PostDetailPage />,
-      },
-      {
-        path: "/post/:postId/applicant",
-        element: <ApplicantListPage />,
-      },
-      { path: "/login/end", element: <LoginEnd /> },
-      { path: "/auth/kakao", element: <KakaoAuth /> },
-      {
-        path: "posting/1",
-        element: <Posting1 />,
-      },
-      {
-        path: "posting/2",
-        element: <Posting2 />,
-      },
-      {
-        path: "posting/3",
-        element: <Posting3 />,
-      },
-      {
-        path: "posting/4",
-        element: <Posting4 />,
-      },
-      {
-        path: "posting/5",
-        element: <Posting5 />,
-      },
-      {
-        path: "posting/6",
-        element: <Posting6 />,
-      },
-      {
-        path: "posting/7",
-        element: <Posting7 />,
-      },
-      {
-        path: "posting/8",
-        element: <Posting8 />,
-      },
-      {
-        path: "/test",
-        element: <Test />,
-      },
-      {
-        path: "/test2",
-        element: <Test2 />,
-      },
-      {
-        path: "/chat/detail",
-        element: <ChatRoom />,
-      },
-      {
-        path: "/chat",
-        element: <Chat />,
-      },
-      {
-        path: "/post",
-        element: <PostList />,
-      },
-      {
-        path: "/mypage",
-        element: <Mypage />,
-      },
-    ],
+    errorElement: <WrongAccessPage />,
+    children: routeChildren.map(({ path, element, auth }) => {
+      if (auth) return { path, element: <AuthLayout>{element}</AuthLayout> };
+      return { path, element };
+    }),
   },
 ]);
 

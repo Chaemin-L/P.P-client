@@ -8,6 +8,18 @@ import {
 } from "./types/post-type";
 
 export default class PostApi {
+  static async deletePost(postId: string) {
+    const response = await Instance.delete(
+      `/haetsal-service/api/v2/market/post/${postId}`,
+    );
+
+    if (response) {
+      return response.status;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  }
+
   static async postPosting(data: RequestPostingProps) {
     const response = await Instance.post(
       "/haetsal-service/api/v2/market/post",
@@ -66,6 +78,7 @@ export default class PostApi {
     }
   }
 
+  // ** deprecated **
   static async chanchStatus(postId: string, status: string) {
     const response = await Instance.put(
       `/haetsal-service/api/v2/market/post/${postId}/status`,

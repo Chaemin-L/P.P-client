@@ -2,6 +2,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
+import { ApplyType } from "@/api/types/apply-type";
 import { ChatMakeRequest, ChatMakeRoom } from "@/api/types/chat-type";
 import LocationSVG from "@/assets/icons/location.svg";
 import { AppBar } from "@/components/common/app-bar";
@@ -16,34 +17,41 @@ import { usePostMakeChat } from "@/hooks/queries/usePostMakeChat";
 import { colorTheme } from "@/style/color-theme";
 
 type ApplicantItemProps = {
-  applyId: number;
-  applicantInfo: {
-    profileId: number;
-    nickName: string;
-    profileImage: string;
-    address: string;
-  };
-  createdTime: string;
-  status: string;
-  introduction: string;
-  postId: number;
-  isAccepted: boolean;
-
   selected: boolean;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
-};
+} & ApplyType;
 
 const ApplicantItem = (props: ApplicantItemProps) => {
+  // const [profileImage, setProfileImage] = useState<string>();
+  // useEffect(() => {
+  //   // const blob = new Blob([props.applicantInfo.profileImage], {
+  //   //   type: "image/png;base64",
+  //   // });
+  //   // const blobURL = URL.createObjectURL(blob);
+  //   // setProfileImage(blobURL);
+  //   // return () => URL.revokeObjectURL(blobURL);
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(new Blob([props.applicantInfo.profileImage]));
+  //   reader.onload = () => {
+  //     setProfileImage(reader.result as string);
+  //   };
+  // }, []);
+
+  // console.log(profileImage);
+
   return (
     <ApplicantItemWrapper>
       <ApplicantImage>
+        {/* <img src={profileImage} /> */}
         <img src={props.applicantInfo.profileImage} />
       </ApplicantImage>
       <ApplicantInfo>
         <ApplicantLocation>{props.applicantInfo.address}</ApplicantLocation>
         <ApplicantNickname>{props.applicantInfo.nickName}</ApplicantNickname>
         <ApplicantMoreInfo>
-          도움횟수 16 <Bullet /> 남 <Bullet /> 45세
+          도움횟수 16 <Bullet />{" "}
+          {props.applicantInfo.gender === "male" ? "남" : "여"} <Bullet />{" "}
+          {props.applicantInfo.ageRange * 10}대
         </ApplicantMoreInfo>
       </ApplicantInfo>
       <ApplyButton $selected={props.selected} onClick={props.onSelect}>
