@@ -13,7 +13,6 @@ export const Posting8 = () => {
   const resetRecoil = useResetRecoilState(postingState);
   const navigate = useNavigate();
 
-  // 뒤로가기 누르면 리스트로 가게
   return (
     <PageContainer>
       <AppBar>
@@ -22,7 +21,7 @@ export const Posting8 = () => {
             onClick={() => {
               resetRecoil();
               localStorage.removeItem("postId");
-              navigate("");
+              navigate("/post");
             }}
           />
         </AppBar.AppBarNavigate>
@@ -38,7 +37,6 @@ export const Posting8 = () => {
           onClick={() => {
             resetRecoil();
             navigate(`/post/${state.postId}`);
-            // 게시글 상세페이지로 가기
           }}
         >
           게시물 보러가기

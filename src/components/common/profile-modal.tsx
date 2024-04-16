@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { ProfileModalType } from "./type";
 
-import mapIcon from "@/assets/icons/map-icon.png";
+import LocationSVG from "@/assets/icons/location.svg";
 import { Modal } from "@/components/common/modal";
 import { useDeleteBlock } from "@/hooks/queries/useDeleteBlock";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
@@ -19,6 +19,12 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
 
   const postBlock = usePostBlock();
   const deleteBlock = useDeleteBlock();
+  console.log("Profile-Modal:: ", userId);
+
+  let myId: number = -1;
+  let myIdStorage: string | null = null;
+  myIdStorage = localStorage.getItem("userId");
+  if (myIdStorage) myId = Number(myIdStorage);
 
   const handleBlock = () => {
     isBlocked
@@ -79,21 +85,24 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
               <ModalHeaderLine />
               <span>{profileData?.ageRange + "대"}</span>
             </ModalHeader>
-            <ImgContainer>
-              <Img src={profileData?.profileImage} />
-            </ImgContainer>
+            <Img src={profileData?.profileImage} />
             <AddressSpan>
-              <img src={mapIcon} />
+              <img
+                style={{ width: "1rem", height: "1rem" }}
+                src={LocationSVG}
+              />
               {profileData?.address}
             </AddressSpan>
           </ModalDiv>
-          <Modal.Button
-            style={{ width: "100%" }}
-            onClick={() => setCheckBlock(true)}
-            color={isBlocked ? "blue" : "orange"}
-          >
-            {isBlocked ? "차단해제" : "차단하기"}
-          </Modal.Button>
+          {myId !== userId && (
+            <Modal.Button
+              style={{ width: "100%" }}
+              onClick={() => setCheckBlock(true)}
+              color={isBlocked ? "blue" : "orange"}
+            >
+              {isBlocked ? "차단해제" : "차단하기"}
+            </Modal.Button>
+          )}
         </div>
       )}
     </Modal>
@@ -104,6 +113,7 @@ const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 11rem;
 `;
 
 const ModalHeader = styled.div`
@@ -124,20 +134,9 @@ const ModalHeaderLine = styled.div`
   margin: 0 0.33rem;
 `;
 
-const ImgContainer = styled.div`
-  width: 70%;
-  padding-top: 70%;
-  position: relative;
-  border-radius: 1.17rem;
-  background-color: ${colorTheme.blue300};
-`;
-
 const Img = styled.img`
-  width: 90%;
-  height: 90%;
-  top: 5%;
-  left: 5%;
-  position: absolute;
+  width: 8rem;
+  height: 8rem;
   border-radius: 1.17rem;
 `;
 

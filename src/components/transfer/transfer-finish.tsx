@@ -22,8 +22,8 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
       <CheckMsg style={{ color: colorTheme.blue900 }}>송금완료</CheckMsg>
       <TransferExplainBox>
         {lastTransfer.member == 1
-          ? `${lastTransfer.users[0].name}님 외 ${lastTransfer.member - 1}분께`
-          : `${lastTransfer.users[0].name}님께`}
+          ? `${lastTransfer.users[0].nickName}님 외 ${lastTransfer.member - 1}분께`
+          : `${lastTransfer.users[0].nickName}님께`}
         <br />
         {lastTransfer.price * lastTransfer.member}매듭을
         <br />
@@ -37,18 +37,15 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
         매듭 입니다
       </div>
       <BottomFixed alignDirection="column">
-        <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
-          onClick={onClick}
-        >
+        <BottomFixed.Button color="blue" onClick={onClick}>
           돌아가기
         </BottomFixed.Button>
-        <BottomFixed.Button
-          style={{ backgroundColor: colorTheme.blue900 }}
+        {/* <BottomFixed.Button
+          color="blue"
           onClick={handleClick}
         >
-          송금내역보기
-        </BottomFixed.Button>
+          송금내역보기 */}
+        {/* </BottomFixed.Button> */}
       </BottomFixed>
     </Wrapper>
   );

@@ -4,41 +4,51 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
+import { CommonInput } from "@/components/common/common-input";
 import { ToggleSwitch } from "@/components/common/toggle-switch";
 import { PostingAppBar } from "@/components/posting/posting-app-bar";
 import { PostingBoldText } from "@/components/posting/posting-bold-text";
 import { postingState } from "@/recoil/atoms/posting-state";
+import { colorTheme } from "@/style/color-theme";
 
 export const Posting3 = () => {
+  const navigate = useNavigate();
   const [posting, setPosting] = useRecoilState(postingState);
-  const today = new Date();
-  const [hours, setHours] = useState(
-    posting.startTimeSave ? posting.startDate.getHours() : today.getHours() + 1,
-  );
-  const [minutes, setMinutes] = useState(
-    posting.startTimeSave ? posting.startDate.getMinutes() : today.getMinutes(),
+  const hour = posting.startTimeSave ? posting.startDate.getHours() : -1;
+  const [minuteValue, setMinuteValue] = useState(
+    posting.startTimeSave ? posting.startDate.getMinutes().toString() : "",
   );
   const [isLeftSelected, SetIsLeftSelected] = useState(
-    hours < 12 ? true : false,
+    hour < 12 ? true : false,
   );
-  const navigate = useNavigate();
+  const [hourValue, setHourValue] = useState(
+    hour === -1
+      ? ""
+      : hour < 12
+        ? hour === 0
+          ? "12"
+          : hour.toString()
+        : hour - 12 === 0
+          ? "12"
+          : (hour - 12).toString(),
+  );
+  const [isHourError, setIsHourError] = useState(false);
+  const [isMinuteError, setIsMinuteError] = useState(false);
+  const [isAllError, setIsAllError] = useState(false);
 
   const handleSave = () => {
-    const tempSlot = isLeftSelected ? "AM" : "PM";
-    const tempHours = isLeftSelected
-      ? hours === 12
-        ? 0
-        : hours
-      : hours === 12
-        ? 12
-        : hours + 12;
-    posting.startDate.setHours(tempHours);
-    posting.startDate.setMinutes(minutes);
+    let tempHour = 0;
+    if (isLeftSelected) {
+      tempHour = Number(hourValue) === 12 ? 0 : Number(hourValue);
+    } else {
+      tempHour = Number(hourValue) === 12 ? 12 : Number(hourValue) + 12;
+    }
+    posting.startDate.setHours(tempHour);
+    posting.startDate.setMinutes(Number(minuteValue));
     setPosting((prevPosting) => {
       const updatedPosting = {
         ...prevPosting,
         startDate: posting.startDate,
-        slot: tempSlot,
         startTimeSave: true,
       };
       return updatedPosting;
@@ -59,24 +69,35 @@ export const Posting3 = () => {
         isLeftSelected={isLeftSelected}
         onChangeSelected={SetIsLeftSelected}
       />
-      <span>
-        <input
-          type="number"
-          value={hours.toString()}
-          onChange={(e) => {
-            setHours(Number(e.target.value));
-          }}
-        />
-        <span>시</span>
-        <input
-          type="number"
-          value={minutes.toString()}
-          onChange={(e) => {
-            setMinutes(Number(e.target.value));
-          }}
-        />
-        <span>분</span>
-      </span>
+      <CommonInput style={{ paddingTop: "10%" }}>
+        <CommonInput.InputInner
+          value={hourValue}
+          setValue={setHourValue}
+          isError={isHourError}
+          setIsError={setIsHourError}
+          maximum={12}
+          minimum={1}
+        >
+          시
+        </CommonInput.InputInner>
+        <CommonInput.InputInner
+          value={minuteValue}
+          setValue={setMinuteValue}
+          isError={isMinuteError}
+          setIsError={setIsMinuteError}
+          maximum={59}
+          minimum={0}
+        >
+          분
+        </CommonInput.InputInner>
+      </CommonInput>
+      {isHourError && !isMinuteError && !isAllError && (
+        <ErrorMsg>1~12시 사이로 입력해주세요!</ErrorMsg>
+      )}
+      {!isHourError && isMinuteError && !isAllError && (
+        <ErrorMsg>0~59분 사이로 입력해주세요!</ErrorMsg>
+      )}
+      {isAllError && <ErrorMsg>정확한 시작 시간을 입력해주세요!</ErrorMsg>}
       <BottomFixed alignDirection="row">
         <BottomFixed.Button
           color="blue"
@@ -90,8 +111,14 @@ export const Posting3 = () => {
         <BottomFixed.Button
           color="blue"
           onClick={() => {
-            handleSave();
-            navigate("/posting/4");
+            if (hourValue === "" || minuteValue === "") {
+              setIsAllError(true);
+              setIsHourError(true);
+              setIsMinuteError(true);
+            } else {
+              handleSave();
+              navigate("/posting/4");
+            }
           }}
         >
           다음
@@ -106,4 +133,12 @@ const PageContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
+`;
+
+const ErrorMsg = styled.div`
+  color: ${colorTheme.orange400};
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.1rem;
 `;
