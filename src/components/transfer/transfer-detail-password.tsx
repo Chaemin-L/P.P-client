@@ -19,9 +19,6 @@ export const TransferDetailPassword = ({
   const [lastTransfer, setLastTransfer] = useRecoilState(transferState);
   const [password, setPassword] = useState<string>("");
   const [isError, setIsError] = useState(false);
-  const [status, setStatus] = useState<"INITIAL" | "CONFIRM" | "MISMATCH">(
-    "INITIAL",
-  );
   const { mutate: postTransfer } = usePostChatTransfer();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
