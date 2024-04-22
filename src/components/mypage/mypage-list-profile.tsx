@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 import FemaleSVG from "@/assets/icons/female.svg";
@@ -14,15 +13,9 @@ export const MypageListProfile = () => {
   const { data: myProfile } = useGetProfile();
   const { data: bankAccount } = useGetBankData();
 
-  const [profileImage, setProfileImage] = useState(myProfile?.profileImage);
-
-  useEffect(() => {
-    if (profileImage) setProfileImage(atob(profileImage));
-  }, []);
-
   return (
     <Wrapper>
-      <ProfileImg src={profileImage} />
+      <ProfileImg src={myProfile?.profileImage} />
       <ColumnBox>
         <ProfileRowBox>
           <Name>{myProfile?.nickName}</Name>
