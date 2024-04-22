@@ -20,10 +20,7 @@ export const AddressPage = ({ nextStep }: AddressPageProps) => {
 
   useEffect(() => {
     if (address !== undefined) {
-      setProfile((profile) => ({
-        request: { ...profile.request, address },
-        file: profile.file,
-      }));
+      setProfile((profile) => ({ ...profile, address }));
     }
   }, [address]);
 

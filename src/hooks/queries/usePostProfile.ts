@@ -2,13 +2,17 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import ProfileApi from "@/api/profile-api";
-import { ProfilePostResponse } from "@/api/types/profile-type";
+import {
+  ProfilePostRequest,
+  ProfilePostResponse,
+} from "@/api/types/profile-type";
 
 export function usePostProfile() {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (profile: FormData) => ProfileApi.postProfile(profile),
+    mutationFn: (profile: ProfilePostRequest) =>
+      ProfileApi.postProfile(profile),
     onSuccess: (response: ProfilePostResponse) => {
       const { accessToken, refreshToken, role } = response.data.tokenInfo;
 
