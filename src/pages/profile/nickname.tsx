@@ -36,8 +36,8 @@ export const NicknamePage = ({ nextStep, onModal }: NicknamePageProps) => {
               return;
             }
             setProfile((profile) => ({
-              request: { ...profile.request, nickName: nickName },
-              file: profile.file,
+              ...profile,
+              nickName,
             }));
             nextStep();
           }}

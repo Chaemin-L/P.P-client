@@ -28,9 +28,5 @@ export const ProfileLayout = ({ children }: { children: ReactNode }) => {
     else setProfile(data!);
   }, []);
 
-  return (
-    <ProfileContext.Provider value={profile}>
-      {children}
-    </ProfileContext.Provider>
-  );
+  return <>{children}</>;
 };

@@ -35,8 +35,8 @@ export const NamePage = ({ nextStep, onModal }: NamePageProps) => {
               return;
             }
             setProfile((profile) => ({
-              request: { ...profile.request, name },
-              file: profile.file,
+              ...profile,
+              name,
             }));
             nextStep();
           }}

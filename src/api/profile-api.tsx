@@ -1,5 +1,9 @@
 import Instance from "./axios-instance";
-import { ProfileGetResponse, ProfilePostResponse } from "./types/profile-type";
+import {
+  ProfileGetResponse,
+  ProfilePostRequest,
+  ProfilePostResponse,
+} from "./types/profile-type";
 
 export default class ProfileApi {
   static async getProfile(userId?: number) {
@@ -16,10 +20,8 @@ export default class ProfileApi {
     }
   }
 
-  static async postProfile(profile: FormData) {
-    return await Instance.post("/auth-service/api/v2/profile", profile, {
-      headers: { "Content-Type": "multipart/form-data" },
-    })
+  static async postProfile(profile: ProfilePostRequest) {
+    return await Instance.post("/auth-service/api/v2/profile", profile)
       .then((res) => res.data as ProfilePostResponse)
       .catch(() => {
         throw new Error("Invalid response from server");

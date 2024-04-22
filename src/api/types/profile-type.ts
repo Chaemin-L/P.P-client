@@ -14,14 +14,12 @@ export type ProfileData = {
 export type ProfileGetResponse = FinalResponse<ProfileData>;
 
 export type ProfilePostRequest = {
-  request: {
-    nickname: string;
-    password: string;
-    name: string;
-    birth: string;
-    gender: string;
-    address: string;
-  };
+  nickName: string;
+  password: string;
+  name: string;
+  birth: string;
+  gender: string;
+  address: string;
   file: string;
 };
 

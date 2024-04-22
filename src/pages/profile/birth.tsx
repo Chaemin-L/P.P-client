@@ -35,13 +35,8 @@ export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
     }
 
     setProfile((profile) => ({
-      request: {
-        ...profile.request,
-        birth: [bYear, bMonth.padStart(2, "0"), bDay.padStart(2, "0")].join(
-          "-",
-        ),
-      },
-      file: profile.file,
+      ...profile,
+      birth: [bYear, bMonth.padStart(2, "0"), bDay.padStart(2, "0")].join("-"),
     }));
 
     nextStep();
