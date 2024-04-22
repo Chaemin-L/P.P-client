@@ -41,19 +41,7 @@ export const PasswordPage = () => {
   useEffect(() => {
     if (confirmPassword.length === PASSWORD_LENGTH) {
       if (password === confirmPassword) {
-        const formData = new FormData();
-        const requestJSON = JSON.stringify({ ...profile.request, password });
-        const requestBLOB = new Blob([requestJSON], {
-          type: "application/json",
-        });
-        formData.append("request", requestBLOB);
-        formData.append(
-          "file",
-          new Blob([profile.file], {
-            type: "application/json",
-          }),
-        );
-        submitProfile(formData);
+        submitProfile({ ...profile, password });
       } else {
         setPassword("");
         setConfirmPassword("");

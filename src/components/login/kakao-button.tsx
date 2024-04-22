@@ -9,7 +9,10 @@ export const KakaoButton = () => {
 
   return (
     <div onClick={handleKakaoLogin}>
-      <img src={KakaoLoginButtonPNG} style={{ width: "50vw" }} />
+      <img
+        src={KakaoLoginButtonPNG}
+        style={{ width: "50vw", maxWidth: "200px" }}
+      />
     </div>
   );
 };

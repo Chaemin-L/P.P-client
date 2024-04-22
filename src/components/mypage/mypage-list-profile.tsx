@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 import FemaleSVG from "@/assets/icons/female.svg";
 import KnotWhiteBackSVG from "@/assets/icons/knot-white-back.svg";
 import LocationWhiteBackSVG from "@/assets/icons/location-white-back.svg";
 import MaleSVG from "@/assets/icons/male.svg";
-import PersonSVG from "@/assets/icons/person-white-back.svg";
+// import PersonSVG from "@/assets/icons/person-white-back.svg";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { colorTheme } from "@/style/color-theme";
@@ -13,9 +14,15 @@ export const MypageListProfile = () => {
   const { data: myProfile } = useGetProfile();
   const { data: bankAccount } = useGetBankData();
 
+  const [profileImage, setProfileImage] = useState(myProfile?.profileImage);
+
+  useEffect(() => {
+    if (profileImage) setProfileImage(atob(profileImage));
+  }, []);
+
   return (
     <Wrapper>
-      <ProfileImg src={myProfile?.profileImage} />
+      <ProfileImg src={profileImage} />
       <ColumnBox>
         <ProfileRowBox>
           <Name>{myProfile?.nickName}</Name>
