@@ -7,7 +7,10 @@ export const GoogleButton = () => {
   if (isLoading) return <div>Loading...</div>;
   return (
     <>
-      <div style={{ width: "50vw" }} onClick={() => void signIn()}>
+      <div
+        style={{ width: "50vw", maxWidth: "200px" }}
+        onClick={() => void signIn()}
+      >
         <GoogleLoginButtonSVG />
       </div>
       {/* <button onClick={() => void signIn()}>Login</button>
