@@ -21,6 +21,7 @@ export type ProfilePostRequest = {
   gender: string;
   address: string;
   file: string;
+  fileByte: string;
 };
 
 export type ProfilePostResponse = FinalResponse<{

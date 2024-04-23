@@ -10,5 +10,6 @@ export const profileState = atom({
     gender: "",
     address: "",
     file: "",
+    fileByte: "",
   },
 });
