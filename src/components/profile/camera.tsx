@@ -21,6 +21,8 @@ const Camera = ({ setDataUri }: CameraProps) => {
           handleTakePhoto(dataUri);
           setDataUri(dataUri);
         }}
+        imageType="jpg"
+        imageCompression={0.5}
       />
     </CameraWrapper>
   );
