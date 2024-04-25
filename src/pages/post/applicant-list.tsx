@@ -73,24 +73,43 @@ export const ApplicantListPage = () => {
   const { mutate: changeStatus } = useChangeStatus(postId!);
 
   const { mutate: makeChat } = usePostMakeChat();
-  // const chatRoomId = useCheckChatMake(postId!);
+  const chatRoomId = useCheckChatMake(postId!);
   const [chatMakeRoomId, setChatMakeRoomId] = useState<ChatMakeRoom | null>(
     null,
   );
   const navigate = useNavigate();
 
-  const [isApplyError, setIsApplyError] = useState(false);
-  // const [isApplyChange, setIsApplyChange] = useState(false);
+  const [isApplyError, setIsApplyError] = useState("");
+  const [isApplyChange, setIsApplyChange] = useState(false);
+  const [isApplyChangeCheck, setIsApplyChangeCheck] = useState(false);
 
-  // console.log(data);
-  // useEffect(() => {
-  //   const tempList: number[] = data ? data.filter((item) => {item.status}) : [];
-  //   setIsApplyChange(false);
-  //   applyIds.map((item) => {
-  //     if (tempList.find((e) => e === item) === undefined)
-  //       setIsApplyChange(true);
-  //   });
-  // }, [applyIds]);
+  console.log(chatRoomId);
+  console.log(data);
+  useEffect(() => {
+    const tempList = data
+      ? data.filter((item) => {
+          if (item.status) return item.applicantInfo.userId;
+        })
+      : [];
+    setIsApplyChange(false);
+    applyIds.map((item) => {
+      if (tempList.find((e) => e.applicantInfo.userId === item) === undefined)
+        setIsApplyChange(true);
+    });
+  }, [applyIds]);
+
+  useEffect(() => {
+    const tempApplyIds: number[] = [];
+    const tempApplyUserIds: number[] = [];
+    data?.map((item) => {
+      if (item.status != "WAITING") {
+        tempApplyIds.push(item.applyId);
+        tempApplyUserIds.push(item.applicantInfo.userId);
+      }
+    });
+    setApplyIds(tempApplyIds);
+    setApplyUserIds(tempApplyUserIds);
+  }, []);
 
   return (
     <DefaultLayout
@@ -127,26 +146,36 @@ export const ApplicantListPage = () => {
           color="orange"
           onClick={() => {
             if (applyIds.length > 0) {
-              accept(applyIds);
-              setApplyModal(true);
+              if (isApplyChange) {
+                console.log("true");
+                setIsApplyChangeCheck(true);
+              } else {
+                accept(applyIds, {
+                  onSuccess: () => {
+                    setApplyModal(true);
+                    const tempList: string[] = applyUserIds.map((id) =>
+                      id.toString(),
+                    );
+                    const tempData: ChatMakeRequest = {
+                      postId: Number(postId),
+                      memberIds: tempList,
+                    };
 
-              const tempList: string[] = applyUserIds.map((id) =>
-                id.toString(),
-              );
-              const tempData: ChatMakeRequest = {
-                postId: Number(postId),
-                memberIds: tempList,
-              };
-
-              makeChat(tempData, {
-                onSuccess: (res) => {
-                  setApplyModal(true);
-                  setChatMakeRoomId(res);
-                  console.log("makeChat: ", res);
-                },
-              });
+                    makeChat(tempData, {
+                      onSuccess: (res) => {
+                        setApplyModal(true);
+                        setChatMakeRoomId(res);
+                        console.log("makeChat: ", res);
+                      },
+                    });
+                  },
+                  onError: () => {
+                    setIsApplyError("APPLY_ID_LENGTH_OVER");
+                  },
+                });
+              }
             } else {
-              setIsApplyError(true);
+              setIsApplyError("APPLY_ID_LENGTH_ZERO");
             }
           }}
         >
@@ -179,9 +208,30 @@ export const ApplicantListPage = () => {
           </Modal.Button>
         </Modal>
       )}
-      {isApplyError && applyIds.length === 0 && (
-        <Modal onClose={() => setIsApplyError(false)}>
-          <Modal.Title text="수락할 지원자 선택 후 \n 수락해주세요." />
+      {isApplyError !== "" && (
+        <Modal onClose={() => setIsApplyError("")}>
+          {isApplyError === "APPLY_ID_LENGTH_ZERO" && (
+            <Modal.Title text="수락할 지원자 선택 후 \n 수락해주세요" />
+          )}
+          {isApplyError === "APPLY_ID_LENGTH_OVER" && (
+            <Modal.Title text="최대 신청자 수를 넘겼습니다" />
+          )}
+        </Modal>
+      )}
+      {isApplyChangeCheck && (
+        <Modal
+          onClose={() => {
+            setIsApplyChangeCheck(false);
+          }}
+        >
+          <Modal.Title text="정말 참여자를 바꾸겠습니까?" />
+          <Modal.Button
+            onClick={() => {
+              // 게시글 status 변경 -> 수정한 지원자 비교하여 없앤 지원자는 delete accept, 재 accept, chatting 인원 수정, apply modal true
+            }}
+          >
+            참여자 변경
+          </Modal.Button>
         </Modal>
       )}
       {/* {isApplyError && !isApplyChange && applyIds.length > 0 && (

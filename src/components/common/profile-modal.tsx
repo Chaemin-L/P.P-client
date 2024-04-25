@@ -83,7 +83,7 @@ export const ProfileModal = ({ userId, onClose }: ProfileModalType) => {
               <ModalHeaderLine />
               <span>{profileData?.gender}</span>
               <ModalHeaderLine />
-              <span>{profileData?.ageRange + "대"}</span>
+              <span>{Number(profileData?.ageRange) * 10 + "대"}</span>
             </ModalHeader>
             <Img src={profileData?.profileImage} />
             <AddressSpan>

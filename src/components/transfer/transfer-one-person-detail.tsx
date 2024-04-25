@@ -5,10 +5,12 @@ import { TransferDetailProps } from "./type";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const TransferOnePersonDetail = ({ setScreen }: TransferDetailProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
+  const [transfer, setTransfer] = useRecoilState(transferState);
 
   return (
     <Wrapper>
@@ -25,7 +27,8 @@ export const TransferOnePersonDetail = ({ setScreen }: TransferDetailProps) => {
         <div style={{ width: "22%", textAlign: "right" }}>매듭</div>
       </TransferExplainRowBox>
       <div style={{ color: colorTheme.orange400 }}>
-        지금 내 잔액은 {lastTransfer.availableBudget}매듭 입니다
+        지금 내 잔액은 {lastTransfer.availableBudget + transfer.price}매듭
+        입니다
       </div>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button

@@ -11,6 +11,7 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
   const resetTransferRecoil = useResetRecoilState(transferState);
 
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
+  const [transfer, setTransfer] = useRecoilState(transferState);
 
   const handleClick = () => {
     resetLastTransferRecoil();
@@ -32,7 +33,8 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
       :
       <div>
         송금 후 내 잔액은{" "}
-        {lastTransfer.availableBudget -
+        {lastTransfer.availableBudget +
+          transfer.price -
           lastTransfer.member * lastTransfer.price}
         매듭 입니다
       </div>

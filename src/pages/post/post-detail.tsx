@@ -137,13 +137,18 @@ export const PostDetailPage = () => {
               </BottomFixed.Button>
             </>
           ) : (
-            <BottomFixed.Button
-              onClick={() => {
-                // TODO: 채팅방으로 이동
-              }}
-            >
-              채팅방으로 가기
-            </BottomFixed.Button>
+            <>
+              <BottomFixed.Button
+                onClick={() => {
+                  // TODO: 채팅방으로 이동
+                }}
+              >
+                채팅방으로 가기
+              </BottomFixed.Button>
+              <BottomFixed.Button onClick={() => navigate("applicant")}>
+                참여관리
+              </BottomFixed.Button>
+            </>
           )
         ) : data?.marketPostResponse.status === "RECRUITING" ? (
           !data?.userCurrentStatus.isApplicant ? (

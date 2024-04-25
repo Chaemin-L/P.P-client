@@ -1,10 +1,11 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { TransferDetailProps } from "./type";
 
 import { transferRequest } from "@/api/types/bank-type";
+import KnotNotBorderSVG from "@/assets/icons/knot-not-border.svg";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { usePostChatTransfer } from "@/hooks/queries/usePostChatTransfer";
 import { transferState } from "@/recoil/atoms/transfer-state";
@@ -19,6 +20,7 @@ export const TransferDetailPassword = ({
   const [lastTransfer, setLastTransfer] = useRecoilState(transferState);
   const [password, setPassword] = useState<string>("");
   const [isError, setIsError] = useState(false);
+  const [isError500, setIsError500] = useState(false);
   const { mutate: postTransfer } = usePostChatTransfer();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +32,7 @@ export const TransferDetailPassword = ({
     else {
       setPassword(e.target.value);
       setIsError(false);
+      setIsError500(false);
     }
   };
 
@@ -58,9 +61,10 @@ export const TransferDetailPassword = ({
               return updatedLastTransfer;
             });
           },
-          onError: () => {
+          onError: (e) => {
+            console.log("error, ", e.message);
             setPassword("");
-            setIsError(true);
+            e.message.includes("400") ? setIsError(true) : setIsError500(true);
           },
         },
       );
@@ -78,7 +82,7 @@ export const TransferDetailPassword = ({
         <input value={password} onChange={(e) => onChange(e)} />
         <PasswordWrapper>
           {password.split("").map((p, i) => (
-            <span key={i}>{p}</span>
+            <KnotIcon src={KnotNotBorderSVG} key={i} />
           ))}
           {new Array(PASSWORD_LENGTH - password.length).fill(0).map((_, i) => (
             <DotsWrapper key={i}>
@@ -88,6 +92,10 @@ export const TransferDetailPassword = ({
         </PasswordWrapper>
       </InputArea>
       {isError && <ErrorMessage>비밀번호가 틀렸습니다</ErrorMessage>}
+      {isError500 && (
+        <ErrorMessage>{`오류가 발생했습니다
+      다시 시도해주세요`}</ErrorMessage>
+      )}
       <BottomFixed>
         <BottomFixed.Button
           color="blue"
@@ -116,6 +124,7 @@ const Wrapper = styled.div`
 const CheckMsg = styled.div`
   font-size: 1.39rem;
   margin: 5% 0 15%;
+  text-align: center;
 `;
 
 const InputArea = styled.div`
@@ -151,6 +160,11 @@ const PasswordWrapper = styled.div`
   }
 `;
 
+const KnotIcon = styled.img`
+  width: 2.06rem;
+  height: 2.06rem;
+`;
+
 const DotsWrapper = styled.div`
   flex: 1;
   display: flex;
@@ -171,4 +185,5 @@ const ErrorMessage = styled.div`
   text-align: center;
   line-height: 120%;
   margin-top: 10%;
+  white-space: pre-line;
 `;

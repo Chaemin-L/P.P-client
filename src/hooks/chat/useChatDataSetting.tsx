@@ -30,6 +30,7 @@ export const useChatDataSetting = (props: ChatMakeRoom) => {
     const dealId: number = roomData ? roomData.postInfo.dealId : -1;
     const availableBudget: number = bankData ? bankData.availableBudget : -1;
 
+    console.log("availableBudget!!!: ", availableBudget);
     setTransfer({
       users: users,
       price: price,
