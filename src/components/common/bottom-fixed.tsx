@@ -53,8 +53,21 @@ const StyledButton = styled.button<{
 }>`
   width: 100%;
   padding: 12px;
-  background-color: ${({ color }) =>
-    color === "blue" ? `${colorTheme.blue900}` : `${colorTheme.orange400}`};
+  ${({ color }) =>
+    color === "blue"
+      ? `background-color: ${colorTheme.blue900};
+    &:active{
+      background-color: #fff;
+      color: ${colorTheme.blue900};
+      border: 1px solid ${colorTheme.blue900};
+    }
+    `
+      : `background-color: ${colorTheme.orange400}; 
+      &:active{
+      background-color: #fff;
+      color: ${colorTheme.orange400};
+      outline: 1px solid ${colorTheme.orange400};
+    }`};
 
   ${({ $rounded }) => $rounded && "border-radius: 50px;"}
   border: 0;

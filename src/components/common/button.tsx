@@ -30,14 +30,25 @@ const StyledButton = styled.button<{
   border: 0;
   color: white;
   font-size: 1rem;
+
   ${({ $rounded }) => $rounded && "border-radius: 40px;"}
 
   ${({ color }) =>
     color === "blue"
       ? `
       background-color: ${colorTheme.blue900};
+      &:active{
+        background-color: #fff;
+        color: ${colorTheme.blue900};
+        outline: 1px solid ${colorTheme.blue900};
+      }
     `
       : color === "orange"
-        ? `background-color: ${colorTheme.orange400};`
+        ? `background-color: ${colorTheme.orange400};
+        &:active{
+          background-color: #fff;
+          color: ${colorTheme.orange400}; 
+          outline: 1px solid ${colorTheme.orange400};
+        }`
         : `background-color: #f5f5f5; color: ${colorTheme.blue900}`};
 `;
