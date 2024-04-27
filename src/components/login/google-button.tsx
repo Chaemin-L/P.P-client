@@ -1,5 +1,4 @@
 import {
-  Auth,
   GoogleAuthProvider,
   signInWithRedirect,
   User as FirebaseUser,
@@ -8,7 +7,6 @@ import { getRedirectResult } from "firebase/auth";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { ReactComponent as GoogleLoginButtonSVG } from "@/assets/icons/google-login-button.svg";
-import { useGoogleLogin } from "@/hooks/queries/useGoogleLogin";
 import { useSignIn } from "@/hooks/queries/useSignIn";
 import { auth } from "@/lib/firebase";
 
