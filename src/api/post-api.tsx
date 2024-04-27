@@ -98,4 +98,12 @@ export default class PostApi {
     if (response) return response.status;
     else throw new Error("Invalid response from server");
   }
+
+  static async postRollback(postId: string) {
+    const response = await Instance.post(
+      `/haetsal-service/api/v2/market/post/${postId}/rollback`,
+    );
+    if (response) return response.status;
+    else throw new Error("Invalid response from server");
+  }
 }

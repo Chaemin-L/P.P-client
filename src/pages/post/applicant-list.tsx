@@ -14,12 +14,23 @@ import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
 import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
 import { usePostMakeChat } from "@/hooks/queries/usePostMakeChat";
+import { usePostRollback } from "@/hooks/queries/usePostRollback";
+import { usePutChatNewMember } from "@/hooks/queries/usePutChatNewMember";
 import { colorTheme } from "@/style/color-theme";
 
 type ApplicantItemProps = {
   selected: boolean;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
 } & ApplyType;
+
+const equals = ({ a, b }: { a: number[]; b: number[] }) =>
+  JSON.stringify(a) === JSON.stringify(b);
+
+const newMember = ({ a, b }: { a: number[]; b: number[] }) => {
+  a.sort();
+  b.sort();
+  return a.filter((x) => !b.includes(x));
+};
 
 const ApplicantItem = (props: ApplicantItemProps) => {
   // const [profileImage, setProfileImage] = useState<string>();
@@ -65,6 +76,7 @@ export const ApplicantListPage = () => {
   const [applyIds, setApplyIds] = useState<number[]>([]);
   const [applyModal, setApplyModal] = useState<boolean>();
   const [applyUserIds, setApplyUserIds] = useState<number[]>([]);
+  const [originUserIds, setOriginUserIds] = useState<number[]>([]);
 
   const { postId } = useParams();
 
@@ -79,36 +91,33 @@ export const ApplicantListPage = () => {
   );
   const navigate = useNavigate();
 
+  const { mutate: postRollback } = usePostRollback();
+  const { mutate: putNewMember } = usePutChatNewMember();
+
   const [isApplyError, setIsApplyError] = useState("");
-  const [isApplyChange, setIsApplyChange] = useState(false);
   const [isApplyChangeCheck, setIsApplyChangeCheck] = useState(false);
 
   console.log(chatRoomId);
   console.log(data);
-  useEffect(() => {
-    const tempList = data
-      ? data.filter((item) => {
-          if (item.status) return item.applicantInfo.userId;
-        })
-      : [];
-    setIsApplyChange(false);
-    applyIds.map((item) => {
-      if (tempList.find((e) => e.applicantInfo.userId === item) === undefined)
-        setIsApplyChange(true);
-    });
-  }, [applyIds]);
+
+  const checkChange = ({ a, b }: { a: number[]; b: number[] }) => {
+    a.sort();
+    b.sort();
+    return equals({ a: a, b: b });
+  };
 
   useEffect(() => {
     const tempApplyIds: number[] = [];
     const tempApplyUserIds: number[] = [];
     data?.map((item) => {
-      if (item.status != "WAITING") {
+      if (item.status !== "WAITING") {
         tempApplyIds.push(item.applyId);
         tempApplyUserIds.push(item.applicantInfo.userId);
       }
     });
     setApplyIds(tempApplyIds);
     setApplyUserIds(tempApplyUserIds);
+    setOriginUserIds(tempApplyUserIds);
   }, []);
 
   return (
@@ -146,33 +155,35 @@ export const ApplicantListPage = () => {
           color="orange"
           onClick={() => {
             if (applyIds.length > 0) {
-              if (isApplyChange) {
-                console.log("true");
-                setIsApplyChangeCheck(true);
+              if (checkChange({ a: originUserIds, b: applyUserIds })) {
+                setIsApplyError("APPLY_ID_NOT_CHANGE");
               } else {
-                accept(applyIds, {
-                  onSuccess: () => {
-                    setApplyModal(true);
-                    const tempList: string[] = applyUserIds.map((id) =>
-                      id.toString(),
-                    );
-                    const tempData: ChatMakeRequest = {
-                      postId: Number(postId),
-                      memberIds: tempList,
-                    };
+                if (originUserIds.length > 0) {
+                  setIsApplyChangeCheck(true);
+                } else {
+                  accept(applyIds, {
+                    onSuccess: () => {
+                      const tempList: string[] = applyUserIds.map((id) =>
+                        id.toString(),
+                      );
+                      const tempData: ChatMakeRequest = {
+                        postId: Number(postId),
+                        memberIds: tempList,
+                      };
 
-                    makeChat(tempData, {
-                      onSuccess: (res) => {
-                        setApplyModal(true);
-                        setChatMakeRoomId(res);
-                        console.log("makeChat: ", res);
-                      },
-                    });
-                  },
-                  onError: () => {
-                    setIsApplyError("APPLY_ID_LENGTH_OVER");
-                  },
-                });
+                      makeChat(tempData, {
+                        onSuccess: (res) => {
+                          setApplyModal(true);
+                          setChatMakeRoomId(res);
+                          console.log("makeChat: ", res);
+                        },
+                      });
+                    },
+                    onError: () => {
+                      setIsApplyError("APPLY_ID_LENGTH_OVER");
+                    },
+                  });
+                }
               }
             } else {
               setIsApplyError("APPLY_ID_LENGTH_ZERO");
@@ -192,13 +203,15 @@ export const ApplicantListPage = () => {
           <Modal.Button
             color="orange"
             onClick={() => {
-              navigate(`/chat/detail`, {
-                state: {
-                  roomId: chatMakeRoomId?.roomId,
-                  postId: chatMakeRoomId?.postId,
-                  memberCount: chatMakeRoomId?.memberCount,
-                },
-              });
+              if (chatMakeRoomId !== null) {
+                navigate(`/chat/detail`, {
+                  state: {
+                    roomId: chatMakeRoomId.roomId,
+                    postId: chatMakeRoomId.postId,
+                    memberCount: chatMakeRoomId.memberCount,
+                  },
+                });
+              } // 수정 후 채팅방 가기도 구현해야함
             }}
           >
             채팅방 가기
@@ -216,6 +229,9 @@ export const ApplicantListPage = () => {
           {isApplyError === "APPLY_ID_LENGTH_OVER" && (
             <Modal.Title text="최대 신청자 수를 넘겼습니다" />
           )}
+          {isApplyError === "APPLY_ID_NOT_CHANGE" && (
+            <Modal.Title text="변경 사항이 없습니다." />
+          )}
         </Modal>
       )}
       {isApplyChangeCheck && (
@@ -228,17 +244,37 @@ export const ApplicantListPage = () => {
           <Modal.Button
             onClick={() => {
               // 게시글 status 변경 -> 수정한 지원자 비교하여 없앤 지원자는 delete accept, 재 accept, chatting 인원 수정, apply modal true
+              const temp = newMember({ a: applyUserIds, b: originUserIds });
+              postRollback(postId!, {
+                onSuccess: () => {
+                  accept(temp, {
+                    onSuccess: () => {
+                      const tempList: string[] = temp.map((id) =>
+                        id.toString(),
+                      );
+                      const tempData = {
+                        chatRoomId: chatRoomId,
+                        addingData: {
+                          postId: Number(postId),
+                          memberIds: tempList,
+                        },
+                      };
+
+                      putNewMember(tempData, {
+                        onSuccess: () => {
+                          setApplyModal(true);
+                        },
+                      });
+                    },
+                  });
+                },
+              });
             }}
           >
             참여자 변경
           </Modal.Button>
         </Modal>
       )}
-      {/* {isApplyError && !isApplyChange && applyIds.length > 0 && (
-        <Modal onClose={() => setIsApplyError(false)}>
-          <Modal.Title text={"변경사항이 없습니다."} />
-        </Modal>
-      )} */}
     </DefaultLayout>
   );
 };

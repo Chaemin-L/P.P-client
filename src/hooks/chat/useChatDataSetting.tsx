@@ -50,7 +50,7 @@ export const useChatDataSetting = (props: ChatMakeRoom) => {
       dealId: dealId,
       transferState: status,
     });
-  }, [roomData]);
+  }, [roomData, bankData]);
 
   return roomData?.messages;
 };
