@@ -1,18 +1,12 @@
 import { Stomp, CompatClient } from "@stomp/stompjs";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import SockJS from "sockjs-client";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import { allMsg, tempList } from "./dummy";
-import { ChatRoomSubMessage } from "./type";
+import { ChatRoomData, ChatRoomSubMessage } from "./type";
 
-import {
-  ChatListItemType,
-  ChatMakeRoom,
-  ChatRoomMessage,
-} from "@/api/types/chat-type";
+import { ChatMakeRoom } from "@/api/types/chat-type";
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
@@ -29,7 +23,7 @@ import { FormatDateString } from "@/utils/format-date-string";
 export const ChatRoom = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as ChatMakeRoom;
+  const state = location.state as ChatRoomData;
 
   const [transfer, setTransfer] = useRecoilState(transferState);
   const [newRoomMsgs, setNewRoomMsgs] = useState<ChatRoomSubMessage[]>([]);
@@ -74,14 +68,12 @@ export const ChatRoom = () => {
     connectHandler();
   }, []);
 
-  // 스크롤을 맨 아래로 이동하는 함수
   const scrollToBottom = () => {
     if (chatListRef.current !== null)
       chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
   };
 
   useEffect(() => {
-    // 메시지가 업데이트될 때마다 스크롤을 맨 아래로 이동
     scrollToBottom();
   }, [newRoomMsgs]);
 
@@ -91,7 +83,6 @@ export const ChatRoom = () => {
         type: "CHAT",
         roomIdx: state.roomId,
         message: inputValue,
-        // senderName: localStorage.getItem("nickName"),
         userId: myId,
         createdAt: FormatDateString(new Date()),
       };
@@ -112,7 +103,6 @@ export const ChatRoom = () => {
     <PageContainer>
       {appBerVisibility && (
         <ChatAppBar
-          name="test"
           onClickTransfer={() => {
             setIsBottomSheetOpened(true);
             setIsTransfer(true);
@@ -126,6 +116,8 @@ export const ChatRoom = () => {
           setErrorModal={() => {
             setErrorModal(true);
           }}
+          memberCount={state.memberCount}
+          creatorId={state.creatorId}
         />
       )}
       <ChatList

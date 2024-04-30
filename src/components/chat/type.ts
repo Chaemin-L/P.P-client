@@ -28,15 +28,17 @@ export type ChatRoomItemType = {
   time: string;
   chatMsg: string;
   msgNum: number;
+  creatorId: string;
 };
 
 export type ChatAppBarType = {
-  name: string;
   setAppBarHeight: (value: number) => void;
   onClickTransfer: () => void;
   onClickReport: () => void;
   postId: string;
   setErrorModal: () => void;
+  memberCount: number;
+  creatorId: string;
 };
 
 export type ChatInRoomUser = {

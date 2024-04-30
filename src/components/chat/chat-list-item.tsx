@@ -14,6 +14,7 @@ export const ChatListItem = (props: ChatRoomItemType) => {
         roomId: props.roomId,
         postId: props.postId,
         memberCount: props.memberCount,
+        creatorId: props.creatorId,
       },
     });
   };

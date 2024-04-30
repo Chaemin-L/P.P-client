@@ -29,6 +29,7 @@ export const useChatDataSetting = (props: ChatMakeRoom) => {
       roomData?.postInfo.status === "TRANSACTION_COMPLETED";
     const dealId: number = roomData ? roomData.postInfo.dealId : -1;
     const availableBudget: number = bankData ? bankData.availableBudget : -1;
+    const title: string = roomData ? roomData.postInfo.title : "";
 
     console.log("availableBudget!!!: ", availableBudget);
     setTransfer({
@@ -39,6 +40,7 @@ export const useChatDataSetting = (props: ChatMakeRoom) => {
       postId: props.postId.toString(),
       dealId: dealId,
       transferState: status,
+      title: title,
     });
 
     setLastTransfer({
@@ -49,6 +51,7 @@ export const useChatDataSetting = (props: ChatMakeRoom) => {
       postId: props.postId.toString(),
       dealId: dealId,
       transferState: status,
+      title: title,
     });
   }, [roomData, bankData]);
 

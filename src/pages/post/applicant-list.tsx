@@ -203,15 +203,17 @@ export const ApplicantListPage = () => {
           <Modal.Button
             color="orange"
             onClick={() => {
-              if (chatMakeRoomId !== null) {
+              const myId = localStorage.getItem("userId");
+              if (chatMakeRoomId !== null && myId !== null) {
                 navigate(`/chat/detail`, {
                   state: {
                     roomId: chatMakeRoomId.roomId,
                     postId: chatMakeRoomId.postId,
                     memberCount: chatMakeRoomId.memberCount,
+                    creatorId: myId,
                   },
                 });
-              } // 수정 후 채팅방 가기도 구현해야함
+              }
             }}
           >
             채팅방 가기
@@ -261,7 +263,8 @@ export const ApplicantListPage = () => {
                       };
 
                       putNewMember(tempData, {
-                        onSuccess: () => {
+                        onSuccess: (res) => {
+                          setChatMakeRoomId(res);
                           setApplyModal(true);
                         },
                       });

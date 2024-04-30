@@ -11,6 +11,7 @@ export type ChatListItemType = {
   memberCount: number;
   title: string;
   status: StatusType;
+  creatorId: string;
 };
 
 export type ChatMakeRoom = {

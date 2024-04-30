@@ -67,9 +67,11 @@ export default class ChatApi {
       data.addingData,
     );
     if (response) {
-      return response.status;
+      const temp = response.data as ChatFinalResponse<ChatMakeRoom>;
+      return temp.result;
     } else {
       throw new Error("Invalid response from server");
     }
   }
 }
+0;

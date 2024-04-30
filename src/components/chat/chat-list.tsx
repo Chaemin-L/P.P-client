@@ -19,6 +19,7 @@ export const ChatList = ({ chatList }: { chatList: ChatListItemType[] }) => {
           time: "",
           chatMsg: "",
           msgNum: 0,
+          creatorId: item.creatorId,
         };
         return <ChatListItem key={index} {...tempItem} />;
       })}
