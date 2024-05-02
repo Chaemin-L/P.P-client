@@ -10,7 +10,7 @@ export const postState = atom({
       applyStatus: "",
     },
     marketPostResponse: {
-      postId: 0,
+      postId: -1,
       title: "",
       content: "",
       location: "",
