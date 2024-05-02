@@ -75,6 +75,7 @@ const StyledButton = styled.button<{
   max-width: calc(480px - 3.2rem);
   margin: auto;
   padding: 12px;
+  border: 1px solid transparent;
   ${({ color }) =>
     color === "blue"
       ? `background-color: ${colorTheme.blue900};
@@ -88,11 +89,10 @@ const StyledButton = styled.button<{
       &:active{
       background-color: #fff;
       color: ${colorTheme.orange400};
-      outline: 1px solid ${colorTheme.orange400};
+      border: 1px solid ${colorTheme.orange400};
     }`};
 
   ${({ $rounded }) => $rounded && "border-radius: 50px;"}
-  border: 0;
   color: white;
   font-size: 1.3rem;
 `;

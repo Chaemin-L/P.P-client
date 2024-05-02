@@ -27,7 +27,7 @@ const StyledButton = styled.button<{
 }>`
   padding: 15px 30px;
   border-radius: 20px;
-  border: 0;
+  border: 1px solid transparent;
   color: white;
   font-size: 1rem;
 
@@ -40,7 +40,7 @@ const StyledButton = styled.button<{
       &:active{
         background-color: #fff;
         color: ${colorTheme.blue900};
-        outline: 1px solid ${colorTheme.blue900};
+        border: 1px solid ${colorTheme.blue900};
       }
     `
       : color === "orange"
@@ -48,7 +48,7 @@ const StyledButton = styled.button<{
         &:active{
           background-color: #fff;
           color: ${colorTheme.orange400}; 
-          outline: 1px solid ${colorTheme.orange400};
+          border: 1px solid ${colorTheme.orange400};
         }`
         : `background-color: #f5f5f5; color: ${colorTheme.blue900}`};
 `;

@@ -86,11 +86,25 @@ const TitleWrapper = styled.div`
 const ButtonWrapper = styled.button<{ color?: string }>`
   padding: 20px;
   background-color: #f17547;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 30px;
-  background-color: ${({ color }) =>
-    color === "blue" ? `${colorTheme.blue900}` : `${colorTheme.orange400}`};
   color: white;
+  ${({ color }) =>
+    color === "blue"
+      ? `
+    background-color: ${colorTheme.blue900};
+    &:active{
+      border: 1px solid ${colorTheme.blue900};
+      background-color: white;
+      color: ${colorTheme.blue900};
+    }
+  `
+      : `background-color: ${colorTheme.orange400};
+  &:active{
+    border: 1px solid ${colorTheme.orange400};
+    background-color: white;
+    color: ${colorTheme.orange400};
+  }`}
   font-size: 1.6rem;
   font-weight: 400;
 `;
