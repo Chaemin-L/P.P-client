@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { useGetChatList } from "@/hooks/queries/useGetChatList";
 
 export const useCheckChatMake = (postId: string) => {

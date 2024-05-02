@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 
 export type MyChatType = {
   children?: React.ReactNode;
@@ -14,7 +14,6 @@ export type ChatItemType = {
 };
 
 export type InputType = {
-  // setHeight: (value: number) => void;
   onFocus: React.Dispatch<React.SetStateAction<boolean>>;
   onClick: (inputValue: string) => void;
 };
@@ -29,6 +28,9 @@ export type ChatRoomItemType = {
   chatMsg: string;
   msgNum: number;
   creatorId: string;
+  startDate: string;
+  location: string;
+  creatorNickname: string;
 };
 
 export type ChatAppBarType = {
@@ -37,8 +39,8 @@ export type ChatAppBarType = {
   onClickReport: () => void;
   postId: string;
   setErrorModal: () => void;
-  memberCount: number;
   creatorId: string;
+  onClickApply: () => void;
 };
 
 export type ChatInRoomUser = {

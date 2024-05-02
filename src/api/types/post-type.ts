@@ -57,7 +57,7 @@ export type UserCurrentStatusType = {
 
 export type PostDetailType = {
   writerInfo: {
-    profileId: number;
+    userId: number;
     nickName: string;
     profileImage: string;
     address: string;

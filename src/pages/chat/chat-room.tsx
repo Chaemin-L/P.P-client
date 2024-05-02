@@ -6,8 +6,9 @@ import { styled } from "styled-components";
 
 import { ChatRoomData, ChatRoomSubMessage } from "./type";
 
-import { ChatMakeRoom } from "@/api/types/chat-type";
+import { ApplicantListBottomSheet } from "@/components/apply/applicant-list-bottom-sheet";
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
+import { ChatEntryExit } from "@/components/chat/chat-entry-exit";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
 import { BottomSheet } from "@/components/common/bottom-sheet";
@@ -42,6 +43,9 @@ export const ChatRoom = () => {
   const [errorModal, setErrorModal] = useState(false);
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
+
+  const [isApplyError, setIsApplyError] = useState("");
+  const [isApplySheet, setIsApplySheet] = useState(false);
 
   const client = useRef<CompatClient | null>(null);
   const { mutate: sendMsg } = UseSendMessages();
@@ -116,8 +120,11 @@ export const ChatRoom = () => {
           setErrorModal={() => {
             setErrorModal(true);
           }}
-          memberCount={state.memberCount}
           creatorId={state.creatorId}
+          onClickApply={() => {
+            setIsBottomSheetOpened(true);
+            setIsApplySheet(true);
+          }}
         />
       )}
       <ChatList
@@ -127,18 +134,22 @@ export const ChatRoom = () => {
         }}
       >
         {roomMsgs?.map((item, index) => {
-          return (
-            <ChatItem
-              key={index}
-              userId={item.senderInfo.userId}
-              userName={item.senderInfo.nickName}
-              setProfileModal={setProfileModal}
-              setProfileUserId={setProfileUserId}
-              imgurl={item.senderInfo.profileImage}
-            >
-              {item.message.replace(/^"(.*)"$/, "$1")}
-            </ChatItem>
-          );
+          if (item.senderInfo !== null) {
+            return (
+              <ChatItem
+                key={index}
+                userId={item.senderInfo.userId}
+                userName={item.senderInfo.nickName}
+                setProfileModal={setProfileModal}
+                setProfileUserId={setProfileUserId}
+                imgurl={item.senderInfo.profileImage}
+              >
+                {item.message.replace(/^"(.*)"$/, "$1")}
+              </ChatItem>
+            );
+          } else {
+            <ChatEntryExit msg={item.message} />;
+          }
         })}
         {newRoomMsgs?.map((item, index) => {
           const temp = transfer.users.find((e) => {
@@ -172,6 +183,7 @@ export const ChatRoom = () => {
           setIsBottomSheetOpened(false);
           setIsReport(false);
           setIsTransfer(false);
+          setIsApplySheet(false);
         }}
       >
         {isTransfer && (
@@ -185,11 +197,21 @@ export const ChatRoom = () => {
         )}
         {isReport && (
           <Report
-            postId=""
+            postId={state.postId.toString()}
             onSuccessReport={() => {
               setIsBottomSheetOpened(false);
               setIsReport(false);
               setReportModal(true);
+            }}
+            creatorId={state.creatorId}
+          />
+        )}
+        {isApplySheet && (
+          <ApplicantListBottomSheet
+            postId={state.postId.toString()}
+            chatId={state.roomId}
+            onFinishApply={() => {
+              setIsApplySheet(false);
             }}
           />
         )}
@@ -219,6 +241,19 @@ export const ChatRoom = () => {
           }}
         >
           <Modal.Title text="아직 지원하지 않는 \n 서비스입니다." />
+        </Modal>
+      )}
+      {isApplyError !== "" && (
+        <Modal onClose={() => setIsApplyError("")}>
+          {isApplyError === "APPLY_ID_LENGTH_ZERO" && (
+            <Modal.Title text="수락할 지원자 선택 후 \n 수락해주세요" />
+          )}
+          {isApplyError === "APPLY_ID_LENGTH_OVER" && (
+            <Modal.Title text="최대 신청자 수를 넘겼습니다" />
+          )}
+          {isApplyError === "APPLY_ID_NOT_CHANGE" && (
+            <Modal.Title text="변경 사항이 없습니다." />
+          )}
         </Modal>
       )}
     </PageContainer>

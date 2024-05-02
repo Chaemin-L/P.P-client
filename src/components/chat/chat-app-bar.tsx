@@ -17,9 +17,9 @@ export const ChatAppBar = ({
   onClickTransfer,
   setAppBarHeight,
   postId,
-  setErrorModal,
-  memberCount,
   creatorId,
+  onClickApply,
+  setErrorModal,
 }: ChatAppBarType) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ export const ChatAppBar = ({
   }, [setAppBarHeight]);
 
   const isColorMode = !lastTransfer.transferState;
+  const myId = localStorage.getItem("userId");
 
   return (
     <AppBar isFixed={true} isColorMode={isColorMode} id="AppBar">
@@ -42,18 +43,22 @@ export const ChatAppBar = ({
           onClick={() => navigate("/chat", { replace: true })}
         />
         <AppBar.HeaderText>{lastTransfer.title}</AppBar.HeaderText>
-        <AppBar.RightButton
-          imgSrc={isColorMode ? ReportWhiteSVG : ReportBlackSVG}
-          onClick={() => {
-            onClickReport();
-          }}
-        />
+        {myId === creatorId ? (
+          <div style={{ width: "0.78rem" }}></div>
+        ) : (
+          <AppBar.RightButton
+            imgSrc={isColorMode ? ReportWhiteSVG : ReportBlackSVG}
+            onClick={() => {
+              onClickReport();
+            }}
+          />
+        )}
       </AppBar.AppBarNavigate>
       {isColorMode ? (
         <BeforeTransfer
           onClickTransfer={onClickTransfer}
           postId={postId}
-          setErrorModal={setErrorModal}
+          onClickApply={onClickApply}
           creatorId={creatorId}
         />
       ) : (
@@ -96,7 +101,7 @@ const AfterTransferDiv = styled.div`
 type BeforeTransferProps = {
   onClickTransfer: () => void;
   postId: string;
-  setErrorModal: () => void;
+  onClickApply: () => void;
   creatorId: string;
 };
 
@@ -115,19 +120,21 @@ const AfterTransfer = ({
   return (
     <ColumnBox>
       <RowBox>
-        <Button
-          color="blue"
-          style={{
-            width: "100%",
-            padding: "0.83rem",
-            borderRadius: "1.11rem",
-            color: colorTheme.blue900,
-            fontWeight: "500",
-          }}
-          onClick={setErrorModal}
-        >
-          거래내역
-        </Button>
+        {creatorId === myId && (
+          <Button
+            color="blue"
+            style={{
+              width: "100%",
+              padding: "0.83rem",
+              borderRadius: "1.11rem",
+              color: colorTheme.blue900,
+              fontWeight: "500",
+            }}
+            onClick={setErrorModal}
+          >
+            참여관리
+          </Button>
+        )}
         <Button
           color="blue"
           style={{
@@ -152,8 +159,8 @@ const AfterTransfer = ({
 const BeforeTransfer = ({
   onClickTransfer,
   postId,
-  setErrorModal,
   creatorId,
+  onClickApply,
 }: BeforeTransferProps) => {
   const navigate = useNavigate();
   const myId = localStorage.getItem("userId");
@@ -175,7 +182,7 @@ const BeforeTransfer = ({
             color: colorTheme.blue900,
             fontWeight: "500",
           }}
-          onClick={setErrorModal}
+          onClick={onClickApply}
         >
           거래파기
         </Button>

@@ -4,7 +4,6 @@ import { ChatListItem } from "./chat-list-item";
 import { ChatRoomItemType } from "./type";
 
 import { ChatListItemType } from "@/api/types/chat-type";
-import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
 
 export const ChatList = ({ chatList }: { chatList: ChatListItemType[] }) => {
   return (
@@ -20,6 +19,9 @@ export const ChatList = ({ chatList }: { chatList: ChatListItemType[] }) => {
           chatMsg: "",
           msgNum: 0,
           creatorId: item.creatorId,
+          startDate: item.startDate,
+          creatorNickname: item.creatorNickname,
+          location: item.location,
         };
         return <ChatListItem key={index} {...tempItem} />;
       })}

@@ -3,7 +3,10 @@ import { styled } from "styled-components";
 
 import { ChatRoomItemType } from "./type";
 
+import dateSVG from "@/assets/icons/date.svg";
+import locationSVG from "@/assets/icons/location.svg";
 import { colorTheme } from "@/style/color-theme";
+import { BackdateToItemtype } from "@/utils/backdate-to-itemtype";
 
 export const ChatListItem = (props: ChatRoomItemType) => {
   const navigate = useNavigate();
@@ -28,17 +31,23 @@ export const ChatListItem = (props: ChatRoomItemType) => {
         )}
         <LeftColumnDiv>
           <TitleText>{props.postTitle}</TitleText>
-          <ItemText style={{ color: "#828282" }}>{props.chatMsg}</ItemText>
+          <ItemText style={{ color: "#828282" }}>
+            <IconImg />
+            {" " + props.creatorNickname + "   "} <IconImg src={dateSVG} />
+            {" " + BackdateToItemtype(props.startDate) + "   "}
+            <IconImg src={locationSVG} />
+            {" " + props.location + "   "}
+          </ItemText>
         </LeftColumnDiv>
       </RowDiv>
-      <RightColumnDiv>
+      {/* <RightColumnDiv>
         <NewMsgNum
           style={{ visibility: props.msgNum !== 0 ? "visible" : "hidden" }}
         >
           {props.msgNum}
         </NewMsgNum>
         <ItemText style={{ color: "#d9d9d9" }}>{props.time}</ItemText>
-      </RightColumnDiv>
+      </RightColumnDiv> */}
     </ItemContainer>
   );
 };
@@ -118,4 +127,9 @@ const RightColumnDiv = styled.div`
   padding: 0 0 0 4.61%;
   gap: 0.33rem;
   width: 20%;
+`;
+
+const IconImg = styled.img`
+  width: 0.56rem;
+  height: 0.56rem;
 `;

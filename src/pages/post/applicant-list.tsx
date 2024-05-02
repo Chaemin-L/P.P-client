@@ -1,225 +1,178 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { styled } from "styled-components";
 
-import { ApplyType } from "@/api/types/apply-type";
 import { ChatMakeRequest, ChatMakeRoom } from "@/api/types/chat-type";
-import LocationSVG from "@/assets/icons/location.svg";
-import { AppBar } from "@/components/common/app-bar";
+import { ApplicantItemList } from "@/components/apply/applicant-item-list";
+import { ApplicantModifyModal } from "@/components/apply/applicant-modify-modal";
+import { ApplicantOnlyDelete } from "@/components/apply/applicant-only-delete";
+import { ApplyListType } from "@/components/apply/type";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { Modal } from "@/components/common/modal";
-import { DefaultLayout } from "@/components/layout/default-layout";
-import { useCheckChatMake } from "@/hooks/chat/useChatMake";
+import { useCheckChatMake } from "@/hooks/chat/useCheckChatMake";
 import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
+import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
 import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
 import { usePostMakeChat } from "@/hooks/queries/usePostMakeChat";
-import { usePostRollback } from "@/hooks/queries/usePostRollback";
-import { usePutChatNewMember } from "@/hooks/queries/usePutChatNewMember";
-import { colorTheme } from "@/style/color-theme";
+import { checkChange } from "@/utils/apply-list-change-check";
 
-type ApplicantItemProps = {
-  selected: boolean;
-  onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
-} & ApplyType;
+export const ApplicantList = ({ postId }: { postId: string }) => {
+  const [applyModal, setApplyModal] = useState<string>("");
+  const [originApplyIds, setOriginApplyIds] = useState<ApplyListType[]>([]);
+  const [applyIds, setApplyIds] = useState<ApplyListType[]>([]);
 
-const equals = ({ a, b }: { a: number[]; b: number[] }) =>
-  JSON.stringify(a) === JSON.stringify(b);
-
-const newMember = ({ a, b }: { a: number[]; b: number[] }) => {
-  a.sort();
-  b.sort();
-  return a.filter((x) => !b.includes(x));
-};
-
-const ApplicantItem = (props: ApplicantItemProps) => {
-  // const [profileImage, setProfileImage] = useState<string>();
-  // useEffect(() => {
-  //   // const blob = new Blob([props.applicantInfo.profileImage], {
-  //   //   type: "image/png;base64",
-  //   // });
-  //   // const blobURL = URL.createObjectURL(blob);
-  //   // setProfileImage(blobURL);
-  //   // return () => URL.revokeObjectURL(blobURL);
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(new Blob([props.applicantInfo.profileImage]));
-  //   reader.onload = () => {
-  //     setProfileImage(reader.result as string);
-  //   };
-  // }, []);
-
-  // console.log(profileImage);
-
-  return (
-    <ApplicantItemWrapper>
-      <ApplicantImage>
-        {/* <img src={profileImage} /> */}
-        <img src={props.applicantInfo.profileImage} />
-      </ApplicantImage>
-      <ApplicantInfo>
-        <ApplicantLocation>{props.applicantInfo.address}</ApplicantLocation>
-        <ApplicantNickname>{props.applicantInfo.nickName}</ApplicantNickname>
-        <ApplicantMoreInfo>
-          도움횟수 16 <Bullet />{" "}
-          {props.applicantInfo.gender === "male" ? "남" : "여"} <Bullet />{" "}
-          {props.applicantInfo.ageRange * 10}대
-        </ApplicantMoreInfo>
-      </ApplicantInfo>
-      <ApplyButton $selected={props.selected} onClick={props.onSelect}>
-        {props.selected ? "선택됨" : "선택하기"}
-      </ApplyButton>
-    </ApplicantItemWrapper>
-  );
-};
-
-export const ApplicantListPage = () => {
-  const [applyIds, setApplyIds] = useState<number[]>([]);
-  const [applyModal, setApplyModal] = useState<boolean>();
-  const [applyUserIds, setApplyUserIds] = useState<number[]>([]);
-  const [originUserIds, setOriginUserIds] = useState<number[]>([]);
-
-  const { postId } = useParams();
-
-  const { data } = useGetApplyList(postId!);
-  const { mutate: accept } = usePostApplyAccept(postId!);
-  const { mutate: changeStatus } = useChangeStatus(postId!);
+  const { data } = useGetApplyList(postId);
+  const { mutate: accept } = usePostApplyAccept(postId);
+  const { data: postData } = useGetPostDetail(postId);
 
   const { mutate: makeChat } = usePostMakeChat();
-  const chatRoomId = useCheckChatMake(postId!);
+  const chatRoomId = useCheckChatMake(postId);
   const [chatMakeRoomId, setChatMakeRoomId] = useState<ChatMakeRoom | null>(
     null,
   );
   const navigate = useNavigate();
 
-  const { mutate: postRollback } = usePostRollback();
-  const { mutate: putNewMember } = usePutChatNewMember();
-
   const [isApplyError, setIsApplyError] = useState("");
   const [isApplyChangeCheck, setIsApplyChangeCheck] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isStatusChange, setIsStatusChange] = useState(false);
 
-  console.log(chatRoomId);
-  console.log(data);
-
-  const checkChange = ({ a, b }: { a: number[]; b: number[] }) => {
-    a.sort();
-    b.sort();
-    return equals({ a: a, b: b });
-  };
+  const isRecruiting = postData
+    ? postData.marketPostResponse.status === "RECRUITING"
+      ? true
+      : false
+    : false;
 
   useEffect(() => {
-    const tempApplyIds: number[] = [];
-    const tempApplyUserIds: number[] = [];
-    data?.map((item) => {
-      if (item.status !== "WAITING") {
-        tempApplyIds.push(item.applyId);
-        tempApplyUserIds.push(item.applicantInfo.userId);
-      }
-    });
-    setApplyIds(tempApplyIds);
-    setApplyUserIds(tempApplyUserIds);
-    setOriginUserIds(tempApplyUserIds);
-  }, []);
+    if (data && !isDataLoaded) {
+      const tempApplyIds: ApplyListType[] = [];
+      data?.map((item) => {
+        if (item.status !== "WAITING") {
+          tempApplyIds.push({
+            applyId: item.applyId,
+            userId: item.applicantInfo.userId,
+          });
+        }
+      });
+      setApplyIds(tempApplyIds);
+      setOriginApplyIds(tempApplyIds);
+      console.log("OriginApplyIds: ", tempApplyIds);
+      const timeoutId = setTimeout(() => {
+        setIsDataLoaded(true);
+      }, 300);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [data, isDataLoaded]);
+
+  const GoToChatRoom = () => {
+    const myId = localStorage.getItem("userId");
+    if (chatMakeRoomId !== null && myId !== null) {
+      navigate(`/chat/detail`, {
+        state: {
+          roomId: chatMakeRoomId.roomId,
+          postId: chatMakeRoomId.postId,
+          memberCount: chatMakeRoomId.memberCount,
+          creatorId: myId,
+        },
+      });
+    }
+  };
 
   return (
-    <DefaultLayout
-      scrollbar
-      appbar={
-        <AppBar isBorderExist>
-          <AppBar.AppBarNavigate>
-            <AppBar.BackButton />
-            <AppBar.HeaderText isBigSizeText>참여관리</AppBar.HeaderText>
-          </AppBar.AppBarNavigate>
-        </AppBar>
-      }
-    >
-      {data?.map((applicant) => (
-        <ApplicantItem
-          key={applicant.applyId}
-          {...applicant}
-          selected={applyIds.includes(applicant.applyId)}
-          onSelect={() => {
-            const id = applicant.applyId;
-            const userId = applicant.applicantInfo.userId;
-            if (applyIds.includes(id)) {
-              setApplyIds((prev) => prev.filter((p) => p !== id));
-              setApplyUserIds((prev) => prev.filter((p) => p !== userId));
-            } else {
-              setApplyIds((prev) => [...prev, id]);
-              setApplyUserIds((prev) => [...prev, userId]);
-            }
-          }}
-        />
-      ))}
+    <>
+      <ApplicantItemList
+        data={data!}
+        applyIds={applyIds}
+        setApplyIds={setApplyIds}
+        isRecruiting={isRecruiting}
+        originApplyIds={originApplyIds}
+        setApplyModal={setApplyModal}
+      />
       <BottomFixed>
         <BottomFixed.Button
           color="orange"
           onClick={() => {
-            if (applyIds.length > 0) {
-              if (checkChange({ a: originUserIds, b: applyUserIds })) {
-                setIsApplyError("APPLY_ID_NOT_CHANGE");
+            const tempAcceptList: number[] = applyIds.map((item) => {
+              return item.applyId;
+            });
+            if (isRecruiting) {
+              if (applyIds.length === 0) {
+                setIsApplyError("APPLY_ID_LENGTH_ZERO");
               } else {
-                if (originUserIds.length > 0) {
-                  setIsApplyChangeCheck(true);
-                } else {
-                  accept(applyIds, {
-                    onSuccess: () => {
-                      const tempList: string[] = applyUserIds.map((id) =>
-                        id.toString(),
-                      );
-                      const tempData: ChatMakeRequest = {
-                        postId: Number(postId),
-                        memberIds: tempList,
-                      };
-
+                accept(tempAcceptList, {
+                  onSuccess: () => {
+                    const tempList: string[] = applyIds.map((id) => {
+                      return id.userId.toString();
+                    });
+                    const tempData: ChatMakeRequest = {
+                      postId: Number(postId),
+                      memberIds: tempList,
+                    };
+                    if (chatRoomId === "") {
                       makeChat(tempData, {
                         onSuccess: (res) => {
-                          setApplyModal(true);
+                          setApplyModal("PostNewMember");
                           setChatMakeRoomId(res);
                           console.log("makeChat: ", res);
                         },
                       });
-                    },
-                    onError: () => {
-                      setIsApplyError("APPLY_ID_LENGTH_OVER");
-                    },
-                  });
-                }
+                    }
+                  },
+                  onError: () => {
+                    setIsApplyError("APPLY_ID_LENGTH_OVER");
+                  },
+                });
               }
             } else {
-              setIsApplyError("APPLY_ID_LENGTH_ZERO");
+              if (checkChange({ a: originApplyIds, b: applyIds })) {
+                if (applyIds.length === 0) {
+                  setIsApplyError("APPLY_ID_LENGTH_ZERO");
+                } else {
+                  setIsApplyError("APPLY_ID_NOT_CHANGE");
+                }
+              } else {
+                if (originApplyIds.length > 0) {
+                  setIsApplyChangeCheck(true);
+                }
+              }
             }
           }}
         >
           {applyIds.length}명 수락하기
         </BottomFixed.Button>
       </BottomFixed>
-      {applyModal && (
+      {applyModal !== "" && (
         <Modal
           onClose={() => {
-            setApplyModal(false);
+            setApplyModal("");
           }}
         >
-          <Modal.Title text="신청 수락 완료" />
+          {(applyModal === "PostNewMember" ||
+            applyModal === "ChangeNewMember") && (
+            <Modal.Title text="신청 수락 완료" />
+          )}
+          {applyModal === "Finish" && (
+            <Modal.Title text="이 게시물은 [모집완료] 상태가 되었습니다" />
+          )}
+          {applyModal === "KeepStatus" && (
+            <Modal.Title text="이 게시물은 [모집중] 상태가 되었습니다" />
+          )}
           <Modal.Button
             color="orange"
             onClick={() => {
-              const myId = localStorage.getItem("userId");
-              if (chatMakeRoomId !== null && myId !== null) {
-                navigate(`/chat/detail`, {
-                  state: {
-                    roomId: chatMakeRoomId.roomId,
-                    postId: chatMakeRoomId.postId,
-                    memberCount: chatMakeRoomId.memberCount,
-                    creatorId: myId,
-                  },
-                });
-              }
+              GoToChatRoom();
             }}
           >
             채팅방 가기
           </Modal.Button>
-          <Modal.Button onClick={() => changeStatus("RECRUITMENT_COMPLETED")}>
-            모집완료
+          <Modal.Button
+            color="orange"
+            onClick={() => {
+              navigate("/post");
+            }}
+          >
+            홈화면 가기
           </Modal.Button>
         </Modal>
       )}
@@ -237,128 +190,27 @@ export const ApplicantListPage = () => {
         </Modal>
       )}
       {isApplyChangeCheck && (
-        <Modal
-          onClose={() => {
-            setIsApplyChangeCheck(false);
-          }}
-        >
-          <Modal.Title text="정말 참여자를 바꾸겠습니까?" />
-          <Modal.Button
-            onClick={() => {
-              // 게시글 status 변경 -> 수정한 지원자 비교하여 없앤 지원자는 delete accept, 재 accept, chatting 인원 수정, apply modal true
-              const temp = newMember({ a: applyUserIds, b: originUserIds });
-              postRollback(postId!, {
-                onSuccess: () => {
-                  accept(temp, {
-                    onSuccess: () => {
-                      const tempList: string[] = temp.map((id) =>
-                        id.toString(),
-                      );
-                      const tempData = {
-                        chatRoomId: chatRoomId,
-                        addingData: {
-                          postId: Number(postId),
-                          memberIds: tempList,
-                        },
-                      };
-
-                      putNewMember(tempData, {
-                        onSuccess: (res) => {
-                          setChatMakeRoomId(res);
-                          setApplyModal(true);
-                        },
-                      });
-                    },
-                  });
-                },
-              });
-            }}
-          >
-            참여자 변경
-          </Modal.Button>
-        </Modal>
+        <ApplicantModifyModal
+          setIsApplyChangeCheck={setIsApplyChangeCheck}
+          applyIds={applyIds}
+          originApplyIds={originApplyIds}
+          postId={postId}
+          chatRoomId={chatRoomId}
+          isPage={true}
+          setChatMakeRoomId={setChatMakeRoomId}
+          setApplyModal={setApplyModal}
+          setStatusChangeModal={setIsStatusChange}
+          setIsApplyError={setIsApplyError}
+        />
       )}
-    </DefaultLayout>
+      {isStatusChange && (
+        <ApplicantOnlyDelete
+          applyIds={applyIds}
+          postId={postId}
+          setApplyModal={setApplyModal}
+          setStatusChangeModal={setIsApplyChangeCheck}
+        />
+      )}
+    </>
   );
 };
-
-const ApplicantItemWrapper = styled.div`
-  height: 20%;
-  display: flex;
-  padding: 20px 25px;
-  gap: 10px;
-  border-top: 1px solid #e4e8f1;
-`;
-
-const ApplicantImage = styled.div`
-  height: 100%;
-  display: flex;
-  position: relative;
-  flex: 1.2;
-  align-items: start;
-  & img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    border-radius: 10px;
-  }
-`;
-
-const ApplicantInfo = styled.div`
-  display: flex;
-  flex: 3;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 2px;
-`;
-
-const ApplicantLocation = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.83rem;
-  &::before {
-    width: 14px;
-    height: 17px;
-    border-radius: 1px;
-    background-image: url(${LocationSVG});
-    background-position: center;
-    background-repeat: no-repeat;
-    content: " ";
-  }
-`;
-
-const ApplicantNickname = styled.div`
-  color: ${colorTheme.blue900};
-  font-size: 1.1rem;
-  font-weight: 500;
-`;
-
-const ApplicantMoreInfo = styled.div`
-  display: flex;
-  gap: 4px;
-  font-size: 0.72rem;
-  align-items: center;
-`;
-
-const Bullet = styled.span`
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  background-color: black;
-  border-radius: 50%;
-`;
-
-const ApplyButton = styled.button<{ $selected: boolean }>`
-  flex: 1.1;
-  display: flex;
-  padding: 30px 10px;
-  border: 0;
-  border-radius: 15px;
-  background-color: #e4e8f1;
-  color: ${colorTheme.blue500};
-  font-size: 0.8rem;
-  justify-content: center;
-  align-items: center;
-  ${({ $selected }) =>
-    $selected && `background-color: ${colorTheme.orange400};color: white`}
-`;

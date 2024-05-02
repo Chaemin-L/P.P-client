@@ -62,8 +62,8 @@ export default class ChatApi {
     chatRoomId: string;
     addingData: ChatMakeRequest;
   }) {
-    const response = await Instance.post(
-      `/chat-service/api/chats/${data.chatRoomId}}`,
+    const response = await Instance.patch(
+      `/chat-service/api/chats/${data.chatRoomId}/members}`,
       data.addingData,
     );
     if (response) {

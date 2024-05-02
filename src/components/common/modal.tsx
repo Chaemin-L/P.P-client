@@ -104,6 +104,7 @@ const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(217, 217, 217, 0.7);
+  z-index: 80;
 `;
 
 const Content = styled.div`

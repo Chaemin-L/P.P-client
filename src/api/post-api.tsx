@@ -36,7 +36,7 @@ export default class PostApi {
   static async reportPosting(data: { postId: string; reportMsg: string }) {
     const response = await Instance.post(
       `/haetsal-service/api/v2/market/post/${data.postId}/report`,
-      { introduction: data.reportMsg },
+      { reason: data.reportMsg },
     );
     return response.status;
   }

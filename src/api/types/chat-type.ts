@@ -12,6 +12,9 @@ export type ChatListItemType = {
   title: string;
   status: StatusType;
   creatorId: string;
+  creatorNickname: string;
+  location: string;
+  startDate: string;
 };
 
 export type ChatMakeRoom = {
@@ -36,7 +39,8 @@ export type senderInfo = {
 };
 
 export type ChatRoomMessage = {
-  senderInfo: senderInfo;
+  senderInfo: senderInfo | null;
+  type: string;
   message: string;
   createdAt: string;
 };
