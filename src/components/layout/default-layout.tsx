@@ -48,5 +48,5 @@ const StyledDefaultLayout = styled.div<{ $scrollbar: boolean }>`
   flex: 1;
   width: 100%;
   height: 100%;
-  ${({ $scrollbar }) => ($scrollbar ? "overflow: auto" : "padding: 10px 16px")}
+  ${({ $scrollbar }) => $scrollbar && "overflow-y: auto;overflow-x:hidden"}
 `;
