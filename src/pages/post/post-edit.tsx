@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { PostType } from "@/api/types/post-type";
 import { ActivityBox } from "@/components/common/activity-box";
@@ -11,7 +11,7 @@ import { postState } from "@/recoil/atoms/post-state";
 
 export const PostEditPage = () => {
   const { postId } = useParams();
-  const [post, setPost] = useRecoilState(postState);
+  const post = useRecoilValue(postState);
   const { mutate } = useEditPost(postId!);
 
   return (

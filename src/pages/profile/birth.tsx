@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -17,6 +17,7 @@ export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
   const [bMonth, setBMonth] = useState<string>("");
   const [bDay, setBDay] = useState<string>("");
   const [error, setError] = useState<boolean>();
+  const firstInputRef = useRef<HTMLInputElement>(null);
 
   const setProfile = useSetRecoilState(profileState);
   const saveProfile = () => {
@@ -42,12 +43,17 @@ export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
     nextStep();
   };
 
+  useEffect(() => {
+    firstInputRef.current?.focus();
+  }, []);
+
   return (
     <ContentLayout>
       <Header text="생년월일을 입력해주세요" />
       <InputContainer>
         <InputWrapper>
           <Input
+            ref={firstInputRef}
             maxLength={4}
             onChange={(event) => setBYear(event.target.value)}
           />

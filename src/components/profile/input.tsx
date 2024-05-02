@@ -1,11 +1,13 @@
-import { forwardRef, InputHTMLAttributes } from "react";
+import { forwardRef, InputHTMLAttributes, LegacyRef } from "react";
 import { styled } from "styled-components";
 
 type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type">;
 
-export const Input = forwardRef(function input(props: InputProps, _) {
-  return <InputWrapper type="text" {...props} />;
-});
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  function Input(props, ref) {
+    return <InputWrapper ref={ref} type="text" {...props} />;
+  },
+);
 
 const InputWrapper = styled.input`
   width: 100%;

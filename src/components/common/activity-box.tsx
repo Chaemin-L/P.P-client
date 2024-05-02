@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useEffect, useRef } from "react";
+import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { PostType, StatusType } from "@/api/types/post-type";

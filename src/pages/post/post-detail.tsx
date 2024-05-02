@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { PostType } from "@/api/types/post-type";
@@ -13,7 +13,6 @@ import { Button } from "@/components/common/button";
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
 import { Report } from "@/components/report/report";
-import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useDeleteApply } from "@/hooks/queries/useDeleteApply";
 import { useDeletePost } from "@/hooks/queries/useDeletePost";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";

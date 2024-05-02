@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -15,13 +15,19 @@ type NamePageProps = {
 
 export const NamePage = ({ nextStep, onModal }: NamePageProps) => {
   const [name, setName] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const setProfile = useSetRecoilState(profileState);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <ContentLayout>
       <Header text="우선\n이름을 알려주세요!" />
       <Input
+        ref={inputRef}
         maxLength={5}
         value={name}
         onChange={({ target }) => setName(target.value)}
