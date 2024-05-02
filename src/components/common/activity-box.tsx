@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { PostType, StatusType } from "@/api/types/post-type";
@@ -19,7 +19,7 @@ type ActivityBoxType = {
 export const ActivityBox = ({ data, editMode = false }: ActivityBoxType) => {
   const titleInputRef = useRef<HTMLInputElement>(null);
 
-  const setEPost = useSetRecoilState(postEditState);
+  const [ePost, setEPost] = useRecoilState(postEditState);
 
   useEffect(() => {
     if (data && editMode)
@@ -59,16 +59,20 @@ export const ActivityBox = ({ data, editMode = false }: ActivityBoxType) => {
             <TitleInput
               ref={titleInputRef}
               defaultValue={data.title}
-              onBlur={(e) =>
+              maxLength={20}
+              onChange={(e) =>
                 setEPost((prev) => ({ ...prev, title: e.target.value }))
               }
             />
             <ContentTextarea
+              rows={5}
               defaultValue={data.content}
-              onBlur={(e) =>
+              maxLength={100}
+              onChange={(e) =>
                 setEPost((prev) => ({ ...prev, content: e.target.value }))
               }
             />
+            <CharacterCount>{ePost.content.length}/100</CharacterCount>
           </>
         )}
       </PostInfo>
@@ -139,7 +143,8 @@ const TitleInput = styled.input`
 `;
 
 const Content = styled.p`
-  line-height: 120%;
+  line-height: 140%;
+  white-space: pre-line;
 `;
 
 const ContentTextarea = styled.textarea`
@@ -147,6 +152,10 @@ const ContentTextarea = styled.textarea`
   border: 0;
   line-height: 120%;
   color: ${colorTheme.orange400};
+`;
+
+const CharacterCount = styled.div`
+  text-align: right;
 `;
 
 const HeadCount = styled.span`
