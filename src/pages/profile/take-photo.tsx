@@ -19,7 +19,7 @@ export const TakePhotoPage = ({ nextStep, onModal }: TakePhotoPageProps) => {
   const nextPage = () => {
     setProfile((profile) => ({
       ...profile,
-      file: dataUri,
+      fileByte: dataUri.replace("data:image/jpeg;base64,", ""),
     }));
     nextStep();
   };

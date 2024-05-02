@@ -4,7 +4,7 @@ import FemaleSVG from "@/assets/icons/female.svg";
 import KnotWhiteBackSVG from "@/assets/icons/knot-white-back.svg";
 import LocationWhiteBackSVG from "@/assets/icons/location-white-back.svg";
 import MaleSVG from "@/assets/icons/male.svg";
-import PersonSVG from "@/assets/icons/person-white-back.svg";
+// import PersonSVG from "@/assets/icons/person-white-back.svg";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { colorTheme } from "@/style/color-theme";

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 
@@ -15,6 +15,8 @@ export const PasswordPage = () => {
   const [status, setStatus] = useState<"INITIAL" | "CONFIRM" | "MISMATCH">(
     "INITIAL",
   );
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
   const profile = useRecoilValue(profileState);
 
@@ -35,25 +37,18 @@ export const PasswordPage = () => {
   };
 
   useEffect(() => {
+    if (status === "CONFIRM") confirmPasswordRef.current?.focus();
+    else passwordRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
     if (password.length === PASSWORD_LENGTH) setStatus("CONFIRM");
   }, [password]);
 
   useEffect(() => {
     if (confirmPassword.length === PASSWORD_LENGTH) {
       if (password === confirmPassword) {
-        const formData = new FormData();
-        const requestJSON = JSON.stringify({ ...profile.request, password });
-        const requestBLOB = new Blob([requestJSON], {
-          type: "application/json",
-        });
-        formData.append("request", requestBLOB);
-        formData.append(
-          "file",
-          new Blob([profile.file], {
-            type: "application/json",
-          }),
-        );
-        submitProfile(formData);
+        submitProfile({ ...profile, password });
       } else {
         setPassword("");
         setConfirmPassword("");
@@ -68,7 +63,11 @@ export const PasswordPage = () => {
         <>
           <Header text={`계좌 비밀번호를\\n설정해주세요`} />
           <InputArea>
-            <input value={password} onChange={(e) => onChange("password", e)} />
+            <input
+              ref={passwordRef}
+              value={password}
+              onChange={(e) => onChange("password", e)}
+            />
             <PasswordWrapper>
               {password.split("").map((p, i) => (
                 <span key={i}>{p}</span>
@@ -97,6 +96,7 @@ export const PasswordPage = () => {
           <Header text={`똑같이 한 번 더\\n입력해주세요`} />
           <InputArea>
             <input
+              ref={confirmPasswordRef}
               value={confirmPassword}
               onChange={(e) => onChange("confirmPassword", e)}
             />

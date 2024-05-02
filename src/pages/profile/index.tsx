@@ -49,6 +49,9 @@ export const ProfilePage = () => {
       case 0:
         setRequiredElem("본인 사진");
         break;
+      case 1:
+        setRequiredElem("이름");
+        break;
       case 2:
         setRequiredElem("닉네임");
         break;

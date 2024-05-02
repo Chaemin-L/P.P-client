@@ -13,6 +13,7 @@ export const useSignIn = () => {
       localStorage.setItem("refreshToken", response.refreshToken);
       localStorage.setItem("userId", response.userId.toString());
       localStorage.setItem("role", response.role);
+      sessionStorage.removeItem("isLoading"); // when google login provider redirects to login page, show loading state
       if (response.role !== "ROLE_USER") navigate("/profile");
       else navigate("/post");
     },

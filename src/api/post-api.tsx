@@ -98,4 +98,16 @@ export default class PostApi {
     if (response) return response.status;
     else throw new Error("Invalid response from server");
   }
+
+  static async editPost(postId: string, ePost: object) {
+    const response = await Instance.put(
+      `/haetsal-service/api/v2/market/post/${postId}`,
+      { ...ePost },
+    );
+
+    if (response) return response.status;
+    else {
+      throw new Error("Invalid response from server");
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -17,6 +17,7 @@ export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
   const [bMonth, setBMonth] = useState<string>("");
   const [bDay, setBDay] = useState<string>("");
   const [error, setError] = useState<boolean>();
+  const firstInputRef = useRef<HTMLInputElement>(null);
 
   const setProfile = useSetRecoilState(profileState);
   const saveProfile = () => {
@@ -35,17 +36,16 @@ export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
     }
 
     setProfile((profile) => ({
-      request: {
-        ...profile.request,
-        birth: [bYear, bMonth.padStart(2, "0"), bDay.padStart(2, "0")].join(
-          "-",
-        ),
-      },
-      file: profile.file,
+      ...profile,
+      birth: [bYear, bMonth.padStart(2, "0"), bDay.padStart(2, "0")].join("-"),
     }));
 
     nextStep();
   };
+
+  useEffect(() => {
+    firstInputRef.current?.focus();
+  }, []);
 
   return (
     <ContentLayout>
@@ -53,6 +53,7 @@ export const BirthPage = ({ nextStep, onModal }: BirthPageProps) => {
       <InputContainer>
         <InputWrapper>
           <Input
+            ref={firstInputRef}
             maxLength={4}
             onChange={(event) => setBYear(event.target.value)}
           />

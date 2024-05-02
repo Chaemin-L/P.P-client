@@ -1,41 +1,58 @@
+import {
+  GoogleAuthProvider,
+  signInWithRedirect,
+  User as FirebaseUser,
+} from "@firebase/auth";
+import { getRedirectResult } from "firebase/auth";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+
 import { ReactComponent as GoogleLoginButtonSVG } from "@/assets/icons/google-login-button.svg";
-import { useGoogleLogin } from "@/hooks/queries/useGoogleLogin";
+import { useSignIn } from "@/hooks/queries/useSignIn";
+import { auth } from "@/lib/firebase";
 
-export const GoogleButton = () => {
-  const { isLoading, signIn, signOut, user, accessToken } = useGoogleLogin();
+export const GoogleButton = ({
+  setIsLoading,
+}: {
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const { mutateAsync: signInBack } = useSignIn();
 
-  if (isLoading) return <div>Loading...</div>;
+  const signIn = async () => {
+    setIsLoading(true);
+    sessionStorage.setItem("isLoading", "true");
+    const provider = new GoogleAuthProvider();
+    await signInWithRedirect(auth, provider);
+  };
+
+  // Not yet
+  const signOut = async () => {
+    setIsLoading(true);
+    await auth.signOut().then(() => console.log("logout!", user));
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then(async function (result) {
+        if (result?.user) {
+          const token = await result.user.getIdToken();
+          await signInBack({ type: "firebase", token });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
-      <div style={{ width: "50vw" }} onClick={() => void signIn()}>
+      <div
+        style={{ width: "50vw", maxWidth: "200px" }}
+        onClick={() => void signIn()}
+      >
         <GoogleLoginButtonSVG />
       </div>
-      {/* <button onClick={() => void signIn()}>Login</button>
-      <button onClick={() => void signOut()}>Logout</button>
-      <div>
-        {!isLoading && user ? (
-          <div>
-            <>
-              <br />
-              Profile: <br />
-              <img src={user.photoURL ?? ""} width={50} height={50} />
-              <br />
-              {user.displayName}님<br />
-              {user.email},
-              <br />
-              <br />
-              AccessToken:
-              <br />
-              {accessToken}
-              <br />
-              <br />
-              RefreshToken:
-              <br />
-              {user.refreshToken}
-            </>
-          </div>
-        ) : null}
-      </div> */}
     </>
   );
 };
