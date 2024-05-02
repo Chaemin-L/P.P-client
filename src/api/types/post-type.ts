@@ -22,6 +22,9 @@ export type WriterInfo = {
   nickName: string;
   profileImage: string;
   address: string;
+  gender: string;
+  ageRange: number;
+  userId: number;
 };
 
 export type StatusType =
@@ -56,12 +59,7 @@ export type UserCurrentStatusType = {
 };
 
 export type PostDetailType = {
-  writerInfo: {
-    userId: number;
-    nickName: string;
-    profileImage: string;
-    address: string;
-  };
+  writerInfo: WriterInfo;
   userCurrentStatus: UserCurrentStatusType;
   marketPostResponse: PostType;
 };

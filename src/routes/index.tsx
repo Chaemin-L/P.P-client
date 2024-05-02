@@ -10,6 +10,7 @@ import { LoginPage } from "@/pages/login";
 import { Mypage } from "@/pages/mypage/mypage";
 import { ApplicantListPage } from "@/pages/post/applicant-list-page";
 import { PostDetailPage } from "@/pages/post/post-detail";
+import { PostEditPage } from "@/pages/post/post-edit";
 import { PostList } from "@/pages/post/post-list";
 import { Posting1 } from "@/pages/posting/posting1";
 import { Posting2 } from "@/pages/posting/posting2";
@@ -60,6 +61,11 @@ const routeChildren = [
   {
     path: "/post/:postId/applicant",
     element: <ApplicantListPage />,
+    auth: true,
+  },
+  {
+    path: "/post/:postId/edit",
+    element: <PostEditPage />,
     auth: true,
   },
   {

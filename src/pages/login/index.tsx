@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 import { ReactComponent as LoginIcon } from "@/assets/icons/login-icon.svg";
@@ -6,15 +7,25 @@ import { KakaoButton } from "@/components/login/kakao-button";
 import { colorTheme } from "@/style/color-theme";
 
 export const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("isLoading") === "true") setIsLoading(true);
+  }, []);
+
   return (
     <Layout>
       <Content>
         <Header>간편하게 로그인</Header>
         <LoginIcon width="5rem" />
-        <ButtonContainer>
-          <GoogleButton />
-          <KakaoButton />
-        </ButtonContainer>
+        {isLoading ? (
+          <>로딩중입니다</>
+        ) : (
+          <ButtonContainer>
+            <GoogleButton setIsLoading={setIsLoading} />
+            <KakaoButton />
+          </ButtonContainer>
+        )}
       </Content>
     </Layout>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -15,13 +15,19 @@ type NicknamePageProps = {
 
 export const NicknamePage = ({ nextStep, onModal }: NicknamePageProps) => {
   const [nickName, setNickName] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const setProfile = useSetRecoilState(profileState);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <ContentLayout>
       <Header text="닉네임을 정해볼까요?" />
       <Input
+        ref={inputRef}
         maxLength={5}
         value={nickName}
         onChange={({ target }) => setNickName(target.value)}

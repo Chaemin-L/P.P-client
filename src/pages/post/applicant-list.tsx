@@ -87,7 +87,7 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
         setApplyIds={setApplyIds}
         isRecruiting={isRecruiting}
         originApplyIds={originApplyIds}
-        setApplyModal={setApplyModal}
+        setApplyModal={setIsApplyError}
       />
       <BottomFixed>
         <BottomFixed.Button
@@ -186,6 +186,9 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
           )}
           {isApplyError === "APPLY_ID_NOT_CHANGE" && (
             <Modal.Title text="변경 사항이 없습니다." />
+          )}
+          {isApplyError === "IMPOSSIBLE_SELECT_APPLY" && (
+            <Modal.Title text="[모집중] 상태에서는 \n 기존의 참여자를 \n 제외시킬 수 없습니다." />
           )}
         </Modal>
       )}
