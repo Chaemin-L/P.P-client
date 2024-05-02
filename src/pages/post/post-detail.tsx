@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { PostType } from "@/api/types/post-type";
@@ -19,6 +20,7 @@ import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
 import { useGetProfile } from "@/hooks/queries/useGetProfile";
 import { usePostApply } from "@/hooks/queries/usePostApply";
 import { usePullUp } from "@/hooks/queries/usePullUp";
+import { postState } from "@/recoil/atoms/post-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const PostDetailPage = () => {
@@ -36,14 +38,19 @@ export const PostDetailPage = () => {
   const [applyModal, setApplyModal] = useState<boolean>(false);
 
   const { data } = useGetPostDetail(postId!);
+  const setPost = useSetRecoilState(postState);
   const { mutate: deletePost } = useDeletePost(postId!);
   const { mutate: applyActivity } = usePostApply(postId!);
   const { mutate: cancelActivity } = useDeleteApply(postId!);
   const { mutate: pullUp } = usePullUp(postId!);
   // deprecated
-  const { mutate: changeStatus } = useChangeStatus(postId!);
+  // const { mutate: changeStatus } = useChangeStatus(postId!);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data) setPost(data);
+  }, [data]);
 
   return (
     <DefaultLayout
@@ -83,12 +90,7 @@ export const PostDetailPage = () => {
       ) : (
         <DoneWrapper>모집완료</DoneWrapper>
       )}
-      <ActivityBox
-        {...(data?.marketPostResponse as PostType)}
-        startDate={
-          data?.marketPostResponse.startDate.split(" ") ?? ["0", "0", "0", "0"]
-        }
-      />
+      <ActivityBox data={{ ...data?.marketPostResponse } as PostType} />
       {!data?.userCurrentStatus.isWriter && (
         <ButtonWrapper>
           <Button
@@ -234,6 +236,11 @@ export const PostDetailPage = () => {
             <Modal.Button
               color="orange"
               onClick={() => {
+                if (data && data?.marketPostResponse.currentApplicant > 0) {
+                  setErrorModal(true); // temp
+                } else {
+                  navigate("edit");
+                }
                 setEditModal(false);
                 setErrorModal(true);
               }}

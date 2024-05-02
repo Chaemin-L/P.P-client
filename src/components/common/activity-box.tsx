@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { PostType, StatusType } from "@/api/types/post-type";
@@ -6,63 +8,85 @@ import DateSVG from "@/assets/icons/date.svg";
 import KnotSVG from "@/assets/icons/knot.svg";
 import LocationSVG from "@/assets/icons/location.svg";
 import TimeSVG from "@/assets/icons/time.svg";
+import { postEditState } from "@/recoil/atoms/post-edit-state";
 import { colorTheme } from "@/style/color-theme";
+import { BackdateToItemtype } from "@/utils/backdate-to-itemtype";
 
-export const ActivityBox = (
-  data: Omit<PostType, "startDate"> & { startDate: string[] },
-) => {
-  const {
-    status,
-    currentApplicant,
-    maxNumOfPeople,
-    pay,
-    title,
-    content,
-    location,
-    volunteerTime,
-    startDate,
-    viewsCount,
-  } = data;
+type ActivityBoxType = {
+  data: PostType;
+  editMode?: boolean;
+};
+export const ActivityBox = ({ data, editMode = false }: ActivityBoxType) => {
+  const titleInputRef = useRef<HTMLInputElement>(null);
 
+  const setEPost = useSetRecoilState(postEditState);
+
+  useEffect(() => {
+    if (data && editMode)
+      setEPost({
+        title: data.title,
+        content: data.content,
+        startDate: data.startDate,
+        location: data.location,
+        maxNumOfPeople: data.maxNumOfPeople,
+        volunteerTime: data.volunteerTime,
+      });
+  }, [data]);
+
+  useEffect(() => {
+    if (editMode && titleInputRef.current) titleInputRef.current.focus();
+  }, []);
   return (
     <>
       <Progress>
-        <Status $status={status}>
-          {status === "RECRUITING" ? "모집중" : "모집완료"}
+        <Status $status={data.status}>
+          {data.status === "RECRUITING" ? "모집중" : "모집완료"}
         </Status>
         <HeadCount>
-          {currentApplicant}/{maxNumOfPeople}명
+          {data.currentApplicant}/{data.maxNumOfPeople}명
         </HeadCount>
-        <KnotPay>{pay} 매듭</KnotPay>
+        <KnotPay>{data.pay} 매듭</KnotPay>
       </Progress>
 
       <PostInfo>
-        <Title>{title}</Title>
-        <Content>{content}</Content>
+        {!editMode ? (
+          <>
+            <Title>{data.title}</Title>
+            <Content>{data.content}</Content>
+          </>
+        ) : (
+          <>
+            <TitleInput
+              ref={titleInputRef}
+              defaultValue={data.title}
+              onBlur={(e) =>
+                setEPost((prev) => ({ ...prev, title: e.target.value }))
+              }
+            />
+            <ContentTextarea
+              defaultValue={data.content}
+              onBlur={(e) =>
+                setEPost((prev) => ({ ...prev, content: e.target.value }))
+              }
+            />
+          </>
+        )}
       </PostInfo>
 
       <MoreInfoContainer>
         <PromiseInfoList>
           <PromiseInfoItem $icon={DateSVG}>
-            <span>
-              {startDate[0]}월 {startDate[1]}일{" "}
-              {+startDate[2] > 12
-                ? +startDate[2] === 0
-                  ? `오전 12시`
-                  : `오후 ${+startDate[2] - 12}`
-                : startDate[2]}
-              :{startDate[3]}
-            </span>
+            <span>{BackdateToItemtype(data.startDate)}</span>
           </PromiseInfoItem>
           <PromiseInfoItem $icon={LocationSVG}>
-            <span>{location}</span>
+            <span>{data.location}</span>
           </PromiseInfoItem>
           <PromiseInfoItem $icon={TimeSVG}>
-            <span>예상 소요 시간 {volunteerTime}분</span>
+            <span>예상 소요 시간 {data.volunteerTime}분</span>
           </PromiseInfoItem>
         </PromiseInfoList>
 
-        <span>조회수 {viewsCount}회</span>
+        <span>조회수 {data.viewsCount}회</span>
       </MoreInfoContainer>
     </>
   );
@@ -106,8 +130,23 @@ const Title = styled.h1`
   font-weight: 700;
 `;
 
+const TitleInput = styled.input`
+  background-color: transparent;
+  border: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: ${colorTheme.orange400};
+`;
+
 const Content = styled.p`
   line-height: 120%;
+`;
+
+const ContentTextarea = styled.textarea`
+  background-color: transparent;
+  border: 0;
+  line-height: 120%;
+  color: ${colorTheme.orange400};
 `;
 
 const HeadCount = styled.span`
