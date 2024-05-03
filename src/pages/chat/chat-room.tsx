@@ -41,6 +41,7 @@ export const ChatRoom = () => {
   const [reportModal, setReportModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
+  const [transferErrorModal, setTransferErrorModal] = useState(false);
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
 
@@ -124,6 +125,10 @@ export const ChatRoom = () => {
           onClickApply={() => {
             setIsBottomSheetOpened(true);
             setIsApplySheet(true);
+          }}
+          memberCount={state.memberCount}
+          setTransferErrorModal={() => {
+            setTransferErrorModal(true);
           }}
         />
       )}
@@ -241,6 +246,15 @@ export const ChatRoom = () => {
           }}
         >
           <Modal.Title text="아직 지원하지 않는 \n 서비스입니다." />
+        </Modal>
+      )}
+      {transferErrorModal && (
+        <Modal
+          onClose={() => {
+            setTransferErrorModal(false);
+          }}
+        >
+          <Modal.Title text="채팅방에 소속된 유저가 없어 \n 송금할 수 없습니다." />
         </Modal>
       )}
       {isApplyError !== "" && (

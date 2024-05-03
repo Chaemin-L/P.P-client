@@ -38,9 +38,13 @@ export const ApplicantItem = (props: ApplicantItemDetailProps) => {
           {props.applicantInfo.ageRange * 10}대
         </ApplicantMoreInfo>
       </ApplicantInfo>
-      <ApplyButton $selected={props.selected} onClick={props.onSelect}>
-        {props.selected ? "선택됨" : "선택하기"}
-      </ApplyButton>
+      {props.isDeleted ? (
+        <ApplyButtonNotClick>선택불가</ApplyButtonNotClick>
+      ) : (
+        <ApplyButton $selected={props.selected} onClick={props.onSelect}>
+          {props.selected ? "선택됨" : "선택하기"}
+        </ApplyButton>
+      )}
     </ApplicantItemWrapper>
   );
 };
@@ -124,4 +128,17 @@ const ApplyButton = styled.button<{ $selected: boolean }>`
   align-items: center;
   ${({ $selected }) =>
     $selected && `background-color: ${colorTheme.orange400};color: white`}
+`;
+
+const ApplyButtonNotClick = styled.div`
+  flex: 1.1;
+  display: flex;
+  padding: 30px 10px;
+  border: 0;
+  border-radius: 15px;
+  background-color: #e4e8f1;
+  color: ${colorTheme.blue500};
+  font-size: 0.8rem;
+  justify-content: center;
+  align-items: center;
 `;

@@ -6,6 +6,7 @@ import { ChatMakeRoom } from "@/api/types/chat-type";
 export type ApplicantItemDetailProps = {
   selected: boolean;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
+  isDeleted: boolean;
 } & ApplyType;
 
 export type ApplicantItemProps = {
@@ -13,7 +14,6 @@ export type ApplicantItemProps = {
   applyIds: ApplyListType[];
   setApplyIds: (value: React.SetStateAction<ApplyListType[]>) => void;
   isRecruiting: boolean;
-  originApplyIds: ApplyListType[];
   setApplyModal: (value: React.SetStateAction<string>) => void;
 };
 

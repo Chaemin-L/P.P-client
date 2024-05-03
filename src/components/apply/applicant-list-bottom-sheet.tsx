@@ -68,7 +68,6 @@ export const ApplicantListBottomSheet = ({
           applyIds={applyIds}
           setApplyIds={setApplyIds}
           isRecruiting={isRecruiting}
-          originApplyIds={originApplyIds}
           setApplyModal={setApplyModal}
         />
       )}

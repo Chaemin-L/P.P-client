@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { ChatMakeRequest, ChatMakeRoom } from "@/api/types/chat-type";
 import { ApplicantItemList } from "@/components/apply/applicant-item-list";
@@ -9,7 +9,6 @@ import { ApplyListType } from "@/components/apply/type";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { Modal } from "@/components/common/modal";
 import { useCheckChatMake } from "@/hooks/chat/useCheckChatMake";
-import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
 import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
@@ -47,7 +46,7 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
     if (data && !isDataLoaded) {
       const tempApplyIds: ApplyListType[] = [];
       data?.map((item) => {
-        if (item.status !== "WAITING") {
+        if (item.status !== "WAITING" && item.status !== "TRADING_CANCEL") {
           tempApplyIds.push({
             applyId: item.applyId,
             userId: item.applicantInfo.userId,
@@ -86,7 +85,6 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
         applyIds={applyIds}
         setApplyIds={setApplyIds}
         isRecruiting={isRecruiting}
-        originApplyIds={originApplyIds}
         setApplyModal={setIsApplyError}
       />
       <BottomFixed>

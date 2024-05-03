@@ -41,6 +41,8 @@ export type ChatAppBarType = {
   setErrorModal: () => void;
   creatorId: string;
   onClickApply: () => void;
+  memberCount: number;
+  setTransferErrorModal: () => void;
 };
 
 export type ChatInRoomUser = {

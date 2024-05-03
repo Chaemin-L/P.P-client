@@ -20,6 +20,8 @@ export const ChatAppBar = ({
   creatorId,
   onClickApply,
   setErrorModal,
+  memberCount,
+  setTransferErrorModal,
 }: ChatAppBarType) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
   const navigate = useNavigate();
@@ -60,6 +62,8 @@ export const ChatAppBar = ({
           postId={postId}
           onClickApply={onClickApply}
           creatorId={creatorId}
+          setTransferErrorModal={setTransferErrorModal}
+          memberCount={memberCount}
         />
       ) : (
         <AfterTransfer
@@ -103,6 +107,8 @@ type BeforeTransferProps = {
   postId: string;
   onClickApply: () => void;
   creatorId: string;
+  memberCount: number;
+  setTransferErrorModal: () => void;
 };
 
 const AfterTransfer = ({
@@ -161,6 +167,8 @@ const BeforeTransfer = ({
   postId,
   creatorId,
   onClickApply,
+  setTransferErrorModal,
+  memberCount,
 }: BeforeTransferProps) => {
   const navigate = useNavigate();
   const myId = localStorage.getItem("userId");
@@ -215,7 +223,13 @@ const BeforeTransfer = ({
               color: colorTheme.blue900,
               fontWeight: "500",
             }}
-            onClick={onClickTransfer}
+            onClick={() => {
+              if (memberCount < 2) {
+                setTransferErrorModal();
+              } else {
+                onClickTransfer();
+              }
+            }}
           >
             송금하기
           </Button>

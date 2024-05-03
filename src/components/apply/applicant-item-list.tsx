@@ -6,13 +6,12 @@ export const ApplicantItemList = ({
   applyIds,
   setApplyIds,
   isRecruiting,
-  originApplyIds,
   setApplyModal,
 }: ApplicantItemProps) => {
   console.log("Applicant List: ", data);
   return (
     <>
-      {data.map((applicant) => {
+      {data?.map((applicant) => {
         return (
           <ApplicantItem
             key={applicant.applyId}
@@ -22,17 +21,11 @@ export const ApplicantItemList = ({
                 item.applyId === applicant.applyId &&
                 item.userId === applicant.applicantInfo.userId,
             )}
+            isDeleted={applicant.status === "TRADING_CANCEL"}
             onSelect={() => {
               const id = applicant.applyId;
               const userId = applicant.applicantInfo.userId;
-              if (
-                isRecruiting &&
-                originApplyIds.some(
-                  (item) =>
-                    item.applyId === applicant.applyId &&
-                    item.userId === applicant.applicantInfo.userId,
-                )
-              ) {
+              if (isRecruiting && applicant.isAccepted) {
                 setApplyModal("IMPOSSIBLE_SELECT_APPLY");
               } else {
                 if (
