@@ -6,11 +6,32 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: .env setting
+        run: |
+          echo "REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}" >> .env
+          echo "REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_FIREBASE_API_KEY }}" >> .env
+          echo "REACT_APP_FIREBASE_AUTH_DOMAIN=${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}" >> .env
+          echo "REACT_APP_PROJECT_ID=${{ secrets.REACT_APP_PROJECT_ID }}" >> .env
+          echo "REACT_APP_FIREBASE_STORAGE_BUCKET=${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}" >> .env
+          echo "REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}" >> .env
+          echo "REACT_APP_FIREBASE_APP_ID=${{ secrets.REACT_APP_FIREBASE_APP_ID }}" >> .env
+          echo "RREACT_APP_FIREBASE_MEASUREMENTID=${{ secrets.REACT_APP_FIREBASE_MEASUREMENTID }}" >> .env
+          echo "REACT_APP_CHAT_API_BASE_URL=${{ secrets.REACT_APP_CHAT_API_BASE_URL }}" >> .env
+          echo "REACT_APP_CHAT_API_PORT=${{ secrets.REACT_APP_CHAT_API_PORT }}" >> .env
+          echo "REACT_APP_CHAT_WS_BASE_URL=${{ secrets.REACT_APP_CHAT_WS_BASE_URL}}" >> .env
+          echo "REACT_APP_KAKAO_REST_API_KEY=${{ secrets.REACT_APP_KAKAO_REST_API_KEY }}" >> .env
+          echo "REACT_APP_KAKAO_REDIRECT_URI=${{ secrets.REACT_APP_KAKAO_REDIRECT_URI }}" >> .env
+          echo "REACT_APP_KAKAO_CLIENT_SECRET=${{ secrets.REACT_APP_KAKAO_CLIENT_SECRET }}" >> .env
+          echo "REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }}" >> .env
+          echo "REACT_APP_API_PORT=${{ secrets.REACT_APP_API_PORT }}" >> .env
+          echo "REACT_APP_TEST_TOKEN=${{ secrets.REACT_APP_TEST_TOKEN }}" >> .env
 
       - run: npm ci && npm run build
 
