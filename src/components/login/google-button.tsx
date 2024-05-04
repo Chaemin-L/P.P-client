@@ -1,10 +1,6 @@
-import {
-  GoogleAuthProvider,
-  signInWithRedirect,
-  User as FirebaseUser,
-} from "@firebase/auth";
+import { GoogleAuthProvider, signInWithRedirect } from "@firebase/auth";
 import { getRedirectResult } from "firebase/auth";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 import { ReactComponent as GoogleLoginButtonSVG } from "@/assets/icons/google-login-button.svg";
 import { useSignIn } from "@/hooks/queries/useSignIn";
@@ -15,7 +11,6 @@ export const GoogleButton = ({
 }: {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [user, setUser] = useState<FirebaseUser | null>(null);
   const { mutateAsync: signInBack } = useSignIn();
 
   const signIn = async () => {
@@ -28,15 +23,16 @@ export const GoogleButton = ({
   // Not yet
   const signOut = async () => {
     setIsLoading(true);
-    await auth.signOut().then(() => console.log("logout!", user));
+    await auth.signOut().then(() => console.log("logout!"));
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getRedirectResult(auth)
+    void getRedirectResult(auth)
       .then(async function (result) {
         if (result?.user) {
           const token = await result.user.getIdToken();
+          console.log("IdToken", token);
           await signInBack({ type: "firebase", token });
         }
       })
