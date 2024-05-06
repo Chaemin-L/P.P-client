@@ -1,18 +1,12 @@
 import { Stomp, CompatClient } from "@stomp/stompjs";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import SockJS from "sockjs-client";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
-import { allMsg, tempList } from "./dummy";
 import { ChatRoomSubMessage } from "./type";
 
-import {
-  ChatListItemType,
-  ChatMakeRoom,
-  ChatRoomMessage,
-} from "@/api/types/chat-type";
+import { ChatMakeRoom } from "@/api/types/chat-type";
 import { ChatAppBar } from "@/components/chat/chat-app-bar";
 import { ChatInput } from "@/components/chat/chat-input";
 import { ChatItem } from "@/components/chat/chat-item";
@@ -31,7 +25,7 @@ export const ChatRoom = () => {
   const location = useLocation();
   const state = location.state as ChatMakeRoom;
 
-  const [transfer, setTransfer] = useRecoilState(transferState);
+  const [transfer] = useRecoilState(transferState);
   const [newRoomMsgs, setNewRoomMsgs] = useState<ChatRoomSubMessage[]>([]);
 
   const roomMsgs = useChatDataSetting(state);

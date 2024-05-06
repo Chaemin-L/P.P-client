@@ -20,7 +20,7 @@ export const ChatAppBar = ({
   postId,
   setErrorModal,
 }: ChatAppBarType) => {
-  const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
+  const [lastTransfer] = useRecoilState(lastTransferState);
   const navigate = useNavigate();
 
   useEffect(() => {

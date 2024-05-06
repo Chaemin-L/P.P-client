@@ -1,12 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 import UpArrowSVG from "@/assets/images/up-arrow.svg";
 import { colorTheme } from "@/style/color-theme";
 
 export const MypageUpButton = ({ onHandler }: { onHandler: () => void }) => {
-  const navigate = useNavigate();
-
   return (
     <FixedButton
       onClick={() => {

@@ -1,13 +1,19 @@
 {
   "hosting": {
-    "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "redirects": [
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
       {
-        "source": "__/auth/handler",
-        "destination": "/auth/google",
-        "type": 301
+        "source": "**",
+        "destination": "/index.html"
       }
+    ],
+    "predeploy": [
+      "npm run build"
     ]
   }
 }
