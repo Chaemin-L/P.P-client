@@ -65,6 +65,11 @@ export default class ChatApi {
     const response = await Instance.patch(
       `/chat-service/api/chats/${data.chatRoomId}/members`,
       { postId: data.addingData.postId, memberIds: data.addingData.memberIds },
+      {
+        headers: {
+          userId: localStorage.getItem("userId"),
+        },
+      },
     );
     if (response) {
       const temp = response.data as ChatFinalResponse<ChatMakeRoom>;
