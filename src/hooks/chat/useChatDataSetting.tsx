@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 
-import {
-  ChatListItemType,
-  ChatMakeRoom,
-  ChatRoomMember,
-} from "@/api/types/chat-type";
+import { ChatMakeRoom, ChatRoomMember } from "@/api/types/chat-type";
 import { useGetBankData } from "@/hooks/queries/useGetBankData";
 import { useGetChatRoomData } from "@/hooks/queries/useGetChatRoomData";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";

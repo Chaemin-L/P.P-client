@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { css, styled } from "styled-components";
+import { styled } from "styled-components";
 
 import { PostType } from "@/api/types/post-type";
 import BackBlackSVG from "@/assets/icons/back-black.svg";

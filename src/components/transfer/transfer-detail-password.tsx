@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
@@ -19,9 +19,9 @@ export const TransferDetailPassword = ({
   const [lastTransfer, setLastTransfer] = useRecoilState(transferState);
   const [password, setPassword] = useState<string>("");
   const [isError, setIsError] = useState(false);
-  const [status, setStatus] = useState<"INITIAL" | "CONFIRM" | "MISMATCH">(
-    "INITIAL",
-  );
+  // const [status, setStatus] = useState<"INITIAL" | "CONFIRM" | "MISMATCH">(
+  //   "INITIAL",
+  // );
   const { mutate: postTransfer } = usePostChatTransfer();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

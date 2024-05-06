@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 import { PostListItem } from "@/components/post/post-list-item";
 import { useGetMypostList } from "@/hooks/queries/useGetMypostList";

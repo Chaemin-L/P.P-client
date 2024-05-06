@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 import PlusWhiteSVG from "@/assets/icons/plus-white.svg";
 import { colorTheme } from "@/style/color-theme";

@@ -2,21 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/sun.svg" />
+    <!-- desktop 상단 아이콘 -->
+    <link rel="icon" href="%PUBLIC_URL%/icons/logo-192.png" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="한마을 페이지" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/sun.svg" />
+    <meta name="theme-color" content="#253659" />
+    <meta name="description" content="정릉이음" />
+
+    <!-- iPhone은 manifest.json의 아이콘을 모두 무시함. png파일만 가능(svg x) -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/thumb.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/logo-192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/logo-512.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
-    <!-- // TODO: 배포 후 제거-->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -26,7 +31,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>한마을</title>
+    <title>정릉이음</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -41,5 +46,12 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      (function () {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/pwabuilder-sw.js");
+        }
+      })();
+    </script>
   </body>
 </html>

@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
 import PostApi from "@/api/post-api";
-import { PostDetailType } from "@/api/types/post-type";
 
 const CACHE_KEY = "post-detail";
 

@@ -1,6 +1,5 @@
-import { async } from "@firebase/util";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 

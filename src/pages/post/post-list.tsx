@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 import { PostListItem } from "@/components/post/post-list-item";
 import { PostPostingButton } from "@/components/post/post-posting-button";

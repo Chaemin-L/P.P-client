@@ -3,7 +3,6 @@ import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { Description } from "@/components/profile/description";
 import { Header } from "@/components/profile/header";
 import { Input } from "@/components/profile/input";
 import { profileState } from "@/recoil/atoms/profile-state";

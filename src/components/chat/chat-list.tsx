@@ -4,7 +4,6 @@ import { ChatListItem } from "./chat-list-item";
 import { ChatRoomItemType } from "./type";
 
 import { ChatListItemType } from "@/api/types/chat-type";
-import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
 
 export const ChatList = ({ chatList }: { chatList: ChatListItemType[] }) => {
   return (

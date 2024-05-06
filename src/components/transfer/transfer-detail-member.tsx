@@ -11,7 +11,7 @@ import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const TransferDetailMember = ({ setScreen }: TransferDetailProps) => {
-  const [transfer, setTransfer] = useRecoilState(transferState);
+  const [transfer] = useRecoilState(transferState);
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
 
   const handleAllSelect = () => {
