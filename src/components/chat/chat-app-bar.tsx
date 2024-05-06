@@ -64,6 +64,7 @@ export const ChatAppBar = ({
           creatorId={creatorId}
           setTransferErrorModal={setTransferErrorModal}
           memberCount={memberCount}
+          setErrorModal={setErrorModal}
         />
       ) : (
         <AfterTransfer
@@ -109,6 +110,7 @@ type BeforeTransferProps = {
   creatorId: string;
   memberCount: number;
   setTransferErrorModal: () => void;
+  setErrorModal: () => void;
 };
 
 const AfterTransfer = ({
@@ -169,6 +171,7 @@ const BeforeTransfer = ({
   onClickApply,
   setTransferErrorModal,
   memberCount,
+  setErrorModal,
 }: BeforeTransferProps) => {
   const navigate = useNavigate();
   const myId = localStorage.getItem("userId");
@@ -190,9 +193,17 @@ const BeforeTransfer = ({
             color: colorTheme.blue900,
             fontWeight: "500",
           }}
-          onClick={onClickApply}
+          onClick={() => {
+            if (myId !== null) {
+              if (myId === creatorId) {
+                onClickApply();
+              } else {
+                setErrorModal();
+              }
+            }
+          }}
         >
-          거래파기
+          {myId !== null ? (myId === creatorId ? "참여관리" : "거래파기") : ""}
         </Button>
         <Button
           color="white"

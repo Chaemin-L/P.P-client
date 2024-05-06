@@ -22,10 +22,10 @@ export const Splash = () => {
           if (data.role !== "ROLE_USER") {
             path = "/signup";
             console.log("splash::", path);
-            // navigate(path, { replace: true });
+            navigate(path, { replace: true });
           } else {
             path = "/post";
-            // navigate(path, { replace: true });
+            navigate(path, { replace: true });
           }
         }
       } catch (error) {
@@ -40,7 +40,7 @@ export const Splash = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       verifyTokens().catch((err) => console.log(err));
-      // navigate(path, { replace: true });
+      navigate(path, { replace: true });
     }, 2000);
 
     return () => clearTimeout(timer);

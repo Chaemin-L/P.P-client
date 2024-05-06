@@ -77,12 +77,16 @@ export const ApplicantModifyModal = ({
                       setStatusChangeModal(true);
                       if (isPage && setChatMakeRoomId) {
                         setChatMakeRoomId(res);
-                        setIsApplyChangeCheck(false);
                       }
+                      setIsApplyChangeCheck(false);
                     }
+                  },
+                  onError: () => {
+                    setIsApplyError("APPLY_CHAT_ERROR");
                   },
                 });
               } else {
+                console.log("accept modify modal");
                 const tempAcceptList: number[] = applyIds.map((item) => {
                   return item.applyId;
                 });
@@ -98,11 +102,16 @@ export const ApplicantModifyModal = ({
                           }
                         }
                       },
+                      onError: () => {
+                        setIsApplyError("APPLY_CHAT_ERROR");
+                        setIsApplyChangeCheck(false);
+                      },
                     });
                   },
                   onError: () => {
                     if (setApplyModal) {
                       setIsApplyError("APPLY_ID_LENGTH_OVER");
+                      setIsApplyChangeCheck(false);
                     }
                   },
                 });

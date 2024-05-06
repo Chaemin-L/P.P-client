@@ -139,6 +139,7 @@ export const ChatRoom = () => {
         }}
       >
         {roomMsgs?.map((item, index) => {
+          console.log("msg Data: ", item);
           if (item.senderInfo !== null) {
             return (
               <ChatItem
@@ -152,8 +153,9 @@ export const ChatRoom = () => {
                 {item.message.replace(/^"(.*)"$/, "$1")}
               </ChatItem>
             );
-          } else {
-            <ChatEntryExit msg={item.message} />;
+          } else if (item.type === "JOIN") {
+            console.log("null senderInfo");
+            return <ChatEntryExit key={index} msg={item.message} />;
           }
         })}
         {newRoomMsgs?.map((item, index) => {
@@ -267,6 +269,9 @@ export const ChatRoom = () => {
           )}
           {isApplyError === "APPLY_ID_NOT_CHANGE" && (
             <Modal.Title text="변경 사항이 없습니다." />
+          )}
+          {isApplyError === "APPLY_CHAT_ERROR" && (
+            <Modal.Title text="채팅방 수정에 오류가 생겼습니다. " />
           )}
         </Modal>
       )}

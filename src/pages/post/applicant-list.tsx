@@ -167,6 +167,14 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
           <Modal.Button
             color="orange"
             onClick={() => {
+              GoToChatRoom();
+            }}
+          >
+            게시글 돌아가기
+          </Modal.Button>
+          <Modal.Button
+            color="orange"
+            onClick={() => {
               navigate("/post");
             }}
           >
@@ -209,7 +217,7 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
           applyIds={applyIds}
           postId={postId}
           setApplyModal={setApplyModal}
-          setStatusChangeModal={setIsApplyChangeCheck}
+          setStatusChangeModal={setIsStatusChange}
         />
       )}
     </>
