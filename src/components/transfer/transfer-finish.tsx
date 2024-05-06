@@ -1,14 +1,13 @@
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
-import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
-  const resetLastTransferRecoil = useResetRecoilState(lastTransferState);
-  const resetTransferRecoil = useResetRecoilState(transferState);
+  // const resetLastTransferRecoil = useResetRecoilState(lastTransferState);
+  // const resetTransferRecoil = useResetRecoilState(transferState);
 
   const [lastTransfer] = useRecoilState(lastTransferState);
 

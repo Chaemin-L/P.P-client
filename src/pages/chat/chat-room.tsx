@@ -25,7 +25,7 @@ export const ChatRoom = () => {
   const location = useLocation();
   const state = location.state as ChatMakeRoom;
 
-  const [transfer, setTransfer] = useRecoilState(transferState);
+  const [transfer] = useRecoilState(transferState);
   const [newRoomMsgs, setNewRoomMsgs] = useState<ChatRoomSubMessage[]>([]);
 
   const roomMsgs = useChatDataSetting(state);
