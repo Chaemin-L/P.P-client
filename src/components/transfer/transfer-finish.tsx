@@ -10,12 +10,12 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
   const resetLastTransferRecoil = useResetRecoilState(lastTransferState);
   const resetTransferRecoil = useResetRecoilState(transferState);
 
-  const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
+  const [lastTransfer] = useRecoilState(lastTransferState);
 
-  const handleClick = () => {
-    resetLastTransferRecoil();
-    resetTransferRecoil();
-  };
+  // const handleClick = () => {
+  //   resetLastTransferRecoil();
+  //   resetTransferRecoil();
+  // };
 
   return (
     <Wrapper>

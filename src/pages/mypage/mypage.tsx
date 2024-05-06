@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 import { AppBar } from "@/components/common/app-bar";
 import { MypageList } from "@/components/mypage/mypage-list";

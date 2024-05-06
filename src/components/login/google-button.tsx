@@ -20,12 +20,12 @@ export const GoogleButton = ({
     await signInWithRedirect(auth, provider);
   };
 
-  // Not yet
-  const signOut = async () => {
-    setIsLoading(true);
-    await auth.signOut().then(() => console.log("logout!"));
-    setIsLoading(false);
-  };
+  // // Not yet
+  // const signOut = async () => {
+  //   setIsLoading(true);
+  //   await auth.signOut().then(() => console.log("logout!"));
+  //   setIsLoading(false);
+  // };
 
   useEffect(() => {
     void getRedirectResult(auth)

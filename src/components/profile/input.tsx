@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes, LegacyRef } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 import { styled } from "styled-components";
 
 type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type">;

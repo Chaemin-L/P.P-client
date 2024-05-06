@@ -1,9 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
-import Instance from "./axios-instance";
 import {
   ChatFinalResponse,
-  ChatListItemType,
   ChatListResponse,
   ChatMakeRequest,
   ChatMakeRoom,

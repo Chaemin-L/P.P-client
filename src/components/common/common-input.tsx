@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { styled } from "styled-components";
 
 import { InputInnerProps, InputWrapperProps } from "./type";
