@@ -16,4 +16,6 @@ export type ChatRoomData = {
   postId: number;
   memberCount: number;
   creatorId: string;
+  deletedPost: boolean;
+  blockedRoom: boolean;
 };

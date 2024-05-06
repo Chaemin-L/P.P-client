@@ -19,10 +19,10 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 100%;
   font-size: 1rem;
-  height: 1.3rem;
+  height: 1.5rem;
   border-radius: 0.5rem;
-  background-color: #a1a1a1;
+  background-color: #c2c2c2;
   color: black;
   text-align: center;
-  line-height: 1.3rem;
+  line-height: 1.5rem;
 `;

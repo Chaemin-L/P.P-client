@@ -90,7 +90,6 @@ export default class ChatApi {
       { postId: data.addingData.postId, memberIds: data.addingData.memberIds },
       {
         headers: {
-          userId: localStorage.getItem("userId"),
           Authorization: localStorage.getItem("accessToken"),
           "Content-Type": "application/json",
           // "X-Requested-With": "XMLHttpRequest",

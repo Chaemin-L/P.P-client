@@ -15,6 +15,8 @@ export type ChatListItemType = {
   creatorNickname: string;
   location: string;
   startDate: string;
+  deletedPost: boolean;
+  blockedRoom: boolean;
 };
 
 export type ChatMakeRoom = {
@@ -36,6 +38,7 @@ export type senderInfo = {
   userId: number;
   profileImage: string;
   nickName: string;
+  deleted: boolean;
 };
 
 export type ChatRoomMessage = {

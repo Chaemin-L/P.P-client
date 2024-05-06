@@ -6,15 +6,20 @@ import { InputType } from "./type";
 import ChatSendSVG from "@/assets/icons/chat-send.svg";
 import { colorTheme } from "@/style/color-theme";
 
-export const ChatInput = ({ onFocus, onClick }: InputType) => {
+export const ChatInput = ({ onFocus, onClick, blockedRoom }: InputType) => {
   const [inputValue, setIsValue] = useState("");
   return (
     <Container>
       <InputContainer
-        value={inputValue}
+        value={
+          blockedRoom
+            ? "게시글 작성자가 탈퇴하여 채팅을 할 수 없습니다."
+            : inputValue
+        }
         onChange={(e) => setIsValue(e.target.value)}
         onFocus={() => onFocus(false)}
         onBlur={() => onFocus(true)}
+        readOnly={blockedRoom}
       />
       <ChatButton
         onClick={() => {

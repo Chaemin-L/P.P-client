@@ -144,16 +144,24 @@ export const ChatRoom = () => {
             return (
               <ChatItem
                 key={index}
-                userId={item.senderInfo.userId}
-                userName={item.senderInfo.nickName}
+                userId={item.senderInfo.deleted ? -2 : item.senderInfo.userId}
+                userName={
+                  item.senderInfo.deleted
+                    ? "(알 수 없음)"
+                    : item.senderInfo.nickName
+                }
                 setProfileModal={setProfileModal}
                 setProfileUserId={setProfileUserId}
-                imgurl={item.senderInfo.profileImage}
+                imgurl={
+                  item.senderInfo.deleted
+                    ? undefined
+                    : item.senderInfo.profileImage
+                }
               >
                 {item.message.replace(/^"(.*)"$/, "$1")}
               </ChatItem>
             );
-          } else if (item.type === "JOIN") {
+          } else if (item.type === "JOIN" || item.type === "LEAVE") {
             console.log("null senderInfo");
             return <ChatEntryExit key={index} msg={item.message} />;
           }
@@ -182,7 +190,11 @@ export const ChatRoom = () => {
           );
         })}
       </ChatList>
-      <ChatInput onFocus={setAppBarVisibility} onClick={handleSendMessage} />
+      <ChatInput
+        onFocus={setAppBarVisibility}
+        onClick={handleSendMessage}
+        blockedRoom={state.blockedRoom}
+      />
       <BottomSheet
         style={{ height: window.innerHeight > 720 ? "81%" : "90%" }}
         isOpened={isBottomSheetOpened}

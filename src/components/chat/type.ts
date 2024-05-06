@@ -16,6 +16,7 @@ export type ChatItemType = {
 export type InputType = {
   onFocus: React.Dispatch<React.SetStateAction<boolean>>;
   onClick: (inputValue: string) => void;
+  blockedRoom: boolean;
 };
 
 export type ChatRoomItemType = {
@@ -31,6 +32,8 @@ export type ChatRoomItemType = {
   startDate: string;
   location: string;
   creatorNickname: string;
+  deletedPost: boolean;
+  blockedRoom: boolean;
 };
 
 export type ChatAppBarType = {

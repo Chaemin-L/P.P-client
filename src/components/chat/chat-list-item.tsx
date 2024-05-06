@@ -18,19 +18,39 @@ export const ChatListItem = (props: ChatRoomItemType) => {
         postId: props.postId,
         memberCount: props.memberCount,
         creatorId: props.creatorId,
+        deletedPost: props.deletedPost,
+        blockedRoom: props.blockedRoom,
       },
     });
   };
   return (
     <ItemContainer onClick={HandlerEnterRoom}>
       <RowDiv>
-        {props.postStatus === "TRANSACTION_COMPLETED" ? (
-          <StateFinishDiv>진행완료</StateFinishDiv>
-        ) : (
-          <StateDiv>진행중</StateDiv>
+        {!props.deletedPost &&
+          !props.blockedRoom &&
+          props.postStatus === "TRANSACTION_COMPLETED" && (
+            <StateFinishDiv>진행완료</StateFinishDiv>
+          )}
+        {!props.deletedPost &&
+          !props.blockedRoom &&
+          props.postStatus !== "TRANSACTION_COMPLETED" && (
+            <StateDiv>진행중</StateDiv>
+          )}
+        {props.deletedPost && !props.blockedRoom && (
+          <BlockRoom>{"삭제된\n게시글"}</BlockRoom>
+        )}
+        {!props.deletedPost && props.blockedRoom && (
+          <BlockRoom>{"작성자\n탈퇴"}</BlockRoom>
         )}
         <LeftColumnDiv>
-          <TitleText>{props.postTitle}</TitleText>
+          <TitleText>
+            {props.postTitle}{" "}
+            {props.deletedPost
+              ? "(삭제된 게시글)"
+              : props.blockedRoom
+                ? "(작성자 탈퇴)"
+                : ""}
+          </TitleText>
           <ItemText style={{ color: "#828282" }}>
             <IconImg />
             {" " + props.creatorNickname + "   "} <IconImg src={dateSVG} />
@@ -132,4 +152,19 @@ const RightColumnDiv = styled.div`
 const IconImg = styled.img`
   width: 0.56rem;
   height: 0.56rem;
+`;
+
+const BlockRoom = styled.div`
+  display: flex;
+  height: 3rem;
+  width: 3.56rem;
+  background-color: #6e6e6e;
+  color: #ffffff;
+  text-align: center;
+  font-size: 0.72rem;
+  border-radius: 1.22rem;
+  line-height: 0.85rem;
+  white-space: pre-line;
+  align-items: center;
+  justify-content: center;
 `;
