@@ -34,6 +34,9 @@ export const GoogleButton = ({
           const token = await result.user.getIdToken();
           console.log("IdToken", token);
           await signInBack({ type: "firebase", token });
+        } else {
+          setIsLoading(false);
+          sessionStorage.removeItem("isLoading");
         }
       })
       .catch(function (error) {
