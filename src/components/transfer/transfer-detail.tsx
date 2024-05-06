@@ -9,8 +9,8 @@ import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const TransferDetail = ({ setScreen }: TransferDetailProps) => {
-  const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
-  const [transfer, setTransfer] = useRecoilState(transferState);
+  const [lastTransfer] = useRecoilState(lastTransferState);
+  const [transfer] = useRecoilState(transferState);
 
   return (
     <Wrapper>

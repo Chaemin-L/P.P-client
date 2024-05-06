@@ -1,25 +1,64 @@
 {
-  "short_name": "한마을",
-  "name": "한마을",
-  "icons": [
+  "shortcuts": [
     {
-      "src": "sun.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "sun.svg",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "sun.svg",
-      "type": "image/png",
-      "sizes": "512x512"
+      "name": "정릉이음",
+      "short_name": "정릉이음",
+      "description": "동네 주민들과 도움을 주고 받아요",
+      "url": "/",
+      "icons": [{ "src": "./icons/thumb.svg", "sizes": "192x192" }]
     }
   ],
-  "start_url": ".",
+  "short_name": "정릉이음",
+  "name": "정릉이음",
+  "description": "동네 주민들과 도움을 주고 받아요",
+  "icons": [
+    {
+      "src": "./icons/thumb.png",
+      "sizes": "192x131",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot1.jpg",
+      "sizes": "1080x1920",
+      "form_factor": "narrow",
+      "platform": "windows",
+      "label": "KMU"
+    },
+    {
+      "src": "images/screenshot2.png",
+      "sizes": "2400x1600",
+      "form_factor": "wide",
+      "platform": "windows",
+      "label": "KMU"
+    }
+  ],
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#253659",
+  "background_color": "#253659",
+  "orientation": "portrait"
 }

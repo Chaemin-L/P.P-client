@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import Instance from "./axios-instance";
 import {
   ChatFinalResponse,
@@ -58,17 +60,42 @@ export default class ChatApi {
     }
   }
 
+  // static async postAddingNewMember(data: {
+  //   chatRoomId: string;
+  //   addingData: ChatMakeRequest;
+  // }) {
+  //   const response = await Instance.patch(
+  //     `/chat-service/api/chats/${data.chatRoomId}/members`,
+  //     { postId: data.addingData.postId, memberIds: data.addingData.memberIds },
+  //     {
+  //       headers: {
+  //         userId: localStorage.getItem("userId"),
+  //       },
+  //     },
+  //   );
+  //   if (response) {
+  //     const temp = response.data as ChatFinalResponse<ChatMakeRoom>;
+  //     return temp.result;
+  //   } else {
+  //     throw new Error("Invalid response from server");
+  //   }
+  // }
+
   static async postAddingNewMember(data: {
     chatRoomId: string;
     addingData: ChatMakeRequest;
   }) {
-    const response = await Instance.patch(
-      `/chat-service/api/chats/${data.chatRoomId}/members`,
+    const response = await axios.patch(
+      `${process.env.REACT_APP_CHAT_API_BASE_URL}/chat-service/api/chats/${data.chatRoomId}/members`,
       { postId: data.addingData.postId, memberIds: data.addingData.memberIds },
       {
         headers: {
           userId: localStorage.getItem("userId"),
+          Authorization: localStorage.getItem("accessToken"),
+          "Content-Type": "application/json",
+          // "X-Requested-With": "XMLHttpRequest",
         },
+        withCredentials: true,
       },
     );
     if (response) {
@@ -79,4 +106,3 @@ export default class ChatApi {
     }
   }
 }
-0;

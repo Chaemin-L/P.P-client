@@ -7,7 +7,7 @@ import { useGetProfile } from "@/hooks/queries/useGetProfile";
 export const ProfileContext = createContext<ProfileData | null>(null);
 
 export const ProfileLayout = ({ children }: { children: ReactNode }) => {
-  const [profile, setProfile] = useState<ProfileData>({
+  const [_, setProfile] = useState<ProfileData>({
     userId: 0,
     nickName: "",
     gender: "",
