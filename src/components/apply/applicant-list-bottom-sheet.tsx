@@ -10,12 +10,16 @@ import { BottomFixed } from "@/components/common/bottom-fixed";
 import { Modal } from "@/components/common/modal";
 import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
+import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
+import { usePutChatNewMember } from "@/hooks/queries/usePutChatNewMember";
 import { checkChange } from "@/utils/apply-list-change-check";
 
 export const ApplicantListBottomSheet = ({
   postId,
   chatId,
   onFinishApply,
+  isApplyChange,
+  setApplyLength,
 }: ApplicantListBottomSheetProps) => {
   const [originApplyIds, setOriginApplyIds] = useState<ApplyListType[]>([]);
   const [applyIds, setApplyIds] = useState<ApplyListType[]>([]);
@@ -27,6 +31,8 @@ export const ApplicantListBottomSheet = ({
 
   const { data } = useGetApplyList(postId);
   const { data: postData } = useGetPostDetail(postId);
+  const { mutate: accept } = usePostApplyAccept(postId);
+  const { mutate: putNewMember } = usePutChatNewMember();
 
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
@@ -42,7 +48,7 @@ export const ApplicantListBottomSheet = ({
     if (data && !isDataLoaded) {
       const tempApplyIds: ApplyListType[] = [];
       data?.map((item) => {
-        if (item.status !== "WAITING") {
+        if (item.status !== "WAITING" && item.status !== "TRADING_CANCEL") {
           tempApplyIds.push({
             applyId: item.applyId,
             userId: item.applicantInfo.userId,
@@ -75,15 +81,51 @@ export const ApplicantListBottomSheet = ({
         <BottomFixed.Button
           color="orange"
           onClick={() => {
-            if (checkChange({ a: originApplyIds, b: applyIds })) {
+            const tempAcceptList: number[] = applyIds.map((item) => {
+              return item.applyId;
+            });
+            if (isRecruiting) {
               if (applyIds.length === 0) {
                 setIsApplyError("APPLY_ID_LENGTH_ZERO");
               } else {
-                setIsApplyError("APPLY_ID_NOT_CHANGE");
+                accept(tempAcceptList, {
+                  onSuccess: () => {
+                    const tempList: string[] = applyIds.map((id) => {
+                      return id.userId.toString();
+                    });
+                    const tempData = {
+                      chatRoomId: chatId,
+                      addingData: {
+                        postId: Number(postId),
+                        memberIds: tempList,
+                      },
+                    };
+                    putNewMember(tempData, {
+                      onSuccess: () => {
+                        setApplyModal("PostNewMember");
+                        setApplyLength(applyIds.length);
+                      },
+                      onError: () => {
+                        setIsApplyError("APPLY_CHAT_ERROR");
+                      },
+                    });
+                  },
+                  onError: () => {
+                    setIsApplyError("APPLY_ID_LENGTH_OVER");
+                  },
+                });
               }
             } else {
-              if (originApplyIds.length > 0) {
-                setIsApplyChangeCheck(true);
+              if (checkChange({ a: originApplyIds, b: applyIds })) {
+                if (applyIds.length === 0) {
+                  setIsApplyError("APPLY_ID_LENGTH_ZERO");
+                } else {
+                  setIsApplyError("APPLY_ID_NOT_CHANGE");
+                }
+              } else {
+                if (originApplyIds.length > 0) {
+                  setIsApplyChangeCheck(true);
+                }
               }
             }
           }}
@@ -120,6 +162,9 @@ export const ApplicantListBottomSheet = ({
           setApplyModal={setApplyModal}
           setStatusChangeModal={setIsStatusChange}
           setIsApplyError={setIsApplyError}
+          maxNumOfPeople={
+            postData ? postData.marketPostResponse.maxNumOfPeople : 0
+          }
         />
       )}
       {applyModal !== "" && (
@@ -141,6 +186,7 @@ export const ApplicantListBottomSheet = ({
           <Modal.Button
             onClick={() => {
               onFinishApply();
+              isApplyChange();
             }}
           >
             확인
@@ -161,7 +207,10 @@ export const ApplicantListBottomSheet = ({
           postId={postId}
           setApplyModal={setApplyModal}
           setStatusChangeModal={setIsApplyChangeCheck}
-          onFinishApply={onFinishApply}
+          onFinishApply={() => {
+            onFinishApply();
+            isApplyChange();
+          }}
         />
       )}
     </div>

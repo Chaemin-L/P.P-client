@@ -46,6 +46,7 @@ export const ChatRoom = () => {
 
   const [profileUserId, setProfileUserId] = useState<number>(0);
   const [isApplySheet, setIsApplySheet] = useState(false);
+  const [applyLength, setApplyLength] = useState(0);
 
   const client = useRef<CompatClient | null>(null);
   const { mutate: sendMsg } = UseSendMessages();
@@ -63,7 +64,6 @@ export const ChatRoom = () => {
         setNewRoomMsgs((prevHistory) => {
           return prevHistory ? [...prevHistory, temp] : [];
         });
-        console.log("newMessage:", message.body);
       });
     });
   };
@@ -85,6 +85,20 @@ export const ChatRoom = () => {
   useEffect(() => {
     scrollToBottom();
   }, [newRoomMsgs]);
+
+  const refreshPage = () => {
+    navigate(`/chat/detail`, {
+      state: {
+        roomId: state.roomId,
+        postId: state.postId,
+        memberCount: applyLength + 1,
+        creatorId: state.creatorId,
+        deletedPost: state.deletedPost,
+        blockedRoom: state.blockedRoom,
+      },
+      replace: true,
+    });
+  };
 
   const sendHandler = (inputValue: string) => {
     if (client.current && client.current.connected) {
@@ -247,6 +261,10 @@ export const ChatRoom = () => {
                 setIsApplySheet(false);
                 setIsBottomSheetOpened(false);
               }}
+              isApplyChange={() => {
+                refreshPage();
+              }}
+              setApplyLength={setApplyLength}
             />
           )}
         </BottomSheet>
