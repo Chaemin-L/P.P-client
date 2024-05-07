@@ -37,6 +37,8 @@ export const Report = ({ postId, onSuccessReport, creatorId }: ReportProps) => {
     );
   };
 
+  const [isError, setIsError] = useState(false);
+
   return (
     <Wrapper>
       <CheckMsg>신고 이유를 선택해주세요</CheckMsg>
@@ -95,12 +97,19 @@ export const Report = ({ postId, onSuccessReport, creatorId }: ReportProps) => {
           />
           <Modal.Button
             onClick={() => {
-              postBlock.mutate(Number(creatorId), {
-                onSuccess: () => {
-                  setCheckBlock(false);
-                  setBlockFinish(true);
-                },
-              });
+              if (Number(creatorId) > -1) {
+                postBlock.mutate(Number(creatorId), {
+                  onSuccess: () => {
+                    setCheckBlock(false);
+                    setBlockFinish(true);
+                  },
+                  onError: () => {
+                    setIsError(true);
+                  },
+                });
+              } else {
+                setIsError(true);
+              }
             }}
           >
             차단하기
@@ -118,7 +127,23 @@ export const Report = ({ postId, onSuccessReport, creatorId }: ReportProps) => {
           />
           <Modal.Button
             onClick={() => {
-              navigate("/chat");
+              navigate("/post");
+            }}
+          >
+            홈화면으로 이동
+          </Modal.Button>
+        </Modal>
+      )}
+      {isError && (
+        <Modal
+          onClose={() => {
+            setIsError(false);
+          }}
+        >
+          <Modal.Title text="알 수 없는 오류가 발생했습니다 \n 다시 시도해주세요." />
+          <Modal.Button
+            onClick={() => {
+              navigate("/post");
             }}
           >
             홈화면으로 이동

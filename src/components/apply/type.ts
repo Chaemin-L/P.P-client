@@ -35,12 +35,16 @@ export type ApplicantModifyModalProps = {
   setApplyModal?: (value: React.SetStateAction<string>) => void;
   setStatusChangeModal: (value: React.SetStateAction<boolean>) => void;
   setIsApplyError: (value: React.SetStateAction<string>) => void;
+  maxNumOfPeople: number;
+  setApplyLength?: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export type ApplicantListBottomSheetProps = {
   postId: string;
   chatId: string;
   onFinishApply: () => void;
+  isApplyChange: () => void;
+  setApplyLength: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export type ApplicantOnlyDeleteProps = {
