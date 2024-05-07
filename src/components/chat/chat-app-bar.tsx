@@ -135,7 +135,6 @@ const AfterTransfer = ({
               width: "100%",
               padding: "0.83rem",
               borderRadius: "1.11rem",
-              color: colorTheme.blue900,
               fontWeight: "500",
             }}
             onClick={setErrorModal}
@@ -149,7 +148,6 @@ const AfterTransfer = ({
             width: "100%",
             padding: "0.83rem",
             borderRadius: "1.11rem",
-            color: colorTheme.blue900,
             fontWeight: "500",
           }}
           onClick={() => {

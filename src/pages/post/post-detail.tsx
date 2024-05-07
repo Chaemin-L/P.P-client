@@ -119,7 +119,7 @@ export const PostDetailPage = () => {
               setReportBottomSheet(false);
               setReportModal(true);
             }}
-            creatorId={"35"}
+            creatorId={data ? data.writerInfo.userId.toString() : "-1"}
           />
         </BottomSheet>
         {reportModal && (

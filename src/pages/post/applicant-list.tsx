@@ -235,6 +235,9 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
           setApplyModal={setApplyModal}
           setStatusChangeModal={setIsStatusChange}
           setIsApplyError={setIsApplyError}
+          maxNumOfPeople={
+            postData ? postData.marketPostResponse.maxNumOfPeople : 0
+          }
         />
       )}
       {isStatusChange && (
