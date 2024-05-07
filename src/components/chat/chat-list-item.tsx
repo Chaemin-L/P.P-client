@@ -125,29 +125,29 @@ const TitleText = styled.span`
   font-weight: bold;
 `;
 
-const NewMsgNum = styled.span`
-  font-size: 0.56rem;
-  text-align: center;
-  padding: 0.17rem;
-  width: 100%;
-  border-radius: 0.5rem;
-  background-color: ${colorTheme.orange400};
-  color: #ffffff;
-`;
+// const NewMsgNum = styled.span`
+//   font-size: 0.56rem;
+//   text-align: center;
+//   padding: 0.17rem;
+//   width: 100%;
+//   border-radius: 0.5rem;
+//   background-color: ${colorTheme.orange400};
+//   color: #ffffff;
+// `;
 
 const ItemText = styled.span`
   font-size: 0.56rem;
 `;
 
-const RightColumnDiv = styled.div`
-  display: flex;
-  height: 2.7rem;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 0 0 0 4.61%;
-  gap: 0.33rem;
-  width: 20%;
-`;
+// const RightColumnDiv = styled.div`
+//   display: flex;
+//   height: 2.7rem;
+//   flex-direction: column;
+//   align-items: flex-end;
+//   padding: 0 0 0 4.61%;
+//   gap: 0.33rem;
+//   width: 20%;
+// `;
 
 const IconImg = styled.img`
   width: 0.56rem;

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 import PlusWhiteSVG from "@/assets/icons/plus-white.svg";
 import { postingState } from "@/recoil/atoms/posting-state";

@@ -14,7 +14,6 @@ import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
 import { Report } from "@/components/report/report";
 import { useCheckChatMakePost } from "@/hooks/chat/useCheckChatMakePost";
-import { useChangeStatus } from "@/hooks/queries/useChangeStatus";
 import { useDeleteApply } from "@/hooks/queries/useDeleteApply";
 import { useDeletePost } from "@/hooks/queries/useDeletePost";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";

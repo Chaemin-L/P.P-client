@@ -15,7 +15,7 @@ export const TransferDetailPrice = ({
   memberCount,
 }: TransferDetailProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
-  const [transfer, setTransfer] = useRecoilState(transferState);
+  const [transfer] = useRecoilState(transferState);
   const [price, setPrice] = useState(lastTransfer.price.toString());
   const [isPriceError, setIsPriceError] = useState(false);
   const [isError, setIsError] = useState(false);
