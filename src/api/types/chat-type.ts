@@ -11,6 +11,12 @@ export type ChatListItemType = {
   memberCount: number;
   title: string;
   status: StatusType;
+  creatorId: string;
+  creatorNickname: string;
+  location: string;
+  startDate: string;
+  deletedPost: boolean;
+  blockedRoom: boolean;
 };
 
 export type ChatMakeRoom = {
@@ -32,10 +38,12 @@ export type senderInfo = {
   userId: number;
   profileImage: string;
   nickName: string;
+  deleted: boolean;
 };
 
 export type ChatRoomMessage = {
-  senderInfo: senderInfo;
+  senderInfo: senderInfo | null;
+  type: string;
   message: string;
   createdAt: string;
 };

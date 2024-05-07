@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
@@ -10,6 +11,7 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
   // const resetTransferRecoil = useResetRecoilState(transferState);
 
   const [lastTransfer] = useRecoilState(lastTransferState);
+  const [transfer] = useRecoilState(transferState);
 
   // const handleClick = () => {
   //   resetLastTransferRecoil();
@@ -31,7 +33,8 @@ export const TransferFinish = ({ onClick }: { onClick: () => void }) => {
       :
       <div>
         송금 후 내 잔액은{" "}
-        {lastTransfer.availableBudget -
+        {lastTransfer.availableBudget +
+          transfer.price -
           lastTransfer.member * lastTransfer.price}
         매듭 입니다
       </div>

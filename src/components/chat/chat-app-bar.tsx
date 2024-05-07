@@ -13,12 +13,15 @@ import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const ChatAppBar = ({
-  name,
   onClickReport,
   onClickTransfer,
   setAppBarHeight,
   postId,
+  creatorId,
+  onClickApply,
   setErrorModal,
+  memberCount,
+  setTransferErrorModal,
 }: ChatAppBarType) => {
   const [lastTransfer] = useRecoilState(lastTransferState);
   const navigate = useNavigate();
@@ -32,6 +35,7 @@ export const ChatAppBar = ({
   }, [setAppBarHeight]);
 
   const isColorMode = !lastTransfer.transferState;
+  const myId = localStorage.getItem("userId");
 
   return (
     <AppBar isFixed={true} isColorMode={isColorMode} id="AppBar">
@@ -40,22 +44,34 @@ export const ChatAppBar = ({
           isColorMode={isColorMode}
           onClick={() => navigate("/chat", { replace: true })}
         />
-        <AppBar.HeaderText>{name}</AppBar.HeaderText>
-        <AppBar.RightButton
-          imgSrc={isColorMode ? ReportWhiteSVG : ReportBlackSVG}
-          onClick={() => {
-            onClickReport();
-          }}
-        />
+        <AppBar.HeaderText>{lastTransfer.title}</AppBar.HeaderText>
+        {myId === creatorId ? (
+          <div style={{ width: "0.78rem" }}></div>
+        ) : (
+          <AppBar.RightButton
+            imgSrc={isColorMode ? ReportWhiteSVG : ReportBlackSVG}
+            onClick={() => {
+              onClickReport();
+            }}
+          />
+        )}
       </AppBar.AppBarNavigate>
       {isColorMode ? (
         <BeforeTransfer
           onClickTransfer={onClickTransfer}
           postId={postId}
+          onClickApply={onClickApply}
+          creatorId={creatorId}
+          setTransferErrorModal={setTransferErrorModal}
+          memberCount={memberCount}
           setErrorModal={setErrorModal}
         />
       ) : (
-        <AfterTransfer postId={postId} setErrorModal={setErrorModal} />
+        <AfterTransfer
+          postId={postId}
+          setErrorModal={setErrorModal}
+          creatorId={creatorId}
+        />
       )}
     </AppBar>
   );
@@ -90,34 +106,43 @@ const AfterTransferDiv = styled.div`
 type BeforeTransferProps = {
   onClickTransfer: () => void;
   postId: string;
+  onClickApply: () => void;
+  creatorId: string;
+  memberCount: number;
+  setTransferErrorModal: () => void;
   setErrorModal: () => void;
 };
 
 const AfterTransfer = ({
   postId,
   setErrorModal,
+  creatorId,
 }: {
   postId: string;
   setErrorModal: () => void;
+  creatorId: string;
 }) => {
   const navigate = useNavigate();
+  const myId = localStorage.getItem("userId");
 
   return (
     <ColumnBox>
       <RowBox>
-        <Button
-          color="blue"
-          style={{
-            width: "100%",
-            padding: "0.83rem",
-            borderRadius: "1.11rem",
-            color: colorTheme.blue900,
-            fontWeight: "500",
-          }}
-          onClick={setErrorModal}
-        >
-          거래내역
-        </Button>
+        {creatorId === myId && (
+          <Button
+            color="blue"
+            style={{
+              width: "100%",
+              padding: "0.83rem",
+              borderRadius: "1.11rem",
+              color: colorTheme.blue900,
+              fontWeight: "500",
+            }}
+            onClick={setErrorModal}
+          >
+            거래내역
+          </Button>
+        )}
         <Button
           color="blue"
           style={{
@@ -134,7 +159,7 @@ const AfterTransfer = ({
           게시물 보기
         </Button>
       </RowBox>
-      <AfterTransferDiv>송금완료</AfterTransferDiv>
+      {creatorId === myId && <AfterTransferDiv>송금완료</AfterTransferDiv>}
     </ColumnBox>
   );
 };
@@ -142,9 +167,14 @@ const AfterTransfer = ({
 const BeforeTransfer = ({
   onClickTransfer,
   postId,
+  creatorId,
+  onClickApply,
+  setTransferErrorModal,
+  memberCount,
   setErrorModal,
 }: BeforeTransferProps) => {
   const navigate = useNavigate();
+  const myId = localStorage.getItem("userId");
 
   return (
     <ColumnBox
@@ -163,9 +193,17 @@ const BeforeTransfer = ({
             color: colorTheme.blue900,
             fontWeight: "500",
           }}
-          onClick={setErrorModal}
+          onClick={() => {
+            if (myId !== null) {
+              if (myId === creatorId) {
+                onClickApply();
+              } else {
+                setErrorModal();
+              }
+            }
+          }}
         >
-          거래파기
+          {myId !== null ? (myId === creatorId ? "참여관리" : "거래파기") : ""}
         </Button>
         <Button
           color="white"
@@ -183,23 +221,31 @@ const BeforeTransfer = ({
           게시물 보기
         </Button>
       </RowBox>
-      <div style={{ padding: "0 1.833rem" }}>
-        <Button
-          color="white"
-          style={{
-            width: "100%",
-            fontSize: "1.33rem",
-            padding: "0.56rem",
-            borderRadius: "1.11rem",
-            marginTop: "0",
-            color: colorTheme.blue900,
-            fontWeight: "500",
-          }}
-          onClick={onClickTransfer}
-        >
-          송금하기
-        </Button>
-      </div>
+      {creatorId === myId && (
+        <div style={{ padding: "0 1.833rem" }}>
+          <Button
+            color="white"
+            style={{
+              width: "100%",
+              fontSize: "1.33rem",
+              padding: "0.56rem",
+              borderRadius: "1.11rem",
+              marginTop: "0",
+              color: colorTheme.blue900,
+              fontWeight: "500",
+            }}
+            onClick={() => {
+              if (memberCount < 2) {
+                setTransferErrorModal();
+              } else {
+                onClickTransfer();
+              }
+            }}
+          >
+            송금하기
+          </Button>
+        </div>
+      )}
     </ColumnBox>
   );
 };

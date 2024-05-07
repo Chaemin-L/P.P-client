@@ -36,7 +36,7 @@ export default class PostApi {
   static async reportPosting(data: { postId: string; reportMsg: string }) {
     const response = await Instance.post(
       `/haetsal-service/api/v2/market/post/${data.postId}/report`,
-      { introduction: data.reportMsg },
+      { reason: data.reportMsg },
     );
     return response.status;
   }
@@ -94,6 +94,14 @@ export default class PostApi {
   static async pullUp(postId: string) {
     const response = await Instance.put<FinalResponse>(
       `/haetsal-service/api/v2/market/post/${postId}/pull-up`,
+    );
+    if (response) return response.status;
+    else throw new Error("Invalid response from server");
+  }
+
+  static async postRollback(postId: string) {
+    const response = await Instance.post(
+      `/haetsal-service/api/v2/market/post/${postId}/rollback`,
     );
     if (response) return response.status;
     else throw new Error("Invalid response from server");

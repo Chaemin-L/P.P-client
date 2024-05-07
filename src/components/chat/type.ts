@@ -14,9 +14,9 @@ export type ChatItemType = {
 };
 
 export type InputType = {
-  // setHeight: (value: number) => void;
   onFocus: React.Dispatch<React.SetStateAction<boolean>>;
   onClick: (inputValue: string) => void;
+  blockedRoom?: boolean;
 };
 
 export type ChatRoomItemType = {
@@ -28,15 +28,24 @@ export type ChatRoomItemType = {
   time: string;
   chatMsg: string;
   msgNum: number;
+  creatorId: string;
+  startDate: string;
+  location: string;
+  creatorNickname: string;
+  deletedPost: boolean;
+  blockedRoom: boolean;
 };
 
 export type ChatAppBarType = {
-  name: string;
   setAppBarHeight: (value: number) => void;
   onClickTransfer: () => void;
   onClickReport: () => void;
   postId: string;
   setErrorModal: () => void;
+  creatorId: string;
+  onClickApply: () => void;
+  memberCount: number;
+  setTransferErrorModal: () => void;
 };
 
 export type ChatInRoomUser = {
@@ -44,4 +53,10 @@ export type ChatInRoomUser = {
   userId: number;
   profileImg: string;
   blocked: boolean;
+};
+
+export type ChatAppBarBlockProps = {
+  setAppBarHeight: (value: number) => void;
+  isDelted: boolean;
+  isBlocked: boolean;
 };

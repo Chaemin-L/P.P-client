@@ -6,4 +6,5 @@ export type ReportButtonProps = {
 export type ReportProps = {
   postId: string;
   onSuccessReport: () => void;
+  creatorId: string;
 };

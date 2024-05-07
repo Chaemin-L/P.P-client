@@ -15,8 +15,6 @@ export const ChatItem = ({
   const tempId = localStorage.getItem("userId");
   const myId = tempId ? Number(tempId) : -1;
 
-  // console.log("myId: ", myId);
-
   return (
     <Container
       style={{

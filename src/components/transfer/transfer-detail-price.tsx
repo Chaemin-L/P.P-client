@@ -7,6 +7,7 @@ import { TransferDetailProps } from "./type";
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { CommonInput } from "@/components/common/common-input";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const TransferDetailPrice = ({
@@ -14,6 +15,7 @@ export const TransferDetailPrice = ({
   memberCount,
 }: TransferDetailProps) => {
   const [lastTransfer, setLastTransfer] = useRecoilState(lastTransferState);
+  const [transfer] = useRecoilState(transferState);
   const [price, setPrice] = useState(lastTransfer.price.toString());
   const [isPriceError, setIsPriceError] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -45,8 +47,7 @@ export const TransferDetailPrice = ({
       </CheckMsg>
       {isPriceError && !isError && (
         <ErrorMsg>
-          {`잔액이 모자랍니다!
-          송금할 매듭은 1~${Math.floor(lastTransfer.availableBudget / lastTransfer.member)}매듭 사이로
+          {`송금할 매듭은 1~${Math.floor(lastTransfer.availableBudget / lastTransfer.member)}매듭 사이로
           설정해주세요`}
         </ErrorMsg>
       )}
@@ -57,14 +58,15 @@ export const TransferDetailPrice = ({
           setValue={setPrice}
           isError={isPriceError}
           setIsError={setIsPriceError}
-          maximum={lastTransfer.availableBudget}
+          maximum={lastTransfer.availableBudget + transfer.price}
           minimum={1}
         >
           매듭
         </CommonInput.InputInner>
       </CommonInput>
       <div style={{ marginTop: "20px" }}>
-        지금 내 잔액은 {lastTransfer.availableBudget}매듭 입니다
+        지금 내 잔액은 {lastTransfer.availableBudget + transfer.price}매듭
+        입니다
       </div>
       <BottomFixed alignDirection="column">
         <BottomFixed.Button

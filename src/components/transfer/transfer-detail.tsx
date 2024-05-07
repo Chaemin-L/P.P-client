@@ -5,10 +5,12 @@ import { TransferDetailProps } from "./type";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
 import { lastTransferState } from "@/recoil/atoms/last-transfet-state";
+import { transferState } from "@/recoil/atoms/transfer-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const TransferDetail = ({ setScreen }: TransferDetailProps) => {
   const [lastTransfer] = useRecoilState(lastTransferState);
+  const [transfer] = useRecoilState(transferState);
 
   return (
     <Wrapper>
@@ -41,7 +43,8 @@ export const TransferDetail = ({ setScreen }: TransferDetailProps) => {
       </TransferExplainRowBox>
       <div style={{ color: colorTheme.orange400 }}>
         송금 후 내 잔액은{" "}
-        {lastTransfer.availableBudget -
+        {lastTransfer.availableBudget +
+          transfer.price -
           lastTransfer.member * lastTransfer.price}
         매듭 입니다
       </div>

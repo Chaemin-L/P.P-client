@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-import SplashBackSVG from "@/assets/images/splash-back.svg";
-import SplashHandSVG from "@/assets/images/splash-hand.svg";
+import SplashLogoSVG from "@/assets/images/splash-logo.svg";
+import { colorTheme } from "@/style/color-theme";
 import getRefreshToken from "@/utils/token";
 
 export const Splash = () => {
@@ -48,15 +48,12 @@ export const Splash = () => {
 
   return (
     <Wrapper>
-      <BackgroundImg img={SplashBackSVG}>
-        <HandImg
-          src={SplashHandSVG}
-          animate={{
-            rotate: [0, -10, 10, -10, 10, 0],
-            transition: { duration: 2, repeat: Infinity },
-          }}
-        />
-      </BackgroundImg>
+      <LogoImg
+        src={SplashLogoSVG}
+        initial={{ opacity: 0, scale: 0.6 }}
+        animate={{ opacity: 1, scale: 1.0 }}
+        transition={{ duration: 1 }}
+      />
     </Wrapper>
   );
 };
@@ -67,22 +64,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${colorTheme.blue100};
 `;
 
-const BackgroundImg = styled.div<{ img: string }>`
-  width: 12.11rem;
-  height: 7.56rem;
-  position: relative;
-  background-image: url(${({ img }) => img});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-`;
-
-const HandImg = styled(motion.img)`
-  width: 6.167rem;
-  height: 6.06rem;
-  position: absolute;
-  left: 27%;
-  bottom: -16%;
+const LogoImg = styled(motion.img)`
+  width: 15.06rem;
+  height: 3.38rem;
 `;

@@ -1,7 +1,7 @@
 export type ApplyType = {
   applyId: number;
   applicantInfo: {
-    profileId: number;
+    userId: number;
     nickName: string;
     profileImage: string;
     address: string;

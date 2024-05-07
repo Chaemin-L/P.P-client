@@ -24,7 +24,7 @@ export const Posting1 = () => {
 
   return (
     <PageContainer>
-      <PostingAppBar onClick={() => resetRecoil()} nowPage={1} />
+      <PostingAppBar onClick={resetRecoil} nowPage={1} />
       <PostingBoldText>위치를 입력해 주세요</PostingBoldText>
       <InputBox.InputMap
         value={location}

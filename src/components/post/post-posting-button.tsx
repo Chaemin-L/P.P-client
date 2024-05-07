@@ -1,16 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import { useResetRecoilState } from "recoil";
 import { styled } from "styled-components";
 
 import PlusWhiteSVG from "@/assets/icons/plus-white.svg";
+import { postingState } from "@/recoil/atoms/posting-state";
 import { colorTheme } from "@/style/color-theme";
 
 export const PostPostingButton = () => {
+  const resetRecoil = useResetRecoilState(postingState);
   const navigate = useNavigate();
 
   return (
     <Wrapper>
       <PostingButton
         onClick={() => {
+          resetRecoil();
           navigate("/posting/1");
         }}
       >
