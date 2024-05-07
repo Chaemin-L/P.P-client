@@ -13,12 +13,14 @@ import { useGetApplyList } from "@/hooks/queries/useGetApplyList";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
 import { usePostApplyAccept } from "@/hooks/queries/usePostApplyAccept";
 import { usePostMakeChat } from "@/hooks/queries/usePostMakeChat";
+import { usePutChatNewMember } from "@/hooks/queries/usePutChatNewMember";
 import { checkChange } from "@/utils/apply-list-change-check";
 
 export const ApplicantList = ({ postId }: { postId: string }) => {
   const [applyModal, setApplyModal] = useState<string>("");
   const [originApplyIds, setOriginApplyIds] = useState<ApplyListType[]>([]);
   const [applyIds, setApplyIds] = useState<ApplyListType[]>([]);
+  const { mutate: putNewMember } = usePutChatNewMember();
 
   const { data } = useGetApplyList(postId);
   const { mutate: accept } = usePostApplyAccept(postId);
@@ -103,16 +105,36 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
                     const tempList: string[] = applyIds.map((id) => {
                       return id.userId.toString();
                     });
-                    const tempData: ChatMakeRequest = {
-                      postId: Number(postId),
-                      memberIds: tempList,
-                    };
                     if (chatRoomId === "") {
+                      const tempData: ChatMakeRequest = {
+                        postId: Number(postId),
+                        memberIds: tempList,
+                      };
                       makeChat(tempData, {
                         onSuccess: (res) => {
                           setApplyModal("PostNewMember");
                           setChatMakeRoomId(res);
                           console.log("makeChat: ", res);
+                        },
+                        onError: () => {
+                          setIsApplyError("APPLY_CHAT_ERROR");
+                        },
+                      });
+                    } else {
+                      const tempData = {
+                        chatRoomId: chatRoomId,
+                        addingData: {
+                          postId: Number(postId),
+                          memberIds: tempList,
+                        },
+                      };
+                      putNewMember(tempData, {
+                        onSuccess: (res) => {
+                          setApplyModal("PostNewMember");
+                          setChatMakeRoomId(res);
+                        },
+                        onError: () => {
+                          setIsApplyError("APPLY_CHAT_ERROR");
                         },
                       });
                     }
@@ -167,7 +189,7 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
           <Modal.Button
             color="orange"
             onClick={() => {
-              GoToChatRoom();
+              navigate(-1);
             }}
           >
             게시글 돌아가기
@@ -196,6 +218,9 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
           {isApplyError === "IMPOSSIBLE_SELECT_APPLY" && (
             <Modal.Title text="[모집중] 상태에서는 \n 기존의 참여자를 \n 제외시킬 수 없습니다." />
           )}
+          {isApplyError === "APPLY_CHAT_ERROR" && (
+            <Modal.Title text="채팅방 생성 중 오류가 발생했습니다." />
+          )}
         </Modal>
       )}
       {isApplyChangeCheck && (
@@ -218,6 +243,7 @@ export const ApplicantList = ({ postId }: { postId: string }) => {
           postId={postId}
           setApplyModal={setApplyModal}
           setStatusChangeModal={setIsStatusChange}
+          isPage={true}
         />
       )}
     </>

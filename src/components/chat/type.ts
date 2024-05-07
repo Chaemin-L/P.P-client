@@ -16,7 +16,7 @@ export type ChatItemType = {
 export type InputType = {
   onFocus: React.Dispatch<React.SetStateAction<boolean>>;
   onClick: (inputValue: string) => void;
-  blockedRoom: boolean;
+  blockedRoom?: boolean;
 };
 
 export type ChatRoomItemType = {
@@ -53,4 +53,10 @@ export type ChatInRoomUser = {
   userId: number;
   profileImg: string;
   blocked: boolean;
+};
+
+export type ChatAppBarBlockProps = {
+  setAppBarHeight: (value: number) => void;
+  isDelted: boolean;
+  isBlocked: boolean;
 };

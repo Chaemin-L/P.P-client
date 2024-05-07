@@ -48,4 +48,6 @@ export type ApplicantOnlyDeleteProps = {
   postId: string;
   setApplyModal: (value: React.SetStateAction<string>) => void;
   setStatusChangeModal: (value: React.SetStateAction<boolean>) => void;
+  isPage?: boolean;
+  onFinishApply?: () => void;
 };

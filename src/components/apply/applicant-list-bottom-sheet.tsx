@@ -105,6 +105,9 @@ export const ApplicantListBottomSheet = ({
           {isApplyError === "IMPOSSIBLE_SELECT_APPLY" && (
             <Modal.Title text="[모집중] 상태에서는 \n 기존의 참여자를 \n 제외시킬 수 없습니다." />
           )}
+          {isApplyError === "APPLY_CHAT_ERROR" && (
+            <Modal.Title text="채팅방 생성 중 오류가 발생했습니다." />
+          )}
         </Modal>
       )}
       {isApplyChangeCheck && (
@@ -158,6 +161,7 @@ export const ApplicantListBottomSheet = ({
           postId={postId}
           setApplyModal={setApplyModal}
           setStatusChangeModal={setIsApplyChangeCheck}
+          onFinishApply={onFinishApply}
         />
       )}
     </div>

@@ -8,7 +8,7 @@ export const ApplicantItemList = ({
   isRecruiting,
   setApplyModal,
 }: ApplicantItemProps) => {
-  console.log("Applicant List: ", data);
+  console.log("Applicant List: ", applyIds);
   return (
     <>
       {data?.map((applicant) => {

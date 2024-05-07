@@ -45,7 +45,7 @@ export const ApplicantModifyModal = ({
       }}
     >
       {deleteMemberList.length > 0 && newMemberList.length === 0 ? (
-        <Modal.Title text="정말 선택한 유저를 \n 참여자에서 제외하시겠습니까?" />
+        <Modal.Title text="정말 선택한 유저를 \n 참여자에서 \n 제외하시겠습니까?" />
       ) : (
         <Modal.Title text="정말 참여자를 바꾸겠습니까?" />
       )}

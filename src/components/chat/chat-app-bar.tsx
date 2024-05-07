@@ -140,7 +140,7 @@ const AfterTransfer = ({
             }}
             onClick={setErrorModal}
           >
-            참여관리
+            거래내역
           </Button>
         )}
         <Button

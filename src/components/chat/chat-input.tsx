@@ -6,7 +6,11 @@ import { InputType } from "./type";
 import ChatSendSVG from "@/assets/icons/chat-send.svg";
 import { colorTheme } from "@/style/color-theme";
 
-export const ChatInput = ({ onFocus, onClick, blockedRoom }: InputType) => {
+export const ChatInput = ({
+  onFocus,
+  onClick,
+  blockedRoom = false,
+}: InputType) => {
   const [inputValue, setIsValue] = useState("");
   return (
     <Container>
@@ -23,11 +27,14 @@ export const ChatInput = ({ onFocus, onClick, blockedRoom }: InputType) => {
       />
       <ChatButton
         onClick={() => {
-          if (inputValue !== "") {
-            onClick(inputValue);
-            setIsValue("");
+          if (!blockedRoom) {
+            if (inputValue !== "") {
+              onClick(inputValue);
+              setIsValue("");
+            }
           }
         }}
+        $blockedRoom={blockedRoom}
       >
         <ButtonImg src={ChatSendSVG} />
         <ButtonDiv>전송하기</ButtonDiv>
@@ -58,7 +65,7 @@ const InputContainer = styled.textarea`
   background-color: ${colorTheme.blue100};
 `;
 
-const ChatButton = styled.button`
+const ChatButton = styled.button<{ $blockedRoom: boolean }>`
   width: 4.9rem;
   height: 100%;
   background-color: ${colorTheme.blue700};
@@ -70,6 +77,8 @@ const ChatButton = styled.button`
   align-items: center;
   gap: 0.22rem;
   border-radius: 0.67rem;
+
+  ${({ $blockedRoom }) => $blockedRoom && "background-color: #adadad;"}
 `;
 
 const ButtonImg = styled.img`
