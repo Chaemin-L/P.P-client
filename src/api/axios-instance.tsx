@@ -23,7 +23,7 @@ Instance.interceptors.request.use(
 
     const token = localStorage.getItem("accessToken");
 
-    if (token !== undefined) {
+    if (token !== undefined && token !== null) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     console.log(`[API - REQUEST] ${method?.toUpperCase()} ${url}`);

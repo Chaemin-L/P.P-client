@@ -1,13 +1,23 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { ReportButton } from "./report-button";
 import { ReportProps } from "./type";
 
 import { BottomFixed } from "@/components/common/bottom-fixed";
+import { Modal } from "@/components/common/modal";
+import { useGetProfile } from "@/hooks/queries/useGetProfile";
+import { usePostBlock } from "@/hooks/queries/usePostBlock";
 import { usePostReport } from "@/hooks/queries/usePostReport";
 
-export const Report = ({ postId, onSuccessReport }: ReportProps) => {
+export const Report = ({ postId, onSuccessReport, creatorId }: ReportProps) => {
+  const { data: profileData } = useGetProfile(Number(creatorId));
+  const postBlock = usePostBlock();
+  const [checkBlock, setCheckBlock] = useState(false);
+  const [blockFinish, setBlockFinish] = useState(false);
+
+  const navigate = useNavigate();
   const { mutate: reportPost } = usePostReport();
   const [reportList, setReportList] = useState([
     { content: "광고/홍보 글이에요", state: false },
@@ -15,6 +25,7 @@ export const Report = ({ postId, onSuccessReport }: ReportProps) => {
     { content: "이웃 비방/혐오 표현을 사용했어요", state: false },
     { content: "카테고리에 부적절한 글이에요", state: false },
   ]);
+  const [reportModal, setReportModal] = useState(false);
 
   const handleReport = () => {
     const temp = reportList.find((e) => {
@@ -55,6 +66,65 @@ export const Report = ({ postId, onSuccessReport }: ReportProps) => {
           신고하기
         </BottomFixed.Button>
       </BottomFixed>
+      {reportModal && (
+        <Modal
+          onClose={() => {
+            setReportModal(false);
+          }}
+        >
+          <Modal.Title text="신고가 접수되었습니다." />
+          <Modal.Button
+            onClick={() => {
+              navigate("/chat");
+            }}
+          >
+            홈화면으로 이동
+          </Modal.Button>
+          {!profileData?.blocked && <Modal.Button>작성자 차단</Modal.Button>}
+        </Modal>
+      )}
+      {checkBlock && (
+        <Modal
+          onClose={() => {
+            setReportModal(true);
+            setCheckBlock(false);
+          }}
+        >
+          <Modal.Title
+            text={`작성자 ${profileData?.nickName}님을 \n 차단하시겠습니까?`}
+          />
+          <Modal.Button
+            onClick={() => {
+              postBlock.mutate(Number(creatorId), {
+                onSuccess: () => {
+                  setCheckBlock(false);
+                  setBlockFinish(true);
+                },
+              });
+            }}
+          >
+            차단하기
+          </Modal.Button>
+        </Modal>
+      )}
+      {blockFinish && (
+        <Modal
+          onClose={() => {
+            setBlockFinish(false);
+          }}
+        >
+          <Modal.Title
+            text={`${profileData?.nickName}님이 \n 차단되었습니다.`}
+          />
+          <Modal.Button
+            onClick={() => {
+              navigate("/chat");
+            }}
+          >
+            홈화면으로 이동
+          </Modal.Button>
+        </Modal>
+      )}
     </Wrapper>
   );
 };

@@ -13,6 +13,7 @@ import { Button } from "@/components/common/button";
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
 import { Report } from "@/components/report/report";
+import { useCheckChatMakePost } from "@/hooks/chat/useCheckChatMakePost";
 import { useDeleteApply } from "@/hooks/queries/useDeleteApply";
 import { useDeletePost } from "@/hooks/queries/useDeletePost";
 import { useGetPostDetail } from "@/hooks/queries/useGetPostDetail";
@@ -37,6 +38,7 @@ export const PostDetailPage = () => {
   const [applyModal, setApplyModal] = useState<boolean>(false);
 
   const { data } = useGetPostDetail(postId!);
+  const chatData = useCheckChatMakePost(postId!);
   const setPost = useSetRecoilState(postState);
   const { mutate: deletePost } = useDeletePost(postId!);
   const { mutate: applyActivity } = usePostApply(postId!);
@@ -117,6 +119,7 @@ export const PostDetailPage = () => {
               setReportBottomSheet(false);
               setReportModal(true);
             }}
+            creatorId={"35"}
           />
         </BottomSheet>
         {reportModal && (
@@ -142,13 +145,30 @@ export const PostDetailPage = () => {
                 </BottomFixed.Button>
               </>
             ) : (
-              <BottomFixed.Button
-                onClick={() => {
-                  // TODO: 채팅방으로 이동
-                }}
-              >
-                채팅방으로 가기
-              </BottomFixed.Button>
+              <>
+                <BottomFixed.Button
+                  onClick={() => {
+                    if (chatData !== null) {
+                      navigate(`/chat/detail`, {
+                        state: {
+                          roomId: chatData.roomId,
+                          postId: chatData.postId,
+                          memberCount: chatData.memberCount,
+                          creatorId: chatData.creatorId,
+                        },
+                      });
+                    }
+                  }}
+                >
+                  채팅방으로 가기
+                </BottomFixed.Button>
+                {data?.marketPostResponse.status ===
+                  "RECRUITMENT_COMPLETED" && (
+                  <BottomFixed.Button onClick={() => navigate("applicant")}>
+                    참여관리
+                  </BottomFixed.Button>
+                )}
+              </>
             )
           ) : data?.marketPostResponse.status === "RECRUITING" ? (
             !data?.userCurrentStatus.isApplicant ? (

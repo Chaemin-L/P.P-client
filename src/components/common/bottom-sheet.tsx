@@ -26,22 +26,22 @@ export const BottomSheet = ({
     }
   }, [props]);
 
-  useEffect(() => {
-    const handleClickOutside = (e: TouchEvent) => {
-      if (
-        sheetRef.current &&
-        e.target instanceof Node &&
-        !sheetRef.current.contains(e.target) &&
-        isOpened
-      ) {
-        onChangeIsOpened();
-      }
-    };
-    document.addEventListener("touchend", handleClickOutside);
-    return () => {
-      document.removeEventListener("touchend", handleClickOutside);
-    };
-  }, [isOpened, sheetRef]);
+  // useEffect(() => {
+  //   const handleClickOutside = (e: TouchEvent) => {
+  //     if (
+  //       sheetRef.current &&
+  //       e.target instanceof Node &&
+  //       !sheetRef.current.contains(e.target) &&
+  //       isOpened
+  //     ) {
+  //       onChangeIsOpened();
+  //     }
+  //   };
+  //   document.addEventListener("touchend", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("touchend", handleClickOutside);
+  //   };
+  // }, [isOpened, sheetRef]);
 
   return (
     <Background style={{ visibility: isOpened ? "visible" : "hidden" }}>
@@ -72,7 +72,7 @@ export const BottomSheet = ({
 const Background = styled.div`
   position: absolute;
   background-color: rgb(0, 0, 0, 0.25);
-  z-index: 9996;
+  z-index: 70;
   height: 100%;
   width: 100%;
   top: 0;
@@ -82,7 +82,7 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   position: fixed;
-  z-index: 9997;
+  z-index: 71;
   top: 0;
   left: 0;
   right: 0;
@@ -120,7 +120,7 @@ const HeaderXButton = styled.button`
   border: 0;
   box-shadow: -1px 0 0.72rem rgb(0, 0, 0, 0.09);
   right: 3%;
-  z-index: 9999;
+  z-index: 73;
 `;
 
 const HeaderXImg = styled.img`
@@ -137,7 +137,7 @@ const ContentContainer = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  z-index: 9998;
+  z-index: 72;
   border-top: 0.17rem solid #ffffff;
   box-shadow: 0 -1px 1px #ffffff;
 `;

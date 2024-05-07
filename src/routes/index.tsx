@@ -8,7 +8,7 @@ import { ChatRoom } from "@/pages/chat/chat-room";
 import { WrongAccessPage } from "@/pages/error/wrong-access";
 import { LoginPage } from "@/pages/login";
 import { Mypage } from "@/pages/mypage/mypage";
-import { ApplicantListPage } from "@/pages/post/applicant-list";
+import { ApplicantListPage } from "@/pages/post/applicant-list-page";
 import { PostDetailPage } from "@/pages/post/post-detail";
 import { PostEditPage } from "@/pages/post/post-edit";
 import { PostList } from "@/pages/post/post-list";

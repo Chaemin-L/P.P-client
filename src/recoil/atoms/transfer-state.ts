@@ -18,5 +18,6 @@ export const transferState = atom({
     postId: "",
     dealId: 0,
     transferState: false,
+    title: "",
   },
 });
