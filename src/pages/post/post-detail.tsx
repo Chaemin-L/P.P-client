@@ -8,11 +8,11 @@ import BackBlackSVG from "@/assets/icons/back-black.svg";
 import { ActivityBox } from "@/components/common/activity-box";
 import { AppBar } from "@/components/common/app-bar";
 import { BottomFixed } from "@/components/common/bottom-fixed";
-import { BottomSheet } from "@/components/common/bottom-sheet";
+// import { BottomSheet } from "@/components/common/bottom-sheet";
 import { Button } from "@/components/common/button";
 import { Modal } from "@/components/common/modal";
 import { DefaultLayout } from "@/components/layout/default-layout";
-import { Report } from "@/components/report/report";
+// import { Report } from "@/components/report/report";
 import { useCheckChatMakePost } from "@/hooks/chat/useCheckChatMakePost";
 import { useDeleteApply } from "@/hooks/queries/useDeleteApply";
 import { useDeletePost } from "@/hooks/queries/useDeletePost";
@@ -33,7 +33,7 @@ export const PostDetailPage = () => {
   const [statusModal, setStatusModal] = useState(false);
   const [reportModal, setReportModal] = useState(false);
   const [repostModal, setRepostModal] = useState(false);
-  const [reportBottomSheet, setReportBottomSheet] = useState(false);
+  // const [reportBottomSheet, setReportBottomSheet] = useState(false);
 
   const [applyModal, setApplyModal] = useState<boolean>(false);
 
@@ -94,7 +94,7 @@ export const PostDetailPage = () => {
           <DoneWrapper>모집완료</DoneWrapper>
         )}
         <ActivityBox data={{ ...data?.marketPostResponse } as PostType} />
-        {!data?.userCurrentStatus.isWriter && (
+        {/* {!data?.userCurrentStatus.isWriter && (
           <ButtonWrapper>
             <Button
               rounded
@@ -104,10 +104,10 @@ export const PostDetailPage = () => {
               신고
             </Button>
           </ButtonWrapper>
-        )}
+        )} */}
 
         {/** Bottom sheet */}
-        <BottomSheet
+        {/* <BottomSheet
           style={{ height: window.innerHeight > 720 ? "81%" : "90%" }}
           isOpened={reportBottomSheet}
           onChangeIsOpened={() => setReportBottomSheet(false)}
@@ -121,7 +121,7 @@ export const PostDetailPage = () => {
             }}
             creatorId={data ? data.writerInfo.userId.toString() : "-1"}
           />
-        </BottomSheet>
+        </BottomSheet> */}
         {reportModal && (
           <Modal
             onClose={() => {
@@ -348,10 +348,10 @@ const DoneWrapper = styled.div`
   text-align: center;
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
+// const ButtonWrapper = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+// `;
 
 const EmptyBox = styled.div`
   padding: 10px;
