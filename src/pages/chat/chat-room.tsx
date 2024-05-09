@@ -55,7 +55,7 @@ export const ChatRoom = () => {
 
   const connectHandler = () => {
     const socket = new WebSocket(
-      `${process.env.REACT_APP_CHAT_WS_BASE_URL}:${process.env.REACT_APP_CHAT_API_PORT}/ws/init`,
+      `${process.env.REACT_APP_CHAT_WS_BASE_URL}/ws/init`,
     );
     client.current = Stomp.over(socket);
     client.current.connect({}, () => {
